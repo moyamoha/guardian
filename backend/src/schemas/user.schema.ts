@@ -17,7 +17,7 @@ export class User {
   @Prop({ required: true, minLength: 10 })
   password: string;
 
-  @Prop()
+  @Prop({ type: Date })
   lastLoggedIn: Date | null;
 
   @Prop({ default: false })

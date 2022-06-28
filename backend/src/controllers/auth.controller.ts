@@ -5,7 +5,7 @@ import { AuthService } from 'src/services/auth.service';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('')
+  @Post('/login')
   @HttpCode(201)
   async login() {
     return;
