@@ -1,5 +1,7 @@
 import { Prop, Schema } from '@nestjs/mongoose';
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
+import { Category } from './category.schema';
+import { User } from './user.schema';
 
 @Schema()
 export class Entry {
@@ -16,8 +18,8 @@ export class Entry {
   url: string;
 
   @Prop({ type: mongoose.Types.ObjectId, ref: 'Category' })
-  category: ObjectId;
+  category: Category;
 
   @Prop({ type: mongoose.Types.ObjectId, ref: 'User' })
-  userId: ObjectId;
+  owner: User;
 }
