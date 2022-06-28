@@ -1,12 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 import { EntryService } from 'src/services/entry.service';
 
-@Controller()
+@Controller('entry')
 export class EntryController {
-  constructor(private passService: EntryService) {}
+  constructor(private entryService: EntryService) {}
 
   @Get('')
-  async getPassword() {
+  async getEntries() {
     return '12';
   }
 }

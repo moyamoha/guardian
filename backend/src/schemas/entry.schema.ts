@@ -1,7 +1,9 @@
-import { Prop, Schema } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { Document } from 'mongoose';
 import { Category } from './category.schema';
 import { User } from './user.schema';
+
+export type EntryDocument = Document & Entry;
 
 @Schema()
 export class Entry {
@@ -23,3 +25,5 @@ export class Entry {
   @Prop({ type: mongoose.Types.ObjectId, ref: 'User' })
   owner: User;
 }
+
+export const EntrySchema = SchemaFactory.createForClass(Entry);
