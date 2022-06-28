@@ -22,7 +22,7 @@ export class AuthController {
 
   @Post('/signup')
   @HttpCode(201)
-  async signup(@Body() body) {
-    await this.authService.singup();
+  async signup(@Body() userData) {
+    await this.authService.singup(userData);
   }
 }
