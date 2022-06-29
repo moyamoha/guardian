@@ -15,7 +15,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException('Email or password is incorrect');
     }
-    console.log(user.emailConfirmed);
     if (!user.emailConfirmed) {
       throw new UnauthorizedException(
         'User has not confirmed their email address',

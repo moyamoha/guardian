@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, ObjectId } from 'mongoose';
 import { Category } from './category.schema';
 import { User } from './user.schema';
 
@@ -19,7 +19,7 @@ export class Entry {
   @Prop()
   url: string;
 
-  @Prop({ type: mongoose.Types.ObjectId, ref: 'Category' })
+  @Prop({ type: mongoose.Types.ObjectId, ref: 'Category', required: true })
   category: Category;
 
   @Prop({ type: mongoose.Types.ObjectId, ref: 'User' })

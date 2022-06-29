@@ -1,4 +1,14 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
 import { EntryService } from 'src/services/entry.service';
 
@@ -8,7 +18,22 @@ export class EntryController {
 
   @UseGuards(AuthTokenGaurd)
   @Get('')
-  async getEntries(@Req() req) {
-    await this.entryService.getEntries(req.user);
+  async getEntries(@Req() req, @Query('categoryId') categId) {
+    try {
+      if (categId) return await this.entryService.getEntries(req.user, categId);
+      else return await this.entryService.getEntries(req.user);
+    } catch (e) {
+      throw new NotFoundException('Nothing found');
+    }
+  }
+
+  @UseGuards(AuthTokenGaurd)
+  @Post('')
+  async addEntry(@Body() body, @Req() req, @Query('categoryId') categoryId) {
+    try {
+      return this.entryService.createEntry(body, req.user, categoryId);
+    } catch (e) {
+      throw new BadRequestException(e, e.message);
+    }
   }
 }

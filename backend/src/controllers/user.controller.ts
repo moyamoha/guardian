@@ -1,4 +1,12 @@
-import { Controller, Delete, Get, Param, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { get } from 'http';
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
 import { UserService } from 'src/services/user.service';
@@ -15,6 +23,10 @@ export class UserController {
   @UseGuards(AuthTokenGaurd)
   @Delete('')
   async deleteAccount(@Req() req) {
-    await this.userService.deleteUser(req.user);
+    try {
+      await this.userService.deleteUser(req.user);
+    } catch (e) {
+      throw new NotFoundException(e, e.message);
+    }
   }
 }

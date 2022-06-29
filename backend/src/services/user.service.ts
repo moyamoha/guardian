@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
@@ -29,5 +25,6 @@ export class UserService {
 
   async deleteUser(user: UserDocument) {
     const email = user.email;
+    await this.userModel.findOneAndDelete({ email: email });
   }
 }
