@@ -1,6 +1,6 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+// import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
@@ -27,6 +27,7 @@ export class UserService {
       from: process.env.EMAIL_SENDER,
       to: created.email,
       text: 'Welcome to Gaurdian',
+      subject: 'Welcome to Gaurdian',
       html: `<p><strong>Dear ${created.firstname}!</strong><br></br>We are glad you chose Gaurdian to keep your passwords safe and secure. 
       Before you can do anything, please confirm your email address by clicking <a href="${process.env.SITE_ADDRESS}/users/confirm/?id=${created._id}">This link</a>
       <i>Team Gaurdian.</i></p>`,
