@@ -7,7 +7,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { get } from 'http';
+
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
 import { UserService } from 'src/services/user.service';
 

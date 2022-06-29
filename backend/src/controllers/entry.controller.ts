@@ -31,8 +31,14 @@ export class EntryController {
   @Post('')
   async addEntry(@Body() body, @Req() req, @Query('categoryId') categoryId) {
     try {
-      return this.entryService.createEntry(body, req.user, categoryId);
+      const createdEntry = await this.entryService.createEntry(
+        body,
+        req.user,
+        categoryId,
+      );
+      return createdEntry;
     } catch (e) {
+      console.log('tuli tänne');
       throw new BadRequestException(e, e.message);
     }
   }
