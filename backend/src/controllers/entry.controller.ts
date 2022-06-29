@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   NotFoundException,
+  Param,
   Post,
   Query,
   Req,
@@ -24,6 +25,17 @@ export class EntryController {
       else return await this.entryService.getEntries(req.user);
     } catch (e) {
       throw new NotFoundException('Nothing found');
+    }
+  }
+
+  @UseGuards(AuthTokenGaurd)
+  @Get(':id')
+  async getEntry(@Req() req, @Param('id') id) {
+    try {
+      const entry = await this.entryService.getEntry(req.user._id, id);
+      return entry;
+    } catch (e) {
+      throw new NotFoundException(`Entry ${id} was not found`);
     }
   }
 

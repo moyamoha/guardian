@@ -17,14 +17,26 @@ export class EntryService {
     categoryId?: string,
   ): Promise<EntryDocument[]> {
     if (categoryId)
-      return await this.entryModel.find({
-        owner: new mongoose.Types.ObjectId(user._id),
-        category: new mongoose.Types.ObjectId(categoryId),
-      });
+      return await this.entryModel
+        .find({
+          owner: new mongoose.Types.ObjectId(user._id),
+          category: new mongoose.Types.ObjectId(categoryId),
+        })
+        .populate('category', { name: 1 });
     else
-      return await this.entryModel.find({
-        owner: new mongoose.Types.ObjectId(user._id),
-      });
+      return await this.entryModel
+        .find({
+          owner: new mongoose.Types.ObjectId(user._id),
+        })
+        .populate('category', { name: 1 });
+  }
+
+  async getEntry(ownerId: string, id: string) {
+    return await this.entryModel.findOne({
+      owner: new mongoose.Types.ObjectId(ownerId),
+      _id: new mongoose.Types.ObjectId(id),
+    });
+    // .populate('category', { name: 1 });
   }
 
   async createEntry(

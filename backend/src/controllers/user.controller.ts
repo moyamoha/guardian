@@ -15,11 +15,6 @@ import { UserService } from 'src/services/user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get(':email')
-  async getUser(@Param('email') email) {
-    return this.userService.findOneByEmail(email);
-  }
-
   @UseGuards(AuthTokenGaurd)
   @Delete('')
   async deleteAccount(@Req() req) {
