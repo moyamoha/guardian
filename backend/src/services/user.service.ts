@@ -51,8 +51,17 @@ export class UserService {
   async deleteUser(user: UserDocument) {
     const email = user.email;
     const deleted = await this.userModel.findOneAndDelete({ email: email });
-    if (!deleted)
+    if (!deleted) {
       throw new NotFoundException(`User with email of ${email} was not found`);
+    }
+    await this.mailerService.sendMail({
+      from: process.env.EMAIL_SENDER,
+      to: email,
+      text: 'Welcome to Gaurdian',
+      subject: 'Welcome to Gaurdian',
+      html: `<p><strong>Dear ${user.firstname}!</strong><br></br>We are sad to see you go. But you can always make a new account
+      <br></br><i>Team Gaurdian.</i></p>`,
+    });
   }
 
   async confirmEmail(id: string): Promise<string> {

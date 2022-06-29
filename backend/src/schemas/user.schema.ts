@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Date, Document } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type UserDocument = Document & User;
 
@@ -17,7 +17,7 @@ export class User {
   @Prop({ required: true, minLength: 10 })
   password: string;
 
-  @Prop({ type: Date })
+  @Prop()
   lastLoggedIn: Date | null;
 
   @Prop({ default: false })

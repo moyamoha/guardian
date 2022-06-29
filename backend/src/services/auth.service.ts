@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -13,6 +13,7 @@ export class AuthService {
   ) {}
 
   async login(user: UserDocument): Promise<{ accessToken: string }> {
+    user.lastLoggedIn = new Date();
     const payload = {
       email: user.email,
       firstname: user.firstname,
@@ -21,6 +22,7 @@ export class AuthService {
     const accessToken = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
     });
+    await user.save();
     return { accessToken };
   }
 
@@ -34,10 +36,6 @@ export class AuthService {
   }
 
   async singup(userObj: Partial<UserDocument>) {
-    try {
-      await this.userService.createUser(userObj);
-    } catch (e) {
-      throw new BadRequestException(e, e.message);
-    }
+    await this.userService.createUser(userObj);
   }
 }
