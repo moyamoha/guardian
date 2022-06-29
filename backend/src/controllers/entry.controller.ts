@@ -38,7 +38,6 @@ export class EntryController {
       );
       return createdEntry;
     } catch (e) {
-      console.log('tuli tänne');
       throw new BadRequestException(e, e.message);
     }
   }
