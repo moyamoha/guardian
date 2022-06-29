@@ -40,7 +40,7 @@ export class UserService {
       subject: 'Welcome to Gaurdian',
       html: `<p><strong>Dear ${created.firstname}!</strong><br></br>We are glad you chose Gaurdian to keep your passwords safe and secure. 
       Before you can do anything, please confirm your email address by clicking <a href="${process.env.SITE_ADDRESS}/users/confirm/?id=${created._id}">This link</a>
-      <i>Team Gaurdian.</i></p>`,
+      <br></br><i>Team Gaurdian.</i></p>`,
     });
     return created;
   }
@@ -62,6 +62,6 @@ export class UserService {
     }
     user.emailConfirmed = true;
     await user.save();
-    return 'You are all set. Enjoy using our app.';
+    return 'You are all set. Enjoy using our application ❤️';
   }
 }
