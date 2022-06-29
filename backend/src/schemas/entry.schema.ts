@@ -20,7 +20,7 @@ export class Entry {
   url: string;
 
   @Prop({ type: mongoose.Types.ObjectId, ref: 'Category', required: true })
-  category: Category;
+  category: mongoose.Types.ObjectId;
 
   @Prop({ type: mongoose.Types.ObjectId, ref: 'User', required: true })
   owner: User;

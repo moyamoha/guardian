@@ -21,7 +21,7 @@ export class User {
   lastLoggedIn: Date | null;
 
   @Prop({ default: false })
-  emailConfirmed: false;
+  emailConfirmed: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

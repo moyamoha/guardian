@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { Category, CategoryDocument } from 'src/schemas/category.schema';
@@ -16,45 +20,121 @@ export class EntryService {
     user: UserDocument,
     categoryId?: string,
   ): Promise<EntryDocument[]> {
-    if (categoryId)
-      return await this.entryModel
-        .find({
-          owner: new mongoose.Types.ObjectId(user._id),
-          category: new mongoose.Types.ObjectId(categoryId),
-        })
-        .populate('category', { name: 1 });
-    else
-      return await this.entryModel
-        .find({
-          owner: new mongoose.Types.ObjectId(user._id),
-        })
-        .populate('category', { name: 1 });
+    let entries = [];
+    if (categoryId) {
+      try {
+        const category = await this.entryModel.findById(categoryId);
+        if (!category) {
+          throw new NotFoundException(`Category ${categoryId} was not found`);
+        }
+      } catch (e) {
+        throw new NotFoundException(`Category ${categoryId} was not found`);
+      }
+      entries = await this.entryModel.find({
+        owner: new mongoose.Types.ObjectId(user._id),
+        category: new mongoose.Types.ObjectId(categoryId),
+      });
+    } else {
+      entries = await this.entryModel.find({
+        owner: new mongoose.Types.ObjectId(user._id),
+      });
+      // .populate('category', { name: 1 });
+    }
+    return entries;
   }
 
-  async getEntry(ownerId: string, id: string) {
-    return await this.entryModel.findOne({
+  async getEntry(ownerId: string, id: string): Promise<EntryDocument> {
+    const foundEntry = await this.entryModel.findOne({
       owner: new mongoose.Types.ObjectId(ownerId),
       _id: new mongoose.Types.ObjectId(id),
     });
     // .populate('category', { name: 1 });
+    if (!foundEntry) {
+      throw new NotFoundException(`Entry ${id} was not found`);
+    }
+    return foundEntry;
   }
 
   async createEntry(
     body: Partial<EntryDocument>,
-    user: UserDocument,
+    ownerId: string,
     categoryId: string,
   ): Promise<EntryDocument> {
-    const entry = new this.entryModel({
-      ...body,
-      owner: new mongoose.Types.ObjectId(user._id),
-      category: new mongoose.Types.ObjectId(categoryId),
+    let category: CategoryDocument;
+    try {
+      category = await this.categModel.findOne({
+        owner: new mongoose.Types.ObjectId(ownerId),
+        _id: new mongoose.Types.ObjectId(categoryId),
+      });
+      if (!category)
+        throw new NotFoundException(
+          `Category ${categoryId} to which you want to attach new entry, was not found`,
+        );
+    } catch (e) {
+      throw new NotFoundException(
+        `Category ${categoryId} to which you want to attach new entry, was not found`,
+      );
+    }
+
+    try {
+      const entry = new this.entryModel({
+        ...body,
+        owner: new mongoose.Types.ObjectId(ownerId),
+        category: new mongoose.Types.ObjectId(categoryId),
+      });
+      category.items.push(new mongoose.Types.ObjectId(entry._id));
+      await category.save();
+      return await entry.save();
+    } catch (e) {
+      throw new BadRequestException(e, e.message);
+    }
+  }
+
+  async editEntry(
+    ownerId: string,
+    id: string,
+    entryObj: Partial<EntryDocument>,
+  ) {
+    if (entryObj.category) {
+      // Check if the category id is correct and exists
+      try {
+        const categ = await this.categModel.findOne({
+          _id: new mongoose.Types.ObjectId(entryObj.category),
+          owner: new mongoose.Types.ObjectId(ownerId),
+        });
+        if (!categ) {
+          throw new NotFoundException(
+            `Category ${entryObj.category} to which you want to attach new entry, was not found`,
+          );
+        }
+      } catch (e) {
+        throw new NotFoundException(
+          `Category ${entryObj.category} to which you want to attach new entry, was not found`,
+        );
+      }
+    }
+    try {
+      const updated = await this.entryModel.findOneAndUpdate(
+        {
+          _id: new mongoose.Types.ObjectId(id),
+          owner: new mongoose.Types.ObjectId(ownerId),
+        },
+        entryObj,
+        { returnDocument: 'after' },
+      );
+      return updated;
+    } catch (e) {
+      throw new BadRequestException(e, e.message);
+    }
+  }
+
+  async deleteEntry(ownerId: string, id: string) {
+    const deleted = await this.entryModel.findOneAndDelete({
+      _id: new mongoose.Types.ObjectId(id),
+      owner: new mongoose.Types.ObjectId(ownerId),
     });
-    const category = await this.categModel.findOne({
-      owner: new mongoose.Types.ObjectId(user._id),
-      _id: new mongoose.Types.ObjectId(categoryId),
-    });
-    category.items.push(new mongoose.Types.ObjectId(entry._id));
-    await category.save();
-    return await entry.save();
+    if (!deleted) {
+      throw new NotFoundException(`Entry ${id} was not found`);
+    }
   }
 }

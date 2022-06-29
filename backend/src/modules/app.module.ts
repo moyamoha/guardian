@@ -14,7 +14,11 @@ import { UserModule } from './user.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/passapp'),
+    MongooseModule.forRoot(
+      process.env.NODE_ENV === 'production'
+        ? process.env.MONGODB_ATLAS_URL
+        : process.env.MONGODB_LOCAL_URL,
+    ),
     AuthModule,
     UserModule,
     EntryModule,
