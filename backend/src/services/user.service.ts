@@ -48,20 +48,24 @@ export class UserService {
     return await this.userModel.findOne({ email: email });
   }
 
-  async deleteUser(user: UserDocument) {
-    const email = user.email;
-    const deleted = await this.userModel.findOneAndDelete({ email: email });
-    if (!deleted) {
-      throw new NotFoundException(`User with email of ${email} was not found`);
-    }
-    await this.mailerService.sendMail({
-      from: process.env.EMAIL_SENDER,
-      to: email,
-      text: 'Welcome to Gaurdian',
-      subject: 'Welcome to Gaurdian',
-      html: `<p><strong>Dear ${user.firstname}!</strong><br></br>We are sad to see you go. But you can always make a new account
-      <br></br><i>Team Gaurdian.</i></p>`,
-    });
+  async deactivate(user: UserDocument) {
+    try {
+      user.isActive = false;
+      await this.mailerService.sendMail({
+        from: process.env.EMAIL_SENDER,
+        to: user.email,
+        text: 'Welcome to Gaurdian',
+        subject: 'Welcome to Gaurdian',
+        html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Your account has been scheduled to be removed in one month from now. 
+        Once removed you can not recover it or any data of it. If you want to still keep your account simply login again :)
+        <br></br><i>Team Gaurdian.</i></p>`,
+      });
+      await user.save();
+    } catch (e) {}
+  }
+
+  async deleteAccount(id: string) {
+    await this.userModel.findByIdAndDelete(id);
   }
 
   async confirmEmail(id: string): Promise<string> {

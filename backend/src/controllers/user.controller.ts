@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Query, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Patch, Query, Req, UseGuards } from '@nestjs/common';
 
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
 import { UserService } from 'src/services/user.service';
@@ -8,9 +8,9 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @UseGuards(AuthTokenGaurd)
-  @Delete('')
+  @Patch('deactivate')
   async deleteAccount(@Req() req) {
-    await this.userService.deleteUser(req.user);
+    await this.userService.deactivate(req.user);
   }
 
   @Get('confirm')

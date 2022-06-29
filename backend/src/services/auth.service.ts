@@ -14,6 +14,7 @@ export class AuthService {
 
   async login(user: UserDocument): Promise<{ accessToken: string }> {
     user.lastLoggedIn = new Date();
+    if (!user.isActive) user.isActive = true;
     const payload = {
       email: user.email,
       firstname: user.firstname,
