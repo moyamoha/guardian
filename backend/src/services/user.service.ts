@@ -1,5 +1,9 @@
 import { MailerService } from '@nestjs-modules/mailer';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 // import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
@@ -14,16 +18,22 @@ export class UserService {
   ) {}
 
   async createUser(userObj: Partial<UserDocument>): Promise<UserDocument> {
-    const mockUser = new this.userModel(userObj);
-    await mockUser.validate();
-    const hashedPassoword = await bcrypt.hash(userObj.password, 10);
-    const newUser = new this.userModel({
-      ...userObj,
-      password: hashedPassoword,
-      lastLoggedIn: null,
-    }) as UserDocument;
-    const created = await newUser.save({ validateBeforeSave: false });
-    this.mailerService.sendMail({
+    let created: UserDocument;
+    try {
+      const mockUser = new this.userModel(userObj);
+      await mockUser.validate();
+      const hashedPassoword = await bcrypt.hash(userObj.password, 10);
+      const newUser = new this.userModel({
+        ...userObj,
+        password: hashedPassoword,
+        lastLoggedIn: null,
+      }) as UserDocument;
+
+      created = await newUser.save({ validateBeforeSave: false });
+    } catch (e) {
+      throw new BadRequestException(e, e.message);
+    }
+    await this.mailerService.sendMail({
       from: process.env.EMAIL_SENDER,
       to: created.email,
       text: 'Welcome to Gaurdian',

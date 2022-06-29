@@ -35,7 +35,7 @@ export class AuthService {
 
   async singup(userObj: Partial<UserDocument>) {
     try {
-      return await this.userService.createUser(userObj);
+      await this.userService.createUser(userObj);
     } catch (e) {
       throw new BadRequestException(e, e.message);
     }
