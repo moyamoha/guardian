@@ -10,7 +10,6 @@ import { faker } from '@faker-js/faker';
 
 import { UserDocument } from 'src/schemas/user.schema';
 import { UserService } from './user.service';
-import { verificationCodeLength } from 'src/utils/constants';
 
 @Injectable()
 export class AuthService {
@@ -51,7 +50,7 @@ export class AuthService {
 
   async sendVerificationCode(user: UserDocument): Promise<void> {
     const randomNum = parseInt(
-      faker.random.numeric(verificationCodeLength, {
+      faker.random.numeric(parseInt(process.env.VERIFICATION_CODE_LENGTH), {
         allowLeadingZeros: false,
       }),
     );
