@@ -70,7 +70,6 @@ export class AuthService {
   async verifyLogin(code: number): Promise<{ accessToken: string }> {
     const foundUser = await this.userService.findUserByCode(code);
     if (foundUser) {
-      foundUser.verificationCode = 0;
       return this.login(foundUser);
     } else {
       throw new UnauthorizedException(
