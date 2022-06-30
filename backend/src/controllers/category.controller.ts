@@ -35,7 +35,7 @@ export class CategoryController {
   @Get('')
   async getCategories(@Req() req) {
     try {
-      return await this.categoryService.getAll(req.user);
+      return await this.categoryService.getAll(req.user._id);
     } catch (e) {
       throw new NotFoundException('Nothing was found');
     }
@@ -44,11 +44,7 @@ export class CategoryController {
   @UseGuards(AuthTokenGaurd)
   @Get(':id')
   async getCategory(@Req() req, @Param('id') id) {
-    try {
-      return await this.categoryService.getCategory(id, req.user._id);
-    } catch (e) {
-      throw new NotFoundException(`Category (id=${id}) was not found`);
-    }
+    return await this.categoryService.getCategory(id, req.user._id);
   }
 
   @UseGuards(AuthTokenGaurd)
@@ -57,20 +53,14 @@ export class CategoryController {
   async deleteCategory(@Req() req, @Param('id') categId) {
     try {
       await this.categoryService.deleteCategory(categId, req.user);
-    } catch (e) {
-      throw new NotFoundException(`Category ${categId} was not found`);
-    }
+    } catch (e) {}
   }
 
   @UseGuards(AuthTokenGaurd)
   @Put(':id')
   async editCategory(@Req() req, @Param('id') id, @Body('name') newName) {
-    try {
-      return await this.categoryService.editCategory(id, req.user, {
-        name: newName,
-      });
-    } catch (e) {
-      throw new NotFoundException(`Category ${id} was not found`);
-    }
+    return await this.categoryService.editCategory(id, req.user._id, {
+      name: newName,
+    });
   }
 }

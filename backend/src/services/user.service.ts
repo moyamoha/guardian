@@ -33,13 +33,14 @@ export class UserService {
     } catch (e) {
       throw new BadRequestException(e, e.message);
     }
+    const confirmationLink = `${process.env.SITE_ADDRESS}/users/confirm/?id=${created._id}`;
     await this.mailerService.sendMail({
       from: process.env.EMAIL_SENDER,
       to: created.email,
       text: 'Welcome to Gaurdian',
       subject: 'Welcome to Gaurdian',
       html: `<p><strong>Dear ${created.firstname}!</strong><br></br>We are glad you chose Gaurdian to keep your passwords safe and secure. 
-      Before you can do anything, please confirm your email address by clicking <a href="${process.env.SITE_ADDRESS}/users/confirm/?id=${created._id}">This link</a>
+      Before you can do anything, please confirm your email address by clicking <a href="${confirmationLink}">This link</a>
       <br></br><i>Team Gaurdian.</i></p>`,
     });
     return created;
@@ -54,8 +55,7 @@ export class UserService {
       await this.mailerService.sendMail({
         from: process.env.EMAIL_SENDER,
         to: user.email,
-        text: 'Welcome to Gaurdian',
-        subject: 'Welcome to Gaurdian',
+        subject: 'Your account is DEACTIVATED',
         html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Your account has been scheduled to be removed in one month from now. 
         Once removed you can not recover it or any data of it. If you want to still keep your account simply login again :)
         <br></br><i>Team Gaurdian.</i></p>`,
@@ -65,7 +65,14 @@ export class UserService {
   }
 
   async deleteAccount(id: string) {
-    await this.userModel.findByIdAndDelete(id);
+    const user = await this.userModel.findByIdAndDelete(id);
+    await this.mailerService.sendMail({
+      from: process.env.EMAIL_SENDER,
+      to: user.email,
+      subject: 'Your account was DELETED',
+      html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Sad to see you go. Your account was permanently removed :( <br></br>You can always make a new account
+      <br></br><i>Team Gaurdian.</i></p>`,
+    });
   }
 
   async confirmEmail(id: string): Promise<string> {
@@ -76,5 +83,9 @@ export class UserService {
     user.emailConfirmed = true;
     await user.save();
     return 'You are all set. Enjoy using our application ❤️';
+  }
+
+  async getInActives(): Promise<UserDocument[]> {
+    return await this.userModel.find({ isActive: false });
   }
 }
