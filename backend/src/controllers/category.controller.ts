@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -11,11 +10,14 @@ import {
   Put,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
+import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { CategoryDocument } from 'src/schemas/category.schema';
 import { CategoryService } from 'src/services/category.service';
 
+@UseInterceptors(ErrorsInterceptor)
 @Controller('categories')
 export class CategoryController {
   constructor(private categoryService: CategoryService) {}
@@ -24,11 +26,7 @@ export class CategoryController {
   @HttpCode(201)
   @Post('')
   async addCategory(@Body() body: Partial<CategoryDocument>, @Req() req) {
-    try {
-      return await this.categoryService.creatCategory(body, req.user);
-    } catch (e) {
-      throw new BadRequestException(e, e.message);
-    }
+    return await this.categoryService.createCategory(body, req.user._id);
   }
 
   @UseGuards(AuthTokenGaurd)
@@ -51,9 +49,7 @@ export class CategoryController {
   @HttpCode(204)
   @Delete(':id')
   async deleteCategory(@Req() req, @Param('id') categId) {
-    try {
-      await this.categoryService.deleteCategory(categId, req.user);
-    } catch (e) {}
+    await this.categoryService.deleteCategory(categId, req.user);
   }
 
   @UseGuards(AuthTokenGaurd)

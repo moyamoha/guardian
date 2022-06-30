@@ -1,9 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
+
 import { Category, CategoryDocument } from 'src/schemas/category.schema';
 import { Entry, EntryDocument } from 'src/schemas/entry.schema';
-import { UserDocument } from 'src/schemas/user.schema';
 
 @Injectable()
 export class CategoryService {
@@ -20,15 +24,19 @@ export class CategoryService {
       .populate('items');
   }
 
-  async creatCategory(
+  async createCategory(
     data: Partial<CategoryDocument>,
-    user: UserDocument,
+    ownerId: string,
   ): Promise<CategoryDocument> {
-    const category = new this.categoryModel({
-      ...data,
-      owner: new mongoose.Types.ObjectId(user._id),
-    });
-    return await category.save();
+    try {
+      const category = new this.categoryModel({
+        ...data,
+        owner: new mongoose.Types.ObjectId(ownerId),
+      });
+      return await category.save();
+    } catch (e) {
+      throw new BadRequestException(e, e.mssage);
+    }
   }
 
   async getCategory(id: string, ownerId: string): Promise<CategoryDocument> {
@@ -39,7 +47,7 @@ export class CategoryService {
       })
       .populate('items');
     if (!category) {
-      throw new NotFoundException(`Category (id=${id}) was not found`);
+      throw new NotFoundException(`Category ${id} was not found`);
     }
     return category;
   }

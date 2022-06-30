@@ -10,11 +10,14 @@ import {
   Query,
   Req,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
+import { ErrorsInterceptor } from 'src/interceptors/error.interceptor';
 import { EntryDocument } from 'src/schemas/entry.schema';
 import { EntryService } from 'src/services/entry.service';
 
+@UseInterceptors(ErrorsInterceptor)
 @Controller('entries')
 export class EntryController {
   constructor(private entryService: EntryService) {}

@@ -22,14 +22,11 @@ export class EntryService {
   ): Promise<EntryDocument[]> {
     let entries = [];
     if (categoryId) {
-      try {
-        const category = await this.categModel.findById(categoryId);
-        if (!category) {
-          throw new NotFoundException(`Category ${categoryId} was not found`);
-        }
-      } catch (e) {
+      const category = await this.categModel.findById(categoryId);
+      if (!category) {
         throw new NotFoundException(`Category ${categoryId} was not found`);
       }
+
       entries = await this.entryModel.find({
         owner: new mongoose.Types.ObjectId(user._id),
         category: new mongoose.Types.ObjectId(categoryId),
@@ -60,21 +57,14 @@ export class EntryService {
     ownerId: string,
     categoryId: string,
   ): Promise<EntryDocument> {
-    let category: CategoryDocument;
-    try {
-      category = await this.categModel.findOne({
-        owner: new mongoose.Types.ObjectId(ownerId),
-        _id: new mongoose.Types.ObjectId(categoryId),
-      });
-      if (!category)
-        throw new NotFoundException(
-          `Category ${categoryId} to which you want to attach new entry, was not found`,
-        );
-    } catch (e) {
+    const category = await this.categModel.findOne({
+      owner: new mongoose.Types.ObjectId(ownerId),
+      _id: new mongoose.Types.ObjectId(categoryId),
+    });
+    if (!category)
       throw new NotFoundException(
         `Category ${categoryId} to which you want to attach new entry, was not found`,
       );
-    }
 
     try {
       const entry = new this.entryModel({
@@ -97,17 +87,11 @@ export class EntryService {
   ) {
     if (entryObj.category) {
       // Check if the category id is correct and exists
-      try {
-        const categ = await this.categModel.findOne({
-          _id: new mongoose.Types.ObjectId(entryObj.category),
-          owner: new mongoose.Types.ObjectId(ownerId),
-        });
-        if (!categ) {
-          throw new NotFoundException(
-            `Category ${entryObj.category} to which you want to attach new entry, was not found`,
-          );
-        }
-      } catch (e) {
+      const categ = await this.categModel.findOne({
+        _id: new mongoose.Types.ObjectId(entryObj.category),
+        owner: new mongoose.Types.ObjectId(ownerId),
+      });
+      if (!categ) {
         throw new NotFoundException(
           `Category ${entryObj.category} to which you want to attach new entry, was not found`,
         );
