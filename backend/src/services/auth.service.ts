@@ -5,16 +5,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
-import mongoose, { Model } from 'mongoose';
 import { faker } from '@faker-js/faker';
 
 import { UserDocument } from 'src/schemas/user.schema';
-import {
-  Verification,
-  VerificationDocument,
-} from 'src/schemas/verification.schema';
 import { UserService } from './user.service';
 
 @Injectable()
@@ -22,8 +16,6 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
-    @InjectModel(Verification.name)
-    private verifModel: Model<VerificationDocument>,
     private mailerService: MailerService,
   ) {}
 
@@ -59,17 +51,13 @@ export class AuthService {
     const randomNum = parseInt(
       faker.random.numeric(7, { allowLeadingZeros: false }),
     );
-    const verif = this.verifModel.findOneAndUpdate(
-      {
-        user: new mongoose.Types.ObjectId(user._id),
-      },
-      { code: randomNum },
-    );
-    if (!user.mfaEnabled || !verif) {
+    if (!user.mfaEnabled) {
       throw new ForbiddenException(
         'User has not enabled multi-factorauthentication',
       );
     }
+    user.verificationCode = randomNum;
+    await user.save();
     this.mailerService.sendMail({
       from: process.env.EMAIL_SENDER,
       to: user.email,
@@ -80,18 +68,9 @@ export class AuthService {
   }
 
   async verifyLogin(code: number): Promise<{ accessToken: string }> {
-    const verif = await this.verifModel.findOne({
-      code: code,
-    });
-    const foundUser = await this.userService.getUserById(verif.user);
-    console.log(foundUser);
+    const foundUser = await this.userService.findUserByCode(code);
     if (foundUser) {
-      await this.verifModel.findOneAndUpdate(
-        {
-          user: new mongoose.Types.ObjectId(foundUser._id),
-        },
-        { code: 0 },
-      );
+      foundUser.verificationCode = 0;
       return this.login(foundUser);
     } else {
       throw new UnauthorizedException(

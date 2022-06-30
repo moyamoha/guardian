@@ -7,12 +7,9 @@ import {
 // import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
+
 import { User, UserDocument } from 'src/schemas/user.schema';
-import {
-  Verification,
-  VerificationDocument,
-} from 'src/schemas/verification.schema';
 import {
   mfaDisabledEmailResp,
   accountDeactivedEmailResp,
@@ -24,8 +21,6 @@ import {
 export class UserService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
-    @InjectModel(Verification.name)
-    private verifModel: Model<VerificationDocument>,
     private mailerService: MailerService,
   ) {}
 
@@ -117,23 +112,13 @@ export class UserService {
         html: `<p><strong>Dear ${updated.firstname}!</strong><br></br>${bodyText}
         <br></br><i>Team Gaurdian.</i></p>`,
       });
-      if (mfaEnabled) {
-        const verification = new this.verifModel({
-          user: new mongoose.Types.ObjectId(updated._id),
-        });
-        await verification.save();
-      } else {
-        await this.verifModel.findOneAndDelete({
-          user: new mongoose.Types.ObjectId(updated._id),
-        });
-      }
       return updated;
     } catch (e) {
       throw new BadRequestException('Could not update user');
     }
   }
 
-  async getUserById(id: string | mongoose.Types.ObjectId): Promise<any> {
-    return await this.userModel.findById(id);
+  async findUserByCode(code: number): Promise<UserDocument> {
+    return await this.userModel.findOne({ verificationCode: code });
   }
 }

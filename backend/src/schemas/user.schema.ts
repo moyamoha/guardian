@@ -28,6 +28,9 @@ export class User {
 
   @Prop({ default: false })
   mfaEnabled: boolean;
+
+  @Prop({ default: 0 })
+  verificationCode: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
