@@ -9,3 +9,5 @@ export const accountDeletedEmailResp =
 
 export const accountDeactivedEmailResp = `Your account has been scheduled to be removed in one month from now. 
 Once removed you can not recover it or any data of it. If you want to still keep your account simply login again :)`;
+
+export const verificationCodeLength = 7;

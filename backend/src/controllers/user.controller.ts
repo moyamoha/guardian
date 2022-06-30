@@ -32,6 +32,7 @@ export class UserController {
       email: updated.email,
       firstname: updated.firstname,
       lastname: updated.lastname,
+      mfaEnabled: updated.mfaEnabled,
     };
   }
 

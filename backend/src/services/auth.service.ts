@@ -10,6 +10,7 @@ import { faker } from '@faker-js/faker';
 
 import { UserDocument } from 'src/schemas/user.schema';
 import { UserService } from './user.service';
+import { verificationCodeLength } from 'src/utils/constants';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +27,7 @@ export class AuthService {
       email: user.email,
       firstname: user.firstname,
       lastname: user.lastname,
+      mfaEnabled: user.mfaEnabled,
     };
     const accessToken = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
@@ -49,7 +51,9 @@ export class AuthService {
 
   async sendVerificationCode(user: UserDocument): Promise<void> {
     const randomNum = parseInt(
-      faker.random.numeric(7, { allowLeadingZeros: false }),
+      faker.random.numeric(verificationCodeLength, {
+        allowLeadingZeros: false,
+      }),
     );
     if (!user.mfaEnabled) {
       throw new ForbiddenException(
@@ -70,6 +74,8 @@ export class AuthService {
   async verifyLogin(code: number): Promise<{ accessToken: string }> {
     const foundUser = await this.userService.findUserByCode(code);
     if (foundUser) {
+      foundUser.verificationCode = 0;
+      await foundUser.save();
       return this.login(foundUser);
     } else {
       throw new UnauthorizedException(
