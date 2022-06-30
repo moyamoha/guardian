@@ -83,15 +83,16 @@ export class AuthService {
     const verif = await this.verifModel.findOne({
       code: code,
     });
-    const user = await this.userService.getUserById(verif.user);
-    if (user) {
+    const foundUser = await this.userService.getUserById(verif.user);
+    console.log(foundUser);
+    if (foundUser) {
       await this.verifModel.findOneAndUpdate(
         {
-          user: new mongoose.Types.ObjectId(user._id),
+          user: new mongoose.Types.ObjectId(foundUser._id),
         },
         { code: 0 },
       );
-      return this.login(user);
+      return this.login(foundUser);
     } else {
       throw new UnauthorizedException(
         'The verification code you provided is wrong!',
