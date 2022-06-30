@@ -23,7 +23,7 @@ export class EntryService {
     let entries = [];
     if (categoryId) {
       try {
-        const category = await this.entryModel.findById(categoryId);
+        const category = await this.categModel.findById(categoryId);
         if (!category) {
           throw new NotFoundException(`Category ${categoryId} was not found`);
         }
