@@ -10,6 +10,10 @@ import { CategoryService } from 'src/services/category.service';
 import { UserController } from '../controllers/user.controller';
 import { TaskService } from 'src/services/task.service';
 import { UserService } from '../services/user.service';
+import {
+  Verification,
+  VerificationSchema,
+} from 'src/schemas/verification.schema';
 
 @Module({
   imports: [
@@ -17,6 +21,7 @@ import { UserService } from '../services/user.service';
       { name: User.name, schema: UserSchema },
       { name: Category.name, schema: CategorySchema },
       { name: Entry.name, schema: EntrySchema },
+      { name: Verification.name, schema: VerificationSchema },
     ]),
     MailerModule.forRoot({
       transport: {

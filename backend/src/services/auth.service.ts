@@ -1,8 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { MailerService } from '@nestjs-modules/mailer';
+import {
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
+import mongoose, { Model } from 'mongoose';
+import { faker } from '@faker-js/faker';
 
 import { UserDocument } from 'src/schemas/user.schema';
+import {
+  Verification,
+  VerificationDocument,
+} from 'src/schemas/verification.schema';
 import { UserService } from './user.service';
 
 @Injectable()
@@ -10,6 +22,9 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private jwtService: JwtService,
+    @InjectModel(Verification.name)
+    private verifModel: Model<VerificationDocument>,
+    private mailerService: MailerService,
   ) {}
 
   async login(user: UserDocument): Promise<{ accessToken: string }> {
@@ -38,5 +53,49 @@ export class AuthService {
 
   async singup(userObj: Partial<UserDocument>) {
     await this.userService.createUser(userObj);
+  }
+
+  async sendVerificationCode(user: UserDocument): Promise<void> {
+    const randomNum = parseInt(
+      faker.random.numeric(7, { allowLeadingZeros: false }),
+    );
+    const verif = this.verifModel.findOneAndUpdate(
+      {
+        user: new mongoose.Types.ObjectId(user._id),
+      },
+      { code: randomNum },
+    );
+    if (!user.mfaEnabled || !verif) {
+      throw new ForbiddenException(
+        'User has not enabled multi-factorauthentication',
+      );
+    }
+    this.mailerService.sendMail({
+      from: process.env.EMAIL_SENDER,
+      to: user.email,
+      subject: 'Verificationn code',
+      html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Your verification code is <strong>${randomNum}</strong>
+      <br></br><i>Team Gaurdian.</i></p>`,
+    });
+  }
+
+  async verifyLogin(code: number): Promise<{ accessToken: string }> {
+    const verif = await this.verifModel.findOne({
+      code: code,
+    });
+    const user = await this.userService.getUserById(verif.user);
+    if (user) {
+      await this.verifModel.findOneAndUpdate(
+        {
+          user: new mongoose.Types.ObjectId(user._id),
+        },
+        { code: 0 },
+      );
+      return this.login(user);
+    } else {
+      throw new UnauthorizedException(
+        'The verification code you provided is wrong!',
+      );
+    }
   }
 }

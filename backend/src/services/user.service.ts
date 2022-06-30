@@ -7,13 +7,25 @@ import {
 // import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { User, UserDocument } from 'src/schemas/user.schema';
+import {
+  Verification,
+  VerificationDocument,
+} from 'src/schemas/verification.schema';
+import {
+  mfaDisabledEmailResp,
+  accountDeactivedEmailResp,
+  accountDeletedEmailResp,
+  mfaEnabledEmailResp,
+} from 'src/utils/constants';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
+    @InjectModel(Verification.name)
+    private verifModel: Model<VerificationDocument>,
     private mailerService: MailerService,
   ) {}
 
@@ -56,8 +68,7 @@ export class UserService {
         from: process.env.EMAIL_SENDER,
         to: user.email,
         subject: 'Your account is DEACTIVATED',
-        html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Your account has been scheduled to be removed in one month from now. 
-        Once removed you can not recover it or any data of it. If you want to still keep your account simply login again :)
+        html: `<p><strong>Dear ${user.firstname}!</strong><br></br>${accountDeactivedEmailResp}
         <br></br><i>Team Gaurdian.</i></p>`,
       });
       await user.save();
@@ -70,7 +81,7 @@ export class UserService {
       from: process.env.EMAIL_SENDER,
       to: user.email,
       subject: 'Your account was DELETED',
-      html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Sad to see you go. Your account was permanently removed :( <br></br>You can always make a new account
+      html: `<p><strong>Dear ${user.firstname}!</strong><br></br>${accountDeletedEmailResp}
       <br></br><i>Team Gaurdian.</i></p>`,
     });
   }
@@ -87,5 +98,42 @@ export class UserService {
 
   async getInActives(): Promise<UserDocument[]> {
     return await this.userModel.find({ isActive: false });
+  }
+
+  async changeMfaState(id: string, mfaEnabled: boolean): Promise<UserDocument> {
+    try {
+      const updated = await this.userModel.findByIdAndUpdate(
+        id,
+        { mfaEnabled: mfaEnabled },
+        { returnDocument: 'after' },
+      );
+      const bodyText = mfaEnabled ? mfaEnabledEmailResp : mfaDisabledEmailResp;
+      await this.mailerService.sendMail({
+        from: process.env.EMAIL_SENDER,
+        to: updated.email,
+        subject: mfaEnabled
+          ? 'Your account is now SECURE'
+          : 'Oops! your account is VULNERABLE',
+        html: `<p><strong>Dear ${updated.firstname}!</strong><br></br>${bodyText}
+        <br></br><i>Team Gaurdian.</i></p>`,
+      });
+      if (mfaEnabled) {
+        const verification = new this.verifModel({
+          user: new mongoose.Types.ObjectId(updated._id),
+        });
+        await verification.save();
+      } else {
+        await this.verifModel.findOneAndDelete({
+          user: new mongoose.Types.ObjectId(updated._id),
+        });
+      }
+      return updated;
+    } catch (e) {
+      throw new BadRequestException('Could not update user');
+    }
+  }
+
+  async getUserById(id: string | mongoose.Types.ObjectId): Promise<any> {
+    return await this.userModel.findById(id);
   }
 }
