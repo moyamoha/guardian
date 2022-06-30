@@ -21,6 +21,7 @@ export class UserController {
     await this.userService.deactivate(req.user);
   }
 
+  @UseGuards(AuthTokenGaurd)
   @Patch('toggle-mfa')
   async toggleMfa(@Req() req, @Body('mfaEnabled') mfaEnabled) {
     const updated = await this.userService.changeMfaState(
