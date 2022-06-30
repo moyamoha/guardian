@@ -136,5 +136,8 @@ export class EntryService {
     if (!deleted) {
       throw new NotFoundException(`Entry ${id} was not found`);
     }
+    await this.categModel.findByIdAndUpdate(deleted.category, {
+      $pull: { items: deleted._id },
+    });
   }
 }
