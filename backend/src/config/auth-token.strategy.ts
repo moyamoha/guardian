@@ -15,8 +15,13 @@ export class TokenStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: any) {
     const user = await this.userService.findOneByEmail(payload.email);
-    if (!user || !user.isActive) {
-      throw new UnauthorizedException('User does not exist or is deactivated');
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+    if (!user.isActive) {
+      throw new UnauthorizedException(
+        'User is deactivated. Please login again to activate your account',
+      );
     }
     return user;
   }
