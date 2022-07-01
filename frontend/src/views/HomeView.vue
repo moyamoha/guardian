@@ -1,18 +1,17 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+	<div class="home">
+		<!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
+		<DataTree></DataTree>
+	</div>
 </template>
 
 <script>
+import EntryRow from "@/components/EntryRow.vue";
+import DataTree from "@/components/DataTree.vue";
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "HomeView",
-  components: {
-    HelloWorld,
-  },
+	name: "HomeView",
+	components: { DataTree },
 };
 </script>
