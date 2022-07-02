@@ -1,49 +1,36 @@
 <template>
 	<ol class="wtree">
-		<li>
-			<CategoryRow
-				class="item category"
-				:category="{ name: 'General' }"
-			></CategoryRow>
-			<ol>
-				<li>
-					<EntryRow class="item entry" :entry="entry"></EntryRow>
-				</li>
-			</ol>
+		<li v-for="category in content" :key="category._id">
+			<CategoryContainer :category="category"></CategoryContainer>
 		</li>
 	</ol>
 </template>
 
 <script>
 import EntryRow from "./EntryRow.vue";
-import CategoryRow from "./CategoryRow.vue";
+import { mapGetters } from "vuex";
+import CategoryContainer from "./CategoryContainer.vue";
 export default {
 	data: () => {
 		return {
-			entry: {
-				title: "yaha",
-				password: "wow",
-				username: "Ok",
-				url: "https://facebook.com",
-			},
+			expand: true,
 		};
+	},
+	computed: {
+		...mapGetters(["content"]),
 	},
 	components: {
 		EntryRow,
-		CategoryRow,
+		CategoryContainer,
 	},
 };
 </script>
 
-<style scoped>
-ol {
-	margin-left: 30px;
-}
-
+<style>
 .wtree {
 	margin-top: 2rem;
 	width: 60vw;
-	border-top: 1px solid black;
+	position: relative;
 }
 .wtree li {
 	list-style-type: none;
@@ -74,13 +61,13 @@ ol {
 	display: none;
 }
 .item {
-	display: block;
 	border: 1px solid #ddd;
 	padding: 10px;
 	color: #666666;
 	text-decoration: none;
 	text-align: left;
-	/* border-radius: 5px; */
+	border-radius: 5px;
+	font-size: 0.9rem;
 }
 
 .category {
@@ -89,6 +76,7 @@ ol {
 
 .entry {
 	background-color: #ddebc8;
+	padding: 8px;
 }
 
 .entry:hover,

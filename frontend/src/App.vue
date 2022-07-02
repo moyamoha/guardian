@@ -1,36 +1,49 @@
 <template>
-	<div id="app">
-		<nav>
-			<router-link to="/">Home</router-link> |
-			<router-link to="/about">About</router-link>
-		</nav>
-		<router-view></router-view>
-	</div>
+	<v-app>
+		<NavBar></NavBar>
+		<main>
+			<v-container>
+				<v-row class="d-flex justify-center">
+					<router-view></router-view>
+				</v-row>
+			</v-container>
+		</main>
+	</v-app>
 </template>
+
+<script>
+import NavBar from "./components/NavBar.vue";
+export default {
+	components: {
+		NavBar,
+	},
+};
+</script>
 
 <style>
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* text-align: center; */
 	color: #2c3e50;
 }
 
-nav {
-	padding: 10px;
-	background-color: #2c3e50;
+main {
+	min-height: 90vh;
 	display: flex;
-	gap: 10px;
+	justify-content: center;
+	padding-top: 3rem;
+	border-top: 5px solid rgb(255, 177, 32);
 }
 
-nav a {
-	font-weight: bold;
-	color: #ffffff;
-	text-decoration: none;
+@media (max-width: 900px) {
+	main {
+		padding-top: 2rem;
+	}
 }
-
-nav a.router-link-exact-active {
-	color: #42b983;
+@media (max-width: 700px) {
+	main {
+		padding-top: 1rem;
+	}
 }
 </style>

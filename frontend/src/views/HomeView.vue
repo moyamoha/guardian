@@ -1,17 +1,25 @@
 <template>
 	<div class="home">
-		<!-- <img alt="Vue logo" src="../assets/logo.png" /> -->
+		<p>All your passwords with their categories</p>
+		<span>Add entry</span><EntryDialog></EntryDialog>
 		<DataTree></DataTree>
 	</div>
 </template>
 
 <script>
-import EntryRow from "@/components/EntryRow.vue";
+import { mapActions } from "vuex";
 import DataTree from "@/components/DataTree.vue";
+import EntryDialog from "@/components/EntryDialog.vue";
 // @ is an alias to /src
 
 export default {
 	name: "HomeView",
-	components: { DataTree },
+	components: { DataTree, EntryDialog },
+	methods: {
+		...mapActions(["fetchContent"]),
+	},
+	mounted() {
+		this.fetchContent();
+	},
 };
 </script>

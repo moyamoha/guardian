@@ -98,12 +98,19 @@ export class EntryService {
       }
     }
     try {
+      // const update = {
+      //   ...entryObj
+      // }
       const updated = await this.entryModel.findOneAndUpdate(
         {
           _id: new mongoose.Types.ObjectId(id),
           owner: new mongoose.Types.ObjectId(ownerId),
         },
-        entryObj,
+        {
+          ...entryObj,
+          owner: new mongoose.Types.ObjectId(ownerId),
+          category: new mongoose.Types.ObjectId(entryObj.category),
+        },
         { returnDocument: 'after' },
       );
       return updated;
