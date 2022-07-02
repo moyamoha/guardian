@@ -41,7 +41,7 @@ export class EntryController {
     @Param('id') id,
     @Body() entryObj: Partial<EntryDocument>,
   ) {
-    return await this.entryService.editEntry(req.user.id, id, entryObj);
+    return await this.entryService.editEntry(req.user._id, id, entryObj);
   }
 
   @Post('')

@@ -62,7 +62,7 @@ export default {
 				title: this.entry ? this.entry.title : "",
 				username: this.entry ? this.entry.username : "",
 				password: this.entry ? this.entry.password : "",
-				url: this.entry && this.entry.url !== "" ? this.entry.url : "",
+				url: this.entry && this.entry.url ? this.entry.url : "",
 			},
 			dialog: false,
 		};

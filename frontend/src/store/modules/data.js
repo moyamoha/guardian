@@ -52,9 +52,12 @@ const actions = {
 	},
 
 	editEntry: async ({ commit, dispatch }, entry) => {
+		// console.log("tultiin tänne");
 		const id = entry._id;
+		// console.log(id);
+		// console.log(entry);
 		try {
-			await axios.put("/entries/" + id, copyEntry);
+			await axios.put("/entries/" + id, entry);
 			dispatch("fetchContent");
 		} catch (e) {}
 	},
