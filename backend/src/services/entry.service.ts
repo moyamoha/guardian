@@ -88,8 +88,8 @@ export class EntryService {
     if (entryObj.category) {
       // Check if the category id is correct and exists
       const categ = await this.categModel.findOne({
-        _id: new mongoose.Types.ObjectId(entryObj.category),
-        owner: new mongoose.Types.ObjectId(ownerId),
+        _id: entryObj.category,
+        owner: ownerId,
       });
       if (!categ) {
         throw new NotFoundException(
@@ -98,19 +98,12 @@ export class EntryService {
       }
     }
     try {
-      // const update = {
-      //   ...entryObj
-      // }
       const updated = await this.entryModel.findOneAndUpdate(
         {
           _id: new mongoose.Types.ObjectId(id),
           owner: new mongoose.Types.ObjectId(ownerId),
         },
-        {
-          ...entryObj,
-          owner: new mongoose.Types.ObjectId(ownerId),
-          category: new mongoose.Types.ObjectId(entryObj.category),
-        },
+        entryObj,
         { returnDocument: 'after' },
       );
       return updated;

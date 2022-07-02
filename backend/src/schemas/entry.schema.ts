@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { User } from './user.schema';
+// import { User } from './user.schema';
 
 export type EntryDocument = Document & Entry;
 
@@ -18,11 +18,15 @@ export class Entry {
   @Prop()
   url: string;
 
-  @Prop({ type: mongoose.Types.ObjectId, ref: 'Category', required: true })
-  category: mongoose.Types.ObjectId;
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true,
+  })
+  category: mongoose.Schema.Types.ObjectId;
 
-  @Prop({ type: mongoose.Types.ObjectId, ref: 'User', required: true })
-  owner: User;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
+  owner: mongoose.Schema.Types.ObjectId;
 }
 
 export const EntrySchema = SchemaFactory.createForClass(Entry);

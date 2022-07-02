@@ -1,7 +1,6 @@
 <template>
 	<div class="home">
 		<p>All your passwords with their categories</p>
-		<span>Add entry</span><EntryDialog></EntryDialog>
 		<DataTree></DataTree>
 	</div>
 </template>
@@ -23,3 +22,14 @@ export default {
 	},
 };
 </script>
+
+<style>
+/* .home {
+	width: 100%;
+} */
+@media (max-width: 900) {
+	.home {
+		width: 80%;
+	}
+}
+</style>
