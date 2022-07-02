@@ -2,14 +2,10 @@ import axios from "axios";
 
 const state = {
 	content: [],
-	editingCategory: null,
-	editingEntry: null,
 };
 
 const getters = {
 	content: (state) => state.content,
-	editingCategory: (state) => state.editingCategory,
-	editingEntry: (state) => state.editingEntry,
 };
 
 const mutations = {
@@ -57,12 +53,8 @@ const actions = {
 
 	editEntry: async ({ commit, dispatch }, entry) => {
 		const id = entry._id;
-		const copyEntry = { ...entry };
-		delete copyEntry._id;
-		console.log(copyEntry);
-		console.log(id);
 		try {
-			const resp = await axios.put("/entries/" + id, copyEntry);
+			await axios.put("/entries/" + id, copyEntry);
 			dispatch("fetchContent");
 		} catch (e) {}
 	},
