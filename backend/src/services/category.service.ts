@@ -19,7 +19,7 @@ export class CategoryService {
   async getAll(ownerId: string): Promise<CategoryDocument[]> {
     return await this.categoryModel
       .find({
-        owner: new mongoose.Types.ObjectId(ownerId),
+        owner: ownerId,
       })
       .populate('items');
   }
@@ -31,7 +31,7 @@ export class CategoryService {
     try {
       const category = new this.categoryModel({
         ...data,
-        owner: new mongoose.Types.ObjectId(ownerId),
+        owner: ownerId,
       });
       return await category.save();
     } catch (e) {
@@ -42,8 +42,8 @@ export class CategoryService {
   async getCategory(id: string, ownerId: string): Promise<CategoryDocument> {
     const category = await this.categoryModel
       .findOne({
-        owner: new mongoose.Types.ObjectId(ownerId),
-        _id: new mongoose.Types.ObjectId(id),
+        owner: ownerId,
+        _id: id,
       })
       .populate('items');
     if (!category) {
@@ -54,15 +54,15 @@ export class CategoryService {
 
   async deleteCategory(id: string, ownerId: string): Promise<void> {
     const categoryBeforeDeletion = await this.categoryModel.findOneAndDelete({
-      _id: new mongoose.Types.ObjectId(id),
-      ownerId: new mongoose.Types.ObjectId(ownerId),
+      _id: id,
+      ownerId: ownerId,
     });
     if (!categoryBeforeDeletion) {
       throw new NotFoundException(`Category ${id} was not found`);
     }
     await this.entryModel.deleteMany({
-      category: new mongoose.Types.ObjectId(categoryBeforeDeletion._id),
-      owner: new mongoose.Types.ObjectId(ownerId),
+      category: categoryBeforeDeletion._id,
+      owner: ownerId,
     });
   }
 
@@ -74,8 +74,8 @@ export class CategoryService {
     const updated = await this.categoryModel
       .findOneAndUpdate(
         {
-          _id: new mongoose.Types.ObjectId(id),
-          owner: new mongoose.Types.ObjectId(ownerId),
+          _id: id,
+          owner: ownerId,
         },
         categ,
         {

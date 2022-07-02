@@ -28,12 +28,12 @@ export class EntryService {
       }
 
       entries = await this.entryModel.find({
-        owner: new mongoose.Types.ObjectId(user._id),
-        category: new mongoose.Types.ObjectId(categoryId),
+        owner: user._id,
+        category: categoryId,
       });
     } else {
       entries = await this.entryModel.find({
-        owner: new mongoose.Types.ObjectId(user._id),
+        owner: user._id,
       });
       // .populate('category', { name: 1 });
     }
@@ -42,8 +42,8 @@ export class EntryService {
 
   async getEntry(ownerId: string, id: string): Promise<EntryDocument> {
     const foundEntry = await this.entryModel.findOne({
-      owner: new mongoose.Types.ObjectId(ownerId),
-      _id: new mongoose.Types.ObjectId(id),
+      owner: ownerId,
+      _id: id,
     });
     // .populate('category', { name: 1 });
     if (!foundEntry) {
@@ -58,8 +58,8 @@ export class EntryService {
     categoryId: string,
   ): Promise<EntryDocument> {
     const category = await this.categModel.findOne({
-      owner: new mongoose.Types.ObjectId(ownerId),
-      _id: new mongoose.Types.ObjectId(categoryId),
+      owner: ownerId,
+      _id: categoryId,
     });
     if (!category)
       throw new NotFoundException(
@@ -69,10 +69,10 @@ export class EntryService {
     try {
       const entry = new this.entryModel({
         ...body,
-        owner: new mongoose.Types.ObjectId(ownerId),
-        category: new mongoose.Types.ObjectId(categoryId),
+        owner: ownerId,
+        category: categoryId,
       });
-      category.items.push(new mongoose.Types.ObjectId(entry._id));
+      category.items.push(entry._id);
       await category.save();
       return await entry.save();
     } catch (e) {
@@ -100,8 +100,8 @@ export class EntryService {
     try {
       const updated = await this.entryModel.findOneAndUpdate(
         {
-          _id: new mongoose.Types.ObjectId(id),
-          owner: new mongoose.Types.ObjectId(ownerId),
+          _id: id,
+          owner: ownerId,
         },
         entryObj,
         { returnDocument: 'after' },
