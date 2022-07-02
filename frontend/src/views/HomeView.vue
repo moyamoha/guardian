@@ -1,35 +1,64 @@
 <template>
 	<div class="home">
-		<p>All your passwords with their categories</p>
+		<p v-if="this.isLoading">Loading ...</p>
+		<p v-else-if="this.content.length > 0">
+			All your passwords with their categories
+			<br />
+			<CategoryDialog
+				:category="null"
+				activatorText="Create category"
+			></CategoryDialog>
+		</p>
+		<p v-else>
+			You have not created anything yet.
+			<CategoryDialog
+				:category="null"
+				activatorText="Create category"
+			></CategoryDialog>
+		</p>
 		<DataTree></DataTree>
+		<CategoryDialog></CategoryDialog>
 	</div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import DataTree from "@/components/DataTree.vue";
 import EntryDialog from "@/components/EntryDialog.vue";
+import CategoryDialog from "@/components/CategoryDialog.vue";
 // @ is an alias to /src
 
 export default {
 	name: "HomeView",
-	components: { DataTree, EntryDialog },
+	components: { DataTree, EntryDialog, CategoryDialog },
 	methods: {
 		...mapActions(["fetchContent"]),
 	},
 	mounted() {
 		this.fetchContent();
 	},
+	computed: {
+		...mapGetters(["content", "isLoading"]),
+	},
 };
 </script>
 
 <style>
-/* .home {
-	width: 100%;
-} */
-@media (max-width: 900) {
+.home {
+	width: 60%;
+}
+@media (max-width: 700px) {
 	.home {
-		width: 80%;
+		width: 90%;
 	}
+}
+
+.action-link {
+	cursor: pointer;
+	color: rgb(127, 17, 129);
+	font-style: italic;
+}
+.action-link:hover {
+	text-decoration: underline;
 }
 </style>

@@ -28,9 +28,10 @@ export default {
 
 <style>
 .wtree {
-	margin-top: 2rem;
-	width: 60vw;
+	margin-top: 1rem;
 	position: relative;
+	min-width: 30vw;
+	width: 80%;
 }
 .wtree li {
 	list-style-type: none;
@@ -82,5 +83,11 @@ export default {
 .entry:hover,
 .entry:focus {
 	border-color: #8ca763;
+}
+
+@media (max-width: 900px) {
+	.wtree {
+		width: 100%;
+	}
 }
 </style>

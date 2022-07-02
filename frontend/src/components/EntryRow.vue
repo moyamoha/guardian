@@ -1,11 +1,16 @@
 <template>
 	<div class="entry-row">
 		<section class="content">
-			<span>Title: {{ entry.title }}</span>
-			<span>Username: {{ entry.username }}</span>
-			<span>password: {{ getHiddenPass }}</span>
+			<strong class="font-weight-black">{{ entry.title }}</strong>
+			<span><i>Username:</i> {{ entry.username }}</span>
+			<span
+				><i>Password:</i> {{ reveal ? entry.password : getHiddenPass }}
+				<i class="reveal-pass" @click="reveal = !reveal">{{
+					reveal ? "hide" : "reveal"
+				}}</i></span
+			>
 			<span v-show="entry.url !== undefined"
-				>Url: <a :href="entry.url">{{ entry.url }}</a></span
+				><i>Url:</i> <a :href="entry.url">{{ entry.url }}</a></span
 			>
 		</section>
 		<section class="actions">
@@ -20,6 +25,11 @@ import { mapActions } from "vuex";
 import EntryDialog from "./EntryDialog.vue";
 export default {
 	props: ["entry"],
+	data: () => {
+		return {
+			reveal: false,
+		};
+	},
 	methods: {
 		...mapActions(["removeEntry"]),
 		handleDelete() {
@@ -49,11 +59,12 @@ export default {
 	display: flex !important;
 	width: 100%;
 	justify-content: space-between;
+	position: relative;
 }
 
 .entry-row .content {
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 	gap: 15px;
 }
 
@@ -63,6 +74,20 @@ export default {
 
 .entry-row .actions {
 	display: flex;
-	gap: 15px;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	gap: 5px;
+}
+
+.reveal-pass {
+	font-size: 0.85rem;
+	cursor: pointer;
+	color: rgb(38, 38, 175);
+	margin-left: 10px;
+}
+
+.reveal-pass:hover {
+	text-decoration: underline;
 }
 </style>

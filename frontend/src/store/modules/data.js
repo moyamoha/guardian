@@ -2,14 +2,20 @@ import axios from "axios";
 
 const state = {
 	content: [],
+	loading: false,
 };
 
 const getters = {
 	content: (state) => state.content,
+	isLoading: (state) => state.loading,
 };
 
 const mutations = {
-	setContent: (state, data) => (state.content = data),
+	startLoading: (state) => (state.loading = true),
+	setContent: (state, data) => {
+		state.content = data;
+		state.loading = false;
+	},
 	addCateg: (state, category) => {
 		state.content.push(category);
 	},
@@ -23,6 +29,7 @@ const mutations = {
 
 const actions = {
 	fetchContent: async ({ commit }) => {
+		commit("startLoading");
 		try {
 			const categories = (await axios.get("/categories/")).data;
 			commit("setContent", categories);
@@ -44,6 +51,13 @@ const actions = {
 		} catch (e) {}
 	},
 
+	editCategory: async ({ commit, dispatch }, { id, name }) => {
+		try {
+			await axios.put("/categories/" + id, { name: name });
+			dispatch("fetchContent");
+		} catch (e) {}
+	},
+
 	addEntry: async ({ commit, dispatch }, { entry, categId }) => {
 		try {
 			await axios.post("/entries/?categoryId=" + categId, entry);
@@ -52,10 +66,7 @@ const actions = {
 	},
 
 	editEntry: async ({ commit, dispatch }, entry) => {
-		// console.log("tultiin tänne");
 		const id = entry._id;
-		// console.log(id);
-		// console.log(entry);
 		try {
 			await axios.put("/entries/" + id, entry);
 			dispatch("fetchContent");

@@ -1,10 +1,13 @@
 <template>
 	<section>
 		<div class="categ-row item category">
-			<span>{{ category.name }}</span>
+			<CategoryDialog
+				:category="category"
+				:activatorText="category.name"
+			></CategoryDialog>
 			<div>
 				<EntryDialog :entry="null" :categoryId="category._id"></EntryDialog>
-				<v-icon @click="expand = !expand" v-if="expand" dense
+				<v-icon @click="expand = !expand" v-if="!expand" dense
 					>mdi-chevron-down</v-icon
 				>
 				<v-icon @click="expand = !expand" v-else dense>mdi-chevron-up</v-icon>
@@ -21,12 +24,13 @@
 <script>
 import EntryRow from "./EntryRow.vue";
 import EntryDialog from "./EntryDialog.vue";
+import CategoryDialog from "./CategoryDialog.vue";
 export default {
-	components: { EntryRow, EntryDialog },
+	components: { EntryRow, EntryDialog, CategoryDialog },
 	props: ["category"],
 	data: () => {
 		return {
-			expand: true,
+			expand: false,
 		};
 	},
 };

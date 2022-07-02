@@ -5,7 +5,7 @@
 				entry ? "mdi-pencil-outline" : "mdi-plus"
 			}}</v-icon>
 		</template>
-		<v-card class="entry-body">
+		<v-card class="dialog-card">
 			<v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
 				<div>
 					{{ createNew ? "Create new entry?" : `Edit '${item.title}'?` }}
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style>
-.entry-body {
+.dialog-card {
 	position: relative;
 }
 
