@@ -17,7 +17,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGaurd)
   @Post('/login')
-  async login(@Req() req) {
+  async login(@Req() req: CustomReq) {
     if (!req.user.mfaEnabled) {
       return this.authService.login(req.user);
     } else {

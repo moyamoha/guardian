@@ -10,6 +10,7 @@ import {
 
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
 import { UserService } from 'src/services/user.service';
+import { CustomReq } from 'src/types/custom';
 
 @Controller('users')
 export class UserController {
@@ -17,13 +18,13 @@ export class UserController {
 
   @UseGuards(AuthTokenGaurd)
   @Patch('deactivate')
-  async deleteAccount(@Req() req) {
+  async deleteAccount(@Req() req: CustomReq) {
     await this.userService.deactivate(req.user);
   }
 
   @UseGuards(AuthTokenGaurd)
   @Patch('toggle-mfa')
-  async toggleMfa(@Req() req, @Body('mfaEnabled') mfaEnabled) {
+  async toggleMfa(@Req() req: CustomReq, @Body('mfaEnabled') mfaEnabled) {
     const updated = await this.userService.changeMfaState(
       req.user._id,
       mfaEnabled,

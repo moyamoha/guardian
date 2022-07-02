@@ -27,7 +27,10 @@ export class CategoryController {
 
   @HttpCode(201)
   @Post('')
-  async addCategory(@Body() body: Partial<CategoryDocument>, @Req() req) {
+  async addCategory(
+    @Req() req: CustomReq,
+    @Body() body: Partial<CategoryDocument>,
+  ) {
     return await this.categoryService.createCategory(body, req.user._id);
   }
 
