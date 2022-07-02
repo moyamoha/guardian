@@ -10,6 +10,7 @@ import {
 
 import { LocalAuthGaurd } from 'src/config/auth-local.gaurd';
 import { AuthService } from 'src/services/auth.service';
+import { CustomReq } from 'src/types/custom';
 
 @Controller('auth')
 export class AuthController {

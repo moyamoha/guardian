@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { Category, CategoryDocument } from 'src/schemas/category.schema';
 import { Entry, EntryDocument } from 'src/schemas/entry.schema';
 import { UserDocument } from 'src/schemas/user.schema';
@@ -114,8 +114,8 @@ export class EntryService {
 
   async deleteEntry(ownerId: string, id: string) {
     const deleted = await this.entryModel.findOneAndDelete({
-      _id: new mongoose.Types.ObjectId(id),
-      owner: new mongoose.Types.ObjectId(ownerId),
+      _id: id,
+      owner: ownerId,
     });
     if (!deleted) {
       throw new NotFoundException(`Entry ${id} was not found`);
