@@ -21,6 +21,7 @@ export class CategoryService {
       .find({
         owner: ownerId,
       })
+      .sort({ name: 1 })
       .populate('items');
   }
 
