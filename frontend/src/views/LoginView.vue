@@ -3,14 +3,7 @@
 		<p class="text--primary mb-3">
 			Please login to your account using your email and password
 		</p>
-		<!-- <v-alert
-					v-show="loginError !== ''"
-					color="red lighten-2"
-					dense
-					dismissible
-					type="error"
-					>{{ loginError }}</v-alert
-				> -->
+		<AuthErrorAlert></AuthErrorAlert>
 		<v-form
 			class="login-form px-0 py-3"
 			ref="form"
@@ -45,7 +38,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import AuthErrorAlert from "@/components/AuthErrorAlert.vue";
 export default {
 	data: () => {
 		return {
@@ -67,7 +61,6 @@ export default {
 			return v.length > 0 || "This field is required";
 		},
 	},
-
 	computed: {
 		eyeIcon() {
 			return this.showPass ? "mdi-eye" : "mdi-eye-off";
@@ -76,6 +69,7 @@ export default {
 			return this.showPass ? "text" : "password";
 		},
 	},
+	components: { AuthErrorAlert },
 };
 </script>
 

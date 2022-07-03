@@ -32,7 +32,9 @@ const actions = {
 			} else {
 				router.push("/verify-code");
 			}
-		} catch (error) {}
+		} catch (error) {
+			commit("setAuthError", e.response.data.message);
+		}
 	},
 	logout: ({ commit }) => {
 		localStorage.removeItem("accessToken");
@@ -53,7 +55,15 @@ const actions = {
 			});
 			router.push("/home");
 		} catch (e) {
-			// commit("setAuthError", e);
+			commit("setAuthError", e.response.data.message);
+		}
+	},
+	signup: async ({ commit }, userObj) => {
+		try {
+			await axios.post("/auth/signup", userObj);
+			router.push("login");
+		} catch (e) {
+			commit("setAuthError", e.response.data.message);
 		}
 	},
 };

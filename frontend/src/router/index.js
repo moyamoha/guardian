@@ -38,6 +38,11 @@ const routes = [
 		name: "verify-code",
 		component: () => import("../views/VerifyCodeView.vue"),
 	},
+	{
+		path: "/signup",
+		name: "signup",
+		component: () => import("../views/SignupView.vue"),
+	},
 ];
 
 const router = new VueRouter({
