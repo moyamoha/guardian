@@ -26,6 +26,7 @@ import { mapActions, mapGetters } from "vuex";
 import DataTree from "@/components/DataTree.vue";
 import EntryDialog from "@/components/EntryDialog.vue";
 import CategoryDialog from "@/components/CategoryDialog.vue";
+import router from "@/router";
 // @ is an alias to /src
 
 export default {
@@ -35,10 +36,11 @@ export default {
 		...mapActions(["fetchContent"]),
 	},
 	mounted() {
-		this.fetchContent();
+		if (this.loggedInUser) this.fetchContent();
+		else router.replace("/");
 	},
 	computed: {
-		...mapGetters(["content", "isLoading"]),
+		...mapGetters(["content", "isLoading", "loggedInUser"]),
 	},
 };
 </script>

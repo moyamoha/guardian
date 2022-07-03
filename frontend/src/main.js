@@ -17,6 +17,14 @@ axios.interceptors.request.use((config) => {
 	return config;
 });
 
+axios.interceptors.response.use((resp) => {
+	if (resp.status === 401) {
+		router.replace("/");
+		store.dispatch("logout");
+	}
+	return resp;
+});
+
 new Vue({
 	router,
 	store,

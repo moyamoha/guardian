@@ -1,5 +1,10 @@
 <template>
-	<v-dialog width="500" v-model="dialog">
+	<v-dialog
+		width="500"
+		v-model="dialog"
+		transition="dialog-top-transition"
+		persistent
+	>
 		<template v-slot:activator="{ on, attrs }">
 			<span class="action-link" v-bind="attrs" v-on="on">{{
 				activatorText
@@ -20,14 +25,19 @@
 						label="Name"
 						dense
 						outlined
-						required
+						:rules="[required]"
 						v-model="item.name"
 					></v-text-field>
 					<div class="btn-cont">
 						<v-btn type="submit" color="primary" outlined dense small
 							>Save</v-btn
 						>
-						<v-btn @click="dialog = !dialog" color="warn" outlined dense small
+						<v-btn
+							@click="dialog = !dialog && this.$refs.catform.reset()"
+							color="warn"
+							outlined
+							dense
+							small
 							>Cancel</v-btn
 						>
 						<v-btn
@@ -72,6 +82,7 @@ export default {
 					this.addCategory(this.item);
 				}
 				this.dialog = false;
+				this.$refs.catform.reset();
 			}
 		},
 		handleDelete() {
@@ -83,6 +94,10 @@ export default {
 			) {
 				this.removeCategory(this.category._id);
 			}
+		},
+
+		required(v) {
+			return (v && v.length > 0) || "Category has to have a name";
 		},
 	},
 	computed: {

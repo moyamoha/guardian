@@ -77,7 +77,7 @@ export default {
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	gap: 5px;
+	gap: 8px;
 }
 
 .reveal-pass {

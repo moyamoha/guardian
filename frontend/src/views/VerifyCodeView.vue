@@ -1,19 +1,21 @@
 <template>
-	<v-form class="verify-form" ref="veriform" @submit="handleSubmit">
-		<p class="mb-3">
-			We sent an 8-digit verification code to your email address, please use it
-			to complete logging in
-		</p>
-		<v-text-field
-			class="otp-input"
-			label="Verification code"
-			v-model="code"
-			dense
-			outlined
-			:rules="[atLeastEight]"
-		></v-text-field>
-		<v-btn color="primary" type="submit">Verify</v-btn>
-	</v-form>
+	<v-col xs="7" sm="6" md="5" lg="4">
+		<v-form class="verify-form" ref="veriform" @submit="handleSubmit">
+			<p class="mb-3">
+				We sent an 8-digit verification code to your email address, please use
+				it to complete logging in
+			</p>
+			<v-text-field
+				class="otp-input"
+				label="Verification code"
+				v-model="code"
+				dense
+				outlined
+				:rules="[atLeastEight]"
+			></v-text-field>
+			<v-btn color="primary" type="submit">Verify</v-btn>
+		</v-form>
+	</v-col>
 </template>
 
 <script>
@@ -42,7 +44,7 @@ export default {
 
 <style>
 .verify-form {
-	width: 30%;
+	width: 100%;
 }
 
 .otp-input {

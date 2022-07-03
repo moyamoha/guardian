@@ -1,5 +1,10 @@
 <template>
-	<v-dialog width="500" v-model="dialog">
+	<v-dialog
+		width="500"
+		v-model="dialog"
+		transition="dialog-bottom-transition"
+		persistent
+	>
 		<template v-slot:activator="{ on, attrs }">
 			<v-icon v-bind="attrs" v-on="on" dense>{{
 				entry ? "mdi-pencil-outline" : "mdi-plus"
@@ -17,22 +22,25 @@
 			<v-card-text>
 				<v-form class="my-3" @submit="handleSubmit" ref="enform">
 					<v-text-field
-						label="Title"
+						label="Title *"
 						dense
 						outlined
 						v-model="item.title"
+						:rules="[required]"
 					></v-text-field>
 					<v-text-field
-						label="Username"
+						label="Username *"
 						dense
 						outlined
 						v-model="item.username"
+						:rules="[required]"
 					></v-text-field>
 					<v-text-field
-						label="Password"
+						label="Password *"
 						dense
 						outlined
 						v-model="item.password"
+						:rules="[required]"
 					></v-text-field>
 					<v-text-field
 						label="Url"
@@ -81,6 +89,7 @@ export default {
 			}
 			this.dialog = false;
 		},
+		required: (v) => (v && v.length > 0) || "This Field is required",
 	},
 	computed: {
 		createNew() {
