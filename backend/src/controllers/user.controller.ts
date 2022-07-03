@@ -39,6 +39,6 @@ export class UserController {
 
   @Get('confirm')
   async confirmEmail(@Query('id') id) {
-    await this.userService.confirmEmail(id);
+    return await this.userService.confirmEmail(id);
   }
 }
