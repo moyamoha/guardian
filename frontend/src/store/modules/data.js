@@ -23,8 +23,6 @@ const mutations = {
 		const categIndex = state.content.findIndex((c) => c._id === categId);
 		state.content.splice(categIndex, 1);
 	},
-	setEditingCategory: (state, category) => (state.editingCategory = category),
-	setEditingEntry: (state, entry) => (state.editingEntry = entry),
 };
 
 const actions = {
@@ -43,11 +41,10 @@ const actions = {
 		} catch (e) {}
 	},
 
-	addCategory: async ({ commit }, category) => {
+	addCategory: async ({ commit, dispatch }, category) => {
 		try {
-			const response = await axios.post("/categories/", category);
-			const createdCateg = response.data;
-			commit("addCateg", createdCateg);
+			await axios.post("/categories/", category);
+			dispatch("fetchContent");
 		} catch (e) {}
 	},
 
