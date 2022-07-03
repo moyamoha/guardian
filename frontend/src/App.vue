@@ -1,6 +1,7 @@
 <template>
 	<v-app>
 		<NavBar></NavBar>
+		<NotifBar></NotifBar>
 		<main>
 			<v-container>
 				<v-row class="d-flex justify-center">
@@ -13,9 +14,11 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
+import NotifBar from "./components/NotifBar.vue";
 export default {
 	components: {
 		NavBar,
+		NotifBar,
 	},
 };
 </script>
@@ -33,7 +36,6 @@ main {
 	display: flex;
 	justify-content: center;
 	padding-top: 3rem;
-	border-top: 5px solid rgb(255, 177, 32);
 }
 
 @media (max-width: 900px) {

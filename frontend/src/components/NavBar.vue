@@ -33,6 +33,7 @@ nav {
 	background-color: #2c3e50;
 	display: flex;
 	gap: 10px;
+	border-bottom: 5px solid rgb(255, 177, 32);
 }
 
 nav a,

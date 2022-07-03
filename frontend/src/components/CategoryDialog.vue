@@ -15,9 +15,7 @@
 				<div>
 					{{ createNew ? "Create new category?" : `Edit '${item.name}'?` }}
 				</div>
-				<v-icon @click="dialog = !dialog" color="brown"
-					>mdi-close-circle</v-icon
-				>
+				<v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
 			</v-card-title>
 			<v-card-text>
 				<v-form class="my-3" @submit="handleSubmit" ref="catform">
@@ -32,12 +30,7 @@
 						<v-btn type="submit" color="primary" outlined dense small
 							>Save</v-btn
 						>
-						<v-btn
-							@click="dialog = !dialog && this.$refs.catform.reset()"
-							color="warn"
-							outlined
-							dense
-							small
+						<v-btn @click="handleCancel" color="warn" outlined dense small
 							>Cancel</v-btn
 						>
 						<v-btn
@@ -82,18 +75,22 @@ export default {
 					this.addCategory(this.item);
 				}
 				this.dialog = false;
-				this.$refs.catform.reset();
 			}
 		},
 		handleDelete() {
 			if (
 				window.confirm(
-					`Delete ${this.category.name}? Action is irreversable and all 
+					`Delete ${this.category.name}? Action is irreversable and all
           the entries under this category will be also deleted!!!!`
 				)
 			) {
 				this.removeCategory(this.category._id);
 			}
+		},
+
+		handleCancel() {
+			this.item.name = this.category ? this.category.name : "";
+			this.dialog = false;
 		},
 
 		required(v) {

@@ -9,8 +9,9 @@
 					reveal ? "hide" : "reveal"
 				}}</i></span
 			>
-			<span v-show="entry.url !== undefined"
-				><i>Url:</i> <a :href="entry.url">{{ entry.url }}</a></span
+			<span v-show="this.entry.url"
+				><i>Url:</i>
+				<a :href="entry.url" target="_blank">{{ entry.url }}</a></span
 			>
 		</section>
 		<section class="actions">

@@ -5,13 +5,25 @@
 		dense
 		dismissible
 		type="error"
-		>{{ authError }}
+	>
+		<template v-slot:close="{ toggle }">
+			<v-icon @click="handleClose(toggle)"
+				>mdi-close-circle-outline</v-icon
+			> </template
+		>{{ this.authError }}
 	</v-alert>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
+	methods: {
+		...mapMutations(["setAuthError"]),
+		handleClose() {
+			// toggle();
+			this.setAuthError("");
+		},
+	},
 	computed: {
 		...mapGetters(["authError"]),
 	},

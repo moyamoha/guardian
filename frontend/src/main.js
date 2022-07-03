@@ -6,6 +6,7 @@ import store from "./store";
 import axios from "axios";
 
 Vue.config.productionTip = false;
+
 axios.defaults.baseURL = "https://passwordgaurdian.herokuapp.com";
 axios.interceptors.request.use((config) => {
 	const accessToken = localStorage.getItem("accessToken");
@@ -16,7 +17,6 @@ axios.interceptors.request.use((config) => {
 	}
 	return config;
 });
-
 axios.interceptors.response.use((resp) => {
 	if (resp.status === 401) {
 		router.replace("/");

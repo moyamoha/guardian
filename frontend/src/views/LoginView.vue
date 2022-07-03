@@ -15,6 +15,7 @@
 				v-model="email"
 				dense
 				outlined
+				type="email"
 				:rules="[required]"
 			>
 			</v-text-field>
@@ -62,6 +63,7 @@ export default {
 		},
 	},
 	computed: {
+		...mapGetters(["authError"]),
 		eyeIcon() {
 			return this.showPass ? "mdi-eye" : "mdi-eye-off";
 		},

@@ -1,5 +1,10 @@
 <template>
 	<div class="home">
+		<p v-show="loggedInUser !== null">
+			Hello
+			<strong>{{ loggedInUser.firstname }} {{ loggedInUser.lastname }}</strong
+			>!
+		</p>
 		<p v-if="this.isLoading">Loading ...</p>
 		<p v-else-if="this.content.length > 0">
 			All your passwords with their categories

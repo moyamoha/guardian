@@ -32,7 +32,7 @@ const actions = {
 			} else {
 				router.push("/verify-code");
 			}
-		} catch (error) {
+		} catch (e) {
 			commit("setAuthError", e.response.data.message);
 		}
 	},
@@ -62,6 +62,10 @@ const actions = {
 		try {
 			await axios.post("/auth/signup", userObj);
 			router.push("login");
+			commit(
+				"setNotification",
+				"Welcome to Gaurdian! Please confirm your email first 😍"
+			);
 		} catch (e) {
 			commit("setAuthError", e.response.data.message);
 		}

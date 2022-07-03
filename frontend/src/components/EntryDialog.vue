@@ -90,6 +90,15 @@ export default {
 			this.dialog = false;
 		},
 		required: (v) => (v && v.length > 0) || "This Field is required",
+		handleClose() {
+			this.item = {
+				title: this.entry ? this.entry.title : "",
+				username: this.entry ? this.entry.username : "",
+				password: this.entry ? this.entry.password : "",
+				url: this.entry && this.entry.url ? this.entry.url : "",
+			};
+			this.dialog = false;
+		},
 	},
 	computed: {
 		createNew() {

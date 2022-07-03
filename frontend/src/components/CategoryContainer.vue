@@ -6,7 +6,11 @@
 				:activatorText="category.name"
 			></CategoryDialog>
 			<div>
-				<EntryDialog :entry="null" :categoryId="category._id"></EntryDialog>
+				<EntryDialog
+					:entry="null"
+					:categoryId="category._id"
+					expand="expand"
+				></EntryDialog>
 				<v-icon @click="expand = !expand" v-if="!expand" dense
 					>mdi-chevron-down</v-icon
 				>
