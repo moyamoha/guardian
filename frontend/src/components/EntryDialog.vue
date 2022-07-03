@@ -97,6 +97,7 @@ export default {
 				password: this.entry ? this.entry.password : "",
 				url: this.entry && this.entry.url ? this.entry.url : "",
 			};
+			this.$refs.enform.resetValidation();
 			this.dialog = false;
 		},
 	},

@@ -5,7 +5,7 @@
 			<strong>{{ loggedInUser.firstname }} {{ loggedInUser.lastname }}</strong
 			>!
 		</p>
-		<p v-if="this.isLoading">Loading ...</p>
+		<Loading v-if="this.isLoading"></Loading>
 		<p v-else-if="this.content.length > 0">
 			All your passwords with their categories
 			<br />
@@ -32,11 +32,12 @@ import DataTree from "@/components/DataTree.vue";
 import EntryDialog from "@/components/EntryDialog.vue";
 import CategoryDialog from "@/components/CategoryDialog.vue";
 import router from "@/router";
+import Loading from "@/components/Loading.vue";
 // @ is an alias to /src
 
 export default {
 	name: "HomeView",
-	components: { DataTree, EntryDialog, CategoryDialog },
+	components: { DataTree, EntryDialog, CategoryDialog, Loading },
 	methods: {
 		...mapActions(["fetchContent"]),
 	},

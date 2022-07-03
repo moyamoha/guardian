@@ -37,7 +37,7 @@ const actions = {
 		}
 	},
 	logout: ({ commit }) => {
-		localStorage.removeItem("accessToken");
+		localStorage.clear();
 		commit("setUser", null);
 		router.push("/").catch((e) => {});
 	},
