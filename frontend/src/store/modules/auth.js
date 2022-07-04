@@ -90,6 +90,10 @@ const actions = {
 const mutations = {
 	setAuthError: (state, errorMsg) => (state.authError = errorMsg),
 	setUser: (state, userObj) => (state.user = userObj),
+	setName: (state, nameObj) => {
+		state.user.firstname = nameObj.firstname;
+		state.user.lastname = nameObj.lastname;
+	},
 };
 
 export default {
