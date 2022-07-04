@@ -118,6 +118,19 @@ export class UserService {
     }
   }
 
+  async changeName(
+    user: UserDocument,
+    body: { firstname: string; lastname: string },
+  ): Promise<void> {
+    user.firstname = body.firstname;
+    user.lastname = body.lastname;
+    try {
+      await user.save();
+    } catch (e) {
+      throw new BadRequestException(e, e.message);
+    }
+  }
+
   async findUserByCode(code: number): Promise<UserDocument> {
     return await this.userModel.findOne({ verificationCode: code });
   }

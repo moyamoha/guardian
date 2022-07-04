@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Patch,
+  Put,
   Query,
   Req,
   UseGuards,
@@ -40,5 +41,14 @@ export class UserController {
   @Get('confirm')
   async confirmEmail(@Query('id') id) {
     return await this.userService.confirmEmail(id);
+  }
+
+  @UseGuards(AuthTokenGaurd)
+  @Put('change-name')
+  async changeName(
+    @Req() req: CustomReq,
+    @Body() body: { firstname: string; lastname: string },
+  ) {
+    await this.userService.changeName(req.user, body);
   }
 }
