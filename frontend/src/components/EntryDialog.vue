@@ -15,28 +15,27 @@
 				<div>
 					{{ createNew ? "Create new entry?" : `Edit '${item.title}'?` }}
 				</div>
-				<v-icon @click="dialog = !dialog" color="brown"
-					>mdi-close-circle</v-icon
-				>
+				<v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
 			</v-card-title>
 			<v-card-text>
+				<ErrorAlert></ErrorAlert>
 				<v-form class="my-3" @submit="handleSubmit" ref="enform">
 					<v-text-field
-						label="Title *"
+						label="Title*"
 						dense
 						outlined
 						v-model="item.title"
 						:rules="[required]"
 					></v-text-field>
 					<v-text-field
-						label="Username *"
+						label="Username*"
 						dense
 						outlined
 						v-model="item.username"
 						:rules="[required]"
 					></v-text-field>
 					<v-text-field
-						label="Password *"
+						label="Password*"
 						dense
 						outlined
 						v-model="item.password"
@@ -61,7 +60,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import ErrorAlert from "./ErrorAlert.vue";
 export default {
 	props: ["entry", "categoryId"],
 	data() {
@@ -77,17 +77,19 @@ export default {
 	},
 	methods: {
 		...mapActions(["addEntry", "editEntry"]),
-		handleSubmit(e) {
+		async handleSubmit(e) {
 			e.preventDefault();
-			if (this.entry) {
-				this.editEntry({
-					...this.entry,
-					...this.item,
-				});
-			} else {
-				this.addEntry({ entry: this.item, categId: this.categoryId });
+			if (this.$refs.enform.validate()) {
+				if (this.entry) {
+					await this.editEntry({
+						...this.entry,
+						...this.item,
+					});
+				} else {
+					await this.addEntry({ entry: this.item, categId: this.categoryId });
+				}
+				if (this.error === "") this.dialog = false;
 			}
-			this.dialog = false;
 		},
 		required: (v) => (v && v.length > 0) || "This Field is required",
 		handleClose() {
@@ -102,10 +104,12 @@ export default {
 		},
 	},
 	computed: {
+		...mapGetters(["error"]),
 		createNew() {
 			return this.entry === null || this.entry === undefined;
 		},
 	},
+	components: { ErrorAlert },
 };
 </script>
 

@@ -15,7 +15,6 @@ import { mapGetters } from "vuex";
 import MfaToggler from "../components/MfaToggler.vue";
 import AccountDeactivation from "@/components/AccountDeactivation.vue";
 import ProfileForm from "@/components/ProfileForm.vue";
-import ErrorAlert from "@/components/ErrorAlert.vue";
 export default {
 	methods: {},
 	computed: {

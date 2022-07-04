@@ -45,7 +45,9 @@ const actions = {
 		try {
 			await axios.post("/categories/", category);
 			dispatch("fetchContent");
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	editCategory: async ({ commit, dispatch }, { id, name }) => {

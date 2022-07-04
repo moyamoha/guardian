@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
 	props: ["category", "activatorText"],
 	data() {
@@ -63,18 +63,18 @@ export default {
 	},
 	methods: {
 		...mapActions(["addCategory", "removeCategory", "editCategory"]),
-		handleSubmit(e) {
+		async handleSubmit(e) {
 			e.preventDefault();
 			if (this.$refs.catform.validate()) {
 				if (this.category) {
-					this.editCategory({
+					await this.editCategory({
 						id: this.category._id,
 						name: this.item.name,
 					});
 				} else {
-					this.addCategory(this.item);
+					await this.addCategory(this.item);
 				}
-				this.dialog = false;
+				if (this.error === "") this.dialog = false;
 			}
 		},
 		handleDelete() {
@@ -98,6 +98,7 @@ export default {
 		},
 	},
 	computed: {
+		...mapGetters(["error"]),
 		createNew() {
 			return this.category === null || this.category === undefined;
 		},
