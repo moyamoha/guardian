@@ -7,7 +7,8 @@
 		<v-spacer v-if="loggedInUser"></v-spacer>
 		<router-link v-if="!loggedInUser" to="/login">Login</router-link>
 		<router-link v-if="!loggedInUser" to="/signup">Sign up</router-link>
-		<span v-else @click="handleLogout">Logout</span>
+		<router-link v-if="loggedInUser" to="/settings">Settings</router-link>
+		<span v-if="loggedInUser" @click="handleLogout">Logout</span>
 	</nav>
 </template>
 

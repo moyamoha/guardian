@@ -58,6 +58,7 @@ const actions = {
 			commit("setAuthError", e.response.data.message);
 		}
 	},
+
 	signup: async ({ commit }, userObj) => {
 		try {
 			await axios.post("/auth/signup", userObj);
@@ -69,6 +70,20 @@ const actions = {
 		} catch (e) {
 			commit("setAuthError", e.response.data.message);
 		}
+	},
+
+	toggleMfa: async ({ commit, state }, mfaEnabled) => {
+		try {
+			await axios.patch("/users/toggle-mfa", { mfaEnabled });
+			commit("setUser", { ...state.user, mfaEnabled: mfaEnabled });
+		} catch (e) {}
+	},
+
+	async deactivate({ commit, dispatch }) {
+		try {
+			await axios.patch("/users/deactivate");
+			dispatch("logout");
+		} catch (e) {}
 	},
 };
 
