@@ -22,6 +22,7 @@ export class CategoryService {
         owner: ownerId,
       })
       .sort({ name: 1 })
+      .collation({ locale: 'en' })
       .populate('items');
   }
 
