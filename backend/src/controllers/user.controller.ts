@@ -65,8 +65,9 @@ export class UserController {
         'New password can not the same as old password',
       );
     }
-    if (await bcrypt.compare(body.currentPassword, req.user.password)) {
-      await this.userService.changePassword(req.user, body);
+    if (!(await bcrypt.compare(body.currentPassword, req.user.password))) {
+      throw new BadRequestException('Current password is incorrect!');
     }
+    await this.userService.changePassword(req.user, body);
   }
 }

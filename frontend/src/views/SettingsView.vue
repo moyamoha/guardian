@@ -1,6 +1,7 @@
 <template>
 	<v-col cols="12">
 		<h3 class="mb-2">Profile</h3>
+		<ErrorAlert></ErrorAlert>
 		<p><strong>Email: </strong>{{ loggedInUser.email }}</p>
 		<ProfileForm :user="this.loggedInUser"></ProfileForm>
 		<v-divider class="my-3"></v-divider>
@@ -15,12 +16,13 @@ import { mapGetters } from "vuex";
 import MfaToggler from "../components/MfaToggler.vue";
 import AccountDeactivation from "@/components/AccountDeactivation.vue";
 import ProfileForm from "@/components/ProfileForm.vue";
+import ErrorAlert from "@/components/ErrorAlert.vue";
 export default {
 	methods: {},
 	computed: {
 		...mapGetters(["loggedInUser"]),
 	},
-	components: { MfaToggler, AccountDeactivation, ProfileForm },
+	components: { MfaToggler, AccountDeactivation, ProfileForm, ErrorAlert },
 };
 </script>
 
