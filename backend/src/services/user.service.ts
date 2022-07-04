@@ -137,7 +137,9 @@ export class UserService {
   ) {
     try {
       const mockUser = new this.userModel({
-        ...user,
+        email: user.email,
+        firstname: user.firstname,
+        lastname: user.lastname,
         password: body.newPassword,
       });
       await mockUser.validate();

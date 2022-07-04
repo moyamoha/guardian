@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -59,6 +60,11 @@ export class UserController {
     @Req() req: CustomReq,
     @Body() body: { currentPassword: string; newPassword: string },
   ) {
+    if (await bcrypt.compare(body.newPassword, req.user.password)) {
+      throw new BadRequestException(
+        'New password can not the same as old password',
+      );
+    }
     if (await bcrypt.compare(body.currentPassword, req.user.password)) {
       await this.userService.changePassword(req.user, body);
     }

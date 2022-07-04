@@ -53,7 +53,6 @@ export default {
 		...mapActions(["login"]),
 		handleSubmit(e) {
 			e.preventDefault();
-			console.log(this.email, this.password);
 			if (this.$refs.form.validate()) {
 				this.login({ email: this.email, password: this.password });
 			}
