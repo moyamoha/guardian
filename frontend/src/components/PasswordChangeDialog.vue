@@ -2,7 +2,7 @@
 	<v-dialog v-model="dialog" width="500">
 		<template v-slot:activator="{ on, attrs }">
 			<v-btn
-				color="rgb(20, 110, 78"
+				color="rgb(20, 110, 78)"
 				class="white--text"
 				v-on="on"
 				v-bind="attrs"
@@ -24,20 +24,23 @@
 					<v-text-field
 						outlined
 						dense
+						type="password"
 						label="Current password"
-						v-model="form.currentPassword"
+						v-model="currentPassword"
 					></v-text-field>
 					<v-text-field
 						outlined
 						dense
+						type="password"
 						label="New password"
-						v-model="form.newPassword"
+						v-model="newPassword"
 					></v-text-field>
 					<v-text-field
 						outlined
 						dense
+						type="password"
 						label="Repeat new password"
-						v-model="form.newpasswordAgain"
+						v-model="newPasswordAgain"
 					></v-text-field>
 					<v-btn type="submit" color="success" dense small outlined>Save</v-btn>
 				</v-form>
@@ -52,11 +55,11 @@ export default {
 	data() {
 		return {
 			dialog: false,
-			form: {
-				currentPassword: "",
-				newPassword: "",
-				newPasswordAgain: "",
-			},
+			currentPassword: "",
+			newPassword: "",
+			newPasswordAgain: "",
+			showCurr: false,
+			showNew: false,
 		};
 	},
 	methods: {
@@ -65,15 +68,21 @@ export default {
 		handleSubmit(e) {
 			e.preventDefault();
 			if (
-				this.$refs.changePassForm.validate() &&
-				form.newPassword === form.newPasswordAgain
+				this.$refs.passChangeForm.validate() &&
+				this.newPassword === this.newPasswordAgain
 			) {
-				this.changePassword({ currentPassword, newPassword });
-			} else if (form.newPassword !== form.newPasswordAgain) {
+				this.changePassword({
+					currentPassword: this.currentPassword,
+					newPassword: this.newPassword,
+				});
+			} else if (this.newPassword !== this.newPasswordAgain) {
 				this.setError("Passwords should match");
 			}
 			this.$refs.passChangeForm.reset();
 			this.dialog = false;
+		},
+		required(v) {
+			return (v && v.length > 0) || "This field can not be empty";
 		},
 	},
 };
