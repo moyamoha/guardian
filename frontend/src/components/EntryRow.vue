@@ -5,9 +5,13 @@
 			<span><i>Username:</i> {{ entry.username }}</span>
 			<span
 				><i>Password:</i> {{ reveal ? entry.password : getHiddenPass }}
-				<i class="reveal-pass" @click="reveal = !reveal">{{
+				<span class="reveal-pass" @click="reveal = !reveal">{{
 					reveal ? "hide" : "reveal"
-				}}</i></span
+				}}</span>
+				|
+				<span class="copy-pass" @click="copyToClipboard">{{
+					copied ? "copied" : "copy"
+				}}</span></span
 			>
 			<span v-show="this.entry.url"
 				><i>Url:</i>
@@ -29,6 +33,7 @@ export default {
 	data: () => {
 		return {
 			reveal: false,
+			copied: false,
 		};
 	},
 	methods: {
@@ -41,6 +46,10 @@ export default {
 			) {
 				this.removeEntry(this.entry._id);
 			}
+		},
+		copyToClipboard() {
+			navigator.clipboard.writeText(this.entry.password);
+			this.copied = true;
 		},
 	},
 	computed: {
@@ -88,7 +97,14 @@ export default {
 	margin-left: 10px;
 }
 
-.reveal-pass:hover {
+.copy-pass {
+	font-size: 0.85rem;
+	cursor: pointer;
+	color: rgb(38, 38, 175);
+}
+
+.reveal-pass:hover,
+.copy-pass:hover {
 	text-decoration: underline;
 }
 </style>

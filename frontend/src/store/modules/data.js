@@ -31,14 +31,18 @@ const actions = {
 		try {
 			const categories = (await axios.get("/categories/")).data;
 			commit("setContent", categories);
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	removeCategory: async ({ commit }, id) => {
 		try {
 			await axios.delete("/categories/" + id);
 			commit("removeCateg", id);
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	addCategory: async ({ commit, dispatch }, category) => {
@@ -54,14 +58,18 @@ const actions = {
 		try {
 			await axios.put("/categories/" + id, { name: name });
 			dispatch("fetchContent");
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	addEntry: async ({ commit, dispatch }, { entry, categId }) => {
 		try {
 			await axios.post("/entries/?categoryId=" + categId, entry);
 			dispatch("fetchContent");
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	editEntry: async ({ commit, dispatch }, entry) => {
@@ -69,14 +77,18 @@ const actions = {
 		try {
 			await axios.put("/entries/" + id, entry);
 			dispatch("fetchContent");
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	removeEntry: async ({ commit, dispatch }, id) => {
 		try {
 			await axios.delete("/entries/" + id);
 			dispatch("fetchContent");
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 };
 
