@@ -8,6 +8,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
 import { AuthTokenGaurd } from 'src/config/auth-token.gaurd';
 import { UserService } from 'src/services/user.service';
@@ -50,5 +51,16 @@ export class UserController {
     @Body() body: { firstname: string; lastname: string },
   ) {
     await this.userService.changeName(req.user, body);
+  }
+
+  @UseGuards(AuthTokenGaurd)
+  @Patch('change-password')
+  async changePassword(
+    @Req() req: CustomReq,
+    @Body() body: { currentPassword: string; newPassword: string },
+  ) {
+    if (await bcrypt.compare(body.currentPassword, req.user.password)) {
+      await this.userService.changePassword(req.user, body);
+    }
   }
 }

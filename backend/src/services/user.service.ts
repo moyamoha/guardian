@@ -131,6 +131,23 @@ export class UserService {
     }
   }
 
+  async changePassword(
+    user: UserDocument,
+    body: { currentPassword: string; newPassword: string },
+  ) {
+    try {
+      const mockUser = new this.userModel({
+        ...user,
+        password: body.newPassword,
+      });
+      await mockUser.validate();
+      user.password = await bcrypt.hash(body.newPassword, 10);
+      await user.save({ validateBeforeSave: false });
+    } catch (e) {
+      throw new BadRequestException(e, e.message);
+    }
+  }
+
   async findUserByCode(code: number): Promise<UserDocument> {
     return await this.userModel.findOne({ verificationCode: code });
   }
