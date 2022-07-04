@@ -1,7 +1,7 @@
 <template>
 	<v-col xs="12" sm="9" md="5">
 		<p class="text--primary mb-3">Please fill in the form</p>
-		<AuthErrorAlert></AuthErrorAlert>
+		<ErrorAlert></ErrorAlert>
 		<v-form class="px-0 py-3" ref="form" lazy-validation @submit="handleSubmit">
 			<v-text-field
 				label="Email *"
@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
-import AuthErrorAlert from "@/components/AuthErrorAlert.vue";
+import { mapActions, mapMutations } from "vuex";
+import ErrorAlert from "@/components/ErrorAlert.vue";
 export default {
 	data: () => {
 		return {
@@ -73,7 +73,7 @@ export default {
 	},
 	methods: {
 		...mapActions(["signup"]),
-		...mapMutations(["setAuthError"]),
+		...mapMutations(["setError"]),
 		handleSubmit(e) {
 			e.preventDefault();
 			if (this.$refs.form.validate() && this.password1 === this.password2) {
@@ -84,7 +84,7 @@ export default {
 					password: this.password1,
 				});
 			} else if (this.password1 !== this.password2) {
-				this.setAuthError("Passwords should match");
+				this.setError("Passwords should match");
 			}
 		},
 		required(v) {
@@ -99,7 +99,7 @@ export default {
 			return this.showPass ? "text" : "password";
 		},
 	},
-	components: { AuthErrorAlert },
+	components: { ErrorAlert },
 };
 </script>
 

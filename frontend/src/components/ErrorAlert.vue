@@ -1,6 +1,6 @@
 <template>
 	<v-alert
-		v-show="this.authError !== ''"
+		v-show="this.error !== ''"
 		color="red lighten-2"
 		dense
 		dismissible
@@ -10,7 +10,7 @@
 			<v-icon @click="handleClose(toggle)"
 				>mdi-close-circle-outline</v-icon
 			> </template
-		>{{ this.authError }}
+		>{{ this.error }}
 	</v-alert>
 </template>
 
@@ -18,14 +18,14 @@
 import { mapGetters, mapMutations } from "vuex";
 export default {
 	methods: {
-		...mapMutations(["setAuthError"]),
+		...mapMutations(["setError"]),
 		handleClose() {
 			// toggle();
-			this.setAuthError("");
+			this.setError("");
 		},
 	},
 	computed: {
-		...mapGetters(["authError"]),
+		...mapGetters(["error"]),
 	},
 };
 </script>

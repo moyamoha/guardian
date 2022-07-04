@@ -3,7 +3,7 @@
 		<p class="text--primary mb-3">
 			Please login to your account using your email and password
 		</p>
-		<AuthErrorAlert></AuthErrorAlert>
+		<ErrorAlert></ErrorAlert>
 		<v-form
 			class="login-form px-0 py-3"
 			ref="form"
@@ -40,7 +40,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import AuthErrorAlert from "@/components/AuthErrorAlert.vue";
+import ErrorAlert from "@/components/ErrorAlert.vue";
 export default {
 	data: () => {
 		return {
@@ -63,7 +63,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters(["authError"]),
+		...mapGetters(["error"]),
 		eyeIcon() {
 			return this.showPass ? "mdi-eye" : "mdi-eye-off";
 		},
@@ -71,7 +71,7 @@ export default {
 			return this.showPass ? "text" : "password";
 		},
 	},
-	components: { AuthErrorAlert },
+	components: { ErrorAlert },
 };
 </script>
 

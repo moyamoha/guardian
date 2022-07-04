@@ -29,16 +29,19 @@
 				v-model="profile.lastname"
 				:rules="[required]"
 			></v-text-field>
-			<v-btn dense small color="success">Update</v-btn>
+			<v-btn dense small color="success" type="submit">Update</v-btn>
 			<v-icon class="close-icon top-right" dense small @click="handleClose"
 				>mdi-close-circle</v-icon
 			>
 		</v-form>
+		<br />
+		<PasswordChangeDialog></PasswordChangeDialog>
 	</div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import PasswordChangeDialog from "./PasswordChangeDialog.vue";
 export default {
 	props: ["user"],
 	data() {
@@ -68,6 +71,7 @@ export default {
 		},
 		required: (v) => (v && v.length > 0) || "This field can not be empty",
 	},
+	components: { PasswordChangeDialog },
 };
 </script>
 

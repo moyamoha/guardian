@@ -4,12 +4,10 @@ import jwt_decode from "jwt-decode";
 
 const state = {
 	user: null,
-	authError: "",
 };
 
 const getters = {
 	loggedInUser: (state) => state.user,
-	authError: (state) => state.authError,
 };
 
 const actions = {
@@ -33,12 +31,13 @@ const actions = {
 				router.push("/verify-code");
 			}
 		} catch (e) {
-			commit("setAuthError", e.response.data.message);
+			commit("setError", e.response.data.message);
 		}
 	},
 	logout: ({ commit }) => {
 		localStorage.clear();
 		commit("setUser", null);
+		commit("setError", "");
 		router.push("/").catch((e) => {});
 	},
 
@@ -55,7 +54,7 @@ const actions = {
 			});
 			router.push("/home");
 		} catch (e) {
-			commit("setAuthError", e.response.data.message);
+			commit("setError", e.response.data.message);
 		}
 	},
 
@@ -68,7 +67,7 @@ const actions = {
 				"Welcome to Gaurdian! Please confirm your email first 😍"
 			);
 		} catch (e) {
-			commit("setAuthError", e.response.data.message);
+			commit("setError", e.response.data.message);
 		}
 	},
 
@@ -83,19 +82,33 @@ const actions = {
 		try {
 			await axios.patch("/users/deactivate");
 			dispatch("logout");
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	async changeName({ commit }, { firstname, lastname }) {
 		try {
 			await axios.put("/users/change-name", { firstname, lastname });
 			commit("setName", { firstname, lastname });
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
+	},
+
+	async changePassword({ commit }, { currentPassword, newPassword }) {
+		try {
+			await axios.patch("/users/change-password", {
+				currentPassword,
+				newPassword,
+			});
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 };
 
 const mutations = {
-	setAuthError: (state, errorMsg) => (state.authError = errorMsg),
 	setUser: (state, userObj) => (state.user = userObj),
 	setName: (state, nameObj) => {
 		state.user.firstname = nameObj.firstname;

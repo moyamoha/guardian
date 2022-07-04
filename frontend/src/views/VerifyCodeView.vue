@@ -5,7 +5,7 @@
 				We sent an 8-digit verification code to your email address, please use
 				it to complete logging in
 			</p>
-			<AuthErrorAlert></AuthErrorAlert>
+			<ErrorAlert></ErrorAlert>
 			<v-text-field
 				class="otp-input"
 				label="Verification code"
@@ -21,7 +21,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import AuthErrorAlert from "@/components/AuthErrorAlert.vue";
+import ErrorAlert from "@/components/ErrorAlert.vue";
 export default {
 	data() {
 		return { code: "" };
@@ -41,7 +41,7 @@ export default {
 		},
 	},
 	name: "verify-code",
-	components: { AuthErrorAlert },
+	components: { ErrorAlert },
 };
 </script>
 
