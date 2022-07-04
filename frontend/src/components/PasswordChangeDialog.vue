@@ -19,7 +19,11 @@
 				>
 			</v-card-title>
 			<v-card-text>
-				<p>Your new password must be at least 8 characters long</p>
+				<p class="secondary--text mt-1">
+					Your new password must be at least 10 characters long
+				</p>
+				<ErrorAlert></ErrorAlert>
+
 				<v-form class="my-3" ref="passChangeForm" @submit="handleSubmit">
 					<v-text-field
 						outlined
@@ -50,7 +54,8 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import ErrorAlert from "./ErrorAlert.vue";
 export default {
 	data() {
 		return {
@@ -65,25 +70,33 @@ export default {
 	methods: {
 		...mapActions(["changePassword"]),
 		...mapMutations(["setError"]),
-		handleSubmit(e) {
+		async handleSubmit(e) {
 			e.preventDefault();
 			if (
 				this.$refs.passChangeForm.validate() &&
 				this.newPassword === this.newPasswordAgain
 			) {
-				this.changePassword({
+				await this.changePassword({
 					currentPassword: this.currentPassword,
 					newPassword: this.newPassword,
 				});
 			} else if (this.newPassword !== this.newPasswordAgain) {
 				this.setError("Passwords should match");
 			}
-			this.$refs.passChangeForm.reset();
-			this.dialog = false;
+			if (this.error === "") {
+				this.$refs.passChangeForm.reset();
+				this.dialog = false;
+			}
 		},
 		required(v) {
 			return (v && v.length > 0) || "This field can not be empty";
 		},
+	},
+	computed: {
+		...mapGetters(["error"]),
+	},
+	components: {
+		ErrorAlert,
 	},
 };
 </script>

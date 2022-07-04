@@ -96,12 +96,21 @@ const actions = {
 		}
 	},
 
-	async changePassword({ commit }, { currentPassword, newPassword }) {
+	async changePassword({ commit, dispatch }, { currentPassword, newPassword }) {
 		try {
 			await axios.patch("/users/change-password", {
 				currentPassword,
 				newPassword,
 			});
+			commit(
+				"setNotification",
+				"You will logged out soon. Please log in again :)"
+			);
+			setTimeout(() => {
+				dispatch("logout");
+				commit("setNotification", "");
+				router.push("/login");
+			}, 4000);
 		} catch (e) {
 			commit("setError", e.response.data.message);
 		}

@@ -1,7 +1,6 @@
 <template>
 	<v-col cols="12">
 		<h3 class="mb-2">Profile</h3>
-		<ErrorAlert></ErrorAlert>
 		<p><strong>Email: </strong>{{ loggedInUser.email }}</p>
 		<ProfileForm :user="this.loggedInUser"></ProfileForm>
 		<v-divider class="my-3"></v-divider>
@@ -22,7 +21,7 @@ export default {
 	computed: {
 		...mapGetters(["loggedInUser"]),
 	},
-	components: { MfaToggler, AccountDeactivation, ProfileForm, ErrorAlert },
+	components: { MfaToggler, AccountDeactivation, ProfileForm },
 };
 </script>
 
