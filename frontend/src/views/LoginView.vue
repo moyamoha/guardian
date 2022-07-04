@@ -30,7 +30,9 @@
 				@click:append="showPass = !showPass"
 			>
 			</v-text-field>
-			<v-btn color="primary" type="submit">Login</v-btn>
+			<v-btn color="primary" type="submit" :loading="this.loggingIn"
+				>Login</v-btn
+			>
 		</v-form>
 		<p class="text--secondary mt-5">
 			Don't have an account? <router-link to="/signup">Sign up</router-link>
@@ -47,15 +49,18 @@ export default {
 			email: "",
 			password: "",
 			showPass: false,
+			loggingIn: false,
 		};
 	},
 	methods: {
 		...mapActions(["login"]),
-		handleSubmit(e) {
+		async handleSubmit(e) {
 			e.preventDefault();
+			this.loggingIn = true;
 			if (this.$refs.form.validate()) {
-				this.login({ email: this.email, password: this.password });
+				await this.login({ email: this.email, password: this.password });
 			}
+			this.loggingIn = false;
 		},
 		required(v) {
 			return v.length > 0 || "This field is required";

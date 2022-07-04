@@ -9,10 +9,12 @@
 					reveal ? "hide" : "reveal"
 				}}</span>
 				|
-				<span class="copy-pass" @click="copyToClipboard">{{
-					copied ? "copied" : "copy"
-				}}</span></span
+				<span class="copy-pass" @click="copyToClipboard">copy</span></span
 			>
+
+			<v-snackbar v-model="copied" timeout="1500">
+				Password copied to clipboard
+			</v-snackbar>
 			<span v-show="this.entry.url"
 				><i>Url:</i>
 				<a :href="entry.url" target="_blank">{{ entry.url }}</a></span
