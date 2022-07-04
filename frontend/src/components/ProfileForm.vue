@@ -20,12 +20,14 @@
 				dense
 				outlined
 				v-model="profile.firstname"
+				:rules="[required]"
 			></v-text-field>
 			<v-text-field
 				label="Lastname"
 				dense
 				outlined
 				v-model="profile.lastname"
+				:rules="[required]"
 			></v-text-field>
 			<v-btn dense small color="success">Update</v-btn>
 			<v-icon class="close-icon top-right" dense small @click="handleClose"
@@ -36,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
 	props: ["user"],
 	data() {
@@ -49,11 +51,11 @@ export default {
 		};
 	},
 	methods: {
-		...mapMutations(["setName"]),
+		...mapActions(["changeName"]),
 		handleSubmit(e) {
 			e.preventDefault();
-			if (this.$refs.loginForm.validate()) {
-				this.setName({ ...this.profile });
+			if (this.$refs.profileForm.validate()) {
+				this.changeName({ ...this.profile });
 				this.showForm = false;
 			}
 		},
@@ -64,6 +66,7 @@ export default {
 			};
 			this.showForm = false;
 		},
+		required: (v) => (v && v.length > 0) || "This field can not be empty",
 	},
 };
 </script>

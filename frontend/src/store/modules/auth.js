@@ -85,6 +85,13 @@ const actions = {
 			dispatch("logout");
 		} catch (e) {}
 	},
+
+	async changeName({ commit }, { firstname, lastname }) {
+		try {
+			await axios.put("/users/change-name", { firstname, lastname });
+			commit("setName", { firstname, lastname });
+		} catch (e) {}
+	},
 };
 
 const mutations = {
