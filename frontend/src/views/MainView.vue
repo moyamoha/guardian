@@ -9,8 +9,8 @@
 		</p>
 		<ul class="mb-6">
 			<li class="appear">IT IS SIMPLE</li>
-			<li class="appear">IT IS SECURE</li>
-			<li class="appear">IT IS MADE WITH ❤️</li>
+			<li class="appear two">IT IS SECURE</li>
+			<li class="appear three">IT IS MADE WITH ❤️</li>
 		</ul>
 		<v-btn
 			:class="{ left: toggle, right: !toggle }"
@@ -90,7 +90,15 @@ export default {
 	left: -23px;
 	top: 6px;
 	transform: rotate(45deg);
-	animation: rotate 1s 3 ease-in-out;
+	animation: rotate 1s 1 ease-in-out;
+}
+
+.two::before {
+	animation-delay: 1s;
+}
+
+.three::before {
+	animation-delay: 2s;
 }
 
 .appear::after {
