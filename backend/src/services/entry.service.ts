@@ -104,7 +104,7 @@ export class EntryService {
           owner: ownerId,
         },
         entryObj,
-        { returnDocument: 'after' },
+        { returnDocument: 'after', runValidators: true },
       );
       return updated;
     } catch (e) {
