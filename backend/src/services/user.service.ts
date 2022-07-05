@@ -38,7 +38,11 @@ export class UserService {
 
       created = await newUser.save({ validateBeforeSave: false });
     } catch (e) {
-      throw new BadRequestException(e, e.message);
+      if (e.code === 11000) {
+        throw new BadRequestException('Email address is already taken');
+      } else {
+        throw new BadRequestException(e, e.message);
+      }
     }
     const confirmationLink = `${process.env.SITE_ADDRESS}/users/confirm/?id=${created._id}`;
     await this.mailerService.sendMail({

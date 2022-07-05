@@ -49,7 +49,7 @@
 				@click:append="showPass = !showPass"
 			>
 			</v-text-field>
-			<v-btn color="primary" type="submit">Signup</v-btn>
+			<v-btn color="primary" type="submit" :loading="processing">Signup</v-btn>
 		</v-form>
 		<p class="text--secondary mt-5">
 			Already have an account? <router-link to="/login">Login</router-link>
@@ -69,15 +69,17 @@ export default {
 			firstname: "",
 			lastname: "",
 			showPass: false,
+			processing: false,
 		};
 	},
 	methods: {
 		...mapActions(["signup"]),
 		...mapMutations(["setError"]),
-		handleSubmit(e) {
+		async handleSubmit(e) {
 			e.preventDefault();
+			this.processing = true;
 			if (this.$refs.form.validate() && this.password1 === this.password2) {
-				this.signup({
+				await this.signup({
 					email: this.email,
 					firstname: this.firstname,
 					lastname: this.lastname,
@@ -86,6 +88,7 @@ export default {
 			} else if (this.password1 !== this.password2) {
 				this.setError("Passwords should match");
 			}
+			this.processing = false;
 		},
 		required(v) {
 			return v.length > 0 || "This field is required";

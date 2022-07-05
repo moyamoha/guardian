@@ -14,7 +14,9 @@
 				outlined
 				:rules="[atLeastEight]"
 			></v-text-field>
-			<v-btn color="primary" type="submit">Verify</v-btn>
+			<v-btn color="primary" type="submit" :disabled="processing">{{
+				processing ? "Verifying..." : "Verify"
+			}}</v-btn>
 		</v-form>
 	</v-col>
 </template>
@@ -24,15 +26,17 @@ import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "@/components/ErrorAlert.vue";
 export default {
 	data() {
-		return { code: "" };
+		return { code: "", processing: false };
 	},
 	methods: {
 		...mapActions(["verifyCode"]),
-		handleSubmit(e) {
+		async handleSubmit(e) {
 			e.preventDefault();
+			this.processing = true;
 			if (this.$refs.veriform.validate()) {
-				this.verifyCode(parseInt(this.code));
+				await this.verifyCode(parseInt(this.code));
 			}
+			this.processing = false;
 		},
 		atLeastEight(v) {
 			return (
