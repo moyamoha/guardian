@@ -17,7 +17,7 @@
 				</div>
 				<v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
 			</v-card-title>
-			<v-card-text>
+			<v-card-text class="py-2">
 				<ErrorAlert></ErrorAlert>
 				<v-form class="my-3" @submit="handleSubmit" ref="enform">
 					<v-text-field
