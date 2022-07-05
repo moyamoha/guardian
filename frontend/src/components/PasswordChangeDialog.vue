@@ -2,7 +2,7 @@
 	<v-dialog v-model="dialog" width="500">
 		<template v-slot:activator="{ on, attrs }">
 			<v-btn
-				color="rgb(20, 110, 78)"
+				color="indigo darken-1"
 				class="white--text"
 				v-on="on"
 				v-bind="attrs"

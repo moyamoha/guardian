@@ -18,7 +18,7 @@
 			dense
 			rounded
 			elevation="4"
-			:color="loggedInUser.mfaEnabled ? 'error' : 'success'"
+			:color="loggedInUser.mfaEnabled ? 'error darken-2' : 'success darken-2'"
 			:disabled="processing"
 			@click="handleToggle"
 			>{{ getBtnText }}</v-btn

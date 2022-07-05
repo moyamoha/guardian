@@ -11,7 +11,7 @@
 			small
 			dense
 			rounded
-			color="error"
+			color="error darken-2"
 			elevation="4"
 			:diabled="processing"
 			@click="handleDeactivate"

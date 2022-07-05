@@ -2,10 +2,10 @@
 	<div style="width: '100%'">
 		<v-btn
 			@click="showForm = !showForm"
-			color="primary"
+			color="indigo darken-1"
 			dense
 			small
-			class="mb-2"
+			class="mb-2 white--text"
 			v-show="!showForm"
 			>Change name</v-btn
 		>
@@ -50,7 +50,7 @@ export default {
 				firstname: this.user ? this.user.firstname : "",
 				lastname: this.user ? this.user.lastname : "",
 			},
-			showForm: false,
+			showForm: true,
 		};
 	},
 	methods: {
