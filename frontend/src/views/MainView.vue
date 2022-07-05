@@ -5,7 +5,7 @@
 			make people feel safe about their credintials. We know it is hard. The
 			applications out their are complicated and often expensive to use. That is
 			why we came up with this password management application. Why choose
-			Gaurdian? The answer is:
+			<span class="gaurdian">Gaurdian?</span> The answer is:
 		</p>
 		<ul class="mb-6">
 			<li class="appear">IT IS SIMPLE</li>
