@@ -107,7 +107,7 @@ export default {
 
 @keyframes rotate {
 	from {
-		transform: rotate(0deg);
+		transform: rotate(45deg);
 	}
 	to {
 		transform: rotate(405deg);
