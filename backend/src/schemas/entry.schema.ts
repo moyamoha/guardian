@@ -6,16 +6,24 @@ export type EntryDocument = Document & Entry;
 
 @Schema()
 export class Entry {
-  @Prop({ required: true })
+  @Prop({ required: true, minlength: 3 })
   title: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, minlength: 3 })
   username: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, minlength: 5 })
   password: string;
 
-  @Prop()
+  @Prop({
+    validate: {
+      validator: (v) =>
+        /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm.test(
+          v,
+        ) || v === '',
+      message: 'The format of provided url is not correct',
+    },
+  })
   url: string;
 
   @Prop({

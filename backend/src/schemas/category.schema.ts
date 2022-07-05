@@ -5,7 +5,7 @@ export type CategoryDocument = Document & Category;
 
 @Schema()
 export class Category {
-  @Prop({ required: true })
+  @Prop({ required: true, minlength: 3 })
   name: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
