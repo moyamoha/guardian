@@ -82,6 +82,7 @@ export class CategoryService {
         categ,
         {
           returnDocument: 'after',
+          runValidators: true,
         },
       )
       .populate('items');
