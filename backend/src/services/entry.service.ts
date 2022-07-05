@@ -106,7 +106,7 @@ export class EntryService {
         entryObj,
         { returnDocument: 'after', runValidators: true },
       );
-      await updated.validate();
+      // await updated.validate();
       return updated;
     } catch (e) {
       throw new BadRequestException(e, e.message);
