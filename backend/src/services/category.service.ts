@@ -37,7 +37,7 @@ export class CategoryService {
       });
       return await category.save();
     } catch (e) {
-      throw new BadRequestException(e, e.mssage);
+      throw new BadRequestException(e, e.message);
     }
   }
 
