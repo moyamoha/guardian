@@ -64,7 +64,7 @@ export class AuthService {
     this.mailerService.sendMail({
       from: process.env.EMAIL_SENDER,
       to: user.email,
-      subject: 'Verificationn code',
+      subject: 'Verification code',
       html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Your verification code is <strong>${randomNum}</strong>
       <br></br><i>Team Gaurdian.</i></p>`,
     });
