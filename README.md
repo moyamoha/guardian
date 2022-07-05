@@ -1,4 +1,5 @@
 # Gaurdian 
+Gaurdian is an SPA-application that is made for saving credintials easily and securely
 This is an application developed as a hobby project.
 New things I learned while coding this app:
 - More about mongodb schema validation
