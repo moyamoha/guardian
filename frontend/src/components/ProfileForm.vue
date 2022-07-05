@@ -15,6 +15,7 @@
 			ref="profileForm"
 			v-show="showForm"
 		>
+			<ErrorAlert></ErrorAlert>
 			<v-text-field
 				label="Firstname"
 				dense
@@ -29,7 +30,9 @@
 				v-model="profile.lastname"
 				:rules="[required]"
 			></v-text-field>
-			<v-btn dense small color="success" type="submit">Update</v-btn>
+			<v-btn dense small color="success" type="submit" :loading="processing"
+				>Update</v-btn
+			>
 			<v-icon class="close-icon top-right" dense small @click="handleClose"
 				>mdi-close-circle</v-icon
 			>
@@ -40,8 +43,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import PasswordChangeDialog from "./PasswordChangeDialog.vue";
+import ErrorAlert from "./ErrorAlert.vue";
 export default {
 	props: ["user"],
 	data() {
@@ -51,16 +55,28 @@ export default {
 				lastname: this.user ? this.user.lastname : "",
 			},
 			showForm: true,
+			processing: false,
 		};
 	},
 	methods: {
 		...mapActions(["changeName"]),
-		handleSubmit(e) {
+		...mapMutations(["setNotification"]),
+		async handleSubmit(e) {
 			e.preventDefault();
+			this.processing = true;
 			if (this.$refs.profileForm.validate()) {
-				this.changeName({ ...this.profile });
+				await this.changeName({ ...this.profile });
+				this.processing = false;
 				this.showForm = false;
+				this.setNotification(
+					`Hello ${this.loggedInUser.firstname} ${this.loggedInUser.lastname} 😊`
+				);
+				setTimeout(() => {
+					this.setNotification("");
+				}, 5000);
 			}
+			this.processing = false;
+			if (this.error === "") this.showForm = false;
 		},
 		handleClose() {
 			this.profile = {
@@ -71,7 +87,10 @@ export default {
 		},
 		required: (v) => (v && v.length > 0) || "This field can not be empty",
 	},
-	components: { PasswordChangeDialog },
+	computed: {
+		...mapGetters(["error", "loggedInUser"]),
+	},
+	components: { PasswordChangeDialog, ErrorAlert },
 };
 </script>
 
