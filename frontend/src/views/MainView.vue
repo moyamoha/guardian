@@ -98,8 +98,8 @@ export default {
 	width: 15px;
 	height: 15px;
 	position: absolute;
-	left: -18.675px;
-	top: 10px;
+	left: -17.8px;
+	top: 11px;
 	border-right: none;
 	border-bottom: none;
 }
