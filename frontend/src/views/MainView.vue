@@ -90,7 +90,7 @@ export default {
 	left: -23px;
 	top: 6px;
 	transform: rotate(45deg);
-	animation: rotate 1s 1 ease-in-out;
+	animation: rotate 1s 3 ease-in-out;
 }
 
 .appear::after {
