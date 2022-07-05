@@ -17,10 +17,9 @@ axios.interceptors.request.use((config) => {
 	}
 	return config;
 });
-axios.interceptors.response.use((resp) => {
-	if (resp.status === 401) {
-		router.replace("/");
-		store.dispatch("logout");
+axios.interceptors.response.use(function (resp) {
+	if (resp.status >= 200 && resp.status < 300) {
+		store.commit("setError", "");
 	}
 	return resp;
 });

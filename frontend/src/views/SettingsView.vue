@@ -5,7 +5,9 @@
 			<strong>Email: </strong
 			><span class="grey--text text--darken-1">{{ loggedInUser.email }}</span>
 		</p>
-		<ProfileForm :user="this.loggedInUser"></ProfileForm>
+		<ChangeNameDialog :user="loggedInUser"></ChangeNameDialog>
+		<br />
+		<ChangePassDialog></ChangePassDialog>
 		<v-divider class="my-3"></v-divider>
 		<h3 class="mt-3">Account</h3>
 		<AccountDeactivation class="account-action-box"></AccountDeactivation>
@@ -17,13 +19,19 @@
 import { mapGetters } from "vuex";
 import MfaToggler from "../components/MfaToggler.vue";
 import AccountDeactivation from "@/components/AccountDeactivation.vue";
-import ProfileForm from "@/components/ProfileForm.vue";
+import ChangeNameDialog from "@/components/ChangeNameDialog.vue";
+import ChangePassDialog from "../components/ChangePassDialog.vue";
 export default {
 	methods: {},
 	computed: {
 		...mapGetters(["loggedInUser"]),
 	},
-	components: { MfaToggler, AccountDeactivation, ProfileForm },
+	components: {
+		MfaToggler,
+		AccountDeactivation,
+		ChangeNameDialog,
+		ChangePassDialog,
+	},
 };
 </script>
 

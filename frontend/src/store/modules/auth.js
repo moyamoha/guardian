@@ -30,6 +30,7 @@ const actions = {
 			} else {
 				router.push("/verify-code");
 			}
+			commit("setError", "");
 		} catch (e) {
 			commit("setError", e.response.data.message);
 		}
@@ -75,7 +76,9 @@ const actions = {
 		try {
 			await axios.patch("/users/toggle-mfa", { mfaEnabled });
 			commit("setUser", { ...state.user, mfaEnabled: mfaEnabled });
-		} catch (e) {}
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
 	},
 
 	async deactivate({ commit, dispatch }) {
@@ -104,7 +107,7 @@ const actions = {
 			});
 			commit(
 				"setNotification",
-				"You will logged out soon. Please log in again :)"
+				"You will be logged out soon. Please log in again :)"
 			);
 			setTimeout(() => {
 				dispatch("logout");
