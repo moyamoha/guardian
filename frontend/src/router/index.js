@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 const routes = [
 	{
 		path: "/",
-		name: "main",
+		name: "",
 		component: MainView,
 	},
 	{
@@ -40,7 +40,13 @@ const routes = [
 ];
 
 const router = new VueRouter({
+	mode: "history",
 	routes,
+});
+
+router.beforeEach((to, from, next) => {
+	document.title = to.name !== "" ? "Gaurdian - " + to.name : "Gaurdian";
+	next();
 });
 
 export default router;

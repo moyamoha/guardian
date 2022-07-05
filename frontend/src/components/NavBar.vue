@@ -2,7 +2,6 @@
 	<nav>
 		<router-link to="/">Gaurdian</router-link>
 		<router-link v-if="loggedInUser" to="/home">Home</router-link>
-		<router-link to="/about">About</router-link>
 		<v-spacer v-if="!loggedInUser"></v-spacer>
 		<v-spacer v-if="loggedInUser"></v-spacer>
 		<router-link v-if="!loggedInUser" to="/login">Login</router-link>
