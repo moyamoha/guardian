@@ -90,6 +90,7 @@ export default {
 	left: -23px;
 	top: 6px;
 	transform: rotate(45deg);
+	animation: rotate 1s 1 ease-in-out;
 }
 
 .appear::after {
@@ -102,5 +103,14 @@ export default {
 	top: 11px;
 	border-right: none;
 	border-bottom: none;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(405deg);
+	}
 }
 </style>
