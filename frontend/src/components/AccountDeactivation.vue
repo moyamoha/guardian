@@ -13,8 +13,9 @@
 			rounded
 			color="error"
 			elevation="4"
+			:diabled="processing"
 			@click="handleDeactivate"
-			>Deactivate</v-btn
+			>{{ processing ? "Deactivating..." : "Deactivate" }}</v-btn
 		>
 	</div>
 </template>
@@ -22,12 +23,17 @@
 <script>
 import { mapActions } from "vuex";
 export default {
+	data() {
+		return { processing: false };
+	},
 	methods: {
 		...mapActions(["deactivate"]),
-		handleDeactivate() {
+		async handleDeactivate() {
+			this.processing = true;
 			if (window.confirm("Deactivate?")) {
-				this.deactivate();
+				await this.deactivate();
 			}
+			this.processing = false;
 		},
 	},
 };

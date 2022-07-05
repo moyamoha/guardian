@@ -19,8 +19,9 @@
 			rounded
 			elevation="4"
 			:color="loggedInUser.mfaEnabled ? 'error' : 'success'"
+			:disabled="processing"
 			@click="handleToggle"
-			>{{ loggedInUser.mfaEnabled ? "Disable MFA" : "Enable MFA" }}</v-btn
+			>{{ getBtnText }}</v-btn
 		>
 	</div>
 </template>
@@ -28,21 +29,33 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
+	data() {
+		return { processing: false };
+	},
 	methods: {
 		...mapActions(["toggleMfa"]),
-		handleToggle() {
+		async handleToggle() {
+			this.processing = true;
 			if (
 				this.loggedInUser.mfaEnabled &&
 				window.confirm("Disable multi-factor authentication?")
 			) {
-				this.toggleMfa(false);
+				await this.toggleMfa(false);
 			} else if (!this.loggedInUser.mfaEnabled) {
-				this.toggleMfa(true);
+				await this.toggleMfa(true);
 			} else return;
+			this.processing = false;
 		},
 	},
 	computed: {
 		...mapGetters(["loggedInUser"]),
+		getBtnText() {
+			if (this.loggedInUser.mfaEnabled) {
+				return this.processing ? "Disabling MFA..." : "Disable MFA";
+			} else {
+				return this.processing ? "Enabling MFA..." : "Enable MFA";
+			}
+		},
 	},
 };
 </script>

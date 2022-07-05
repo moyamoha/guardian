@@ -23,7 +23,6 @@
 					Your new password must be at least 10 characters long
 				</p>
 				<ErrorAlert></ErrorAlert>
-
 				<v-form class="my-3" ref="passChangeForm" @submit="handleSubmit">
 					<v-text-field
 						outlined
@@ -46,7 +45,15 @@
 						label="Repeat new password"
 						v-model="newPasswordAgain"
 					></v-text-field>
-					<v-btn type="submit" color="success" dense small outlined>Save</v-btn>
+					<v-btn
+						type="submit"
+						color="success"
+						dense
+						small
+						outlined
+						:loading="processing"
+						>Save</v-btn
+					>
 				</v-form>
 			</v-card-text>
 		</v-card>
@@ -63,8 +70,7 @@ export default {
 			currentPassword: "",
 			newPassword: "",
 			newPasswordAgain: "",
-			showCurr: false,
-			showNew: false,
+			processing: false,
 		};
 	},
 	methods: {
@@ -72,6 +78,7 @@ export default {
 		...mapMutations(["setError"]),
 		async handleSubmit(e) {
 			e.preventDefault();
+			this.processing = true;
 			if (
 				this.$refs.passChangeForm.validate() &&
 				this.newPassword === this.newPasswordAgain
@@ -87,6 +94,7 @@ export default {
 				this.$refs.passChangeForm.reset();
 				this.dialog = false;
 			}
+			this.processing = false;
 		},
 		required(v) {
 			return (v && v.length > 0) || "This field can not be empty";
