@@ -27,6 +27,7 @@ const mutations = {
 
 const actions = {
 	fetchContent: async ({ commit }) => {
+		commit("setContent", []);
 		commit("startLoading");
 		try {
 			const categories = (await axios.get("/categories/")).data;
