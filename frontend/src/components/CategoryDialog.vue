@@ -27,8 +27,14 @@
 						v-model="item.name"
 					></v-text-field>
 					<div class="btn-cont">
-						<v-btn type="submit" color="primary" outlined dense small
-							>Save</v-btn
+						<v-btn
+							type="submit"
+							color="primary"
+							outlined
+							dense
+							small
+							:disabled="processing"
+							>{{ processing ? "Saving..." : "Save" }}</v-btn
 						>
 						<v-btn @click="handleCancel" color="warn" outlined dense small
 							>Cancel</v-btn
@@ -40,7 +46,8 @@
 							dense
 							small
 							v-show="this.category !== null"
-							>Delete</v-btn
+							:disabled="processing"
+							>{{ processing ? "Deleting..." : "Delete" }}</v-btn
 						>
 					</div>
 				</v-form>
@@ -59,12 +66,14 @@ export default {
 				name: this.category ? this.category.name : "",
 			},
 			dialog: false,
+			processing: false,
 		};
 	},
 	methods: {
 		...mapActions(["addCategory", "removeCategory", "editCategory"]),
 		async handleSubmit(e) {
 			e.preventDefault();
+			this.processing = true;
 			if (this.$refs.catform.validate()) {
 				if (this.category) {
 					await this.editCategory({
@@ -74,17 +83,20 @@ export default {
 				} else {
 					await this.addCategory(this.item);
 				}
+				this.processing = false;
 				if (this.error === "") this.dialog = false;
 			}
 		},
-		handleDelete() {
+		async handleDelete() {
 			if (
 				window.confirm(
 					`Delete ${this.category.name}? Action is irreversable and all
           the entries under this category will be also deleted!!!!`
 				)
 			) {
-				this.removeCategory(this.category._id);
+				this.processing = true;
+				await this.removeCategory(this.category._id);
+				this.processing = false;
 			}
 		},
 

@@ -47,8 +47,14 @@
 						outlined
 						v-model="item.url"
 					></v-text-field>
-					<v-btn type="submit" class="mr-2" color="primary" outlined dense
-						>Save</v-btn
+					<v-btn
+						type="submit"
+						class="mr-2"
+						color="primary"
+						outlined
+						dense
+						:disabled="processing"
+						>{{ processing ? "Saving..." : "Save" }}</v-btn
 					>
 					<v-btn @click="dialog = !dialog" color="error" outlined dense
 						>Cancel</v-btn
@@ -73,12 +79,14 @@ export default {
 				url: this.entry && this.entry.url ? this.entry.url : "",
 			},
 			dialog: false,
+			processing: false,
 		};
 	},
 	methods: {
 		...mapActions(["addEntry", "editEntry"]),
 		async handleSubmit(e) {
 			e.preventDefault();
+			this.processing = true;
 			if (this.$refs.enform.validate()) {
 				if (this.entry) {
 					await this.editEntry({
@@ -88,6 +96,7 @@ export default {
 				} else {
 					await this.addEntry({ entry: this.item, categId: this.categoryId });
 				}
+				this.processing = false;
 				if (this.error === "") this.dialog = false;
 			}
 		},
