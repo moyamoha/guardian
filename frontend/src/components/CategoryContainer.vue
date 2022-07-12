@@ -34,7 +34,7 @@ export default {
 	props: ["category"],
 	data: () => {
 		return {
-			expand: true,
+			expand: false,
 		};
 	},
 };
