@@ -1,6 +1,6 @@
 <template>
 	<nav>
-		<router-link to="/">Gaurdian</router-link>
+		<router-link to="/">Guardian</router-link>
 		<router-link v-if="loggedInUser" to="/home">Home</router-link>
 		<v-spacer v-if="!loggedInUser"></v-spacer>
 		<v-spacer v-if="loggedInUser"></v-spacer>

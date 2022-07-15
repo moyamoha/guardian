@@ -48,11 +48,11 @@ export class UserService {
     await this.mailerService.sendMail({
       from: process.env.EMAIL_SENDER,
       to: created.email,
-      text: 'Welcome to Gaurdian',
-      subject: 'Welcome to Gaurdian',
-      html: `<p><strong>Dear ${created.firstname}!</strong><br></br>We are glad you chose Gaurdian to keep your passwords safe and secure. 
+      text: 'Welcome to Guardian',
+      subject: 'Welcome to Guardian',
+      html: `<p><strong>Dear ${created.firstname}!</strong><br></br>We are glad you chose Guardian to keep your passwords safe and secure. 
       Before you can do anything, please confirm your email address by clicking <a href="${confirmationLink}">This link</a>
-      <br></br><i>Team Gaurdian.</i></p>`,
+      <br></br><i>Team Guardian.</i></p>`,
     });
     return created;
   }
@@ -68,7 +68,7 @@ export class UserService {
         to: user.email,
         subject: 'Your account is DEACTIVATED',
         html: `<p><strong>Dear ${user.firstname}!</strong><br></br>${accountDeactivedEmailResp}
-        <br></br><i>Team Gaurdian.</i></p>`,
+        <br></br><i>Team Guardian.</i></p>`,
       });
       await user.save();
     } catch (e) {}
@@ -81,7 +81,7 @@ export class UserService {
       to: user.email,
       subject: 'Your account was DELETED',
       html: `<p><strong>Dear ${user.firstname}!</strong><br></br>${accountDeletedEmailResp}
-      <br></br><i>Team Gaurdian.</i></p>`,
+      <br></br><i>Team Guardian.</i></p>`,
     });
   }
 
@@ -114,7 +114,7 @@ export class UserService {
           ? 'Your account is now SECURE'
           : 'Oops! your account is VULNERABLE',
         html: `<p><strong>Dear ${updated.firstname}!</strong><br></br>${bodyText}
-        <br></br><i>Team Gaurdian.</i></p>`,
+        <br></br><i>Team Guardian.</i></p>`,
       });
       return updated;
     } catch (e) {

@@ -1,5 +1,5 @@
-# Gaurdian 
-Gaurdian is an SPA-application that is made for saving credintials easily and securely
+# Guardian 
+Guardian is an SPA-application that is made for saving credintials easily and securely
 This is an application developed as a hobby project.
 New things I learned while coding this app:
 - More about mongodb schema validation
@@ -17,5 +17,5 @@ I tried to avoid using multiple technologies and a lot of libraries. Here are ba
 
 ## What is next? 
 I will sometimes come back to this app and see if I can make it even more functional by adding more features.  
-You can see live demonstration of the app [here](https://gaurdian.netlify.app)  
+You can see live demonstration of the app [here](https://vartija.netlify.app)  
 If you liked it please consider starring this reporistory. I would appreciate it :)

@@ -65,7 +65,7 @@ const actions = {
 			router.push("login");
 			commit(
 				"setNotification",
-				"Welcome to Gaurdian! Please confirm your email first 😍"
+				"Welcome to Guardian! Please confirm your email first 😍"
 			);
 		} catch (e) {
 			commit("setError", e.response.data.message);

@@ -45,7 +45,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	document.title = to.name !== "" ? "Gaurdian - " + to.name : "Gaurdian";
+	document.title = to.name !== "" ? "Guardian - " + to.name : "Guardian";
 	next();
 });
 

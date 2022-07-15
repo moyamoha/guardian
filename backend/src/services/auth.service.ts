@@ -66,7 +66,7 @@ export class AuthService {
       to: user.email,
       subject: 'Verification code',
       html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Your verification code is <strong>${randomNum}</strong>
-      <br></br><i>Team Gaurdian.</i></p>`,
+      <br></br><i>Team Guardian.</i></p>`,
     });
   }
 

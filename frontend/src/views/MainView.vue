@@ -1,11 +1,11 @@
 <template>
 	<v-col xs="11" sm="8" md="6">
 		<p class="text-justify">
-			Welcome to <span class="gaurdian">Gaurdian</span> :) We are commited to
+			Welcome to <span class="guardian">Guardian</span> :) We are commited to
 			make people feel safe about their credintials. We know it is hard. The
 			applications out their are complicated and often expensive to use. That is
 			why we came up with this password management application. Why choose
-			<span class="gaurdian">Gaurdian?</span> The answer is:
+			<span class="guardian">Guardian?</span> The answer is:
 		</p>
 		<ul class="mb-6">
 			<li class="appear">IT IS SIMPLE</li>
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style scoped>
-.gaurdian {
+.guardian {
 	text-decoration: wavy;
 	letter-spacing: 1.2px;
 	color: orange;
