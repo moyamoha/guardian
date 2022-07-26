@@ -29,11 +29,11 @@ export default {
 	methods: {
 		...mapActions(["deactivate"]),
 		async handleDeactivate() {
-			this.processing = true;
 			if (window.confirm("Deactivate?")) {
+				this.processing = true;
 				await this.deactivate();
+				this.processing = false;
 			}
-			this.processing = false;
 		},
 	},
 };
