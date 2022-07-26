@@ -35,7 +35,6 @@ export default {
 	methods: {
 		...mapActions(["toggleMfa"]),
 		async handleToggle() {
-			this.processing = true;
 			if (
 				this.loggedInUser.mfaEnabled &&
 				window.confirm("Disable multi-factor authentication?")
