@@ -40,11 +40,14 @@ export default {
 				this.loggedInUser.mfaEnabled &&
 				window.confirm("Disable multi-factor authentication?")
 			) {
+				this.processing = true;
 				await this.toggleMfa(false);
+				this.processing = false;
 			} else if (!this.loggedInUser.mfaEnabled) {
+				this.processing = true;
 				await this.toggleMfa(true);
-			} else return;
-			this.processing = false;
+				this.processing = false;
+			}
 		},
 	},
 	computed: {
