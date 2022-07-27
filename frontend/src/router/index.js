@@ -37,6 +37,11 @@ const routes = [
 		name: "settings",
 		component: () => import("../views/SettingsView.vue"),
 	},
+	{
+		path: "/password-forgotten",
+		name: "password-forgotten",
+		component: () => import("../views/ForgotPasswordView.vue"),
+	},
 ];
 
 const router = new VueRouter({

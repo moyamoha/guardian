@@ -33,6 +33,7 @@
 			<v-btn color="primary" type="submit" :loading="this.loggingIn"
 				>Login</v-btn
 			>
+			<router-link to="/password-forgotten">I forgot my password</router-link>
 		</v-form>
 		<p class="text--secondary mt-5">
 			Don't have an account? <router-link to="/signup">Sign up</router-link>

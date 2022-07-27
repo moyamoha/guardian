@@ -2,6 +2,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import {
   ForbiddenException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -81,5 +82,23 @@ export class AuthService {
         'The verification code you provided is wrong!',
       );
     }
+  }
+
+  async sendTemporaryPassword(email: string) {
+    const user = await this.userService.findOneByEmail(email);
+    if (!user) {
+      throw new NotFoundException('Email not associated to any user');
+    }
+    const randomPassword = randomPass() + randomPass();
+    user.password = await bcrypt.hash(randomPassword, 10);
+    await user.save();
+    this.mailerService.sendMail({
+      from: process.env.EMAIL_SENDER,
+      to: user.email,
+      subject: 'Reset password',
+      html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Use this password: <strong>${randomPassword}</strong> to log in. Please make sure to change it after you log in </strong>
+      <br></br><i>Team Guardian.</i></p>`,
+    });
+    return { temporaryPassword: randomPassword };
   }
 }

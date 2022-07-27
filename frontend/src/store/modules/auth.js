@@ -118,6 +118,14 @@ const actions = {
 			commit("setError", e.response.data.message);
 		}
 	},
+
+	async requestTempPassword({ commit, dispatch }, email) {
+		try {
+			await axios.patch("/auth/forgot-password", { email: email });
+		} catch (e) {
+			commit("setError", e.response.data.message);
+		}
+	},
 };
 
 const mutations = {

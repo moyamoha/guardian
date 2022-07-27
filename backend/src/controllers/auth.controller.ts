@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   HttpCode,
+  Patch,
   Post,
   Req,
   UnauthorizedException,
@@ -39,5 +40,10 @@ export class AuthController {
       throw new UnauthorizedException('Verification code can not be 0');
     }
     return await this.authService.verifyLogin(body.code);
+  }
+
+  @Patch('/forgot-password')
+  async resetPassword(@Body() body: { email: string }) {
+    await this.authService.sendTemporaryPassword(body.email);
   }
 }
