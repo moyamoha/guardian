@@ -100,6 +100,5 @@ export class AuthService {
       html: `<p><strong>Dear ${user.firstname}!</strong><br></br>Use this password: <strong>${randomPassword}</strong> to log in. Please make sure to change it after you log in </strong>
       <br></br><i>Team Guardian.</i></p>`,
     });
-    return { temporaryPassword: randomPassword };
   }
 }
