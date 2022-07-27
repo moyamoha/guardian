@@ -11,6 +11,7 @@ import { faker } from '@faker-js/faker';
 
 import { UserDocument } from 'src/schemas/user.schema';
 import { UserService } from './user.service';
+import { randomPass } from 'src/utils/random';
 
 @Injectable()
 export class AuthService {
