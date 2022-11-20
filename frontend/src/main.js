@@ -7,7 +7,7 @@ import axios from "axios";
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = "http://vartija-prod-noname-mby1jg.mo1.mogenius.io";
+axios.defaults.baseURL = "https://vartija-prod-noname-mby1jg.mo1.mogenius.io";
 axios.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
