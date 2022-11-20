@@ -7,26 +7,26 @@ import axios from "axios";
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = "https://passwordgaurdian.herokuapp.com";
+axios.defaults.baseURL = "http://vartija-prod-noname-mby1jg.mo1.mogenius.io";
 axios.interceptors.request.use((config) => {
-	const accessToken = localStorage.getItem("accessToken");
-	if (accessToken) {
-		config.headers = {
-			Authorization: `Bearer ${accessToken}`,
-		};
-	}
-	return config;
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    config.headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+  }
+  return config;
 });
 axios.interceptors.response.use(function (resp) {
-	if (resp.status >= 200 && resp.status < 300) {
-		store.commit("setError", "");
-	}
-	return resp;
+  if (resp.status >= 200 && resp.status < 300) {
+    store.commit("setError", "");
+  }
+  return resp;
 });
 
 new Vue({
-	router,
-	store,
-	vuetify,
-	render: (h) => h(App),
+  router,
+  store,
+  vuetify,
+  render: (h) => h(App),
 }).$mount("#app");
