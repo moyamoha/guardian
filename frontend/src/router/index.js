@@ -6,52 +6,52 @@ import MainView from "../views/MainView.vue";
 Vue.use(VueRouter);
 
 const routes = [
-	{
-		path: "/",
-		name: "",
-		component: MainView,
-	},
-	{
-		path: "/home",
-		name: "home",
-		component: HomeView,
-	},
-	{
-		path: "/login",
-		name: "login",
-		component: () => import("../views/LoginView.vue"),
-	},
+  {
+    path: "/",
+    name: "",
+    component: MainView,
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: HomeView,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/LoginView.vue"),
+  },
 
-	{
-		path: "/verify-code",
-		name: "verify-code",
-		component: () => import("../views/VerifyCodeView.vue"),
-	},
-	{
-		path: "/signup",
-		name: "signup",
-		component: () => import("../views/SignupView.vue"),
-	},
-	{
-		path: "/settings",
-		name: "settings",
-		component: () => import("../views/SettingsView.vue"),
-	},
-	{
-		path: "/password-forgotten",
-		name: "password-forgotten",
-		component: () => import("../views/ForgotPasswordView.vue"),
-	},
+  {
+    path: "/verify-code",
+    name: "verify-code",
+    component: () => import("../views/VerifyCodeView.vue"),
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: () => import("../views/SignupView.vue"),
+  },
+  {
+    path: "/settings",
+    name: "settings",
+    component: () => import("../views/SettingsView.vue"),
+  },
+  {
+    path: "/password-forgotten",
+    name: "password-forgotten",
+    component: () => import("../views/ForgotPasswordView.vue"),
+  },
 ];
 
 const router = new VueRouter({
-	mode: "history",
-	routes,
+  mode: "history",
+  routes,
 });
 
 router.beforeEach((to, from, next) => {
-	document.title = to.name !== "" ? "Guardian - " + to.name : "Guardian";
-	next();
+  document.title = to.name !== "" ? "Guardian - " + to.name : "Guardian";
+  next();
 });
 
 export default router;
