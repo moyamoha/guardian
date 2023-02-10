@@ -1,7 +1,10 @@
 <template>
   <ol class="wtree">
     <li v-for="category in content" :key="category._id">
-      <CategoryContainer :category="category"></CategoryContainer>
+      <CategoryContainer
+        :expand="isExpanded(category._id)"
+        :category="category"
+      ></CategoryContainer>
     </li>
   </ol>
 </template>
@@ -11,13 +14,13 @@ import EntryRow from "./EntryRow.vue";
 import { mapGetters } from "vuex";
 import CategoryContainer from "./CategoryContainer.vue";
 export default {
-  data: () => {
-    return {
-      expand: true,
-    };
-  },
   computed: {
-    ...mapGetters(["content"]),
+    ...mapGetters(["content", "expandedOnes"]),
+  },
+  methods: {
+    isExpanded(categoryId) {
+      return this.expandedOnes.includes(categoryId);
+    },
   },
   components: {
     EntryRow,

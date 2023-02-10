@@ -20,9 +20,28 @@
       elevation="4"
       :color="loggedInUser.mfaEnabled ? 'error darken-2' : 'success darken-2'"
       :disabled="processing"
-      @click="handleToggle"
+      @click="showDialog = true"
       >{{ getBtnText }}</v-btn
     >
+    <v-dialog v-model="showDialog" width="500">
+      <v-card>
+        <v-card-title
+          class="text-h6 grey lighten-2 d-flex justify-space-between"
+        >
+          Disable multi-factor authentication?
+          <v-icon @click="showDialog = false" color="brown"
+            >mdi-close-circle</v-icon
+          >
+        </v-card-title>
+        <v-card-text class="mt-3">
+          Disabling mfa will affect the security of your data negatively! are
+          you sure?
+        </v-card-text>
+        <v-card-actions>
+          <button>Yes</button>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -30,7 +49,7 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
-    return { processing: false };
+    return { processing: false, showDialog: false };
   },
   methods: {
     ...mapActions(["toggleMfa"]),
