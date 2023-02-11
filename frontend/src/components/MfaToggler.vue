@@ -28,17 +28,34 @@
         <v-card-title
           class="text-h6 grey lighten-2 d-flex justify-space-between"
         >
-          Disable multi-factor authentication?
+          {{ dialogTitle }}
           <v-icon @click="showDialog = false" color="brown"
             >mdi-close-circle</v-icon
           >
         </v-card-title>
         <v-card-text class="mt-3">
-          Disabling mfa will affect the security of your data negatively! are
-          you sure?
+          {{ dialogMessageText }}
         </v-card-text>
         <v-card-actions>
-          <button>Yes</button>
+          <v-btn
+            elevation="2"
+            small
+            dense
+            outlined
+            @click="handleOkResponse"
+            color="success"
+            :disabled="processing"
+            >Yes</v-btn
+          >
+          <v-btn
+            elevation="2"
+            small
+            dense
+            outlined
+            color="red"
+            @click="showDialog = false"
+            >No</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -53,19 +70,17 @@ export default {
   },
   methods: {
     ...mapActions(["toggleMfa"]),
-    async handleToggle() {
-      if (
-        this.loggedInUser.mfaEnabled &&
-        window.confirm("Disable multi-factor authentication?")
-      ) {
+    async handleOkResponse() {
+      if (this.loggedInUser.mfaEnabled) {
         this.processing = true;
         await this.toggleMfa(false);
         this.processing = false;
-      } else if (!this.loggedInUser.mfaEnabled) {
+      } else {
         this.processing = true;
         await this.toggleMfa(true);
         this.processing = false;
       }
+      this.showDialog = false;
     },
   },
   computed: {
@@ -75,6 +90,20 @@ export default {
         return this.processing ? "Disabling MFA..." : "Disable MFA";
       } else {
         return this.processing ? "Enabling MFA..." : "Enable MFA";
+      }
+    },
+    dialogMessageText() {
+      if (this.loggedInUser.mfaEnabled) {
+        return "Disabling mfa will affect the security of your data negatively! are you sure?";
+      } else {
+        return "Good choice, You are about to add extra layer of security to your data ✅, Proceed?";
+      }
+    },
+    dialogTitle() {
+      if (this.loggedInUser.mfaEnabled) {
+        return "Disable multi-factor authentication?";
+      } else {
+        return "Enable multi-factor authentication?";
       }
     },
   },
