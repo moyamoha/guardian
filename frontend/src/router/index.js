@@ -57,6 +57,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   document.title = to.name !== "" ? "Guardian - " + to.name : "Guardian";
   next();
+
+  if (routes.findIndex((r) => r.name === to.name) === -1) {
+    next({
+      name: "home",
+    });
+  }
 });
 
 export default router;
