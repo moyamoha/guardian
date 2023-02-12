@@ -42,6 +42,11 @@ const routes = [
     name: "password-forgotten",
     component: () => import("../views/ForgotPasswordView.vue"),
   },
+  {
+    path: "/generate-password",
+    name: "generate",
+    component: () => import("../views/generate-password.vue"),
+  },
 ];
 
 const router = new VueRouter({

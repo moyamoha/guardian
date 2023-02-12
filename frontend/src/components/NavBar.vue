@@ -2,8 +2,8 @@
   <nav>
     <router-link to="/">Guardian</router-link>
     <router-link v-if="loggedInUser" to="/home">Home</router-link>
-    <v-spacer v-if="!loggedInUser"></v-spacer>
-    <v-spacer v-if="loggedInUser"></v-spacer>
+    <router-link to="/generate-password">Generate</router-link>
+    <v-spacer></v-spacer>
     <router-link v-if="!loggedInUser" to="/login">Login</router-link>
     <router-link v-if="!loggedInUser" to="/signup">Sign up</router-link>
     <router-link v-if="loggedInUser" to="/settings">Settings</router-link>
