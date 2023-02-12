@@ -57,7 +57,7 @@ export default {
         const lowercase = "abcdefghijklmnopqrstuvwxyz";
         const capitals = lowercase.toUpperCase();
         const digits = "01234567890123456789";
-        const specialChars = "!?#%$:;_-,*^~+=)([]{}/&€@<>|\"£'.";
+        const specialChars = "!?#%$:;_-,*^~+=/&€@<>";
         let base = lowercase;
         if (this.includesUpperCase) {
           base = base + capitals;
