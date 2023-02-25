@@ -40,7 +40,7 @@ export default {
     },
     atLeastEight(v) {
       return (
-        (v.length === 8 && parseInt(v) !== NaN) || "The code must be 8 digits"
+        (v.trim().length === 8 && parseInt(v.trim()) !== NaN) || "The code must be 8 digits"
       );
     },
   },
