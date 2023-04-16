@@ -79,11 +79,11 @@ const actions = {
     }
   },
 
-  editEntry: async ({ commit, dispatch }, entry) => {
+  editEntry: async ({ commit, dispatch }, { entry, reload }) => {
     const id = entry._id;
     try {
       await axios.put("/entries/" + id, entry);
-      dispatch("fetchContent");
+      if (reload) dispatch("fetchContent");
     } catch (e) {
       commit("setError", e.response.data.message);
     }
@@ -94,8 +94,6 @@ const actions = {
     { entryId, payload }
   ) => {
     try {
-      console.log(entryId);
-      console.table(payload);
       await axios.patch(`/entries/${entryId}/change-category`, payload);
       dispatch("fetchContent");
     } catch (e) {

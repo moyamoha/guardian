@@ -100,13 +100,16 @@ export default {
       this.processing = true;
       if (this.$refs.enform.validate()) {
         if (this.entry) {
+          const categoryChanged = this.item.category.id !== this.entry.category;
           await this.editEntry({
-            ...this.entry,
-            ...this.item,
-            category: this.item.category.id,
+            entry: {
+              ...this.entry,
+              ...this.item,
+              category: this.item.category.id,
+            },
+            reload: !categoryChanged,
           });
-          if (this.item.category.id !== this.entry.category) {
-            console.log("this.categoryId"), this.categoryId;
+          if (categoryChanged) {
             await this.changeCategoryForEntry({
               entryId: this.entry._id,
               payload: {
