@@ -47,6 +47,17 @@
             outlined
             v-model="item.url"
           ></v-text-field>
+
+          <v-combobox
+            v-model="item.category"
+            :items="this.categories"
+            item-text="name"
+            item-value="id"
+            label="Category"
+            dense
+            outlined
+            v-if="this.entry !== null && this.entry !== undefined"
+          ></v-combobox>
           <v-btn
             type="submit"
             class="mr-2"
@@ -92,6 +103,7 @@ export default {
           await this.editEntry({
             ...this.entry,
             ...this.item,
+            category: this.item.category.id,
           });
         } else {
           await this.addEntry({ entry: this.item, categId: this.categoryId });
@@ -107,16 +119,34 @@ export default {
         username: this.entry ? this.entry.username : "",
         password: this.entry ? this.entry.password : "",
         url: this.entry && this.entry.url ? this.entry.url : "",
+        category: this.entry && this.entry.category ? this.entry.category : "",
       };
       this.$refs.enform.resetValidation();
       this.dialog = false;
     },
+
+    getCategoryNameById(id) {
+      const categs = this.categories;
+      const found = categs.find((c) => c.id === id);
+      if (!found) return "";
+      return found.name;
+    },
   },
   computed: {
-    ...mapGetters(["error"]),
+    ...mapGetters(["error", "categories"]),
     createNew() {
       return this.entry === null || this.entry === undefined;
     },
+  },
+  mounted() {
+    if (this.entry && this.entry.category) {
+      const categs = this.categories;
+      const found = categs.find((c) => c.id === this.entry.category);
+      this.item.category = {
+        name: found.name,
+        id: this.entry.category,
+      };
+    }
   },
   components: { ErrorAlert },
 };

@@ -4,17 +4,22 @@ const state = {
   content: [],
   openedCategories: [],
   loading: false,
+  categories: [],
 };
 
 const getters = {
   content: (state) => state.content,
   isLoading: (state) => state.loading,
+  categories: (state) => state.categories,
 };
 
 const mutations = {
   startLoading: (state) => (state.loading = true),
   setContent: (state, data) => {
     state.content = data;
+    state.categories = data.map((item) => {
+      return { name: item.name, id: item._id };
+    });
     state.loading = false;
   },
   addCateg: (state, category) => {
