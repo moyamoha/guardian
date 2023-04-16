@@ -89,6 +89,20 @@ const actions = {
     }
   },
 
+  changeCategoryForEntry: async (
+    { commit, dispatch },
+    { entryId, payload }
+  ) => {
+    try {
+      console.log(entryId);
+      console.table(payload);
+      await axios.patch(`/entries/${entryId}/change-category`, payload);
+      dispatch("fetchContent");
+    } catch (e) {
+      commit("setError", e.response.data.message);
+    }
+  },
+
   removeEntry: async ({ commit, dispatch }, id) => {
     try {
       await axios.delete("/entries/" + id);

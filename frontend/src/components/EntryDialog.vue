@@ -94,7 +94,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["addEntry", "editEntry"]),
+    ...mapActions(["addEntry", "editEntry", "changeCategoryForEntry"]),
     async handleSubmit(e) {
       e.preventDefault();
       this.processing = true;
@@ -105,6 +105,16 @@ export default {
             ...this.item,
             category: this.item.category.id,
           });
+          if (this.item.category.id !== this.entry.category) {
+            console.log("this.categoryId"), this.categoryId;
+            await this.changeCategoryForEntry({
+              entryId: this.entry._id,
+              payload: {
+                oldCategoryId: this.entry.category,
+                newCategoryId: this.item.category.id,
+              },
+            });
+          }
         } else {
           await this.addEntry({ entry: this.item, categId: this.categoryId });
         }
@@ -119,7 +129,13 @@ export default {
         username: this.entry ? this.entry.username : "",
         password: this.entry ? this.entry.password : "",
         url: this.entry && this.entry.url ? this.entry.url : "",
-        category: this.entry && this.entry.category ? this.entry.category : "",
+        category:
+          this.entry && this.entry.category
+            ? {
+                name: this.getCategoryNameById(this.entry.category),
+                id: this.entry.category,
+              }
+            : "",
       };
       this.$refs.enform.resetValidation();
       this.dialog = false;
