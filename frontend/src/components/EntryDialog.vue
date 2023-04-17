@@ -95,7 +95,7 @@ export default {
         username: this.entry ? this.entry.username : "",
         password: this.entry ? this.entry.password : "",
         url: this.entry && this.entry.url ? this.entry.url : "",
-        status: this.entry && this.entry.status ? this.entry.status : "",
+        status: this.entry && this.entry.status ? this.entry.status : "active",
       },
       dialog: false,
       processing: false,
