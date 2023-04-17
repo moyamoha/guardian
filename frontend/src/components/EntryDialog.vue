@@ -47,7 +47,14 @@
             outlined
             v-model="item.url"
           ></v-text-field>
-
+          <v-combobox
+            v-model="item.status"
+            :items="['active', 'expired']"
+            label="Status"
+            dense
+            outlined
+            v-if="this.entry !== null && this.entry !== undefined"
+          ></v-combobox>
           <v-combobox
             v-model="item.category"
             :items="this.categories"
@@ -88,6 +95,7 @@ export default {
         username: this.entry ? this.entry.username : "",
         password: this.entry ? this.entry.password : "",
         url: this.entry && this.entry.url ? this.entry.url : "",
+        status: this.entry && this.entry.status ? this.entry.status : "",
       },
       dialog: false,
       processing: false,

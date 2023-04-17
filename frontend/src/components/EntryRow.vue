@@ -1,5 +1,8 @@
 <template>
   <div class="entry-row">
+    <v-chip class="status-chip" :color="entryStatusColor" small>{{
+      entry.status
+    }}</v-chip>
     <section class="content">
       <strong class="font-weight-black">{{ entry.title }}</strong>
       <span><i>Username:</i> {{ entry.username }}</span>
@@ -61,6 +64,18 @@ export default {
         .map((c) => "*")
         .join("");
     },
+    entryStatusColor() {
+      switch (this.entry.status) {
+        case "expired":
+          return "orange";
+        case "active":
+        default:
+          return "green";
+      }
+    },
+  },
+  mounted() {
+    console.log(this.entry);
   },
   components: { EntryDialog },
 };
@@ -72,6 +87,12 @@ export default {
   width: 100%;
   justify-content: space-between;
   position: relative;
+}
+
+.status-chip {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .entry-row .content {
