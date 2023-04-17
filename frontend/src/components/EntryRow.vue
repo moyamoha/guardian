@@ -74,9 +74,6 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log(this.entry);
-  },
   components: { EntryDialog },
 };
 </script>

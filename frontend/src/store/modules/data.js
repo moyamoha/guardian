@@ -11,6 +11,7 @@ const getters = {
   content: (state) => state.content,
   isLoading: (state) => state.loading,
   categories: (state) => state.categories,
+  openedCategories: (state) => state.openedCategories,
 };
 
 const mutations = {

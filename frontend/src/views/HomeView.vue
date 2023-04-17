@@ -9,10 +9,13 @@
     <p v-else-if="this.content.length > 0">
       All your passwords with their categories
       <br />
-      <CategoryDialog
+      <section class="action-row">
+        <CategoryDialog
         :category="null"
         activatorText="Create category"
-      ></CategoryDialog>
+        ></CategoryDialog>
+        <span class="action-link" @click="collapseOrExpandAll">{{ collapseOrExpandText }}</span>
+      </section>
     </p>
     <p v-else>
       You have not created anything yet.
@@ -27,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import DataTree from "@/components/DataTree.vue";
 import EntryDialog from "@/components/EntryDialog.vue";
 import CategoryDialog from "@/components/CategoryDialog.vue";
@@ -40,13 +43,21 @@ export default {
   components: { DataTree, EntryDialog, CategoryDialog, Loading },
   methods: {
     ...mapActions(["fetchContent"]),
+    ...mapMutations(["setExpandedCategories"]),
+    collapseOrExpandAll() {
+      if (this.expandedOnes.length > 0) this.setExpandedCategories([])
+      else this.setExpandedCategories(this.content.map(c => c._id))
+    }
   },
   mounted() {
     if (this.loggedInUser) this.fetchContent();
     else router.replace("/");
   },
   computed: {
-    ...mapGetters(["content", "isLoading", "loggedInUser"]),
+    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes"]),
+    collapseOrExpandText() {
+      return this.expandedOnes.length > 0 ? "Collapse all" : "Expand all";
+    }
   },
 };
 </script>
@@ -68,5 +79,18 @@ export default {
 }
 .action-link:hover {
   text-decoration: underline;
+}
+
+.action-row {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .action-row {
+    width: 100%;
+  }
 }
 </style>
