@@ -19,17 +19,7 @@
         :rules="[required]"
       >
       </v-text-field>
-      <v-text-field
-        label="Password"
-        :type="typeOfPassField"
-        v-model="password"
-        dense
-        outlined
-        :rules="[required]"
-        :append-icon="eyeIcon"
-        @click:append="showPass = !showPass"
-      >
-      </v-text-field>
+      <PasswordField v-model="password"></PasswordField>
       <v-btn color="primary" type="submit" :loading="this.loggingIn"
         >Login</v-btn
       >
@@ -48,12 +38,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "@/components/ErrorAlert.vue";
+import PasswordField from "@/components/PasswordField.vue";
 export default {
   data: () => {
     return {
       email: "",
       password: "",
-      showPass: false,
       loggingIn: false,
     };
   },
@@ -73,14 +63,8 @@ export default {
   },
   computed: {
     ...mapGetters(["error"]),
-    eyeIcon() {
-      return this.showPass ? "mdi-eye" : "mdi-eye-off";
-    },
-    typeOfPassField() {
-      return this.showPass ? "text" : "password";
-    },
   },
-  components: { ErrorAlert },
+  components: { ErrorAlert, PasswordField },
 };
 </script>
 

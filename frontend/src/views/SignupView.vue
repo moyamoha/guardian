@@ -26,29 +26,11 @@
           :rules="[required]"
         ></v-text-field>
       </section>
-      <v-text-field
-        label="Password *"
-        :type="typeOfPassField"
-        v-model="password1"
-        dense
-        outlined
-        :rules="[required]"
-        :append-icon="eyeIcon"
-        @click:append="showPass = !showPass"
-      >
-      </v-text-field>
-
-      <v-text-field
-        label="Repeat password *"
-        :type="typeOfPassField"
+      <PasswordField v-model="password1" label="Password *"></PasswordField>
+      <PasswordField
         v-model="password2"
-        dense
-        outlined
-        :rules="[required]"
-        :append-icon="eyeIcon"
-        @click:append="showPass = !showPass"
-      >
-      </v-text-field>
+        label="Repeat password *"
+      ></PasswordField>
       <v-btn color="primary" type="submit" :loading="processing">Signup</v-btn>
     </v-form>
     <p class="text--secondary mt-5">
@@ -60,6 +42,7 @@
 <script>
 import { mapActions, mapMutations } from "vuex";
 import ErrorAlert from "@/components/ErrorAlert.vue";
+import PasswordField from "@/components/PasswordField.vue";
 export default {
   data: () => {
     return {
@@ -102,7 +85,7 @@ export default {
       return this.showPass ? "text" : "password";
     },
   },
-  components: { ErrorAlert },
+  components: { ErrorAlert, PasswordField },
 };
 </script>
 

@@ -24,27 +24,12 @@
         </p>
         <ErrorAlert></ErrorAlert>
         <v-form class="my-3" ref="passChangeForm" @submit="handleSubmit">
-          <v-text-field
-            outlined
-            dense
-            type="password"
-            label="Current password"
-            v-model="currentPassword"
-          ></v-text-field>
-          <v-text-field
-            outlined
-            dense
-            type="password"
-            label="New password"
-            v-model="newPassword"
-          ></v-text-field>
-          <v-text-field
-            outlined
-            dense
-            type="password"
-            label="Repeat new password"
+          <PasswordField v-model="currentPassword" label="Current password *" />
+          <PasswordField v-model="newPassword" label="New password *" />
+          <PasswordField
             v-model="newPasswordAgain"
-          ></v-text-field>
+            label="Repeat new password *"
+          />
           <v-btn
             type="submit"
             color="success"
@@ -63,6 +48,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
+import PasswordField from "./PasswordField.vue";
 export default {
   data() {
     return {
@@ -105,6 +91,7 @@ export default {
   },
   components: {
     ErrorAlert,
+    PasswordField,
   },
 };
 </script>

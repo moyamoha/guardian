@@ -34,13 +34,7 @@
             v-model="item.username"
             :rules="[required]"
           ></v-text-field>
-          <v-text-field
-            label="Password*"
-            dense
-            outlined
-            v-model="item.password"
-            :rules="[required]"
-          ></v-text-field>
+          <PasswordField v-model="item.password"></PasswordField>
           <v-text-field
             label="Url"
             dense
@@ -86,6 +80,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
+import PasswordField from "./PasswordField.vue";
 export default {
   props: ["entry", "categoryId"],
   data() {
@@ -175,7 +170,7 @@ export default {
       };
     }
   },
-  components: { ErrorAlert },
+  components: { ErrorAlert, PasswordField },
 };
 </script>
 
