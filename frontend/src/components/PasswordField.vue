@@ -7,6 +7,8 @@
     :type="passwordFieldType"
     :append-icon="passwordFieldAppendIcon"
     @click:append="showPassword = !showPassword"
+    :prepend-inner-icon="ableToGenerate ? 'mdi-key' : ''"
+    @click:prepend-inner="generate"
     :rules="[required]"
     @input="updateValue"
   >
@@ -14,6 +16,9 @@
 </template>
 
 <script>
+import { generatePassword } from "@/utils/generate-password";
+import { mapGetters } from "vuex";
+
 export default {
   name: "password-field",
   props: {
@@ -25,6 +30,11 @@ export default {
       type: String,
       required: false,
       default: "Password*",
+    },
+    ableToGenerate: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   data() {
@@ -39,8 +49,14 @@ export default {
       this.localValue = newVal;
       this.$emit("input", this.localValue);
     },
+    generate() {
+      const result = generatePassword(this.generateOptions);
+      this.localValue = result;
+      this.$emit("input", this.localValue);
+    },
   },
   computed: {
+    ...mapGetters(["generateOptions"]),
     passwordFieldAppendIcon() {
       return this.showPassword ? "mdi-eye" : "mdi-eye-off";
     },
@@ -49,8 +65,10 @@ export default {
       return this.showPassword ? "text" : "password";
     },
   },
-  mounted() {
-    // this.value = this.modelValue;
+  watch: {
+    value(_new, _old) {
+      this.localValue = _new;
+    },
   },
 };
 </script>

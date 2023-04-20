@@ -34,7 +34,10 @@
             v-model="item.username"
             :rules="[required]"
           ></v-text-field>
-          <PasswordField v-model="item.password"></PasswordField>
+          <PasswordField
+            v-model="item.password"
+            :ableToGenerate="!this.entry"
+          ></PasswordField>
           <v-text-field
             label="Url"
             dense

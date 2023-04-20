@@ -31,6 +31,16 @@
             label="Repeat new password *"
           />
           <v-btn
+            type="button"
+            color="primary"
+            dense
+            small
+            outlined
+            @click="generateRandomPassword"
+            class="generate-pass-btn"
+            >Generate</v-btn
+          >
+          <v-btn
             type="submit"
             color="success"
             dense
@@ -41,6 +51,7 @@
           >
         </v-form>
       </v-card-text>
+      <v-card-actions> </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -49,6 +60,7 @@
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
 import PasswordField from "./PasswordField.vue";
+import { generatePassword } from "@/utils/generate-password";
 export default {
   data() {
     return {
@@ -56,6 +68,7 @@ export default {
       currentPassword: "",
       newPassword: "",
       newPasswordAgain: "",
+      generatedPassword: "",
       processing: false,
     };
   },
@@ -85,9 +98,14 @@ export default {
     required(v) {
       return (v && v.length > 0) || "This field can not be empty";
     },
+    generateRandomPassword() {
+      const password = generatePassword(this.generateOptions);
+      this.newPassword = password;
+      this.newPasswordAgain = password;
+    },
   },
   computed: {
-    ...mapGetters(["error"]),
+    ...mapGetters(["error", "generateOptions"]),
   },
   components: {
     ErrorAlert,
@@ -96,4 +114,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.generate-pass-btn {
+  margin-right: 10px;
+}
+</style>
