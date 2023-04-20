@@ -11,6 +11,7 @@
     @click:prepend-inner="generate"
     :rules="[required]"
     @input="updateValue"
+    aria-autocomplete="none"
   >
   </v-text-field>
 </template>
