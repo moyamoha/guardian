@@ -36,7 +36,7 @@
           ></v-text-field>
           <PasswordField
             v-model="item.password"
-            :ableToGenerate="!this.entry"
+            able-to-generate
           ></PasswordField>
           <v-text-field
             label="Url"
