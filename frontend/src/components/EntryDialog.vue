@@ -38,12 +38,7 @@
             v-model="item.password"
             able-to-generate
           ></PasswordField>
-          <v-text-field
-            label="Url"
-            dense
-            outlined
-            v-model="item.url"
-          ></v-text-field>
+          <UrlField v-model="item.url"></UrlField>
           <v-combobox
             v-model="item.status"
             :items="['active', 'expired']"
@@ -84,6 +79,7 @@
 import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
 import PasswordField from "./PasswordField.vue";
+import UrlField from "./UrlField.vue";
 export default {
   props: ["entry", "categoryId"],
   data() {
@@ -173,7 +169,7 @@ export default {
       };
     }
   },
-  components: { ErrorAlert, PasswordField },
+  components: { ErrorAlert, PasswordField, UrlField },
 };
 </script>
 
