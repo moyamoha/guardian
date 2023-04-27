@@ -3,16 +3,23 @@
     <section>
       <span>All your activities</span> <br />
       <span @click="emptyHistoryActivity" class="action-link"
-        >Empty history activity</span
+        >Clear history</span
       >
     </section>
     <section class="activity-cont" v-if="!loading">
-      <div v-for="activity in activities" class="activity-row">
+      <div
+        v-for="activity in activities"
+        class="activity-row"
+        v-if="activities.length > 0"
+      >
         <span>
           <span class="font-weight-bold">{{ activity.activityType }}</span>
           <span> at</span>
         </span>
         <span>{{ getActivityDateString(activity.timestamp) }}</span>
+      </div>
+      <div v-if="activities.length === 0">
+        <p>No activities yet</p>
       </div>
     </section>
     <Loading v-if="loading" />
