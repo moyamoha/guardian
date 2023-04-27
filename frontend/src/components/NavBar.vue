@@ -3,6 +3,7 @@
     <router-link to="/">Guardian</router-link>
     <router-link v-if="loggedInUser" to="/home">Home</router-link>
     <router-link to="/generate-password">Generate</router-link>
+    <router-link v-if="loggedInUser" to="activities">Activities</router-link>
     <v-spacer></v-spacer>
     <router-link v-if="!loggedInUser" to="/login">Login</router-link>
     <router-link v-if="!loggedInUser" to="/signup">Sign up</router-link>
