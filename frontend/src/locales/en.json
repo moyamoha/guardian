@@ -1,0 +1,51 @@
+{
+  "main": {
+    "yes": "yes",
+    "no": "no",
+    "intro": "Welcome to Guardian :) We are commited to make people feel safe about their credintials. We know it is hard. The applications out their are complicated and often expensive to use. That is why we came up with this password management application. Why choose Guardian? The answer is",
+    "your_data": "all your passwords with their categories",
+    "why": {
+      "simple": "IT IS SIMPLE",
+      "secure": "IT IS SECURE",
+      "made_with_love": "IT IS MADE WITH ❤️"
+    },
+    "recommend_2fa": "We highly recommend you to turn it on. It will boost your account's security and keeps it safe from possible vulnerabilities",
+    "2fa_congratulations": "Congratulations! Your have added extra layer of security to your account.",
+    "remove_mfa_question": "Disabling mfa will affect the security of your data negatively! are you sure?",
+    "mfa_dialog_title": "Multifactor authentication",
+    "mfa_enable_confirmation": "Good choice, You are about to add extra layer of security to your data ✅, Proceed?",
+    "deactivate_warning": "We will delete any deactivated account after one month from start of deactivation. Once deleted it can't be recovered, but you can reactivate your account by logging in, in case you change your mind before it gets deleted permanently"
+  },
+  "labels": {
+    "nav": {
+      "settings": "Settings",
+      "login": "Login",
+      "home": "Home",
+      "activities": "Activities",
+      "generate": "Generate",
+      "logout": "Logout"
+    }
+  },
+  "btns": {
+    "get_started": "get started",
+    "change_name": "change name",
+    "change_password": "change password",
+    "collapse_all": "Collapse all",
+    "expand_all": "expand all",
+    "create_category": "create category",
+    "deactivate": "deactivate",
+    "enable_mfa": "enable mfa",
+    "disable mfa": "disable mfa",
+    "processing": "processing...",
+    "save": "save",
+    "saving": "saving...",
+    "cancel": "cancel",
+    "delete": "delete",
+    "clear_history": "clear history",
+    "generate_rand_pass": "generate random password",
+    "update": "update"
+  },
+  "rules": {
+    "long_password": "Your new password must be at least 10 characters long"
+  }
+}

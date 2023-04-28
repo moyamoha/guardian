@@ -64,11 +64,11 @@
             outlined
             dense
             :disabled="processing"
-            >{{ processing ? "Saving..." : "Save" }}</v-btn
+            >{{ saveBtnText }}</v-btn
           >
-          <v-btn @click="dialog = !dialog" color="error" outlined dense
-            >Cancel</v-btn
-          >
+          <v-btn @click="dialog = !dialog" color="error" outlined dense>{{
+            $t("btns.cancel")
+          }}</v-btn>
         </v-form>
       </v-card-text>
     </v-card>
@@ -157,6 +157,9 @@ export default {
     ...mapGetters(["error", "categories"]),
     createNew() {
       return this.entry === null || this.entry === undefined;
+    },
+    saveBtnText() {
+      return this.processing ? this.$t("btns.saving") : this.$t("btns.save");
     },
   },
   mounted() {

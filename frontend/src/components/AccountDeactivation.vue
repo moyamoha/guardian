@@ -2,10 +2,7 @@
   <div class="deactivation-cont">
     <h5 class="red--text">Deactivate account</h5>
     <p>
-      We will delete any deactivated account after one month from start of
-      deactivation. Once deleted it can't be recoverd, but you can reactivate
-      your account in case you change your mind before it gets deleted
-      permanently
+      {{ $t("main.deactivate_warning") }}
     </p>
     <v-btn
       small
@@ -15,7 +12,7 @@
       elevation="4"
       :diabled="processing"
       @click="handleDeactivate"
-      >{{ processing ? "Deactivating..." : "Deactivate" }}</v-btn
+      >{{ processing ? $t("btns.processing") : $t("btns.deactivate") }}</v-btn
     >
   </div>
 </template>

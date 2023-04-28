@@ -2,9 +2,9 @@
   <div>
     <section>
       <span>All your activities</span> <br />
-      <span @click="emptyHistoryActivity" class="action-link"
-        >Clear history</span
-      >
+      <span @click="emptyHistoryActivity" class="action-link">{{
+        $t("btns.change_password")
+      }}</span>
     </section>
     <section class="activity-cont" v-if="!loading">
       <div

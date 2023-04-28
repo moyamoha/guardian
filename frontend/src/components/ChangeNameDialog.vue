@@ -8,7 +8,7 @@
         v-bind="attrs"
         dense
         small
-        >Change name</v-btn
+        >{{ $t("btns.change_name") }}</v-btn
       >
     </template>
     <v-card>

@@ -1,0 +1,51 @@
+{
+  "main": {
+    "yes": "kyllä",
+    "no": "ei",
+    "intro": "Tervetuloa Guardianiin :) Olemme sitoutuneet saamaan ihmiset tuntemaan olonsa turvalliseksi valtuutustietojensa suhteen. Tiedämme, että se on vaikeaa. Sovellukset ovat monimutkaisia ​​ja usein kalliita käyttää. Siksi keksimme tämän salasananhallintasovelluksen. Miksi valita Guardian? Vastaus on:",
+    "your_data": "Kaikki sinun datasi",
+    "why": {
+      "simple": "SE ON YKSINKERTAINEN",
+      "secure": "SE ON TURVALLINEN",
+      "made_with_love": "SE ON TEHTY RAKKAUDELLA ❤️"
+    },
+    "recommend_2fa": "Suosittelemme, että kytket sen päälle. Se parantaa tilisi turvallisuutta ja pitää sen turvassa mahdollisilta haavoittuvuuksilta",
+    "2fa_congratulations": "Onnittelut! Olet lisännyt tiliisi ylimääräisen suojauskerroksen.",
+    "remove_mfa_question": "Mfa:n poistaminen käytöstä vaikuttaa tietojesi turvallisuuteen negatiivisesti! Oletko varma?",
+    "mfa_dialog_title": "Monivaiheinen todennus",
+    "mfa_enable_confirmation": "Hyvä valinta, olet lisäämässä tietoihisi ylimääräistä suojausta ✅, Jatketaanko?",
+    "deactivate_warning": "Poistamme kaikki deaktivoidut tilit kuukauden kuluttua deaktivoinnin alkamisesta. Poistettua sitä ei voi palauttaa, mutta voit aktivoida tilisi uudelleen kirjautumalla sisään, jos muutat mieltäsi ennen kuin se poistetaan pysyvästi"
+  },
+  "labels": {
+    "nav": {
+      "settings": "Asetukset",
+      "login": "Kirjaudu",
+      "home": "Koti",
+      "activities": "Toimintahistoria",
+      "generate": "Generoi",
+      "logout": "Kirjaudu ulos"
+    }
+  },
+  "btns": {
+    "get_started": "Aloita",
+    "change_name": "vaihda nimi",
+    "change_password": "vaihda salasana",
+    "collapse_all": "sulje kaikki",
+    "expand_all": "laajenna kaikki",
+    "create_category": "luo categoria",
+    "deactivate": "deaktivoi",
+    "enable_mfa": "ota mfa käyttöön",
+    "processing": "käsitellään...",
+    "disable mfa": "poista mfa käytöstä",
+    "save": "tallenna",
+    "saving": "tallentamassa...",
+    "cancel": "peruuta",
+    "delete": "poista",
+    "clear_history": "tyhjennä historia",
+    "generate_rand_pass": "generoi satunnainen salasana",
+    "update": "päivitä"
+  },
+  "rules": {
+    "long_password": "Salasanasi on oltava vähintään 10 merkkiä pitkä"
+  }
+}

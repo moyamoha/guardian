@@ -12,7 +12,7 @@
       <section class="action-row">
         <CategoryDialog
         :category="null"
-        activatorText="Create category"
+        :activatorText="getActivatorTextForCategoryDialog"
         ></CategoryDialog>
         <span class="action-link" @click="collapseOrExpandAll">{{ collapseOrExpandText }}</span>
       </section>
@@ -56,9 +56,14 @@ export default {
   computed: {
     ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes"]),
     collapseOrExpandText() {
-      return this.expandedOnes.length > 0 ? "Collapse all" : "Expand all";
+      const txt = this.expandedOnes.length > 0 ? this.$t("btns.collapse_all") : this.$t("btns.expand_all");
+      return txt[0].toUpperCase() + txt.slice(1)
+    },
+    getActivatorTextForCategoryDialog() {
+      const txt = this.$t("btns.create_category")
+      return txt[0].toUpperCase() + txt.slice(1)
     }
-  },
+  }, 
 };
 </script>
 

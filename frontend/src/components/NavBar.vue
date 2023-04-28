@@ -1,19 +1,33 @@
 <template>
   <nav>
     <router-link to="/">Guardian</router-link>
-    <router-link v-if="loggedInUser" to="/home">Home</router-link>
-    <router-link to="/generate-password">Generate</router-link>
-    <router-link v-if="loggedInUser" to="activities">Activities</router-link>
+    <router-link v-if="loggedInUser" to="/home">{{
+      $t("labels.nav.home")
+    }}</router-link>
+    <router-link to="/generate-password">{{
+      $t("labels.nav.generate")
+    }}</router-link>
+    <router-link v-if="loggedInUser" to="activities">{{
+      $t("labels.nav.activities")
+    }}</router-link>
     <v-spacer></v-spacer>
-    <router-link v-if="!loggedInUser" to="/login">Login</router-link>
+    <ChangeLanguage></ChangeLanguage>
+    <router-link v-if="!loggedInUser" to="/login">{{
+      $t("labels.nav.login")
+    }}</router-link>
     <router-link v-if="!loggedInUser" to="/signup">Sign up</router-link>
-    <router-link v-if="loggedInUser" to="/settings">Settings</router-link>
-    <span v-if="loggedInUser" @click="handleLogout">Logout</span>
+    <router-link v-if="loggedInUser" to="/settings">{{
+      $t("labels.nav.settings")
+    }}</router-link>
+    <span v-if="loggedInUser" @click="handleLogout">{{
+      $t("labels.nav.logout")
+    }}</span>
   </nav>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import ChangeLanguage from "./ChangeLanguage.vue";
 
 export default {
   methods: {
@@ -24,6 +38,10 @@ export default {
   },
   computed: {
     ...mapGetters(["loggedInUser"]),
+  },
+  components: {
+    ChangeLanguage,
+    ChangeLanguage,
   },
 };
 </script>

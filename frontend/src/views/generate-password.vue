@@ -25,9 +25,9 @@
       v-model="localOptions.includesSpecialChars"
     />
     <v-divider class="mb-5"></v-divider>
-    <v-btn color="success" dense outlined no-cap small @click="generate"
-      >Generate random password</v-btn
-    >
+    <v-btn color="success" dense outlined no-cap small @click="generate">{{
+      $t("btns.generate_rand_pass")
+    }}</v-btn>
     <v-container
       fluid
       v-if="generated !== ''"

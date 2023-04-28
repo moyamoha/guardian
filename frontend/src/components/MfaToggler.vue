@@ -9,8 +9,8 @@
     <p>
       {{
         loggedInUser.mfaEnabled
-          ? "Congratulations! Your have added extra layer of security to your account."
-          : "We highly recommend you to turn it on. It will boost your account's security and keeps it safe from possible vulnerabilities"
+          ? $t("main.2fa_congratulations")
+          : $t("main.recommend_2fa")
       }}
     </p>
     <v-btn
@@ -94,17 +94,13 @@ export default {
     },
     dialogMessageText() {
       if (this.loggedInUser.mfaEnabled) {
-        return "Disabling mfa will affect the security of your data negatively! are you sure?";
+        return this.$t("main.remove_mfa_question");
       } else {
-        return "Good choice, You are about to add extra layer of security to your data ✅, Proceed?";
+        return this.$t("main.mfa_enable_confirmation");
       }
     },
     dialogTitle() {
-      if (this.loggedInUser.mfaEnabled) {
-        return "Disable multi-factor authentication?";
-      } else {
-        return "Enable multi-factor authentication?";
-      }
+      return this.$t("main.mfa_dialog_title");
     },
   },
 };

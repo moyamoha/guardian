@@ -8,7 +8,7 @@
         v-bind="attrs"
         dense
         small
-        >Change password</v-btn
+        >{{ $t("btns.change_password") }}</v-btn
       >
     </template>
     <v-card>
@@ -20,7 +20,7 @@
       </v-card-title>
       <v-card-text>
         <p class="secondary--text mt-1">
-          Your new password must be at least 10 characters long
+          {{ $t("rules.long_password") }}
         </p>
         <ErrorAlert></ErrorAlert>
         <v-form class="my-3" ref="passChangeForm" @submit="handleSubmit">
@@ -38,7 +38,7 @@
             outlined
             @click="generateRandomPassword"
             class="generate-pass-btn"
-            >Generate</v-btn
+            >{{ $t("labels.nav.generate") }}</v-btn
           >
           <v-btn
             type="submit"
@@ -47,7 +47,7 @@
             small
             outlined
             :loading="processing"
-            >Save</v-btn
+            >{{ $t("btns.save") }}</v-btn
           >
         </v-form>
       </v-card-text>

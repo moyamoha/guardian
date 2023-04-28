@@ -1,16 +1,12 @@
 <template>
   <v-col xs="11" sm="8" md="6">
     <p class="text-justify">
-      Welcome to <span class="guardian">Guardian</span> :) We are commited to
-      make people feel safe about their credintials. We know it is hard. The
-      applications out their are complicated and often expensive to use. That is
-      why we came up with this password management application. Why choose
-      <span class="guardian">Guardian?</span> The answer is:
+      {{ $t("main.intro") }}
     </p>
     <ul class="mb-6">
-      <li class="appear">IT IS SIMPLE</li>
-      <li class="appear two">IT IS SECURE</li>
-      <li class="appear three">IT IS MADE WITH ❤️</li>
+      <li class="appear">{{ $t("main.why.simple") }}</li>
+      <li class="appear two">{{ $t("main.why.secure") }}</li>
+      <li class="appear three">{{ $t("main.why.made_with_love") }}</li>
     </ul>
     <v-btn
       :class="{ left: toggle, right: !toggle }"
@@ -19,7 +15,7 @@
       color="primary"
       @click="handleClick"
       @mouseenter="toggle = !toggle"
-      >Get started</v-btn
+      >{{ $t("btns.get_started") }}</v-btn
     >
   </v-col>
 </template>
