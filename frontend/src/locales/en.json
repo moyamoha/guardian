@@ -9,6 +9,7 @@
     "dont_have_account?": "Don't have an account?",
     "already_have_account?": "Already have an account?",
     "fill_form": "Fill the form below to create an account",
+    "create_new_entry": "Create new entry",
     "why": {
       "simple": "IT IS SIMPLE",
       "secure": "IT IS SECURE",
@@ -47,6 +48,8 @@
       "email*": "Email*",
       "status": "Status"
     },
+    "username": "Käyttäjänimi",
+    "url": "URL",
     "reveal": "reveal",
     "hide": "hide",
     "copy": "copy",

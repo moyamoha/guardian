@@ -9,6 +9,7 @@
     "dont_have_account?": "Ei tiliä?",
     "already_have_account?": "Onko sinulla jo tili?",
     "fill_form": "Täytä alla oleva lomake luodaksesi tilin",
+    "create_new_entry": "Luo uusi merkintä",
     "why": {
       "simple": "SE ON YKSINKERTAINEN",
       "secure": "SE ON TURVALLINEN",

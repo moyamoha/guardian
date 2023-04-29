@@ -5,9 +5,12 @@
     }}</v-chip>
     <section class="content">
       <strong class="font-weight-black">{{ entry.title }}</strong>
-      <span><i>Username:</i> {{ entry.username }}</span>
       <span
-        ><i>Password:</i> {{ reveal ? entry.password : getHiddenPass }}
+        ><i>{{ $t("labels.username") }}:</i> {{ entry.username }}</span
+      >
+      <span
+        ><i>{{ $t("labels.password") }}:</i>
+        {{ reveal ? entry.password : getHiddenPass }}
         <span class="reveal-pass" @click="reveal = !reveal">{{
           reveal ? $t("labels.hide") : $t("labels.reveal")
         }}</span>
@@ -21,7 +24,7 @@
         {{ $t("main.password_copied") }}
       </v-snackbar>
       <span v-show="this.entry.url"
-        ><i>Url:</i>
+        ><i>{{ $t("labels.url") }}: </i>
         <a :href="entry.url" target="_blank">{{ entry.url }}</a></span
       >
     </section>

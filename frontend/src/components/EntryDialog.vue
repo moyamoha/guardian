@@ -13,7 +13,11 @@
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
         <div>
-          {{ createNew ? "Create new entry?" : `Edit '${item.title}'?` }}
+          {{
+            createNew
+              ? `${$t("main.create_new_entry")}?`
+              : `Edit '${item.title}'?`
+          }}
         </div>
         <v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
