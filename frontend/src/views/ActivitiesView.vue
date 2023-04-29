@@ -13,7 +13,7 @@
         v-if="activities.length > 0"
       >
         <span>
-          <span class="font-weight-bold">{{ activity.activityType }}</span>
+          <span class="font-weight-bold">{{ getActivityType(activity) }}</span>
           <span> at</span>
         </span>
         <span>{{ getActivityDateString(activity.timestamp) }}</span>
@@ -29,6 +29,7 @@
 <script>
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
+import i18n from "@/plugins/i18n";
 
 export default {
   name: "activies-view",
@@ -60,6 +61,11 @@ export default {
       } catch (error) {
         console.log(error.toString());
       }
+    },
+
+    getActivityType(activity) {
+      const translation = "activityTypes." + activity.activityType;
+      return i18n.t(translation);
     },
   },
   async mounted() {

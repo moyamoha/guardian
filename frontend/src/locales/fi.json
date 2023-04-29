@@ -27,7 +27,8 @@
       "include_special_chars": "Sisällytä erikoismerkit",
       "include_capitals": "Sisällytä isot kirjaimet"
     },
-    "password_copied": "Salasana kopioitiin leikepöydälle"
+    "password_copied": "Salasana kopioitiin leikepöydälle",
+    "forgot_password_guide_text": "Kirjoita sähköpostiosoitteesi alla olevaan kenttään. Lähetämme väliaikaisen salasanan, jolla voit kirjautua sisään. Muista vaihtaa se jälkeenpäin"
   },
   "labels": {
     "nav": {
@@ -46,7 +47,8 @@
       "url*": "URL*",
       "name*": "Nimi*",
       "email*": "Sähköposti*",
-      "status": "Tila"
+      "status": "Tila",
+      "your_email": "Sähköpostisi"
     },
     "reveal": "paljasta",
     "hide": "piilota",
@@ -77,12 +79,28 @@
     "deleting": "poistetaan...",
     "clear_history": "tyhjennä historia",
     "generate_rand_pass": "generoi satunnainen salasana",
-    "update": "päivitä"
+    "update": "päivitä",
+    "submit": "Lähetä",
+    "submitting": "lähetetään..."
   },
   "rules": {
     "long_password": "Salasanasi on oltava vähintään 10 merkkiä pitkä",
     "required_field": "Tämä kenttä on pakollinen",
     "only_url": "Vain URL-osoitteet ovat sallittuja",
     "category_should_have_a_name": "Kategorialla on oltava nimi"
+  },
+  "activityTypes": {
+    "add entry": "Merkinnän lisääminen",
+    "edit entry": "Merkinnän päivittäminen",
+    "delete entry": "Merkinnän poistaminen",
+    "login": "Kirjautuminen",
+    "change password": "Salasanan vaihtaminen",
+    "change name": "Nimen vaihtaminen",
+    "add category": "Kategorian lisääminen",
+    "edit category": "Kategorian päivittäminen",
+    "delete category": "Kategorian poistaminen",
+    "enable mfa": "Mfa:n ottaminen käyttöön",
+    "disable mfa": "Mfa:n poistaminen käytöstä",
+    "deactivate account": "Tilin deaktivointi"
   }
 }

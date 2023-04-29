@@ -27,7 +27,8 @@
       "include_special_chars": "Include special characters",
       "include_capitals": "Include capital letters"
     },
-    "password_copied": "Password copied to clipboard"
+    "password_copied": "Password copied to clipboard",
+    "forgot_password_guide_text": "Please type your email address in the field below. We will send a temporary password which you can use to login. Make sure to change it afterwards"
   },
   "labels": {
     "nav": {
@@ -46,7 +47,8 @@
       "url*": "URL*",
       "name*": "Name*",
       "email*": "Email*",
-      "status": "Status"
+      "status": "Status",
+      "your_email*": "Your email*"
     },
     "username": "Käyttäjänimi",
     "url": "URL",
@@ -79,12 +81,28 @@
     "deleting": "deleting...",
     "clear_history": "clear history",
     "generate_rand_pass": "generate random password",
-    "update": "update"
+    "update": "update",
+    "submit": "submit",
+    "submitting": "submitting..."
   },
   "rules": {
     "long_password": "Your new password must be at least 10 characters long",
     "required_field": "This field is required",
     "only_url": "This field only accepts a url",
     "category_should_have_a_name": "Category should have a name"
+  },
+  "activityTypes": {
+    "add entry": "add entry",
+    "edit entry": "edit entry",
+    "delete entry": "delete entry",
+    "login": "login",
+    "change password": "change password",
+    "change name": "change_name",
+    "add category": "add category",
+    "edit category": "edit category",
+    "delete category": "delete category",
+    "enable mfa": "enable mfa",
+    "disable mfa": "disable mfa",
+    "deactivate account": "deactivate account"
   }
 }

@@ -84,6 +84,7 @@ import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
 import PasswordField from "./PasswordField.vue";
 import UrlField from "./UrlField.vue";
+import i18n from "@/plugins/i18n";
 export default {
   props: ["entry", "categoryId"],
   data() {
@@ -131,7 +132,7 @@ export default {
         if (this.error === "") this.dialog = false;
       }
     },
-    required: (v) => (v && v.length > 0) || "This Field is required",
+    required: (v) => (v && v.length > 0) || i18n.t("rules.required_field"),
     handleClose() {
       this.item = {
         title: this.entry ? this.entry.title : "",
