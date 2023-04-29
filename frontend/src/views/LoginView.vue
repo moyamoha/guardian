@@ -1,7 +1,7 @@
 <template>
   <v-col xs="11" sm="8" md="4">
     <p class="text--primary mb-3">
-      Please login to your account using your email and password
+      {{ $t("main.please_login") }}
     </p>
     <ErrorAlert></ErrorAlert>
     <v-form
@@ -20,17 +20,18 @@
       >
       </v-text-field>
       <PasswordField v-model="password"></PasswordField>
-      <v-btn color="primary" type="submit" :loading="this.loggingIn"
-        >Login</v-btn
-      >
+      <v-btn color="primary" type="submit" :loading="this.loggingIn">{{
+        $t("labels.nav.login")
+      }}</v-btn>
       <span class="text--secondary ml-3"
-        ><router-link to="/password-forgotten"
-          >I forgot my password</router-link
-        ></span
+        ><router-link to="/password-forgotten">{{
+          $t("main.i_forgot")
+        }}</router-link></span
       >
     </v-form>
     <p class="text--secondary mt-5">
-      Don't have an account? <router-link to="/signup">Sign up</router-link>
+      {{ $t("main.dont_have_account?") }}
+      <router-link to="/signup">{{ $t("labels.nav.signup") }}</router-link>
     </p>
   </v-col>
 </template>
@@ -58,7 +59,8 @@ export default {
       this.loggingIn = false;
     },
     required(v) {
-      return v.length > 0 || "This field is required";
+      const errorMsg = this.$t("rules.required_field");
+      return v.length > 0 || errorMsg;
     },
   },
   computed: {

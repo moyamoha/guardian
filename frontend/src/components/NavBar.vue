@@ -15,7 +15,9 @@
     <router-link v-if="!loggedInUser" to="/login">{{
       $t("labels.nav.login")
     }}</router-link>
-    <router-link v-if="!loggedInUser" to="/signup">Sign up</router-link>
+    <router-link v-if="!loggedInUser" to="/signup">{{
+      $t("labels.nav.signup")
+    }}</router-link>
     <router-link v-if="loggedInUser" to="/settings">{{
       $t("labels.nav.settings")
     }}</router-link>

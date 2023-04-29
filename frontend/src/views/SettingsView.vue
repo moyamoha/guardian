@@ -1,15 +1,15 @@
 <template>
   <v-col cols="12" class="mb-5">
-    <h3 class="mb-2">Profile</h3>
+    <h3 class="mb-2">{{ $t("labels.profile", { capitalize: true }) }}</h3>
     <p>
-      <strong>Email: </strong
+      <strong>{{ $t("labels.email") }}: </strong
       ><span class="grey--text text--darken-1">{{ loggedInUser.email }}</span>
     </p>
     <ChangeNameDialog :user="loggedInUser"></ChangeNameDialog>
     <br />
     <ChangePassDialog></ChangePassDialog>
     <v-divider class="my-3"></v-divider>
-    <h3 class="mt-3">Account</h3>
+    <h3 class="mt-3">{{ $t("labels.account") }}</h3>
     <AccountDeactivation class="account-action-box"></AccountDeactivation>
     <MfaToggler class="account-action-box"></MfaToggler>
   </v-col>

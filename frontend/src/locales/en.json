@@ -3,7 +3,10 @@
     "yes": "yes",
     "no": "no",
     "intro": "Welcome to Guardian :) We are commited to make people feel safe about their credintials. We know it is hard. The applications out their are complicated and often expensive to use. That is why we came up with this password management application. Why choose Guardian? The answer is",
-    "your_data": "all your passwords with their categories",
+    "your_data": "All your passwords with their categories",
+    "please_login": "Please login to your account using your email and password",
+    "i_forgot": "I forgot my password",
+    "dont_have_account?": "Don't have an account?",
     "why": {
       "simple": "IT IS SIMPLE",
       "secure": "IT IS SECURE",
@@ -14,17 +17,33 @@
     "remove_mfa_question": "Disabling mfa will affect the security of your data negatively! are you sure?",
     "mfa_dialog_title": "Multifactor authentication",
     "mfa_enable_confirmation": "Good choice, You are about to add extra layer of security to your data ✅, Proceed?",
-    "deactivate_warning": "We will delete any deactivated account after one month from start of deactivation. Once deleted it can't be recovered, but you can reactivate your account by logging in, in case you change your mind before it gets deleted permanently"
+    "deactivate_warning": "We will delete any deactivated account after one month from start of deactivation. Once deleted it can't be recovered, but you can reactivate your account by logging in, in case you change your mind before it gets deleted permanently",
+    "your_activities": "All your activities",
+    "generate_options": {
+      "include_nums": "Include numbers",
+      "include_special_chars": "Include special characters",
+      "include_capitals": "Include capital letters"
+    },
+    "password_copied": "Password copied to clipboard"
   },
   "labels": {
     "nav": {
       "settings": "Settings",
       "login": "Login",
+      "signup": "Sign up",
       "home": "Home",
       "activities": "Activities",
       "generate": "Generate",
       "logout": "Logout"
-    }
+    },
+    "reveal": "reveal",
+    "copy": "copy",
+    "expired": "vanhentunut",
+    "active": "aktiivinen",
+    "profile": "Profile",
+    "email": "Email",
+    "password": "Password",
+    "account": "Account"
   },
   "btns": {
     "get_started": "get started",
@@ -46,6 +65,7 @@
     "update": "update"
   },
   "rules": {
-    "long_password": "Your new password must be at least 10 characters long"
+    "long_password": "Your new password must be at least 10 characters long",
+    "required_field": "This field is required"
   }
 }

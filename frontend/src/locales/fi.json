@@ -3,7 +3,10 @@
     "yes": "kyllä",
     "no": "ei",
     "intro": "Tervetuloa Guardianiin :) Olemme sitoutuneet saamaan ihmiset tuntemaan olonsa turvalliseksi valtuutustietojensa suhteen. Tiedämme, että se on vaikeaa. Sovellukset ovat monimutkaisia ​​ja usein kalliita käyttää. Siksi keksimme tämän salasananhallintasovelluksen. Miksi valita Guardian? Vastaus on:",
-    "your_data": "Kaikki sinun datasi",
+    "your_data": "Kaikki salasanasi kategorioineen",
+    "please_login": "Kirjaudu tilillesi käyttämällä sähköpostiosoitetta ja salasanaa",
+    "i_forgot": "Unohdin salasanani",
+    "dont_have_account?": "Ei tiliä?",
     "why": {
       "simple": "SE ON YKSINKERTAINEN",
       "secure": "SE ON TURVALLINEN",
@@ -14,17 +17,33 @@
     "remove_mfa_question": "Mfa:n poistaminen käytöstä vaikuttaa tietojesi turvallisuuteen negatiivisesti! Oletko varma?",
     "mfa_dialog_title": "Monivaiheinen todennus",
     "mfa_enable_confirmation": "Hyvä valinta, olet lisäämässä tietoihisi ylimääräistä suojausta ✅, Jatketaanko?",
-    "deactivate_warning": "Poistamme kaikki deaktivoidut tilit kuukauden kuluttua deaktivoinnin alkamisesta. Poistettua sitä ei voi palauttaa, mutta voit aktivoida tilisi uudelleen kirjautumalla sisään, jos muutat mieltäsi ennen kuin se poistetaan pysyvästi"
+    "deactivate_warning": "Poistamme kaikki deaktivoidut tilit kuukauden kuluttua deaktivoinnin alkamisesta. Poistettua sitä ei voi palauttaa, mutta voit aktivoida tilisi uudelleen kirjautumalla sisään, jos muutat mieltäsi ennen kuin se poistetaan pysyvästi",
+    "your_activities": "Alla toimintahistoriasi",
+    "generate_options": {
+      "include_nums": "Sisällytä numerot",
+      "include_special_chars": "Sisällytä erikoismerkit",
+      "include_capitals": "Sisällytä isot kirjaimet"
+    },
+    "password_copied": "Salasana kopioitiin leikepöydälle"
   },
   "labels": {
     "nav": {
       "settings": "Asetukset",
       "login": "Kirjaudu",
+      "signup": "Rekisteröidy",
       "home": "Koti",
       "activities": "Toimintahistoria",
       "generate": "Generoi",
       "logout": "Kirjaudu ulos"
-    }
+    },
+    "reveal": "paljasta",
+    "copy": "kopio",
+    "expired": "vanhentunut",
+    "active": "aktiivinen",
+    "profile": "Profiili",
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "account": "Tili"
   },
   "btns": {
     "get_started": "Aloita",
@@ -46,6 +65,7 @@
     "update": "päivitä"
   },
   "rules": {
-    "long_password": "Salasanasi on oltava vähintään 10 merkkiä pitkä"
+    "long_password": "Salasanasi on oltava vähintään 10 merkkiä pitkä",
+    "required_field": "Tämä kenttä on pakollinen"
   }
 }

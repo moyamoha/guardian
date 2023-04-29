@@ -16,7 +16,7 @@
       >
 
       <v-snackbar v-model="copied" timeout="1500">
-        Password copied to clipboard
+        {{ $t("main.password_copied") }}
       </v-snackbar>
       <span v-show="this.entry.url"
         ><i>Url:</i>

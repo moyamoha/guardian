@@ -10,17 +10,17 @@
       :rules="[required, isFiveOrHiger]"
     />
     <v-checkbox
-      label="Include numbers"
+      :label="includeDigitsLabel"
       dense
       v-model="localOptions.includesDigits"
     />
     <v-checkbox
-      label="Include capital letters"
+      :label="includeCapitalsLabel"
       dense
       v-model="localOptions.includesUpperCase"
     />
     <v-checkbox
-      label="Include special characters"
+      :label="includeSpecialCharsLabel"
       dense
       v-model="localOptions.includesSpecialChars"
     />
@@ -37,7 +37,7 @@
       <v-icon @click="copyGeneratedPassword">mdi-content-copy</v-icon>
     </v-container>
     <v-snackbar v-model="copied" timeout="1500">
-      Password copied to clipboard
+      {{ $t("main.password_copied") }}
     </v-snackbar>
   </v-form>
 </template>
@@ -58,6 +58,15 @@ export default {
   },
   computed: {
     ...mapGetters(["generateOptions"]),
+    includeCapitalsLabel() {
+      return this.$t("main.generate_options.include_capitals");
+    },
+    includeDigitsLabel() {
+      return this.$t("main.generate_options.include_nums");
+    },
+    includeSpecialCharsLabel() {
+      return this.$t("main.generate_options.include_special_chars");
+    },
   },
   methods: {
     generate() {

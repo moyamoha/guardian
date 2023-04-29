@@ -1,10 +1,10 @@
 <template>
   <div>
     <section>
-      <span>All your activities</span> <br />
-      <span @click="emptyHistoryActivity" class="action-link">{{
-        $t("btns.change_password")
-      }}</span>
+      <span>{{ $t("main.your_activities") }}</span> <br />
+      <span @click="emptyHistoryActivity" class="action-link">
+        {{ $t("btns.clear_history") }}</span
+      >
     </section>
     <section class="activity-cont" v-if="!loading">
       <div

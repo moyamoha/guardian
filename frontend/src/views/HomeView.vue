@@ -7,7 +7,7 @@
     </p>
     <Loading v-if="this.isLoading"></Loading>
     <p v-else-if="this.content.length > 0">
-      All your passwords with their categories
+      {{ $t("main.your_data") }}
       <br />
       <section class="action-row">
         <CategoryDialog
