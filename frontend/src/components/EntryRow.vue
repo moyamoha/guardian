@@ -1,7 +1,7 @@
 <template>
   <div class="entry-row">
     <v-chip class="status-chip" :color="entryStatusColor" small>{{
-      entry.status
+      entry.status === "active" ? $t("labels.active") : $t("labels.expired")
     }}</v-chip>
     <section class="content">
       <strong class="font-weight-black">{{ entry.title }}</strong>
@@ -9,10 +9,12 @@
       <span
         ><i>Password:</i> {{ reveal ? entry.password : getHiddenPass }}
         <span class="reveal-pass" @click="reveal = !reveal">{{
-          reveal ? "hide" : "reveal"
+          reveal ? $t("labels.hide") : $t("labels.reveal")
         }}</span>
         |
-        <span class="copy-pass" @click="copyToClipboard">copy</span></span
+        <span class="copy-pass" @click="copyToClipboard">{{
+          $t("labels.copy")
+        }}</span></span
       >
 
       <v-snackbar v-model="copied" timeout="1500">

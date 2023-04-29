@@ -1,7 +1,7 @@
 <template>
   <v-text-field
     v-model="localValue"
-    :label="label"
+    :label="getLabel"
     dense
     outlined
     :type="passwordFieldType"
@@ -30,7 +30,6 @@ export default {
     label: {
       type: String,
       required: false,
-      default: "Password*",
     },
     ableToGenerate: {
       type: Boolean,
@@ -65,11 +64,22 @@ export default {
     passwordFieldType() {
       return this.showPassword ? "text" : "password";
     },
+
+    getLabel() {
+      const label = this.label
+        ? this.label
+        : this.$t("labels.inputs.password*");
+      console.log(label);
+      return label;
+    },
   },
   watch: {
     value(_new, _old) {
       this.localValue = _new;
     },
+  },
+  mounted() {
+    this.localValue = this.value;
   },
 };
 </script>

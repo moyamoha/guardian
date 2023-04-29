@@ -38,7 +38,17 @@
       "generate": "Generoi",
       "logout": "Kirjaudu ulos"
     },
+    "inputs": {
+      "title*": "Otsikko*",
+      "username*": "Käyttäjänimi*",
+      "password*": "Salasana*",
+      "url*": "URL*",
+      "name*": "Nimi*",
+      "email*": "Sähköposti*",
+      "status": "Tila"
+    },
     "reveal": "paljasta",
+    "hide": "piilota",
     "copy": "kopio",
     "expired": "vanhentunut",
     "active": "aktiivinen",

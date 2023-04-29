@@ -21,14 +21,14 @@
         <ErrorAlert></ErrorAlert>
         <v-form class="my-3" @submit="handleSubmit" ref="enform">
           <v-text-field
-            label="Title*"
+            :label="getTitleLabel"
             dense
             outlined
             v-model="item.title"
             :rules="[required]"
           ></v-text-field>
           <v-text-field
-            label="Username*"
+            :label="getUsernameLabel"
             dense
             outlined
             v-model="item.username"
@@ -160,6 +160,12 @@ export default {
     },
     saveBtnText() {
       return this.processing ? this.$t("btns.saving") : this.$t("btns.save");
+    },
+    getUsernameLabel() {
+      return this.$t("labels.inputs.username*");
+    },
+    getTitleLabel() {
+      return this.$t("labels.inputs.title*");
     },
   },
   mounted() {

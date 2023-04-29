@@ -38,7 +38,17 @@
       "generate": "Generate",
       "logout": "Logout"
     },
+    "inputs": {
+      "title*": "Title*",
+      "username*": "Username*",
+      "password*": "Password*",
+      "url*": "URL*",
+      "name*": "Name*",
+      "email*": "Email*",
+      "status": "Status"
+    },
     "reveal": "reveal",
+    "hide": "hide",
     "copy": "copy",
     "expired": "vanhentunut",
     "active": "aktiivinen",
