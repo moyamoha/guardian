@@ -34,11 +34,11 @@
               dense
               small
               :disabled="processing"
-              >{{ processing ? "Saving..." : "Save" }}</v-btn
+              >{{ processing ? $t("btns.saving") : $t("btns.save") }}</v-btn
             >
-            <v-btn @click="handleCancel" color="warn" outlined dense small
-              >Cancel</v-btn
-            >
+            <v-btn @click="handleCancel" color="warn" outlined dense small>{{
+              $t("btns.cancel")
+            }}</v-btn>
             <v-btn
               @click="handleDelete"
               color="error"
@@ -47,7 +47,7 @@
               small
               v-show="this.category !== null"
               :disabled="processing"
-              >{{ processing ? "Deleting..." : "Delete" }}</v-btn
+              >{{ processing ? $t("btns.deleting") : $t("btns.delete") }}</v-btn
             >
           </div>
         </v-form>
@@ -106,7 +106,9 @@ export default {
     },
 
     required(v) {
-      return (v && v.length > 0) || "Category has to have a name";
+      return (
+        (v && v.length > 0) || this.$t("rules.category_should_have_a_name")
+      );
     },
   },
   computed: {

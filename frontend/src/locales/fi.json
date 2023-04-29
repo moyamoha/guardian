@@ -7,6 +7,8 @@
     "please_login": "Kirjaudu tilillesi käyttämällä sähköpostiosoitetta ja salasanaa",
     "i_forgot": "Unohdin salasanani",
     "dont_have_account?": "Ei tiliä?",
+    "already_have_account?": "Onko sinulla jo tili?",
+    "fill_form": "Täytä alla oleva lomake luodaksesi tilin",
     "why": {
       "simple": "SE ON YKSINKERTAINEN",
       "secure": "SE ON TURVALLINEN",
@@ -43,7 +45,8 @@
     "profile": "Profiili",
     "email": "Sähköposti",
     "password": "Salasana",
-    "account": "Tili"
+    "account": "Tili",
+    "no_activities": "Ei toimintahistoriaa tähän mennessä"
   },
   "btns": {
     "get_started": "Aloita",
@@ -57,15 +60,18 @@
     "processing": "käsitellään...",
     "disable mfa": "poista mfa käytöstä",
     "save": "tallenna",
-    "saving": "tallentamassa...",
+    "saving": "tallennetaan...",
     "cancel": "peruuta",
     "delete": "poista",
+    "deleting": "poistetaan...",
     "clear_history": "tyhjennä historia",
     "generate_rand_pass": "generoi satunnainen salasana",
     "update": "päivitä"
   },
   "rules": {
     "long_password": "Salasanasi on oltava vähintään 10 merkkiä pitkä",
-    "required_field": "Tämä kenttä on pakollinen"
+    "required_field": "Tämä kenttä on pakollinen",
+    "only_url": "Vain URL-osoitteet ovat sallittuja",
+    "category_should_have_a_name": "Kategorialla on oltava nimi"
   }
 }

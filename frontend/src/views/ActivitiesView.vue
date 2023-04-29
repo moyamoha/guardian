@@ -19,7 +19,7 @@
         <span>{{ getActivityDateString(activity.timestamp) }}</span>
       </div>
       <div v-if="activities.length === 0">
-        <p>No activities yet</p>
+        <p>{{ $t("labels.no_activities") }}</p>
       </div>
     </section>
     <Loading v-if="loading" />

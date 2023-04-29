@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import i18n from "@/plugins/i18n";
 export default {
   name: "url-field",
   props: ["value"],
@@ -32,7 +33,7 @@ export default {
     isUrl: (v) => {
       const urlRegex =
         /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
-      return v === "" || urlRegex.test(v) || "This field only accepts a url";
+      return v === "" || urlRegex.test(v) || i18n.t("rules.only_url");
     },
   },
   computed: {
