@@ -117,6 +117,9 @@
     "category_should_have_a_name": "Kategorialla on oltava nimi",
     "code_should_be_8_digits": "Varmistuskoodin on oltava 8 numeroa pitkä"
   },
+  "errors": {
+    "passwords_dont_match": "Salasanat eivät täsmää"
+  },
   "activityTypes": {
     "add entry": "Merkinnän lisääminen",
     "edit entry": "Merkinnän päivittäminen",

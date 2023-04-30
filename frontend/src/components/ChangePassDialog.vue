@@ -84,20 +84,18 @@ export default {
     ...mapMutations(["setError"]),
     async handleSubmit(e) {
       e.preventDefault();
+      if (this.newPassword !== this.newPasswordAgain) {
+        this.setError(i18n.t("errors.passwords_dont_match"));
+        return;
+      }
       this.processing = true;
-      if (
-        this.$refs.passChangeForm.validate() &&
-        this.newPassword === this.newPasswordAgain
-      ) {
+      if (this.$refs.passChangeForm.validate()) {
         await this.changePassword({
           currentPassword: this.currentPassword,
           newPassword: this.newPassword,
         });
-      } else if (this.newPassword !== this.newPasswordAgain) {
-        this.setError("Passwords should match");
       }
       if (this.error === "") {
-        this.$refs.passChangeForm.reset();
         this.dialog = false;
       }
       this.processing = false;

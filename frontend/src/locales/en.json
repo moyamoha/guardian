@@ -115,6 +115,9 @@
     "category_should_have_a_name": "Category should have a name",
     "code_should_be_8_digits": "Verification code should be 8 digits long"
   },
+  "errors": {
+    "passwords_dont_match": "Passwords don't match"
+  },
   "activityTypes": {
     "add entry": "add entry",
     "edit entry": "edit entry",

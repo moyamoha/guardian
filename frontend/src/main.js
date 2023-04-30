@@ -33,6 +33,8 @@ axios.interceptors.response.use(
       store.commit("setError", "You are not logged in or session expired");
       store.commit("setUser", null);
       router.push("/login");
+    } else {
+      return Promise.reject(error);
     }
   }
 );
