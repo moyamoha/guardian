@@ -28,7 +28,8 @@
       "include_capitals": "Sisällytä isot kirjaimet"
     },
     "password_copied": "Salasana kopioitiin leikepöydälle",
-    "forgot_password_guide_text": "Kirjoita sähköpostiosoitteesi alla olevaan kenttään. Lähetämme väliaikaisen salasanan, jolla voit kirjautua sisään. Muista vaihtaa se jälkeenpäin"
+    "forgot_password_guide_text": "Kirjoita sähköpostiosoitteesi alla olevaan kenttään. Lähetämme väliaikaisen salasanan, jolla voit kirjautua sisään. Muista vaihtaa se jälkeenpäin",
+    "we_sent_verification_code": "Lähetimme 8-numeroisen varmistuskoodin sähköpostiosoitteeseesi, käytä sitä kirjautumisen loppuun saattamiseksi."
   },
   "labels": {
     "nav": {
@@ -48,7 +49,10 @@
       "name*": "Nimi*",
       "email*": "Sähköposti*",
       "status": "Tila",
-      "your_email": "Sähköpostisi"
+      "your_email": "Sähköpostisi",
+      "length": "Pituus",
+      "category*": "Kategoria*",
+      "verification_code": "Varmistuskoodi *"
     },
     "reveal": "paljasta",
     "hide": "piilota",
@@ -81,13 +85,16 @@
     "generate_rand_pass": "generoi satunnainen salasana",
     "update": "päivitä",
     "submit": "Lähetä",
-    "submitting": "lähetetään..."
+    "submitting": "lähetetään...",
+    "verify": "vahvista",
+    "verifying": "vahvistetaan..."
   },
   "rules": {
     "long_password": "Salasanasi on oltava vähintään 10 merkkiä pitkä",
     "required_field": "Tämä kenttä on pakollinen",
     "only_url": "Vain URL-osoitteet ovat sallittuja",
-    "category_should_have_a_name": "Kategorialla on oltava nimi"
+    "category_should_have_a_name": "Kategorialla on oltava nimi",
+    "code_should_be_8_digits": "Varmistuskoodin on oltava 8 numeroa pitkä"
   },
   "activityTypes": {
     "add entry": "Merkinnän lisääminen",

@@ -5,22 +5,22 @@
       outlined
       v-model="localOptions.length"
       type="number"
-      label="Length"
+      :label="$t('labels.inputs.length')"
       hide-spin-buttons
       :rules="[required, isFiveOrHiger]"
     />
     <v-checkbox
-      :label="includeDigitsLabel"
+      :label="$t('main.generate_options.include_nums')"
       dense
       v-model="localOptions.includesDigits"
     />
     <v-checkbox
-      :label="includeCapitalsLabel"
+      :label="$t('main.generate_options.include_capitals')"
       dense
       v-model="localOptions.includesUpperCase"
     />
     <v-checkbox
-      :label="includeSpecialCharsLabel"
+      :label="$t('main.generate_options.include_special_chars')"
       dense
       v-model="localOptions.includesSpecialChars"
     />
@@ -58,15 +58,6 @@ export default {
   },
   computed: {
     ...mapGetters(["generateOptions"]),
-    includeCapitalsLabel() {
-      return this.$t("main.generate_options.include_capitals");
-    },
-    includeDigitsLabel() {
-      return this.$t("main.generate_options.include_nums");
-    },
-    includeSpecialCharsLabel() {
-      return this.$t("main.generate_options.include_special_chars");
-    },
   },
   methods: {
     generate() {

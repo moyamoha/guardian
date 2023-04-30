@@ -28,7 +28,8 @@
       "include_capitals": "Include capital letters"
     },
     "password_copied": "Password copied to clipboard",
-    "forgot_password_guide_text": "Please type your email address in the field below. We will send a temporary password which you can use to login. Make sure to change it afterwards"
+    "forgot_password_guide_text": "Please type your email address in the field below. We will send a temporary password which you can use to login. Make sure to change it afterwards",
+    "we_sent_verification_code": "We sent an 8-digit verification code to your email address, please use it to complete logging in"
   },
   "labels": {
     "nav": {
@@ -48,7 +49,10 @@
       "name*": "Name*",
       "email*": "Email*",
       "status": "Status",
-      "your_email*": "Your email*"
+      "your_email*": "Your email*",
+      "length": "Length",
+      "category*": "Category*",
+      "verification_code": "Verification code *"
     },
     "username": "Käyttäjänimi",
     "url": "URL",
@@ -83,13 +87,16 @@
     "generate_rand_pass": "generate random password",
     "update": "update",
     "submit": "submit",
-    "submitting": "submitting..."
+    "submitting": "submitting...",
+    "verify": "verify",
+    "verifying": "verifying..."
   },
   "rules": {
     "long_password": "Your new password must be at least 10 characters long",
     "required_field": "This field is required",
     "only_url": "This field only accepts a url",
-    "category_should_have_a_name": "Category should have a name"
+    "category_should_have_a_name": "Category should have a name",
+    "code_should_be_8_digits": "Verification code should be 8 digits long"
   },
   "activityTypes": {
     "add entry": "add entry",

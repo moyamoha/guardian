@@ -11,7 +11,7 @@
       @submit="handleSubmit"
     >
       <v-text-field
-        label="Email"
+        :label="$t('labels.inputs.email*')"
         v-model="email"
         dense
         outlined

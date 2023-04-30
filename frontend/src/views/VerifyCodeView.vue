@@ -2,20 +2,19 @@
   <v-col xs="7" sm="6" md="5" lg="4">
     <v-form class="verify-form" ref="veriform" @submit="handleSubmit">
       <p class="mb-3">
-        We sent an 8-digit verification code to your email address, please use
-        it to complete logging in
+        {{ $t("main.we_sent_verification_code") }}
       </p>
       <ErrorAlert></ErrorAlert>
       <v-text-field
         class="otp-input"
-        label="Verification code"
+        :label="$t('labels.inputs.verification_code')"
         v-model="code"
         dense
         outlined
         :rules="[atLeastEight]"
       ></v-text-field>
       <v-btn color="primary" type="submit" :disabled="processing">{{
-        processing ? "Verifying..." : "Verify"
+        processing ? $t("btns.verifying") : $t("btns.verify")
       }}</v-btn>
     </v-form>
   </v-col>
@@ -24,6 +23,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "@/components/ErrorAlert.vue";
+import i18n from "@/plugins/i18n";
 export default {
   data() {
     return { code: "", processing: false };
@@ -40,7 +40,8 @@ export default {
     },
     atLeastEight(v) {
       return (
-        (v.trim().length === 8 && parseInt(v.trim()) !== NaN) || "The code must be 8 digits"
+        (v.trim().length === 8 && parseInt(v.trim()) !== NaN) ||
+        i18n.t("rules.code_should_be_8_digits")
       );
     },
   },

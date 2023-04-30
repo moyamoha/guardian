@@ -25,14 +25,14 @@
         <ErrorAlert></ErrorAlert>
         <v-form class="my-3" @submit="handleSubmit" ref="enform">
           <v-text-field
-            :label="getTitleLabel"
+            :label="$t('labels.inputs.title*')"
             dense
             outlined
             v-model="item.title"
             :rules="[required]"
           ></v-text-field>
           <v-text-field
-            :label="getUsernameLabel"
+            :label="$t('labels.inputs.username*')"
             dense
             outlined
             v-model="item.username"
@@ -46,7 +46,7 @@
           <v-combobox
             v-model="item.status"
             :items="['active', 'expired']"
-            label="Status"
+            :label="$t('labels.inputs.status')"
             dense
             outlined
             v-if="this.entry !== null && this.entry !== undefined"
@@ -56,7 +56,7 @@
             :items="this.categories"
             item-text="name"
             item-value="id"
-            label="Category"
+            :label="$t('labels.inputs.category*')"
             dense
             outlined
             v-if="this.entry !== null && this.entry !== undefined"
