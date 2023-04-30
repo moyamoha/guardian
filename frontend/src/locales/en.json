@@ -32,7 +32,8 @@
     "we_sent_verification_code": "We sent an 8-digit verification code to your email address, please use it to complete logging in",
     "change_password_dialog_title": "Change password",
     "change_name_dialog_title": "Changing your name?",
-    "category_deletion_warning": "Deleting a category will delete all the entries in it. Are you sure?"
+    "category_deletion_warning": "Deleting a category will delete all the entries in it. Are you sure?",
+    "no_data": "You have not created anything yet"
   },
   "labels": {
     "nav": {

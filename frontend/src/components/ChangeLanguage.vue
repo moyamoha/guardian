@@ -1,7 +1,7 @@
 <template>
   <div class="lang-select" @click="showOptions = !showOptions">
     <span
-      >{{ lang.toUpperCase() }}
+      >{{ localLang.toUpperCase() }}
       <v-icon v-if="showOptions" color="white">mdi-chevron-down</v-icon>
       <v-icon v-else color="white">mdi-chevron-up</v-icon>
     </span>
@@ -18,19 +18,29 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   name: "change-language",
   data() {
     return {
-      lang: navigator.language.split("-")[0],
+      localLang: "",
       showOptions: false,
     };
   },
   methods: {
+    ...mapMutations(["setLanguage"]),
     changeLang(v) {
-      this.lang = v;
+      this.localLang = v;
       this.$i18n.locale = v;
+      this.setLanguage(v);
     },
+  },
+  computed: {
+    ...mapGetters(["language"]),
+  },
+  mounted() {
+    this.localLang = this.language;
   },
 };
 </script>

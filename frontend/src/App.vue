@@ -13,12 +13,19 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import NavBar from "./components/NavBar.vue";
 import NotifBar from "./components/NotifBar.vue";
 export default {
   components: {
     NavBar,
     NotifBar,
+  },
+  computed: {
+    ...mapGetters(["language"]),
+  },
+  mounted: function () {
+    this.$i18n.locale = this.language;
   },
 };
 </script>

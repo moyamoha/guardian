@@ -32,7 +32,9 @@
     "forgot_password_guide_text": "Kirjoita sähköpostiosoitteesi alla olevaan kenttään. Lähetämme väliaikaisen salasanan, jolla voit kirjautua sisään. Muista vaihtaa se jälkeenpäin",
     "we_sent_verification_code": "Lähetimme 8-numeroisen varmistuskoodin sähköpostiosoitteeseesi, käytä sitä kirjautumisen loppuun saattamiseksi.",
     "change_password_dialog_title": "Vaihda salasana",
-    "change_name_dialog_title": "Vaihdatko nimesi?"
+    "change_name_dialog_title": "Vaihdatko nimesi?",
+    "category_deletion_warning": "Poistamme kaikki kategoriaan liittyvät merkinnät. Oletko varma?",
+    "no_data": "Et ole vielä luonut mitään"
   },
   "labels": {
     "nav": {
@@ -78,8 +80,7 @@
     "edit_entity": "Muokataanko {entity}",
     "mfa_card_title": "Kaksivaiheinen todennus käyttäen sähköpostiosoitetta",
     "account_deactivation_card_title": "Tilin deaktivointi",
-    "create_new_category": "Luo uusi kategoria",
-    "category_deletion_warning": "Poistamme kaikki kategoriaan liittyvät merkinnät, oletko varma?"
+    "create_new_category": "Luo uusi kategoria"
   },
   "btns": {
     "get_started": "Aloita",
