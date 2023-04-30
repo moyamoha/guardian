@@ -2,6 +2,7 @@
   "main": {
     "yes": "kyllä",
     "no": "ei",
+    "hello": "Hei",
     "intro": "Tervetuloa Guardianiin :) Olemme sitoutuneet saamaan ihmiset tuntemaan olonsa turvalliseksi valtuutustietojensa suhteen. Tiedämme, että se on vaikeaa. Sovellukset ovat monimutkaisia ​​ja usein kalliita käyttää. Siksi keksimme tämän salasananhallintasovelluksen. Miksi valita Guardian? Vastaus on:",
     "your_data": "Kaikki salasanasi kategorioineen",
     "please_login": "Kirjaudu tilillesi käyttämällä sähköpostiosoitetta ja salasanaa",
@@ -29,7 +30,9 @@
     },
     "password_copied": "Salasana kopioitiin leikepöydälle",
     "forgot_password_guide_text": "Kirjoita sähköpostiosoitteesi alla olevaan kenttään. Lähetämme väliaikaisen salasanan, jolla voit kirjautua sisään. Muista vaihtaa se jälkeenpäin",
-    "we_sent_verification_code": "Lähetimme 8-numeroisen varmistuskoodin sähköpostiosoitteeseesi, käytä sitä kirjautumisen loppuun saattamiseksi."
+    "we_sent_verification_code": "Lähetimme 8-numeroisen varmistuskoodin sähköpostiosoitteeseesi, käytä sitä kirjautumisen loppuun saattamiseksi.",
+    "change_password_dialog_title": "Vaihda salasana",
+    "change_name_dialog_title": "Vaihdatko nimesi?"
   },
   "labels": {
     "nav": {
@@ -45,15 +48,23 @@
       "title*": "Otsikko*",
       "username*": "Käyttäjänimi*",
       "password*": "Salasana*",
-      "url*": "URL*",
+      "url": "URL",
       "name*": "Nimi*",
       "email*": "Sähköposti*",
       "status": "Tila",
       "your_email": "Sähköpostisi",
       "length": "Pituus",
       "category*": "Kategoria*",
-      "verification_code": "Varmistuskoodi *"
+      "verification_code": "Varmistuskoodi *",
+      "current_password": "Nykyinen salasana *",
+      "new_password": "Uusi salasana *",
+      "confirm_new_password": "Vahvista uusi salasana *",
+      "first_name": "Etunimet *",
+      "last_name": "Sukunimi *",
+      "category_name": "Kategorian nimi *"
     },
+    "username": "Käyttäjänimi",
+    "url": "URL",
     "reveal": "paljasta",
     "hide": "piilota",
     "copy": "kopio",
@@ -63,7 +74,8 @@
     "email": "Sähköposti",
     "password": "Salasana",
     "account": "Tili",
-    "no_activities": "Ei toimintahistoriaa tähän mennessä"
+    "no_activities": "Ei toimintahistoriaa tähän mennessä",
+    "edit_entity": "Muokataanko {entity}"
   },
   "btns": {
     "get_started": "Aloita",
@@ -84,6 +96,7 @@
     "clear_history": "tyhjennä historia",
     "generate_rand_pass": "generoi satunnainen salasana",
     "update": "päivitä",
+    "updating": "päivitetään...",
     "submit": "Lähetä",
     "submitting": "lähetetään...",
     "verify": "vahvista",
@@ -106,8 +119,9 @@
     "add category": "Kategorian lisääminen",
     "edit category": "Kategorian päivittäminen",
     "delete category": "Kategorian poistaminen",
-    "enable mfa": "Mfa:n ottaminen käyttöön",
-    "disable mfa": "Mfa:n poistaminen käytöstä",
-    "deactivate account": "Tilin deaktivointi"
+    "enable 2fa": "Mfa:n ottaminen käyttöön",
+    "disable 2fa": "Mfa:n poistaminen käytöstä",
+    "deactivate account": "Tilin deaktivointi",
+    "reactivate account": "Tilin uudelleenaktivointi"
   }
 }

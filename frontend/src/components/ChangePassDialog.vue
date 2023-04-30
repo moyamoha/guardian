@@ -13,7 +13,7 @@
     </template>
     <v-card>
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
-        Changing password
+        {{ $t("main.change_password_dialog_title") }}
         <v-icon @click="dialog = !dialog" color="brown"
           >mdi-close-circle</v-icon
         >
@@ -24,11 +24,17 @@
         </p>
         <ErrorAlert></ErrorAlert>
         <v-form class="my-3" ref="passChangeForm" @submit="handleSubmit">
-          <PasswordField v-model="currentPassword" label="Current password *" />
-          <PasswordField v-model="newPassword" label="New password *" />
+          <PasswordField
+            v-model="currentPassword"
+            :label="$t('labels.inputs.current_password')"
+          />
+          <PasswordField
+            v-model="newPassword"
+            :label="$t('labels.inputs.new_password')"
+          />
           <PasswordField
             v-model="newPasswordAgain"
-            label="Repeat new password *"
+            :label="$t('labels.inputs.confirm_new_password')"
           />
           <v-btn
             type="button"
@@ -61,6 +67,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
 import PasswordField from "./PasswordField.vue";
 import { generatePassword } from "@/utils/generate-password";
+import i18n from "@/plugins/i18n";
 export default {
   data() {
     return {
@@ -94,9 +101,6 @@ export default {
         this.dialog = false;
       }
       this.processing = false;
-    },
-    required(v) {
-      return (v && v.length > 0) || "This field can not be empty";
     },
     generateRandomPassword() {
       const password = generatePassword(this.generateOptions);

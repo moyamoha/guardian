@@ -13,14 +13,18 @@
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
         <div>
-          {{ createNew ? "Create new category?" : `Edit '${item.name}'?` }}
+          {{
+            createNew
+              ? "Create new category?"
+              : `${$t("labels.edit_entity", { entity: item.name })}?`
+          }}
         </div>
         <v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text>
         <v-form class="my-3" @submit="handleSubmit" ref="catform">
           <v-text-field
-            label="Name"
+            :label="$t('labels.inputs.category_name')"
             dense
             outlined
             :rules="[required]"

@@ -13,7 +13,7 @@
     </template>
     <v-card>
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
-        Changing your name?
+        {{ $t("main.change_name_dialog_title") }}
         <v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text>
@@ -22,14 +22,14 @@
           <v-text-field
             outlined
             dense
-            label="Lastname"
+            :label="$t('labels.inputs.first_name')"
             v-model="profile.firstname"
             :rules="[required]"
           ></v-text-field>
           <v-text-field
             outlined
             dense
-            label="Lastname"
+            :label="$t('labels.inputs.last_name')"
             v-model="profile.lastname"
             :rules="[required]"
           ></v-text-field>
@@ -40,7 +40,7 @@
             small
             outlined
             :diabled="processing"
-            >{{ processing ? "Updating..." : "Update" }}</v-btn
+            >{{ processing ? $t("btns.updating") : $t("btns.update") }}</v-btn
           >
         </v-form>
       </v-card-text>
@@ -51,6 +51,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
+import i18n from "@/plugins/i18n";
 export default {
   props: {
     user: {
@@ -98,7 +99,7 @@ export default {
       this.setError("");
     },
     required(v) {
-      return (v && v.length > 0) || "This field can not be empty";
+      return (v && v.length > 0) || i18n.t("rules.required_field");
     },
   },
   computed: {

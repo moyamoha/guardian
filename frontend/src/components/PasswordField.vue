@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import i18n from "@/plugins/i18n";
 import { generatePassword } from "@/utils/generate-password";
 import { mapGetters } from "vuex";
 
@@ -44,7 +45,7 @@ export default {
     };
   },
   methods: {
-    required: (v) => (v && v.length > 0) || "This Field is required",
+    required: (v) => (v && v.length > 0) || i18n.t("rules.required_field"),
     updateValue(newVal) {
       this.localValue = newVal;
       this.$emit("input", this.localValue);
@@ -69,7 +70,6 @@ export default {
       const label = this.label
         ? this.label
         : this.$t("labels.inputs.password*");
-      console.log(label);
       return label;
     },
   },

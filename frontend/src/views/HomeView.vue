@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <p v-show="loggedInUser !== null">
-      Hello
+      {{ $t("main.hello") }}
       <strong>{{ loggedInUser.firstname }} {{ loggedInUser.lastname }}</strong
       >!
     </p>

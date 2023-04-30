@@ -29,7 +29,9 @@
     },
     "password_copied": "Password copied to clipboard",
     "forgot_password_guide_text": "Please type your email address in the field below. We will send a temporary password which you can use to login. Make sure to change it afterwards",
-    "we_sent_verification_code": "We sent an 8-digit verification code to your email address, please use it to complete logging in"
+    "we_sent_verification_code": "We sent an 8-digit verification code to your email address, please use it to complete logging in",
+    "change_password_dialog_title": "Change password",
+    "change_name_dialog_title": "Changing your name?"
   },
   "labels": {
     "nav": {
@@ -45,16 +47,21 @@
       "title*": "Title*",
       "username*": "Username*",
       "password*": "Password*",
-      "url*": "URL*",
       "name*": "Name*",
       "email*": "Email*",
       "status": "Status",
       "your_email*": "Your email*",
       "length": "Length",
       "category*": "Category*",
-      "verification_code": "Verification code *"
+      "verification_code": "Verification code *",
+      "current_password": "Current password *",
+      "new_password": "New password *",
+      "confirm_new_password": "Confirm new password *",
+      "first_name": "First name *",
+      "last_name": "Last name *",
+      "category_name": "Category name *"
     },
-    "username": "Käyttäjänimi",
+    "username": "Username",
     "url": "URL",
     "reveal": "reveal",
     "hide": "hide",
@@ -65,7 +72,8 @@
     "email": "Email",
     "password": "Password",
     "account": "Account",
-    "no_activities": "No activities yet"
+    "no_activities": "No activities yet",
+    "edit_entity": "Edit {entity}"
   },
   "btns": {
     "get_started": "get started",
@@ -86,6 +94,7 @@
     "clear_history": "clear history",
     "generate_rand_pass": "generate random password",
     "update": "update",
+    "updating": "updating...",
     "submit": "submit",
     "submitting": "submitting...",
     "verify": "verify",
@@ -108,8 +117,9 @@
     "add category": "add category",
     "edit category": "edit category",
     "delete category": "delete category",
-    "enable mfa": "enable mfa",
-    "disable mfa": "disable mfa",
-    "deactivate account": "deactivate account"
+    "enable 2fa": "enable 2fa",
+    "disable 2fa": "disable 2fa",
+    "deactivate account": "deactivate account",
+    "reactivate account": "reactivate account"
   }
 }

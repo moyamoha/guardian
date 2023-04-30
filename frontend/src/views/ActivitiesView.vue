@@ -14,7 +14,7 @@
       >
         <span>
           <span class="font-weight-bold">{{ getActivityType(activity) }}</span>
-          <span> at</span>
+          <span> </span>
         </span>
         <span>{{ getActivityDateString(activity.timestamp) }}</span>
       </div>

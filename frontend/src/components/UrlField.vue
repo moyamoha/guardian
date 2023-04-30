@@ -1,6 +1,6 @@
 <template>
   <v-text-field
-    label="Url"
+    :label="$t('labels.url')"
     dense
     outlined
     v-model="localValue"

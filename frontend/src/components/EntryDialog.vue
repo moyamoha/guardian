@@ -16,7 +16,7 @@
           {{
             createNew
               ? `${$t("main.create_new_entry")}?`
-              : `Edit '${item.title}'?`
+              : `${$t("labels.edit_entity", { entity: item.title })}?`
           }}
         </div>
         <v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
@@ -45,7 +45,7 @@
           <UrlField v-model="item.url"></UrlField>
           <v-combobox
             v-model="item.status"
-            :items="['active', 'expired']"
+            :items="[$t('labels.active'), $t('labels.expired')]"
             :label="$t('labels.inputs.status')"
             dense
             outlined
