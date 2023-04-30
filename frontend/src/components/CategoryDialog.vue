@@ -15,8 +15,8 @@
         <div>
           {{
             createNew
-              ? "Create new category?"
-              : `${$t("labels.edit_entity", { entity: item.name })}?`
+              ? $t("labels.create_new_category")
+              : `${$t("labels.edit_entity", { entity: item.name })}`
           }}
         </div>
         <v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
@@ -50,8 +50,8 @@
               dense
               small
               v-show="this.category !== null"
-              :disabled="processing"
-              >{{ processing ? $t("btns.deleting") : $t("btns.delete") }}</v-btn
+              :disabled="deleting"
+              >{{ deleting ? $t("btns.deleting") : $t("btns.delete") }}</v-btn
             >
           </div>
         </v-form>
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import i18n from "@/plugins/i18n";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["category", "activatorText"],
@@ -70,6 +71,7 @@ export default {
         name: this.category ? this.category.name : "",
       },
       dialog: false,
+      deleting: false,
       processing: false,
     };
   },
@@ -92,15 +94,11 @@ export default {
       }
     },
     async handleDelete() {
-      if (
-        window.confirm(
-          `Delete ${this.category.name}? Action is irreversable and all
-          the entries under this category will be also deleted!!!!`
-        )
-      ) {
-        this.processing = true;
+      const warning = i18n.t("main.category_deletion_warning");
+      if (window.confirm(warning)) {
+        this.deleting = true;
         await this.removeCategory(this.category._id);
-        this.processing = false;
+        this.deleting = false;
       }
     },
 

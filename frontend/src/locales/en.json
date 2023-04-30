@@ -31,7 +31,8 @@
     "forgot_password_guide_text": "Please type your email address in the field below. We will send a temporary password which you can use to login. Make sure to change it afterwards",
     "we_sent_verification_code": "We sent an 8-digit verification code to your email address, please use it to complete logging in",
     "change_password_dialog_title": "Change password",
-    "change_name_dialog_title": "Changing your name?"
+    "change_name_dialog_title": "Changing your name?",
+    "category_deletion_warning": "Deleting a category will delete all the entries in it. Are you sure?"
   },
   "labels": {
     "nav": {
@@ -73,7 +74,10 @@
     "password": "Password",
     "account": "Account",
     "no_activities": "No activities yet",
-    "edit_entity": "Edit {entity}"
+    "edit_entity": "Edit {entity}",
+    "mfa_card_title": "2-factor authentication using email",
+    "account_deactivation_card_title": "Account deactivation",
+    "create_new_category": "Create new category"
   },
   "btns": {
     "get_started": "get started",
@@ -84,7 +88,9 @@
     "create_category": "create category",
     "deactivate": "deactivate",
     "enable_mfa": "enable mfa",
-    "disable mfa": "disable mfa",
+    "disable_mfa": "disable mfa",
+    "disabling_mfa": "disabling mfa...",
+    "enabling_mfa": "enabling mfa...",
     "processing": "processing...",
     "save": "save",
     "saving": "saving...",

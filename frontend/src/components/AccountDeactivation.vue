@@ -1,6 +1,8 @@
 <template>
   <div class="deactivation-cont">
-    <h5 class="red--text">Deactivate account</h5>
+    <h5 class="red--text">
+      {{ $t("labels.account_deactivation_card_title") }}
+    </h5>
     <p>
       {{ $t("main.deactivate_warning") }}
     </p>
@@ -12,7 +14,7 @@
       elevation="4"
       :diabled="processing"
       @click="handleDeactivate"
-      >{{ processing ? $t("btns.processing") : $t("btns.deactivate") }}</v-btn
+      >{{ processing ? $t("btns.deactivating") : $t("btns.deactivate") }}</v-btn
     >
   </div>
 </template>

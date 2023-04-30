@@ -5,7 +5,7 @@
       'mfa-off-cont': !loggedInUser.mfaEnabled,
     }"
   >
-    <h5 class="green--text">2-factor authentication using email</h5>
+    <h5 class="green--text">{{ $t("labels.mfa_card_title") }}</h5>
     <p>
       {{
         loggedInUser.mfaEnabled
@@ -45,7 +45,7 @@
             @click="handleOkResponse"
             color="success"
             :disabled="processing"
-            >Yes</v-btn
+            >{{ $t("main.yes") }}</v-btn
           >
           <v-btn
             elevation="2"
@@ -54,7 +54,7 @@
             outlined
             color="red"
             @click="showDialog = false"
-            >No</v-btn
+            >{{ $t("main.no") }}</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -87,9 +87,13 @@ export default {
     ...mapGetters(["loggedInUser"]),
     getBtnText() {
       if (this.loggedInUser.mfaEnabled) {
-        return this.processing ? "Disabling MFA..." : "Disable MFA";
+        return this.processing
+          ? this.$t("btns.disabling_mfa")
+          : this.$t("btns.disable_mfa");
       } else {
-        return this.processing ? "Enabling MFA..." : "Enable MFA";
+        return this.processing
+          ? this.$t("btns.enabling_mfa")
+          : this.$t("btns.enable_mfa");
       }
     },
     dialogMessageText() {
