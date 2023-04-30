@@ -2,6 +2,7 @@
   "main": {
     "yes": "yes",
     "no": "no",
+    "hello": "Hello",
     "intro": "Welcome to Guardian :) We are commited to make people feel safe about their credintials. We know it is hard. The applications out their are complicated and often expensive to use. That is why we came up with this password management application. Why choose Guardian? The answer is",
     "your_data": "All your passwords with their categories",
     "please_login": "Please login to your account using your email and password",
