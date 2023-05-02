@@ -1,6 +1,6 @@
 <template>
   <div class="lang-select" @click="showOptions = !showOptions">
-    <button @blur="showOptions = false" tabindex="-1">
+    <button @blur="hide" tabindex="-1">
       {{ localLang.toUpperCase() }}
       <v-icon v-if="showOptions" color="white">mdi-chevron-down</v-icon>
       <v-icon v-else color="white">mdi-chevron-up</v-icon>
@@ -9,7 +9,7 @@
       <div
         class="option"
         v-for="option in ['en', 'fi']"
-        @click="() => changeLang(option)"
+        @click="changeLang(option)"
       >
         <span>{{ option }}</span>
       </div>
@@ -34,6 +34,11 @@ export default {
       this.localLang = v;
       this.$i18n.locale = v;
       this.setLanguage(v);
+    },
+    hide() {
+      setTimeout(() => {
+        this.showOptions = false;
+      }, 200);
     },
   },
   computed: {
