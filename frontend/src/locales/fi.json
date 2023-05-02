@@ -39,7 +39,8 @@
     "account_deactivation_dialog_message": "Oletko varma, että haluat deaktivoida tilisi? Voit aktivoida tilisi uudelleen kirjautumalla sisään, jos muutat mielesi ennen kuin se poistetaan pysyvästi",
     "entry_deletion_dialog_title": "Merkinnän poistaminen?",
     "entry_deletion_dialog_message": "Oletko varma, että haluat poistaa merkinnän '{name}'?",
-    "category_deletion_dialog_title": "Kategorian poistaminen?"
+    "category_deletion_dialog_title": "Kategorian poistaminen?",
+    "download_your_data": "Voit ladata tietosi painamalla \"Lataa\" -nappia. Tämä aloittaa latausprosessin ja tallentaa tietosi tietokoneellesi. Se on yhtä helppoa kuin se kuulostaakin!"
   },
   "labels": {
     "nav": {
@@ -85,7 +86,8 @@
     "edit_entity": "Muokataanko {entity}",
     "mfa_card_title": "Kaksivaiheinen todennus käyttäen sähköpostiosoitetta",
     "account_deactivation_card_title": "Tilin deaktivointi",
-    "create_new_category": "Luo uusi kategoria"
+    "create_new_category": "Luo uusi kategoria",
+    "data": "Data"
   },
   "btns": {
     "get_started": "Aloita",
@@ -113,7 +115,9 @@
     "submit": "Lähetä",
     "submitting": "lähetetään...",
     "verify": "vahvista",
-    "verifying": "vahvistetaan..."
+    "verifying": "vahvistetaan...",
+    "download": "lataa",
+    "downloading": "ladataan..."
   },
   "rules": {
     "long_password": "Salasanasi on oltava vähintään 10 merkkiä pitkä",

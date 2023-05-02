@@ -12,25 +12,76 @@
     <h3 class="mt-3">{{ $t("labels.account") }}</h3>
     <AccountDeactivation class="account-action-box"></AccountDeactivation>
     <MfaToggler class="account-action-box"></MfaToggler>
+    <h3 class="mt-3">{{ $t("labels.data") }}</h3>
+    <p>{{ $t("main.download_your_data") }}</p>
+    <v-btn
+      dense
+      small
+      color="indigo darken-1"
+      class="white--text"
+      :loading="downloading"
+      @click="downloadData"
+      >{{ $t("btns.download") }}</v-btn
+    >
   </v-col>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import MfaToggler from "../components/MfaToggler.vue";
 import AccountDeactivation from "@/components/AccountDeactivation.vue";
 import ChangeNameDialog from "@/components/ChangeNameDialog.vue";
 import ChangePassDialog from "../components/ChangePassDialog.vue";
+import axios from "axios";
 export default {
-  methods: {},
+  data() {
+    return {
+      downloading: false,
+    };
+  },
   computed: {
-    ...mapGetters(["loggedInUser"]),
+    ...mapGetters(["loggedInUser", "content"]),
   },
   components: {
     MfaToggler,
     AccountDeactivation,
     ChangeNameDialog,
     ChangePassDialog,
+  },
+  methods: {
+    ...mapActions(["fetchContent"]),
+    async downloadData() {
+      this.downloading = true;
+      const activities = (await axios("/users/activity-history")).data;
+      const content = (await axios.get("/categories/")).data;
+      const simplifiedContent = content.map((c) => {
+        return {
+          category_name: c.name,
+          entries: c.items.map((entry) => {
+            const { title, username, password, url, status } = entry;
+            return { title, username, password, url, status };
+          }),
+        };
+      });
+      const simplifiedActivities = activities.map((a) => {
+        const { activityType, timestamp } = a;
+        return { activityType, timestamp };
+      });
+      const data = {
+        ...this.loggedInUser,
+        content: [...simplifiedContent],
+        activities: [...simplifiedActivities],
+      };
+      const file = new Blob([JSON.stringify(data)], {
+        type: "application/json",
+      });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(file);
+      a.download = `${this.loggedInUser.email}-data.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      this.downloading = false;
+    },
   },
 };
 </script>

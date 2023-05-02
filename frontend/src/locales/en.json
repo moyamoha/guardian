@@ -37,7 +37,8 @@
     "no_data": "You have not created anything yet",
     "account_deactivation_dialog_title": "Deactivate account?",
     "account_deactivation_dialog_message": "Are you sure you want to deactivate your account? You can reactivate it by logging in again within one month from now, otherwise it will be deleted permanently",
-    "category_deletion_dialog_title": "Delete category?"
+    "category_deletion_dialog_title": "Delete category?",
+    "download_your_data": "To download your data, simply click the \"Download\" button. This will initiate the download process and save your data to your computer. It's as simple as that!"
   },
   "labels": {
     "nav": {
@@ -82,7 +83,8 @@
     "edit_entity": "Edit {entity}",
     "mfa_card_title": "2-factor authentication using email",
     "account_deactivation_card_title": "Account deactivation",
-    "create_new_category": "Create new category"
+    "create_new_category": "Create new category",
+    "data": "Data"
   },
   "btns": {
     "get_started": "get started",
@@ -109,7 +111,9 @@
     "submit": "submit",
     "submitting": "submitting...",
     "verify": "verify",
-    "verifying": "verifying..."
+    "verifying": "verifying...",
+    "download": "download",
+    "downloading": "downloading..."
   },
   "rules": {
     "long_password": "Your new password must be at least 10 characters long",
