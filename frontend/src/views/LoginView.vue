@@ -53,10 +53,15 @@ export default {
     async handleSubmit(e) {
       e.preventDefault();
       this.loggingIn = true;
-      if (this.$refs.form.validate()) {
-        await this.login({ email: this.email, password: this.password });
+      try {
+        if (this.$refs.form.validate()) {
+          await this.login({ email: this.email, password: this.password });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loggingIn = false;
       }
-      this.loggingIn = false;
     },
     required(v) {
       const errorMsg = this.$t("rules.required_field");

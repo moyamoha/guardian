@@ -96,7 +96,6 @@
     "deactivate": "deactivate",
     "enable_mfa": "enable mfa",
     "disable_mfa": "disable mfa",
-    "disabling_mfa": "disabling mfa...",
     "save": "save",
     "cancel": "cancel",
     "delete": "delete",

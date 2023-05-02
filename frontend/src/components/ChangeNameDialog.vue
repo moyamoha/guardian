@@ -8,6 +8,7 @@
         v-bind="attrs"
         dense
         small
+        :loading="processing"
         >{{ $t("btns.change_name") }}</v-btn
       >
     </template>

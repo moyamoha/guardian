@@ -21,6 +21,7 @@
       :color="loggedInUser.mfaEnabled ? 'error darken-2' : 'success darken-2'"
       :disabled="processing"
       @click="showDialog = true"
+      :loading="processing"
       >{{ getBtnText }}</v-btn
     >
     <v-dialog v-model="showDialog" width="500">
@@ -88,13 +89,9 @@ export default {
     ...mapGetters(["loggedInUser"]),
     getBtnText() {
       if (this.loggedInUser.mfaEnabled) {
-        return this.processing
-          ? this.$t("btns.disabling_mfa")
-          : this.$t("btns.disable_mfa");
+        return this.$t("btns.disable_mfa");
       } else {
-        return this.processing
-          ? this.$t("btns.enabling_mfa")
-          : this.$t("btns.enable_mfa");
+        return this.$t("btns.enable_mfa");
       }
     },
     dialogMessageText() {

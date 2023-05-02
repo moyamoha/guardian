@@ -99,8 +99,6 @@
     "deactivate": "deaktivoi",
     "enable_mfa": "ota mfa käyttöön",
     "disable_mfa": "poista mfa käytöstä",
-    "disabling_mfa": "poistetaan mfa käytöstä...",
-    "enabling_mfa": "otetaan mfa käyttöön...",
     "save": "tallenna",
     "cancel": "peruuta",
     "delete": "poista",
