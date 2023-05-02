@@ -68,7 +68,8 @@
             outlined
             dense
             :disabled="processing"
-            >{{ saveBtnText }}</v-btn
+            :loading="processing"
+            >{{ $t("btns.save") }}</v-btn
           >
           <v-btn @click="dialog = !dialog" color="error" outlined dense>{{
             $t("btns.cancel")
@@ -162,9 +163,6 @@ export default {
     ...mapGetters(["error", "categories"]),
     createNew() {
       return this.entry === null || this.entry === undefined;
-    },
-    saveBtnText() {
-      return this.processing ? this.$t("btns.saving") : this.$t("btns.save");
     },
     getUsernameLabel() {
       return this.$t("labels.inputs.username*");

@@ -45,6 +45,7 @@
             @click="handleOkResponse"
             color="success"
             :disabled="processing"
+            :loading="processing"
             >{{ $t("main.yes") }}</v-btn
           >
           <v-btn

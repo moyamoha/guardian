@@ -14,7 +14,8 @@
       elevation="4"
       :diabled="processing"
       @click="showDialog = true"
-      >{{ processing ? $t("btns.deactivating") : $t("btns.deactivate") }}</v-btn
+      :loading="processing"
+      >{{ $t("btns.deactivate") }}</v-btn
     >
     <v-dialog v-model="showDialog" width="500">
       <v-card>
@@ -38,6 +39,7 @@
             @click="handleDeactivate"
             color="success"
             :disabled="processing"
+            :loading="processing"
             >{{ $t("main.yes") }}</v-btn
           >
           <v-btn

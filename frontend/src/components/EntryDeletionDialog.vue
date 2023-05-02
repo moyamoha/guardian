@@ -25,6 +25,7 @@
           @click="handleDelete"
           color="success"
           :disabled="processing"
+          :loading="processing"
           >{{ $t("main.yes") }}</v-btn
         >
         <v-btn

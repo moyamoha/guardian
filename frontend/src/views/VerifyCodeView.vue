@@ -13,9 +13,13 @@
         outlined
         :rules="[atLeastEight]"
       ></v-text-field>
-      <v-btn color="primary" type="submit" :disabled="processing">{{
-        processing ? $t("btns.verifying") : $t("btns.verify")
-      }}</v-btn>
+      <v-btn
+        color="primary"
+        type="submit"
+        :disabled="processing"
+        :loading="processing"
+        >{{ $t("btns.verify") }}</v-btn
+      >
     </v-form>
   </v-col>
 </template>

@@ -14,7 +14,8 @@
         v-bind="attrs"
         v-on="on"
         :disabled="deleting"
-        >{{ deleting ? $t("btns.deleting") : $t("btns.delete") }}</v-btn
+        :loading="deleting"
+        >{{ $t("btns.delete") }}</v-btn
       >
     </template>
     <v-card class="dialog-card">
@@ -34,6 +35,7 @@
           @click="handleDelete"
           color="success"
           :disabled="deleting"
+          :loading="deleting"
           >{{ $t("main.yes") }}</v-btn
         >
         <v-btn

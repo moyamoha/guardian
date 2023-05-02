@@ -40,7 +40,8 @@
             small
             outlined
             :diabled="processing"
-            >{{ processing ? $t("btns.updating") : $t("btns.update") }}</v-btn
+            :loading="processing"
+            >{{ $t("btns.update") }}</v-btn
           >
         </v-form>
       </v-card-text>

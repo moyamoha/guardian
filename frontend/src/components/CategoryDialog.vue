@@ -38,7 +38,8 @@
               dense
               small
               :disabled="processing"
-              >{{ processing ? $t("btns.saving") : $t("btns.save") }}</v-btn
+              :loading="processing"
+              >{{ $t("btns.save") }}</v-btn
             >
             <v-btn @click="handleCancel" color="warn" outlined dense small>{{
               $t("btns.cancel")
