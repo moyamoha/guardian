@@ -1,10 +1,10 @@
 <template>
   <div class="lang-select" @click="showOptions = !showOptions">
-    <span
-      >{{ localLang.toUpperCase() }}
+    <button @blur="showOptions = false" tabindex="-1">
+      {{ localLang.toUpperCase() }}
       <v-icon v-if="showOptions" color="white">mdi-chevron-down</v-icon>
       <v-icon v-else color="white">mdi-chevron-up</v-icon>
-    </span>
+    </button>
     <div v-if="showOptions" class="options-cont">
       <div
         class="option"

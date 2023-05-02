@@ -36,7 +36,8 @@
     "category_deletion_warning": "Deleting a category will delete all the entries in it. Are you sure?",
     "no_data": "You have not created anything yet",
     "account_deactivation_dialog_title": "Deactivate account?",
-    "account_deactivation_dialog_message": "Are you sure you want to deactivate your account? You can reactivate it by logging in again within one month from now, otherwise it will be deleted permanently"
+    "account_deactivation_dialog_message": "Are you sure you want to deactivate your account? You can reactivate it by logging in again within one month from now, otherwise it will be deleted permanently",
+    "category_deletion_dialog_title": "Delete category?"
   },
   "labels": {
     "nav": {

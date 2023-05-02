@@ -16,7 +16,7 @@
           {{
             createNew
               ? $t("labels.create_new_category")
-              : `${$t("labels.edit_entity", { entity: item.name })}`
+              : `${$t("labels.edit_entity", { entity: item.name })}?`
           }}
         </div>
         <v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
@@ -43,16 +43,10 @@
             <v-btn @click="handleCancel" color="warn" outlined dense small>{{
               $t("btns.cancel")
             }}</v-btn>
-            <v-btn
-              @click="handleDelete"
-              color="error"
-              outlined
-              dense
-              small
-              v-show="this.category !== null"
-              :disabled="deleting"
-              >{{ deleting ? $t("btns.deleting") : $t("btns.delete") }}</v-btn
-            >
+            <CategoryDeletionDialog
+              v-if="!createNew"
+              :category="category"
+            ></CategoryDeletionDialog>
           </div>
         </v-form>
       </v-card-text>
@@ -61,8 +55,8 @@
 </template>
 
 <script>
-import i18n from "@/plugins/i18n";
 import { mapActions, mapGetters } from "vuex";
+import CategoryDeletionDialog from "./CategoryDeletionDialog.vue";
 export default {
   props: ["category", "activatorText"],
   data() {
@@ -71,12 +65,11 @@ export default {
         name: this.category ? this.category.name : "",
       },
       dialog: false,
-      deleting: false,
       processing: false,
     };
   },
   methods: {
-    ...mapActions(["addCategory", "removeCategory", "editCategory"]),
+    ...mapActions(["addCategory", "editCategory"]),
     async handleSubmit(e) {
       e.preventDefault();
       this.processing = true;
@@ -93,20 +86,10 @@ export default {
         if (this.error === "") this.dialog = false;
       }
     },
-    async handleDelete() {
-      const warning = i18n.t("main.category_deletion_warning");
-      if (window.confirm(warning)) {
-        this.deleting = true;
-        await this.removeCategory(this.category._id);
-        this.deleting = false;
-      }
-    },
-
     handleCancel() {
       this.item.name = this.category ? this.category.name : "";
       this.dialog = false;
     },
-
     required(v) {
       return (
         (v && v.length > 0) || this.$t("rules.category_should_have_a_name")
@@ -119,6 +102,7 @@ export default {
       return this.category === null || this.category === undefined;
     },
   },
+  components: { CategoryDeletionDialog },
 };
 </script>
 

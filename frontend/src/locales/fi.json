@@ -38,7 +38,8 @@
     "account_deactivation_dialog_title": "Tilin deaktivointi?",
     "account_deactivation_dialog_message": "Oletko varma, että haluat deaktivoida tilisi? Voit aktivoida tilisi uudelleen kirjautumalla sisään, jos muutat mielesi ennen kuin se poistetaan pysyvästi",
     "entry_deletion_dialog_title": "Merkinnän poistaminen?",
-    "entry_deletion_dialog_message": "Oletko varma, että haluat poistaa merkinnän '{name}'?"
+    "entry_deletion_dialog_message": "Oletko varma, että haluat poistaa merkinnän '{name}'?",
+    "category_deletion_dialog_title": "Kategorian poistaminen?"
   },
   "labels": {
     "nav": {
