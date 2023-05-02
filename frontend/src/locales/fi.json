@@ -34,7 +34,11 @@
     "change_password_dialog_title": "Vaihda salasana",
     "change_name_dialog_title": "Vaihdatko nimesi?",
     "category_deletion_warning": "Poistamme kaikki kategoriaan liittyvät merkinnät. Oletko varma?",
-    "no_data": "Et ole vielä luonut mitään"
+    "no_data": "Et ole vielä luonut mitään",
+    "account_deactivation_dialog_title": "Tilin deaktivointi?",
+    "account_deactivation_dialog_message": "Oletko varma, että haluat deaktivoida tilisi? Voit aktivoida tilisi uudelleen kirjautumalla sisään, jos muutat mielesi ennen kuin se poistetaan pysyvästi",
+    "entry_deletion_dialog_title": "Merkinnän poistaminen?",
+    "entry_deletion_dialog_message": "Oletko varma, että haluat poistaa merkinnän '{name}'?"
   },
   "labels": {
     "nav": {

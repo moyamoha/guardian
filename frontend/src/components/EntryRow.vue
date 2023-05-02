@@ -30,7 +30,8 @@
     </section>
     <section class="actions">
       <EntryDialog :entry="entry"></EntryDialog>
-      <v-icon dense @click="handleDelete">mdi-delete-outline</v-icon>
+      <EntryDeletionDialog :entry="entry"></EntryDeletionDialog>
+      <!-- <v-icon dense @click="handleDelete">mdi-delete-outline</v-icon> -->
     </section>
   </div>
 </template>
@@ -38,6 +39,7 @@
 <script>
 import { mapActions } from "vuex";
 import EntryDialog from "./EntryDialog.vue";
+import EntryDeletionDialog from "./EntryDeletionDialog.vue";
 export default {
   props: ["entry"],
   data: () => {
@@ -48,15 +50,6 @@ export default {
   },
   methods: {
     ...mapActions(["removeEntry"]),
-    handleDelete() {
-      if (
-        window.confirm(
-          `Do you really want to delete ${this.entry.title}? Action is not reversable!`
-        )
-      ) {
-        this.removeEntry(this.entry._id);
-      }
-    },
     copyToClipboard() {
       navigator.clipboard.writeText(this.entry.password);
       this.copied = true;
@@ -79,7 +72,7 @@ export default {
       }
     },
   },
-  components: { EntryDialog },
+  components: { EntryDialog, EntryDeletionDialog },
 };
 </script>
 
