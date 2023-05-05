@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-col xs="12" sm="10" md="8">
     <section>
       <span>{{ $t("main.your_activities") }}</span> <br />
       <span @click="emptyHistoryActivity" class="action-link">
@@ -23,7 +23,7 @@
       </div>
     </section>
     <Loading v-if="loading" />
-  </div>
+  </v-col>
 </template>
 
 <script>
