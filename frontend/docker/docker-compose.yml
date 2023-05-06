@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  frontend:
+    build: 
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: vartija_web
+    ports:
+      - "80:8080"
