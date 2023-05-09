@@ -13,18 +13,14 @@
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
         <div>
-          {{
-            createNew
-              ? $t("labels.create_new_category")
-              : `${$t("labels.edit_entity", { entity: item.name })}?`
-          }}
+          {{ createNew ? "New category" : `Editing ${category.name}` }}
         </div>
         <v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text>
         <v-form class="my-3" @submit="handleSubmit" ref="catform">
           <v-text-field
-            :label="$t('labels.inputs.category_name')"
+            label="Name *"
             dense
             outlined
             :rules="[required]"
@@ -39,11 +35,11 @@
               small
               :disabled="processing"
               :loading="processing"
-              >{{ $t("btns.save") }}</v-btn
+              >Save</v-btn
             >
-            <v-btn @click="handleCancel" color="warn" outlined dense small>{{
-              $t("btns.cancel")
-            }}</v-btn>
+            <v-btn @click="handleCancel" color="warn" outlined dense small
+              >Cancel</v-btn
+            >
             <CategoryDeletionDialog
               v-if="!createNew"
               :category="category"
@@ -92,9 +88,7 @@ export default {
       this.dialog = false;
     },
     required(v) {
-      return (
-        (v && v.length > 0) || this.$t("rules.category_should_have_a_name")
-      );
+      return (v && v.length > 0) || "Category should have a name";
     },
   },
   computed: {

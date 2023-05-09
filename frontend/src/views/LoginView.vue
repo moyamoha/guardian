@@ -1,7 +1,7 @@
 <template>
   <v-col xs="11" sm="8" md="4">
     <p class="text--primary mb-3">
-      {{ $t("main.please_login") }}
+      Please login to your account using your email and password
     </p>
     <ErrorAlert></ErrorAlert>
     <v-form
@@ -11,7 +11,7 @@
       @submit="handleSubmit"
     >
       <v-text-field
-        :label="$t('labels.inputs.email*')"
+        label="Email *"
         v-model="email"
         dense
         outlined
@@ -20,18 +20,18 @@
       >
       </v-text-field>
       <PasswordField v-model="password"></PasswordField>
-      <v-btn color="primary" type="submit" :loading="this.loggingIn">{{
-        $t("labels.nav.login")
-      }}</v-btn>
+      <v-btn color="primary" type="submit" :loading="this.loggingIn"
+        >login</v-btn
+      >
       <span class="text--secondary ml-3"
-        ><router-link to="/password-forgotten">{{
-          $t("main.i_forgot")
-        }}</router-link></span
+        ><router-link to="/password-forgotten"
+          >I forgot my password</router-link
+        ></span
       >
     </v-form>
     <p class="text--secondary mt-5">
-      {{ $t("main.dont_have_account?") }}
-      <router-link to="/signup">{{ $t("labels.nav.signup") }}</router-link>
+      Don't have an account?
+      <router-link to="/signup">Sign up</router-link>
     </p>
   </v-col>
 </template>
@@ -64,7 +64,7 @@ export default {
       }
     },
     required(v) {
-      const errorMsg = this.$t("rules.required_field");
+      const errorMsg = "This field is required";
       return v.length > 0 || errorMsg;
     },
   },

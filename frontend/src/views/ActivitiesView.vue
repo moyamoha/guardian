@@ -1,9 +1,9 @@
 <template>
   <v-col xs="12" sm="10" md="8">
     <section>
-      <span>{{ $t("main.your_activities") }}</span> <br />
-      <span @click="emptyHistoryActivity" class="action-link">
-        {{ $t("btns.clear_history") }}</span
+      <span>All your activities</span> <br />
+      <span @click="emptyHistoryActivity" class="action-link"
+        >Clear activity history</span
       >
     </section>
     <section class="activity-cont" v-if="!loading">
@@ -13,13 +13,13 @@
         v-if="activities.length > 0"
       >
         <span>
-          <span class="font-weight-bold">{{ getActivityType(activity) }}</span>
+          <span class="font-weight-bold">{{ activity.activityType }}</span>
           <span> </span>
         </span>
         <span>{{ getActivityDateString(activity.timestamp) }}</span>
       </div>
       <div v-if="activities.length === 0">
-        <p>{{ $t("labels.no_activities") }}</p>
+        <p>You have no activities yet!</p>
       </div>
     </section>
     <Loading v-if="loading" />
@@ -29,7 +29,6 @@
 <script>
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
-import i18n from "@/plugins/i18n";
 
 export default {
   name: "activies-view",
@@ -61,11 +60,6 @@ export default {
       } catch (error) {
         console.log(error.toString());
       }
-    },
-
-    getActivityType(activity) {
-      const translation = "activityTypes." + activity.activityType;
-      return i18n.t(translation);
     },
   },
   async mounted() {

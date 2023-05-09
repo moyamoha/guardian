@@ -10,11 +10,11 @@
     </template>
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
-        {{ $t("main.entry_deletion_dialog_title") }}
+        Delete entry
         <v-icon @click="dialog = false" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text class="py-2">
-        {{ $t("main.entry_deletion_dialog_message", { name: entry.title }) }}
+        Are your sure you want to delete {{ entry.title }}?
       </v-card-text>
       <v-card-actions>
         <v-btn
@@ -26,7 +26,7 @@
           color="success"
           :disabled="processing"
           :loading="processing"
-          >{{ $t("main.yes") }}</v-btn
+          >Yes</v-btn
         >
         <v-btn
           elevation="2"
@@ -35,7 +35,7 @@
           outlined
           color="red"
           @click="dialog = false"
-          >{{ $t("main.no") }}</v-btn
+          >No</v-btn
         >
       </v-card-actions>
     </v-card>

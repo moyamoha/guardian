@@ -9,12 +9,12 @@
         dense
         small
         :loading="processing"
-        >{{ $t("btns.change_name") }}</v-btn
+        >Change name</v-btn
       >
     </template>
     <v-card>
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
-        {{ $t("main.change_name_dialog_title") }}
+        Changing name
         <v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text>
@@ -23,14 +23,14 @@
           <v-text-field
             outlined
             dense
-            :label="$t('labels.inputs.first_name')"
+            label="First name *"
             v-model="profile.firstname"
             :rules="[required]"
           ></v-text-field>
           <v-text-field
             outlined
             dense
-            :label="$t('labels.inputs.last_name')"
+            label="Last name *"
             v-model="profile.lastname"
             :rules="[required]"
           ></v-text-field>
@@ -42,7 +42,7 @@
             outlined
             :diabled="processing"
             :loading="processing"
-            >{{ $t("btns.update") }}</v-btn
+            >Update</v-btn
           >
         </v-form>
       </v-card-text>
@@ -53,7 +53,6 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
-import i18n from "@/plugins/i18n";
 export default {
   props: {
     user: {
@@ -101,7 +100,7 @@ export default {
       this.setError("");
     },
     required(v) {
-      return (v && v.length > 0) || i18n.t("rules.required_field");
+      return (v && v.length > 0) || "This field is required";
     },
   },
   computed: {

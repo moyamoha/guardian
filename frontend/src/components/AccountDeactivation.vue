@@ -1,10 +1,11 @@
 <template>
   <div class="deactivation-cont">
-    <h5 class="red--text">
-      {{ $t("labels.account_deactivation_card_title") }}
-    </h5>
+    <h5 class="red--text">Account deactivation</h5>
     <p>
-      {{ $t("main.deactivate_warning") }}
+      We will delete all deactivated accounts after one month from start of
+      deactivation. Once deleted it can't be recovered, but you can always
+      reactivate your account by logging in, in case you change your mind before
+      it gets deleted permanently
     </p>
     <v-btn
       small
@@ -15,20 +16,22 @@
       :diabled="processing"
       @click="showDialog = true"
       :loading="processing"
-      >{{ $t("btns.deactivate") }}</v-btn
+      >Deactivate</v-btn
     >
     <v-dialog v-model="showDialog" width="500">
       <v-card>
         <v-card-title
           class="text-h6 grey lighten-2 d-flex justify-space-between"
         >
-          {{ $t("main.account_deactivation_dialog_title") }}
+          Deactivate account?
           <v-icon @click="showDialog = false" color="brown"
             >mdi-close-circle</v-icon
           >
         </v-card-title>
         <v-card-text class="mt-3">
-          {{ $t("main.account_deactivation_dialog_message") }}
+          Are you sure you want to deactivate your account? You can reactivate
+          it by logging in again within one month from now, otherwise it will be
+          deleted permanently
         </v-card-text>
         <v-card-actions>
           <v-btn
@@ -40,7 +43,7 @@
             color="success"
             :disabled="processing"
             :loading="processing"
-            >{{ $t("main.yes") }}</v-btn
+            >Yes</v-btn
           >
           <v-btn
             elevation="2"
@@ -49,7 +52,7 @@
             outlined
             color="red"
             @click="showDialog = false"
-            >{{ $t("main.no") }}</v-btn
+            >No</v-btn
           >
         </v-card-actions>
       </v-card>

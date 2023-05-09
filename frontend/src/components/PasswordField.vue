@@ -1,7 +1,7 @@
 <template>
   <v-text-field
     v-model="localValue"
-    :label="getLabel"
+    :label="label"
     dense
     outlined
     :type="passwordFieldType"
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import i18n from "@/plugins/i18n";
 import { generatePassword } from "@/utils/generate-password";
 import { mapGetters } from "vuex";
 
@@ -31,6 +30,7 @@ export default {
     label: {
       type: String,
       required: false,
+      default: "Password *",
     },
     ableToGenerate: {
       type: Boolean,
@@ -45,7 +45,7 @@ export default {
     };
   },
   methods: {
-    required: (v) => (v && v.length > 0) || i18n.t("rules.required_field"),
+    required: (v) => (v && v.length > 0) || "This field is required",
     updateValue(newVal) {
       this.localValue = newVal;
       this.$emit("input", this.localValue);
@@ -64,13 +64,6 @@ export default {
 
     passwordFieldType() {
       return this.showPassword ? "text" : "password";
-    },
-
-    getLabel() {
-      const label = this.label
-        ? this.label
-        : this.$t("labels.inputs.password*");
-      return label;
     },
   },
   watch: {

@@ -5,106 +5,50 @@
       'mfa-off-cont': !loggedInUser.mfaEnabled,
     }"
   >
-    <h5 class="green--text">{{ $t("labels.mfa_card_title") }}</h5>
+    <h5 class="green--text">2-Factor authtentication</h5>
     <p>
       {{
         loggedInUser.mfaEnabled
-          ? $t("main.2fa_congratulations")
-          : $t("main.recommend_2fa")
+          ? "Congratulations! Your have added extra layer of security to your account."
+          : "We highly recommend you to turn it on. It will boost your account's security and keeps it safe from possible vulnerabilities"
       }}
     </p>
-    <v-btn
-      small
-      dense
-      rounded
-      elevation="4"
-      :color="loggedInUser.mfaEnabled ? 'error darken-2' : 'success darken-2'"
-      :disabled="processing"
-      @click="showDialog = true"
-      :loading="processing"
-      >{{ getBtnText }}</v-btn
-    >
-    <v-dialog v-model="showDialog" width="500">
-      <v-card>
-        <v-card-title
-          class="text-h6 grey lighten-2 d-flex justify-space-between"
-        >
-          {{ dialogTitle }}
-          <v-icon @click="showDialog = false" color="brown"
-            >mdi-close-circle</v-icon
-          >
-        </v-card-title>
-        <v-card-text class="mt-3">
-          {{ dialogMessageText }}
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            elevation="2"
-            small
-            dense
-            outlined
-            @click="handleOkResponse"
-            color="success"
-            :disabled="processing"
-            :loading="processing"
-            >{{ $t("main.yes") }}</v-btn
-          >
-          <v-btn
-            elevation="2"
-            small
-            dense
-            outlined
-            color="red"
-            @click="showDialog = false"
-            >{{ $t("main.no") }}</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <DisableMfaDialog v-if="mfaIsEnabled"></DisableMfaDialog>
+    <MfaEnablerDialog v-else></MfaEnablerDialog>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import DisableMfaDialog from "./DisableMfaDialog.vue";
+import MfaEnablerDialog from "./MfaEnablerDialog.vue";
 export default {
   data() {
-    return { processing: false, showDialog: false };
+    return { disabling: false, showDialog: false };
   },
   methods: {
-    ...mapActions(["toggleMfa"]),
+    ...mapActions(["disableMfa"]),
     async handleOkResponse() {
       if (this.loggedInUser.mfaEnabled) {
-        this.processing = true;
-        await this.toggleMfa(false);
-        this.processing = false;
+        this.disabling = true;
+        await this.disableMfa();
+        this.disabling = false;
       } else {
-        this.processing = true;
+        this.disabling = true;
         await this.toggleMfa(true);
-        this.processing = false;
+        this.disabling = false;
       }
       this.showDialog = false;
     },
+    handleBtnClick() {},
   },
   computed: {
     ...mapGetters(["loggedInUser"]),
-    getBtnText() {
-      if (this.loggedInUser.mfaEnabled) {
-        return this.$t("btns.disable_mfa");
-      } else {
-        return this.$t("btns.enable_mfa");
-      }
-    },
-    dialogMessageText() {
-      if (this.loggedInUser.mfaEnabled) {
-        return this.$t("main.remove_mfa_question");
-      } else {
-        return this.$t("main.mfa_enable_confirmation");
-      }
-    },
-    dialogTitle() {
-      return this.$t("main.mfa_dialog_title");
+    mfaIsEnabled() {
+      return this.loggedInUser.mfaEnabled;
     },
   },
+  components: { DisableMfaDialog, MfaEnablerDialog },
 };
 </script>
 

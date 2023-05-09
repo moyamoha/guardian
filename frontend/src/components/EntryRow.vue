@@ -1,30 +1,26 @@
 <template>
   <div class="entry-row">
     <v-chip class="status-chip" :color="entryStatusColor" small>{{
-      entry.status === "active" ? $t("labels.active") : $t("labels.expired")
+      entry.status
     }}</v-chip>
     <section class="content">
       <strong class="font-weight-black">{{ entry.title }}</strong>
+      <span><i>Username:</i> {{ entry.username }}</span>
       <span
-        ><i>{{ $t("labels.username") }}:</i> {{ entry.username }}</span
-      >
-      <span
-        ><i>{{ $t("labels.password") }}:</i>
+        ><i>Password: </i>
         {{ reveal ? entry.password : getHiddenPass }}
         <span class="reveal-pass" @click="reveal = !reveal">{{
-          reveal ? $t("labels.hide") : $t("labels.reveal")
+          reveal ? "hide" : "reveal"
         }}</span>
         |
-        <span class="copy-pass" @click="copyToClipboard">{{
-          $t("labels.copy")
-        }}</span></span
+        <span class="copy-pass" @click="copyToClipboard">copy</span></span
       >
 
       <v-snackbar v-model="copied" timeout="1500">
-        {{ $t("main.password_copied") }}
+        Password copied to clipboard!
       </v-snackbar>
       <span v-show="this.entry.url"
-        ><i>{{ $t("labels.url") }}: </i>
+        ><i>URL: </i>
         <a :href="entry.url" target="_blank">{{ entry.url }}</a></span
       >
     </section>

@@ -15,16 +15,16 @@
         v-on="on"
         :disabled="deleting"
         :loading="deleting"
-        >{{ $t("btns.delete") }}</v-btn
+        >delete</v-btn
       >
     </template>
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
-        {{ $t("main.category_deletion_dialog_title") }}
+        Delete category {{ category.name }} ?
         <v-icon @click="dialog = false" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text class="py-2">
-        {{ $t("main.category_deletion_warning") }}
+        Deleting a category will delete all the entries in it. Are you sure?
       </v-card-text>
       <v-card-actions>
         <v-btn
@@ -36,7 +36,7 @@
           color="success"
           :disabled="deleting"
           :loading="deleting"
-          >{{ $t("main.yes") }}</v-btn
+          >Yes</v-btn
         >
         <v-btn
           elevation="2"
@@ -45,7 +45,7 @@
           outlined
           color="red"
           @click="dialog = false"
-          >{{ $t("main.no") }}</v-btn
+          >No</v-btn
         >
       </v-card-actions>
     </v-card>

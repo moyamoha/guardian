@@ -5,29 +5,29 @@
       outlined
       v-model="localOptions.length"
       type="number"
-      :label="$t('labels.inputs.length')"
+      label="Length *"
       hide-spin-buttons
       :rules="[required, isFiveOrHiger]"
     />
     <v-checkbox
-      :label="$t('main.generate_options.include_nums')"
+      label="Include digits"
       dense
       v-model="localOptions.includesDigits"
     />
     <v-checkbox
-      :label="$t('main.generate_options.include_capitals')"
+      label="Include uppercase letters"
       dense
       v-model="localOptions.includesUpperCase"
     />
     <v-checkbox
-      :label="$t('main.generate_options.include_special_chars')"
+      label="Include special characters"
       dense
       v-model="localOptions.includesSpecialChars"
     />
     <v-divider class="mb-5"></v-divider>
-    <v-btn color="success" dense outlined no-cap small @click="generate">{{
-      $t("btns.generate_rand_pass")
-    }}</v-btn>
+    <v-btn color="success" dense outlined no-cap small @click="generate"
+      >Generate random password</v-btn
+    >
     <v-container
       fluid
       v-if="generated !== ''"
@@ -37,7 +37,7 @@
       <v-icon @click="copyGeneratedPassword">mdi-content-copy</v-icon>
     </v-container>
     <v-snackbar v-model="copied" timeout="1500">
-      {{ $t("main.password_copied") }}
+      Password copied to clipboard
     </v-snackbar>
   </v-form>
 </template>

@@ -24,9 +24,6 @@ export default {
   computed: {
     ...mapGetters(["language"]),
   },
-  mounted: function () {
-    this.$i18n.locale = this.language;
-  },
 };
 </script>
 

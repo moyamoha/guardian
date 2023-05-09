@@ -13,11 +13,7 @@
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
         <div>
-          {{
-            createNew
-              ? `${$t("main.create_new_entry")}?`
-              : `${$t("labels.edit_entity", { entity: item.title })}?`
-          }}
+          {{ createNew ? `Create new entry` : `Edit '${entry.title}'?` }}
         </div>
         <v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
@@ -25,14 +21,14 @@
         <ErrorAlert></ErrorAlert>
         <v-form class="my-3" @submit="handleSubmit" ref="enform">
           <v-text-field
-            :label="$t('labels.inputs.title*')"
+            label="Title *"
             dense
             outlined
             v-model="item.title"
             :rules="[required]"
           ></v-text-field>
           <v-text-field
-            :label="$t('labels.inputs.username*')"
+            label="Username *"
             dense
             outlined
             v-model="item.username"
@@ -45,8 +41,8 @@
           <UrlField v-model="item.url"></UrlField>
           <v-combobox
             v-model="item.status"
-            :items="[$t('labels.active'), $t('labels.expired')]"
-            :label="$t('labels.inputs.status')"
+            :items="['active', 'expired']"
+            label="Status"
             dense
             outlined
             v-if="this.entry !== null && this.entry !== undefined"
@@ -56,7 +52,7 @@
             :items="this.categories"
             item-text="name"
             item-value="id"
-            :label="$t('labels.inputs.category*')"
+            label="Category *"
             dense
             outlined
             v-if="this.entry !== null && this.entry !== undefined"
@@ -69,11 +65,11 @@
             dense
             :disabled="processing"
             :loading="processing"
-            >{{ $t("btns.save") }}</v-btn
+            >Save</v-btn
           >
-          <v-btn @click="dialog = !dialog" color="error" outlined dense>{{
-            $t("btns.cancel")
-          }}</v-btn>
+          <v-btn @click="dialog = !dialog" color="error" outlined dense
+            >Cancel</v-btn
+          >
         </v-form>
       </v-card-text>
     </v-card>
@@ -85,7 +81,7 @@ import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
 import PasswordField from "./PasswordField.vue";
 import UrlField from "./UrlField.vue";
-import i18n from "@/plugins/i18n";
+
 export default {
   props: ["entry", "categoryId"],
   data() {
@@ -133,7 +129,7 @@ export default {
         if (this.error === "") this.dialog = false;
       }
     },
-    required: (v) => (v && v.length > 0) || i18n.t("rules.required_field"),
+    required: (v) => (v && v.length > 0) || "This field is required",
     handleClose() {
       this.item = {
         title: this.entry ? this.entry.title : "",
@@ -163,12 +159,6 @@ export default {
     ...mapGetters(["error", "categories"]),
     createNew() {
       return this.entry === null || this.entry === undefined;
-    },
-    getUsernameLabel() {
-      return this.$t("labels.inputs.username*");
-    },
-    getTitleLabel() {
-      return this.$t("labels.inputs.title*");
     },
   },
   mounted() {

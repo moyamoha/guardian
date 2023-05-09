@@ -8,33 +8,30 @@
         v-bind="attrs"
         dense
         small
-        >{{ $t("btns.change_password") }}</v-btn
+        >Change password</v-btn
       >
     </template>
     <v-card>
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
-        {{ $t("main.change_password_dialog_title") }}
+        Changing password
         <v-icon @click="dialog = !dialog" color="brown"
           >mdi-close-circle</v-icon
         >
       </v-card-title>
       <v-card-text>
         <p class="secondary--text mt-1">
-          {{ $t("rules.long_password") }}
+          Your new password must be at least 10 characters long
         </p>
         <ErrorAlert></ErrorAlert>
         <v-form class="my-3" ref="passChangeForm" @submit="handleSubmit">
           <PasswordField
             v-model="currentPassword"
-            :label="$t('labels.inputs.current_password')"
+            label="Your current password *"
           />
-          <PasswordField
-            v-model="newPassword"
-            :label="$t('labels.inputs.new_password')"
-          />
+          <PasswordField v-model="newPassword" label="New password *" />
           <PasswordField
             v-model="newPasswordAgain"
-            :label="$t('labels.inputs.confirm_new_password')"
+            label="Confirm new password *"
           />
           <v-btn
             type="button"
@@ -44,7 +41,7 @@
             outlined
             @click="generateRandomPassword"
             class="generate-pass-btn"
-            >{{ $t("labels.nav.generate") }}</v-btn
+            >Generate</v-btn
           >
           <v-btn
             type="submit"
@@ -53,7 +50,7 @@
             small
             outlined
             :loading="processing"
-            >{{ $t("btns.save") }}</v-btn
+            >Save</v-btn
           >
         </v-form>
       </v-card-text>
@@ -67,7 +64,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "./ErrorAlert.vue";
 import PasswordField from "./PasswordField.vue";
 import { generatePassword } from "@/utils/generate-password";
-import i18n from "@/plugins/i18n";
+
 export default {
   data() {
     return {
@@ -85,7 +82,7 @@ export default {
     async handleSubmit(e) {
       e.preventDefault();
       if (this.newPassword !== this.newPasswordAgain) {
-        this.setError(i18n.t("errors.passwords_dont_match"));
+        this.setError("Passwords do not match");
         return;
       }
       this.processing = true;

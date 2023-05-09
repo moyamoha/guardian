@@ -1,19 +1,23 @@
 <template>
   <v-col cols="12" class="mb-5">
-    <h3 class="mb-2">{{ $t("labels.profile", { capitalize: true }) }}</h3>
+    <h3 class="mb-2">Profile</h3>
     <p>
-      <strong>{{ $t("labels.email") }}: </strong
+      <strong>Email: </strong
       ><span class="grey--text text--darken-1">{{ loggedInUser.email }}</span>
     </p>
     <ChangeNameDialog :user="loggedInUser"></ChangeNameDialog>
     <br />
     <ChangePassDialog></ChangePassDialog>
     <v-divider class="my-3"></v-divider>
-    <h3 class="mt-3">{{ $t("labels.account") }}</h3>
+    <h3 class="mt-3">Account</h3>
     <AccountDeactivation class="account-action-box"></AccountDeactivation>
     <MfaToggler class="account-action-box"></MfaToggler>
-    <h3 class="mt-3">{{ $t("labels.data") }}</h3>
-    <p>{{ $t("main.download_your_data") }}</p>
+    <h3 class="mt-3">Data</h3>
+    <p>
+      To download your data, simply click the button below. This will initiate
+      the download process and save your data to your computer. It's as simple
+      as that!
+    </p>
     <v-btn
       dense
       small
@@ -21,7 +25,7 @@
       class="white--text"
       :loading="downloading"
       @click="downloadData"
-      >{{ $t("btns.download") }}</v-btn
+      >download</v-btn
     >
   </v-col>
 </template>

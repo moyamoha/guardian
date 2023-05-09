@@ -3,10 +3,12 @@
     <v-form class="forgot-form" ref="forgotForm" @submit="handleSubmit">
       <ErrorAlert></ErrorAlert>
       <p class="mb-3">
-        {{ $t("main.forgot_password_guide_text") }}
+        Please type your email address in the field below. We will send a
+        temporary password which you can use to login. Make sure to change it
+        afterwards
       </p>
       <v-text-field
-        :label="getEmailLabel"
+        label="Your email *"
         v-model="email"
         dense
         outlined
@@ -18,7 +20,7 @@
         type="submit"
         :disabled="processing"
         :loading="processing"
-        >{{ $t("btns.submit") }}</v-btn
+        >Submit</v-btn
       >
     </v-form>
   </v-col>
@@ -27,7 +29,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "@/components/ErrorAlert.vue";
-import i18n from "@/plugins/i18n";
+
 export default {
   data() {
     return { email: "", processing: false };
@@ -43,12 +45,7 @@ export default {
       this.processing = false;
     },
     required(v) {
-      return (v && v.length > 0) || i18n.t("rules.required_field");
-    },
-  },
-  computed: {
-    getEmailLabel() {
-      return this.$t("labels.inputs.your_email");
+      return (v && v.length > 0) || "This field is required";
     },
   },
   name: "password-forgotten",

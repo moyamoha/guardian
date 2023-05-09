@@ -28,6 +28,7 @@ const actions = {
         });
         router.push("/home");
       } else {
+        localStorage.setItem("email", email);
         router.push("/verify-code");
       }
       commit("setError", "");
@@ -42,9 +43,12 @@ const actions = {
     router.push("/").catch((e) => {});
   },
 
-  verifyCode: async ({ commit }, code) => {
+  verifyCode: async ({ commit }, { email, code }) => {
     try {
-      const resp = await axios.post("/auth/verify-code", { code: code });
+      const resp = await axios.post("/auth/verify-totp", {
+        token: code,
+        email: email,
+      });
       localStorage.setItem("accessToken", resp.data.accessToken);
       const decoded = jwt_decode(resp.data.accessToken);
       commit("setUser", {
@@ -72,12 +76,21 @@ const actions = {
     }
   },
 
-  toggleMfa: async ({ commit, state }, mfaEnabled) => {
+  disbleMfa: async ({ commit, state }) => {
     try {
-      await axios.patch("/users/toggle-mfa", { mfaEnabled });
-      commit("setUser", { ...state.user, mfaEnabled: mfaEnabled });
+      await axios.patch("/users/disable-mfa");
+      commit("setUser", { ...state.user, mfaEnabled: false });
     } catch (e) {
       commit("setError", e.response.data.message);
+    }
+  },
+
+  enableMfa: async ({ commit, state }, token) => {
+    try {
+      await axios.patch("/users/enable-mfa", { token: token });
+      commit("setUser", { ...state.user, mfaEnabled: true });
+    } catch (error) {
+      commit("setError", error.response.data.message);
     }
   },
 

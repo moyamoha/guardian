@@ -1,18 +1,18 @@
 <template>
   <div class="home">
     <p v-show="loggedInUser !== null">
-      {{ $t("main.hello") }}
+      Hello
       <strong>{{ loggedInUser.firstname }} {{ loggedInUser.lastname }}</strong
       >!
     </p>
     <Loading v-if="this.isLoading"></Loading>
     <p v-else-if="this.content.length > 0">
-      {{ $t("main.your_data") }}
+      All your credentials
       <br />
       <section class="action-row">
         <CategoryDialog
         :category="null"
-        :activatorText="getActivatorTextForCategoryDialog"
+        activatorText="Create category"
         ></CategoryDialog>
         <span class="action-link" @click="collapseOrExpandAll">{{ collapseOrExpandText }}</span>
       </section>
@@ -56,13 +56,8 @@ export default {
   computed: {
     ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes"]),
     collapseOrExpandText() {
-      const txt = this.expandedOnes.length > 0 ? this.$t("btns.collapse_all") : this.$t("btns.expand_all");
-      return txt[0].toUpperCase() + txt.slice(1)
+      return this.expandedOnes.length > 0 ? "Collapse all" : "Expand all";
     },
-    getActivatorTextForCategoryDialog() {
-      const txt = this.$t("btns.create_category")
-      return txt[0].toUpperCase() + txt.slice(1)
-    }
   }, 
 };
 </script>
