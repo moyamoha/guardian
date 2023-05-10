@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import EntryRow from "./EntryRow.vue";
-import EntryDialog from "./EntryDialog.vue";
+import EntryRow from "../entry/EntryRow.vue";
+import EntryDialog from "../entry/EntryDialog.vue";
 import CategoryDialog from "./CategoryDialog.vue";
 import { mapGetters, mapMutations } from "vuex";
 export default {

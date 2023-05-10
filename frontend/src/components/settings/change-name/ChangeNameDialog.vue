@@ -52,7 +52,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import ErrorAlert from "./ErrorAlert.vue";
+import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
 export default {
   props: {
     user: {

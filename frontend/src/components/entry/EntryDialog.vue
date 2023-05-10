@@ -78,9 +78,9 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import ErrorAlert from "./ErrorAlert.vue";
-import PasswordField from "./PasswordField.vue";
-import UrlField from "./UrlField.vue";
+import ErrorAlert from "../_shared/ErrorAlert.vue";
+import PasswordField from "../_shared/PasswordField.vue";
+import UrlField from "../_shared/UrlField.vue";
 
 export default {
   props: ["entry", "categoryId"],

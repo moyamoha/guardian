@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import EntryRow from "./EntryRow.vue";
 import { mapGetters } from "vuex";
-import CategoryContainer from "./CategoryContainer.vue";
+import CategoryContainer from "./category/CategoryContainer.vue";
+import EntryRow from "./entry/EntryRow.vue";
 export default {
   computed: {
     ...mapGetters(["content", "expandedOnes"]),

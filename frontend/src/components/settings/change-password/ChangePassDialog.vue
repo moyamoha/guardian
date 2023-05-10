@@ -61,8 +61,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import ErrorAlert from "./ErrorAlert.vue";
-import PasswordField from "./PasswordField.vue";
+import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
+import PasswordField from "@/components/_shared/PasswordField.vue";
 import { generatePassword } from "@/utils/generate-password";
 
 export default {

@@ -32,10 +32,10 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import MfaToggler from "../components/MfaToggler.vue";
-import AccountDeactivation from "@/components/AccountDeactivation.vue";
-import ChangeNameDialog from "@/components/ChangeNameDialog.vue";
-import ChangePassDialog from "../components/ChangePassDialog.vue";
+import MfaToggler from "@/components/settings/mfa/MfaToggler.vue";
+import AccountDeactivation from "@/components/settings/deactivate-account/AccountDeactivation.vue";
+import ChangeNameDialog from "@/components/settings/change-name/ChangeNameDialog.vue";
+import ChangePassDialog from "@/components/settings/change-password/ChangePassDialog.vue";
 import axios from "axios";
 export default {
   data() {

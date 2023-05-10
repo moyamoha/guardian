@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Loading from "@/components/Loading.vue";
 import axios from "axios";
+import Loading from "@/components/_shared/Loading.vue";
 
 export default {
   name: "activies-view",

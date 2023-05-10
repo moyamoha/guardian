@@ -42,8 +42,8 @@
 
 <script>
 import { mapActions, mapMutations } from "vuex";
-import ErrorAlert from "@/components/ErrorAlert.vue";
-import PasswordField from "@/components/PasswordField.vue";
+import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
+import PasswordField from "@/components/_shared/PasswordField.vue";
 export default {
   data: () => {
     return {

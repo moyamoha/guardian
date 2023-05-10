@@ -32,10 +32,10 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import DataTree from "@/components/DataTree.vue";
-import EntryDialog from "@/components/EntryDialog.vue";
-import CategoryDialog from "@/components/CategoryDialog.vue";
+import EntryDialog from "@/components/entry/EntryDialog.vue";
+import CategoryDialog from "@/components/category/CategoryDialog.vue";
 import router from "@/router";
-import Loading from "@/components/Loading.vue";
+import Loading from "@/components/_shared/Loading.vue";
 // @ is an alias to /src
 
 export default {

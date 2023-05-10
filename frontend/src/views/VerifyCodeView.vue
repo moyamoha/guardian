@@ -27,7 +27,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import ErrorAlert from "@/components/ErrorAlert.vue";
+import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
 
 export default {
   data() {

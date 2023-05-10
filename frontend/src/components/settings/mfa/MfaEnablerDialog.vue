@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="700" height="700">
+  <v-dialog v-model="dialog" width="700" height="700" persistent>
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         color="indigo darken-1"
@@ -66,12 +66,6 @@
             >Back to qrcode</v-btn
           >
         </section>
-        <section v-else>
-          <p>
-            Congratulations! You have successfully enabled
-            Multifactor-authentication for your account
-          </p>
-        </section>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -79,7 +73,7 @@
 
 <script>
 import axios from "axios";
-import ErrorAlert from "./ErrorAlert.vue";
+import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
 import QRCode from "qrcode";
 import { mapActions, mapMutations } from "vuex";
 
@@ -88,25 +82,31 @@ export default {
   data() {
     return {
       dialog: false,
-      qrcodeSrc: "",
       step: 0,
       code: "",
       enabling: false,
     };
   },
   methods: {
-    ...mapMutations(["setError"]),
+    ...mapMutations(["setError", "setMfaStatus"]),
     ...mapActions(["enableMfa"]),
     async verify() {
-      await this.enableMfa(this.code);
-      this.dialog = false;
-      this.step = 0;
-      this.code = "";
+      this.enabling = true;
+      try {
+        await this.enableMfa(this.code);
+        this.code = "";
+        this.step = 2;
+        this.setMfaStatus(true);
+      } catch (e) {
+        this.step = 1;
+      } finally {
+        this.enabling = false;
+      }
     },
   },
   watch: {
     async dialog(val) {
-      if (val && this.qrcodeSrc === "") {
+      if (val) {
         this.step = 0;
         const resp = await axios.get("/users/mfa-otpauthurl");
         const that = this;

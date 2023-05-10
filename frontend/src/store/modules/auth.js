@@ -76,19 +76,18 @@ const actions = {
     }
   },
 
-  disbleMfa: async ({ commit, state }) => {
+  disableMfa: async ({ commit, state }) => {
     try {
       await axios.patch("/users/disable-mfa");
-      commit("setUser", { ...state.user, mfaEnabled: false });
+      commit("setMfaStatus", false);
     } catch (e) {
       commit("setError", e.response.data.message);
     }
   },
 
-  enableMfa: async ({ commit, state }, token) => {
+  enableMfa: async ({ commit }, token) => {
     try {
       await axios.patch("/users/enable-mfa", { token: token });
-      commit("setUser", { ...state.user, mfaEnabled: true });
     } catch (error) {
       commit("setError", error.response.data.message);
     }
@@ -148,6 +147,7 @@ const mutations = {
     state.user.firstname = nameObj.firstname;
     state.user.lastname = nameObj.lastname;
   },
+  setMfaStatus: (state, status) => (state.user.mfaEnabled = status),
 };
 
 export default {
