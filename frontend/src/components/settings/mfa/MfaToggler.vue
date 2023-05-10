@@ -28,19 +28,6 @@ export default {
   },
   methods: {
     ...mapActions(["disableMfa"]),
-    async handleOkResponse() {
-      if (this.loggedInUser.mfaEnabled) {
-        this.disabling = true;
-        await this.disableMfa();
-        this.disabling = false;
-      } else {
-        this.disabling = true;
-        await this.toggleMfa(true);
-        this.disabling = false;
-      }
-      this.showDialog = false;
-    },
-    handleBtnClick() {},
   },
   computed: {
     ...mapGetters(["loggedInUser"]),
