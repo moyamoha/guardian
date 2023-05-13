@@ -53,10 +53,9 @@ export default {
     ChangePassDialog,
   },
   methods: {
-    ...mapActions(["fetchContent"]),
+    ...mapActions(["fetchContent", "getProfile"]),
     async downloadData() {
       this.downloading = true;
-      const activities = (await axios("/users/activity-history")).data;
       const content = (await axios.get("/categories/")).data;
       const simplifiedContent = content.map((c) => {
         return {
@@ -67,14 +66,9 @@ export default {
           }),
         };
       });
-      const simplifiedActivities = activities.map((a) => {
-        const { activityType, timestamp } = a;
-        return { activityType, timestamp };
-      });
       const data = {
         ...this.loggedInUser,
         content: [...simplifiedContent],
-        activities: [...simplifiedActivities],
       };
       const file = new Blob([JSON.stringify(data)], {
         type: "application/json",
@@ -86,6 +80,9 @@ export default {
       URL.revokeObjectURL(a.href);
       this.downloading = false;
     },
+  },
+  async mounted() {
+    await this.getProfile();
   },
 };
 </script>

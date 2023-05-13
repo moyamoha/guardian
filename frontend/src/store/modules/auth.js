@@ -139,6 +139,16 @@ const actions = {
       commit("setError", e.response.data.message);
     }
   },
+
+  async getProfile({ commit }) {
+    try {
+      const response = await axios.get("/users/profile");
+      const profile = response.data;
+      commit("setUser", profile);
+    } catch (error) {
+      commit("setError", e.response.data.message);
+    }
+  },
 };
 
 const mutations = {

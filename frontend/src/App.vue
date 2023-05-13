@@ -24,6 +24,12 @@ export default {
   computed: {
     ...mapGetters(["language"]),
   },
+  mounted() {
+    const eventSource = new EventSource("http://localhost:5000/notifications");
+    eventSource.onmessage = ({ data }) => {
+      console.log("New message", JSON.parse(data));
+    };
+  },
 };
 </script>
 
