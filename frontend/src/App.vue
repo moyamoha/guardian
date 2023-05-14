@@ -21,14 +21,35 @@ export default {
     NavBar,
     NotifBar,
   },
-  computed: {
-    ...mapGetters(["language"]),
-  },
-  mounted() {
-    const eventSource = new EventSource("http://localhost:5000/notifications");
-    eventSource.onmessage = ({ data }) => {
-      console.log("New message", JSON.parse(data));
+  data() {
+    return {
+      eventSource: null,
     };
+  },
+  methods: {
+    subscribeToNotifications() {
+      const url = new URL("http://localhost:5000/notifications");
+      // url.searchParams.append("channel", this.loggedInUser.email);
+      this.eventSource = new EventSource(url);
+      this.eventSource.addEventListener("message", (e) => {
+        console.log(e.data);
+      });
+      this.eventSource.addEventListener("profile-update", (e) => {
+        this.$store.dispatch("getProfile");
+      });
+      // this.eventSource.addEventListener("user-deactivate", (e) => {
+      //   this.$store.dispatch("logout");
+      // });
+    },
+    unsubscribeFromNotifications() {
+      if (this.eventSource) {
+        this.eventSource.close();
+        this.eventSource = null;
+      }
+    },
+  },
+  computed: {
+    ...mapGetters(["loggedInUser"]),
   },
 };
 </script>

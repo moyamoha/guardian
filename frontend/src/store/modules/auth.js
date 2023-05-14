@@ -146,7 +146,7 @@ const actions = {
       const profile = response.data;
       commit("setUser", profile);
     } catch (error) {
-      commit("setError", e.response.data.message);
+      commit("setError", error.response.data.message);
     }
   },
 };
