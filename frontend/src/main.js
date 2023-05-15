@@ -4,10 +4,11 @@ import router from "./router";
 import vuetify from "./plugins/vuetify";
 import store from "./store";
 import axios from "axios";
+import { BACKEND_BASE_URL } from "./utils/constants";
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = "https://vartija-backend.onrender.com";
+axios.defaults.baseURL = BACKEND_BASE_URL;
 axios.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
