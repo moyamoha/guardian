@@ -13,43 +13,39 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import NavBar from "./components/NavBar.vue";
 import NotifBar from "./components/NotifBar.vue";
+import socket from "./plugins/socket";
 export default {
   components: {
     NavBar,
     NotifBar,
   },
-  data() {
-    return {
-      eventSource: null,
-    };
-  },
-  methods: {
-    subscribeToNotifications() {
-      const url = new URL("http://localhost:5000/notifications");
-      // url.searchParams.append("channel", this.loggedInUser.email);
-      this.eventSource = new EventSource(url);
-      this.eventSource.addEventListener("message", (e) => {
-        console.log(e.data);
-      });
-      this.eventSource.addEventListener("profile-update", (e) => {
-        this.$store.dispatch("getProfile");
-      });
-      // this.eventSource.addEventListener("user-deactivate", (e) => {
-      //   this.$store.dispatch("logout");
-      // });
-    },
-    unsubscribeFromNotifications() {
-      if (this.eventSource) {
-        this.eventSource.close();
-        this.eventSource = null;
-      }
-    },
-  },
   computed: {
     ...mapGetters(["loggedInUser"]),
+  },
+  watch: {
+    loggedInUser: {
+      handler: function (val) {
+        if (val) {
+          socket.emit("joinRoom", val.email);
+        }
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    ...mapActions(["logout", "getProfile"]),
+  },
+  mounted() {
+    socket.on("profile-updated", () => {
+      this.getProfile();
+    });
+
+    socket.on("user-deactivated", () => {
+      this.logout();
+    });
   },
 };
 </script>

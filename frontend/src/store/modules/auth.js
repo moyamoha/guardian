@@ -1,3 +1,4 @@
+import socket from "@/plugins/socket";
 import router from "@/router";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -80,32 +81,36 @@ const actions = {
     try {
       await axios.patch("/users/disable-mfa");
       commit("setMfaStatus", false);
+      socket.emit("profile-updated", state.user.email);
     } catch (e) {
       commit("setError", e.response.data.message);
     }
   },
 
-  enableMfa: async ({ commit }, token) => {
+  enableMfa: async ({ commit, state }, token) => {
     try {
       await axios.patch("/users/enable-mfa", { token: token });
+      socket.emit("profile-updated", state.user.email);
     } catch (error) {
       commit("setError", error.response.data.message);
     }
   },
 
-  async deactivate({ commit, dispatch }) {
+  async deactivate({ commit, dispatch, state }) {
     try {
       await axios.patch("/users/deactivate");
+      socket.emit("user-deactivated", state.user.email);
       dispatch("logout");
     } catch (e) {
       commit("setError", e.response.data.message);
     }
   },
 
-  async changeName({ commit }, { firstname, lastname }) {
+  async changeName({ commit, state }, { firstname, lastname }) {
     try {
       await axios.put("/users/change-name", { firstname, lastname });
       commit("setName", { firstname, lastname });
+      socket.emit("profile-updated", state.user.email);
     } catch (e) {
       commit("setError", e.response.data.message);
     }

@@ -8,7 +8,6 @@ import axios from "axios";
 Vue.config.productionTip = false;
 
 axios.defaults.baseURL = "https://vartija-backend.onrender.com";
-//axios.defaults.baseURL = "http://localhost:5000";
 axios.interceptors.request.use((config) => {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
