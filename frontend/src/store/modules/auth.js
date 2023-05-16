@@ -37,7 +37,8 @@ const actions = {
       commit("setError", e.response.data.message);
     }
   },
-  logout: ({ commit }) => {
+  logout: ({ commit, state }) => {
+    socket.emit('leaveRoom', state.user.email)
     localStorage.clear();
     commit("setUser", null);
     commit("setError", "");
