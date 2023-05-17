@@ -12,6 +12,7 @@
         v-model="code"
         dense
         outlined
+        autofocus
         :rules="[atLeastSix]"
       ></v-text-field>
       <v-btn

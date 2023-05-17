@@ -26,6 +26,7 @@
             outlined
             v-model="item.title"
             :rules="[required]"
+            autofocus
           ></v-text-field>
           <v-text-field
             label="Username *"

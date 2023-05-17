@@ -5,6 +5,7 @@
     <v-form class="px-0 py-3" ref="form" lazy-validation @submit="handleSubmit">
       <v-text-field
         label="Email *"
+        autofocus
         v-model="email"
         dense
         outlined

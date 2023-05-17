@@ -28,7 +28,7 @@
             >mdi-close-circle</v-icon
           >
         </v-card-title>
-        <v-card-text class="mt-2 pb-0">
+        <v-card-text class="mt-2 pb-4">
           <ErrorAlert></ErrorAlert>
           <p>
             Are you sure you want to deactivate your account? You can reactivate
@@ -39,6 +39,7 @@
           <PasswordField
             label="Your password *"
             v-model="password"
+            autofocus
           ></PasswordField>
           <v-btn
             elevation="2"

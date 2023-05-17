@@ -25,6 +25,7 @@
             outlined
             :rules="[required]"
             v-model="item.name"
+            autofocus
           ></v-text-field>
           <div class="btn-cont">
             <v-btn

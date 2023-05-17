@@ -12,6 +12,7 @@
     :rules="[required]"
     @input="updateValue"
     aria-autocomplete="none"
+    :autofocus="autofocus"
   >
   </v-text-field>
 </template>
@@ -33,6 +34,11 @@ export default {
       default: "Password *",
     },
     ableToGenerate: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    autofocus: {
       type: Boolean,
       required: false,
       default: false,

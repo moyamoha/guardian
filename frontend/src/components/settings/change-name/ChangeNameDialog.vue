@@ -26,6 +26,7 @@
             label="First name *"
             v-model="profile.firstname"
             :rules="[required]"
+            autofocus
           ></v-text-field>
           <v-text-field
             outlined

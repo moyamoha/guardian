@@ -13,6 +13,7 @@
       <v-text-field
         label="Email *"
         v-model="email"
+        autofocus
         dense
         outlined
         type="email"
@@ -58,7 +59,6 @@ export default {
           await this.login({ email: this.email, password: this.password });
         }
       } catch (error) {
-        console.log(error);
       } finally {
         this.loggingIn = false;
       }

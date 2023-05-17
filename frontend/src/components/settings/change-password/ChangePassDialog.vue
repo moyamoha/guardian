@@ -27,6 +27,7 @@
           <PasswordField
             v-model="currentPassword"
             label="Your current password *"
+            autofocus
           />
           <PasswordField v-model="newPassword" label="New password *" />
           <PasswordField

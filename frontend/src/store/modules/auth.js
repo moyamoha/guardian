@@ -37,9 +37,8 @@ const actions = {
       commit("setError", e.response.data.message);
     }
   },
-  logout: ({ commit, state }) => {
-    console.log(state);
-    socket.emit("leaveRoom", state.user.email);
+  logout: ({ commit, getters }) => {
+    socket.emit("leaveRoom", getters.loggedInUser.email);
     localStorage.clear();
     commit("setUser", null);
     commit("setError", "");
@@ -79,21 +78,20 @@ const actions = {
     }
   },
 
-  disableMfa: async ({ commit, state }) => {
-    console.log(state);
+  disableMfa: async ({ commit, getters }) => {
     try {
       await axios.patch("/users/disable-mfa");
       commit("setMfaStatus", false);
-      socket.emit("profile-updated", state.user.email);
+      socket.emit("profile-updated", getters.loggedInUser.email);
     } catch (e) {
       commit("setError", e.response.data.message);
     }
   },
 
-  enableMfa: async ({ commit, state }, token) => {
+  enableMfa: async ({ commit, getters }, token) => {
     try {
       await axios.patch("/users/enable-mfa", { token: token });
-      socket.emit("profile-updated", state.user.email);
+      socket.emit("profile-updated", getters.loggedInUser.email);
     } catch (error) {
       commit("setError", error.response.data.message);
     }
