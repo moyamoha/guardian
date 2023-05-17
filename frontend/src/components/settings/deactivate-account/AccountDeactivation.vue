@@ -35,12 +35,11 @@
             it by logging in again within one month from now, otherwise it will
             be deleted permanently
           </p>
+          <p>Type your password in the field below and click YES</p>
           <PasswordField
             label="Your password *"
             v-model="password"
           ></PasswordField>
-        </v-card-text>
-        <v-card-actions>
           <v-btn
             elevation="2"
             small
@@ -50,6 +49,7 @@
             color="success"
             :disabled="processing"
             :loading="processing"
+            class="mr-2"
             >Yes</v-btn
           >
           <v-btn
@@ -61,7 +61,7 @@
             @click="showDialog = false"
             >No</v-btn
           >
-        </v-card-actions>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </div>
