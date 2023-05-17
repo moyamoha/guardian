@@ -1,3 +1,7 @@
 const isDevMode = process.env.NODE_ENV === 'development'
+const useProdUrlAnyway = process.env.VUE_APP_USE_PROD_URL && process.env.VUE_APP_USE_PROD_URL === '1'
 
-export const BACKEND_BASE_URL = isDevMode ? 'http://localhost:5000' : 'https://vartija-backend.onrender.com'
+const devUrl = 'http://localhost:5000'
+const prodUlr = 'https://vartija-backend.onrender.com'
+
+export const BACKEND_BASE_URL = isDevMode && !useProdUrlAnyway ? devUrl : prodUlr

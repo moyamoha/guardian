@@ -39,6 +39,9 @@ export default {
     ...mapActions(["logout", "getProfile"]),
   },
   mounted() {
+    if (this.loggedInUser) {
+      socket.emit('joinRoom', this.loggedInUser.email)
+    }
     socket.on("profile-updated", () => {
       this.getProfile();
     });
