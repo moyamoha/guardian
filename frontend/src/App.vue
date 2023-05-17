@@ -40,7 +40,7 @@ export default {
   },
   mounted() {
     if (this.loggedInUser) {
-      socket.emit('joinRoom', this.loggedInUser.email)
+      socket.emit("joinRoom", this.loggedInUser.email);
     }
     socket.on("profile-updated", () => {
       this.getProfile();

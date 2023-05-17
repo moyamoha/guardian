@@ -38,7 +38,8 @@ const actions = {
     }
   },
   logout: ({ commit, state }) => {
-    socket.emit('leaveRoom', state.user.email)
+    console.log(state);
+    socket.emit("leaveRoom", state.user.email);
     localStorage.clear();
     commit("setUser", null);
     commit("setError", "");
@@ -79,6 +80,7 @@ const actions = {
   },
 
   disableMfa: async ({ commit, state }) => {
+    console.log(state);
     try {
       await axios.patch("/users/disable-mfa");
       commit("setMfaStatus", false);
@@ -97,10 +99,11 @@ const actions = {
     }
   },
 
-  async deactivate({ commit, dispatch, state }) {
+  async deactivate({ commit, dispatch, state }, password) {
     try {
-      await axios.patch("/users/deactivate");
+      await axios.patch("/users/deactivate", { password });
       socket.emit("user-deactivated", state.user.email);
+      socket.emit("leaveRoom", state.user.email);
       dispatch("logout");
     } catch (e) {
       commit("setError", e.response.data.message);

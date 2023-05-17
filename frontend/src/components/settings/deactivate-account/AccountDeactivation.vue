@@ -28,10 +28,17 @@
             >mdi-close-circle</v-icon
           >
         </v-card-title>
-        <v-card-text class="mt-3">
-          Are you sure you want to deactivate your account? You can reactivate
-          it by logging in again within one month from now, otherwise it will be
-          deleted permanently
+        <v-card-text class="mt-2 pb-0">
+          <ErrorAlert></ErrorAlert>
+          <p>
+            Are you sure you want to deactivate your account? You can reactivate
+            it by logging in again within one month from now, otherwise it will
+            be deleted permanently
+          </p>
+          <PasswordField
+            label="Your password *"
+            v-model="password"
+          ></PasswordField>
         </v-card-text>
         <v-card-actions>
           <v-btn
@@ -61,19 +68,27 @@
 </template>
 
 <script>
+import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
+import PasswordField from "@/components/_shared/PasswordField.vue";
 import { mapActions } from "vuex";
 export default {
   data() {
-    return { processing: false, showDialog: false };
+    return { processing: false, showDialog: false, password: "" };
   },
   methods: {
     ...mapActions(["deactivate"]),
     async handleDeactivate() {
+      if (this.password === "") return;
       this.processing = true;
-      await this.deactivate();
-      this.processing = false;
+      try {
+        await this.deactivate(this.password);
+      } catch (e) {
+      } finally {
+        this.processing = false;
+      }
     },
   },
+  components: { PasswordField, ErrorAlert },
 };
 </script>
 
