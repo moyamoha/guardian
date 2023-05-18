@@ -12,12 +12,14 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   methods: {
     ...mapActions(["logout"]),
+    ...mapMutations(["setContentAlreadyFetched"]),
     handleLogout() {
+      this.setContentAlreadyFetched(false);
       this.logout();
     },
   },

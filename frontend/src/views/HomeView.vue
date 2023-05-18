@@ -43,18 +43,23 @@ export default {
   components: { DataTree, EntryDialog, CategoryDialog, Loading },
   methods: {
     ...mapActions(["fetchContent"]),
-    ...mapMutations(["setExpandedCategories"]),
+    ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched"]),
     collapseOrExpandAll() {
       if (this.expandedOnes.length > 0) this.setExpandedCategories([])
       else this.setExpandedCategories(this.content.map(c => c._id))
     }
   },
   mounted() {
-    if (this.loggedInUser) this.fetchContent();
+    if (this.loggedInUser && !this.contentAlreadyFetched) {
+      this.fetchContent();
+      this.setContentAlreadyFetched(true)
+    } else if (this.loggedInUser && this.contentAlreadyFetched) {
+      return
+    }
     else router.replace("/");
   },
   computed: {
-    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes"]),
+    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes", "contentAlreadyFetched"]),
     collapseOrExpandText() {
       return this.expandedOnes.length > 0 ? "Collapse all" : "Expand all";
     },

@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
-  modules: ["user", "ui"],
+  modules: ["user", "ui", "data"],
 });
 
 export default new Vuex.Store({
