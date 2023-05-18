@@ -82,6 +82,7 @@ import { mapActions, mapGetters } from "vuex";
 import ErrorAlert from "../_shared/ErrorAlert.vue";
 import PasswordField from "../_shared/PasswordField.vue";
 import UrlField from "../_shared/UrlField.vue";
+import socket from "@/plugins/socket";
 
 export default {
   props: ["entry", "categoryId"],
@@ -102,8 +103,8 @@ export default {
     ...mapActions(["addEntry", "editEntry", "changeCategoryForEntry"]),
     async handleSubmit(e) {
       e.preventDefault();
-      this.processing = true;
       if (this.$refs.enform.validate()) {
+        this.processing = true;
         if (this.entry) {
           const categoryChanged = this.item.category.id !== this.entry.category;
           await this.editEntry({
@@ -123,8 +124,10 @@ export default {
               },
             });
           }
+          socket.emit("content-changed", this.loggedInUser.email);
         } else {
           await this.addEntry({ entry: this.item, categId: this.categoryId });
+          socket.emit("content-changed", this.loggedInUser.email);
         }
         this.processing = false;
         if (this.error === "") this.dialog = false;
@@ -157,7 +160,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["error", "categories"]),
+    ...mapGetters(["error", "categories", "loggedInUser"]),
     createNew() {
       return this.entry === null || this.entry === undefined;
     },

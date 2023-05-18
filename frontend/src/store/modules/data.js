@@ -62,7 +62,7 @@ const actions = {
     }
   },
 
-  editCategory: async ({ commit, dispatch }, { id, name }) => {
+  editCategory: async ({ commit, dispatch, getters }, { id, name }) => {
     try {
       await axios.put("/categories/" + id, { name: name });
       dispatch("fetchContent");

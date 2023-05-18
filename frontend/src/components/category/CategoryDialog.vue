@@ -55,6 +55,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import CategoryDeletionDialog from "./CategoryDeletionDialog.vue";
+import socket from "@/plugins/socket";
 export default {
   props: ["category", "activatorText"],
   data() {
@@ -70,8 +71,8 @@ export default {
     ...mapActions(["addCategory", "editCategory"]),
     async handleSubmit(e) {
       e.preventDefault();
-      this.processing = true;
       if (this.$refs.catform.validate()) {
+        this.processing = true;
         if (this.category) {
           await this.editCategory({
             id: this.category._id,
@@ -80,6 +81,7 @@ export default {
         } else {
           await this.addCategory(this.item);
         }
+        socket.emit("content-changed", this.loggedInUser.email);
         this.processing = false;
         if (this.error === "") this.dialog = false;
       }
@@ -93,7 +95,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["error"]),
+    ...mapGetters(["error", "loggedInUser"]),
     createNew() {
       return this.category === null || this.category === undefined;
     },

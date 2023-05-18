@@ -36,7 +36,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["logout", "getProfile"]),
+    ...mapActions(["logout", "getProfile", "fetchContent"]),
   },
   mounted() {
     if (this.loggedInUser) {
@@ -48,6 +48,10 @@ export default {
 
     socket.on("user-deactivated", () => {
       this.logout();
+    });
+
+    socket.on("content-changed", () => {
+      this.fetchContent();
     });
   },
 };

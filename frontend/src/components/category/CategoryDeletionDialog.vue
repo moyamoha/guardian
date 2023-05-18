@@ -53,7 +53,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import socket from "@/plugins/socket";
+import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["category", "done"],
   data() {
@@ -69,8 +70,11 @@ export default {
       await this.removeCategory(this.category._id);
       this.deleting = false;
       this.dialog = false;
-      // this.$emit("update:done", true);
+      socket.emit("content-changed", this.loggedInUser.email);
     },
+  },
+  computed: {
+    ...mapGetters(["loggedInUser"]),
   },
 };
 </script>

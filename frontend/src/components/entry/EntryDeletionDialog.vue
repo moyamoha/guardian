@@ -43,7 +43,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import socket from "@/plugins/socket";
+import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["entry"],
   data() {
@@ -58,7 +59,11 @@ export default {
       this.processing = true;
       await this.removeEntry(this.entry._id);
       this.processing = false;
+      socket.emit("content-changed", this.loggedInUser.email);
     },
+  },
+  computed: {
+    ...mapGetters(["loggedInUser"]),
   },
 };
 </script>
