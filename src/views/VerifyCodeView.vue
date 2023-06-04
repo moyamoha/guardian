@@ -13,7 +13,7 @@
         dense
         outlined
         autofocus
-        :rules="[atLeastSix]"
+        :rules="[atMostSixDigits]"
       ></v-text-field>
       <v-btn
         color="primary"
@@ -48,11 +48,15 @@ export default {
       }
       this.processing = false;
     },
-    atLeastSix(v) {
-      return (
-        (v.trim().length === 6 && parseInt(v.trim()) !== NaN) ||
-        "Code must be 6 digits long"
-      );
+    atMostSixDigits(v) {
+      if (!v) return true
+      const trimmed = v.trim()
+      const isAllDigits = !isNaN(parseInt(trimmed))
+      if (trimmed.length <= 6 && isAllDigits) {
+        return true
+      }
+      if (!isAllDigits) return "Only digits are allowed"
+      if (trimmed.length > 6) return "Code must be 6 digits at most"
     },
   },
   name: "verify-code",
