@@ -55,7 +55,6 @@ export default {
       if (trimmed.length <= 6 && isAllDigits) {
         return true
       }
-      console.log(trimmed)
       if (!isAllDigits) return "Only digits are allowed"
       if (trimmed.length > 6) return "Code must be 6 digits at most"
     },
