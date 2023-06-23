@@ -51,7 +51,7 @@ export default {
     atMostSixDigits(v) {
       if (!v) return true
       const trimmed = v.trim()
-      const isAllDigits = parseInt(trimmed).toString() !== trimmed
+      const isAllDigits = parseInt(trimmed).toString() === trimmed
       if (trimmed.length <= 6 && isAllDigits) {
         return true
       }
