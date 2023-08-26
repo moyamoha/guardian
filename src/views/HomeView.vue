@@ -14,8 +14,10 @@
         :category="null"
         activatorText="Create category"
         ></CategoryDialog>
-        <span class="action-link" @click="collapseOrExpandAll">{{ collapseOrExpandText }}</span>
+        <span class="action-link" v-if="this.isTreeView" @click="collapseOrExpandAll">{{ collapseOrExpandText }}</span>
       </section>
+      <v-btn class="view-toggle-btn" dense small outlined @click="changeView">{{ toggleViewBtnText }}</v-btn>
+      <SearchField v-if="this.isCardView"></SearchField>
     </p>
     <p v-else>
       You have not created anything yet.
@@ -24,7 +26,8 @@
         activatorText="Create category"
       ></CategoryDialog>
     </p>
-    <DataTree></DataTree>
+    <DataTree v-if="!this.isCardView"></DataTree>
+    <EntryContainer v-else></EntryContainer>
     <CategoryDialog></CategoryDialog>
   </div>
 </template>
@@ -36,17 +39,22 @@ import EntryDialog from "@/components/entry/EntryDialog.vue";
 import CategoryDialog from "@/components/category/CategoryDialog.vue";
 import router from "@/router";
 import Loading from "@/components/_shared/Loading.vue";
+import EntryContainer from "@/components/entry/EntryContainer.vue";
+import SearchField from "@/components/SearchField.vue";
 // @ is an alias to /src
 
 export default {
   name: "HomeView",
-  components: { DataTree, EntryDialog, CategoryDialog, Loading },
+  components: { DataTree, EntryDialog, CategoryDialog, Loading, EntryContainer, SearchField },
   methods: {
     ...mapActions(["fetchContent"]),
-    ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched"]),
+    ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched", "toggleCardView"]),
     collapseOrExpandAll() {
       if (this.expandedOnes.length > 0) this.setExpandedCategories([])
       else this.setExpandedCategories(this.content.map(c => c._id))
+    },
+    changeView() {
+      this.toggleCardView()
     }
   },
   mounted() {
@@ -59,11 +67,15 @@ export default {
     else router.replace("/");
   },
   computed: {
-    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes", "contentAlreadyFetched"]),
+    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes", "contentAlreadyFetched", "isCardView", "isTreeView"]),
     collapseOrExpandText() {
       return this.expandedOnes.length > 0 ? "Collapse all" : "Expand all";
     },
-  }, 
+    toggleViewBtnText() {
+      return this.isCardView ? 'Show tree view' : 'Show card view'
+    }
+
+  }
 };
 </script>
 
@@ -97,5 +109,10 @@ export default {
   .action-row {
     width: 100%;
   }
+}
+
+.view-toggle-btn {
+  margin: 1.2rem 0;
+  color: rgb(127, 17, 129) !important;
 }
 </style>

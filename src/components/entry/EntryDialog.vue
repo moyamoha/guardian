@@ -160,7 +160,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["error", "categories", "loggedInUser"]),
+    ...mapGetters(["error", "categories", "loggedInUser", "isCardView"]),
     createNew() {
       return this.entry === null || this.entry === undefined;
     },
@@ -169,10 +169,12 @@ export default {
     if (this.entry && this.entry.category) {
       const categs = this.categories;
       const found = categs.find((c) => c.id === this.entry.category);
-      this.item.category = {
-        name: found.name,
-        id: this.entry.category,
-      };
+      if (!found) this.item.category = { name: "", id: this.entry.category };
+      else
+        this.item.category = {
+          name: found.name,
+          id: this.entry.category,
+        };
     }
   },
   components: { ErrorAlert, PasswordField, UrlField },

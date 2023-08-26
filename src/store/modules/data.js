@@ -2,6 +2,7 @@ import axios from "axios";
 
 const state = {
   content: [],
+  entries: [],
   openedCategories: [],
   loading: false,
   categories: [],
@@ -9,6 +10,7 @@ const state = {
 
 const getters = {
   content: (state) => state.content,
+  allEntries: (state) => state.entries,
   isLoading: (state) => state.loading,
   categories: (state) => state.categories,
   openedCategories: (state) => state.openedCategories,
@@ -21,7 +23,15 @@ const mutations = {
     state.categories = data.map((item) => {
       return { name: item.name, id: item._id };
     });
+    let e = [];
+    data.forEach((citem) => {
+      e = e.concat(citem.items);
+    });
+    state.entries = e;
     state.loading = false;
+  },
+  setEntries: (state, entries) => {
+    state.entries = entries;
   },
   addCateg: (state, category) => {
     state.content.push(category);
@@ -39,6 +49,20 @@ const actions = {
     try {
       const categories = (await axios.get("/categories/")).data;
       commit("setContent", categories);
+    } catch (e) {
+      commit("setError", e.response.data.message);
+    }
+  },
+
+  searchEntries: async ({ commit }, queryObj) => {
+    const queryItems = [];
+    for (const key of Object.keys(queryObj)) {
+      queryItems.push(`${key}=${queryObj[key]}`);
+    }
+    const queryString = queryItems.join("&");
+    try {
+      const entries = (await axios.get("/entries/?" + queryString)).data;
+      commit("setEntries", entries);
     } catch (e) {
       commit("setError", e.response.data.message);
     }
