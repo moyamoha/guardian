@@ -54,7 +54,7 @@ export default {
       const query = {};
       if (this.category) query.category = this.category.id;
       if (this.status) query.status = this.status;
-      if (this.search.length > 0) query.search = this.search;
+      if (this.search && this.search.length > 0) query.search = this.search;
       await this.searchEntries(query);
     },
   },

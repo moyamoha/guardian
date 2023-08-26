@@ -23,6 +23,10 @@
       <span class="entry-card__label">Status: </span>
       <span>{{ this.entry.status }}</span>
     </section>
+    <section class="entry-card__url" v-if="this.entry.url !== ''">
+      <span class="entry-card__label">URL: </span>
+      <a :href="this.entry.url" target="_blank">{{ this.entry.url }}</a>
+    </section>
     <section class="entry-card__actions">
       <v-icon
         class="entry-card__actions__icon"
@@ -92,7 +96,7 @@ export default {
 <style lang="scss">
 .entry-card {
   width: 32%;
-  height: 240px;
+  height: 280px;
   border-radius: 2px;
   border: 1px solid #222;
   padding: 8px 10px;
@@ -110,7 +114,8 @@ export default {
   }
 
   &__username,
-  &__password {
+  &__password,
+  &__url {
     font-size: 0.8rem;
   }
 
