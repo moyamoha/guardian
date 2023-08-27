@@ -6,9 +6,9 @@
     persistent
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-icon v-bind="attrs" v-on="on" dense>{{
-        entry ? "mdi-pencil-outline" : "mdi-plus"
-      }}</v-icon>
+      <div v-bind="attrs" v-on="on">
+        <slot></slot>
+      </div>
     </template>
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
@@ -56,7 +56,6 @@
             label="Category *"
             dense
             outlined
-            v-if="this.entry !== null && this.entry !== undefined"
           ></v-combobox>
           <v-btn
             type="submit"
@@ -126,7 +125,10 @@ export default {
           }
           socket.emit("content-changed", this.loggedInUser.email);
         } else {
-          await this.addEntry({ entry: this.item, categId: this.categoryId });
+          const categId = this.categoryId
+            ? this.categoryId
+            : this.item.category.id;
+          await this.addEntry({ entry: this.item, categId });
           socket.emit("content-changed", this.loggedInUser.email);
         }
         this.processing = false;
@@ -167,6 +169,7 @@ export default {
   },
   mounted() {
     if (this.entry && this.entry.category) {
+      console.log("here");
       const categs = this.categories;
       const found = categs.find((c) => c.id === this.entry.category);
       if (!found) this.item.category = { name: "", id: this.entry.category };
@@ -175,6 +178,8 @@ export default {
           name: found.name,
           id: this.entry.category,
         };
+    } else {
+      this.item.category = null;
     }
   },
   components: { ErrorAlert, PasswordField, UrlField },

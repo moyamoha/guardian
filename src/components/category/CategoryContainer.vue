@@ -5,8 +5,10 @@
         :category="category"
         :activatorText="category.name"
       ></CategoryDialog>
-      <div>
-        <EntryDialog :entry="null" :categoryId="category._id"></EntryDialog>
+      <div class="d-flex">
+        <EntryDialog :entry="null" :categoryId="category._id">
+          <v-icon small dense>mdi-plus</v-icon>
+        </EntryDialog>
         <v-icon @click="handlechevronClick" v-if="!expand" dense
           >mdi-chevron-down</v-icon
         >

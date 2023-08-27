@@ -6,6 +6,11 @@ const state = {
   openedCategories: [],
   loading: false,
   categories: [],
+  filter: {
+    search: "",
+    category: "",
+    status: "",
+  },
 };
 
 const getters = {
@@ -14,6 +19,7 @@ const getters = {
   isLoading: (state) => state.loading,
   categories: (state) => state.categories,
   openedCategories: (state) => state.openedCategories,
+  filter: (state) => state.filter,
 };
 
 const mutations = {
@@ -32,6 +38,9 @@ const mutations = {
   },
   setEntries: (state, entries) => {
     state.entries = entries;
+  },
+  setFilter: (state, filter) => {
+    state.filter = filter;
   },
   addCateg: (state, category) => {
     state.content.push(category);

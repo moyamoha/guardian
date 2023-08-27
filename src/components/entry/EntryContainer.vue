@@ -13,9 +13,17 @@ import EntryCard from "./EntryCard.vue";
 export default {
   name: "entry-container",
   computed: {
-    ...mapGetters(["allEntries"]),
+    ...mapGetters(["allEntries", "content"]),
   },
   components: { EntryCard },
+  mounted() {
+    if (
+      this.content &&
+      this.content.length > 0 &&
+      this.allEntries.length === 0
+    ) {
+    }
+  },
 };
 </script>
 

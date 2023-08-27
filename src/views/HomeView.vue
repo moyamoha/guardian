@@ -9,12 +9,15 @@
     <p v-else-if="this.content.length > 0">
       All your credentials
       <br />
-      <section class="action-row">
+      <section :class="{'action-row': true, 'action-row--cardview': this.isCardView}">
         <CategoryDialog
         :category="null"
         activatorText="Create category"
         ></CategoryDialog>
-        <span class="action-link" v-if="this.isTreeView" @click="collapseOrExpandAll">{{ collapseOrExpandText }}</span>
+        <EntryDialog :entry="null" :categoryId="null" v-if="this.isCardView">
+          <v-btn outlined small dense>Create entry <v-icon right dark>mdi-plus</v-icon></v-btn>
+        </EntryDialog>
+        
       </section>
       <v-btn class="view-toggle-btn" dense small outlined @click="changeView">{{ toggleViewBtnText }}</v-btn>
       <SearchField v-if="this.isCardView"></SearchField>
@@ -45,7 +48,7 @@ import SearchField from "@/components/SearchField.vue";
 
 export default {
   name: "HomeView",
-  components: { DataTree, EntryDialog, CategoryDialog, Loading, EntryContainer, SearchField },
+  components: { DataTree, CategoryDialog, Loading, EntryContainer, SearchField, EntryDialog },
   methods: {
     ...mapActions(["fetchContent"]),
     ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched", "toggleCardView"]),
@@ -82,6 +85,7 @@ export default {
 <style>
 .home {
   width: 60%;
+  padding-bottom: 1rem;
 }
 @media (max-width: 700px) {
   .home {
@@ -105,10 +109,8 @@ export default {
   align-items: center;
 }
 
-@media (max-width: 900px) {
-  .action-row {
-    width: 100%;
-  }
+.action-row--cardview {
+  width: 100%;
 }
 
 .view-toggle-btn {

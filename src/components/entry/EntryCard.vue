@@ -39,10 +39,13 @@
         class="entry-card__actions__icon"
         @click="showPassword = !showPassword"
         dense
+        small
         >{{ eyeIcon }}</v-icon
       >
       <EntryDeletionDialog :entry="entry"></EntryDeletionDialog>
-      <EntryDialog :entry="entry" />
+      <EntryDialog :entry="entry">
+        <v-icon dense small>mdi-square-edit-outline</v-icon>
+      </EntryDialog>
     </section>
     <v-snackbar v-model="passwordCopied" timeout="1500"
       >Password was copied to the clipboard</v-snackbar

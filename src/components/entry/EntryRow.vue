@@ -25,7 +25,9 @@
       >
     </section>
     <section class="actions">
-      <EntryDialog :entry="entry"></EntryDialog>
+      <EntryDialog :entry="entry">
+        <v-icon dense>mdi-pencil-outline</v-icon>
+      </EntryDialog>
       <EntryDeletionDialog :entry="entry"></EntryDeletionDialog>
       <!-- <v-icon dense @click="handleDelete">mdi-delete-outline</v-icon> -->
     </section>
