@@ -142,13 +142,7 @@ export default {
         username: this.entry ? this.entry.username : "",
         password: this.entry ? this.entry.password : "",
         url: this.entry && this.entry.url ? this.entry.url : "",
-        category:
-          this.entry && this.entry.category
-            ? {
-                name: this.getCategoryNameById(this.entry.category),
-                id: this.entry.category,
-              }
-            : "",
+        category: null,
       };
       this.$refs.enform.resetValidation();
       this.dialog = false;
@@ -169,7 +163,6 @@ export default {
   },
   mounted() {
     if (this.entry && this.entry.category) {
-      console.log("here");
       const categs = this.categories;
       const found = categs.find((c) => c.id === this.entry.category);
       if (!found) this.item.category = { name: "", id: this.entry.category };
@@ -178,6 +171,11 @@ export default {
           name: found.name,
           id: this.entry.category,
         };
+    } else if (this.categoryId && this.categoryId.length > 0) {
+      this.item.category = {
+        name: this.getCategoryNameById(this.categoryId),
+        id: this.categoryId,
+      };
     } else {
       this.item.category = null;
     }
