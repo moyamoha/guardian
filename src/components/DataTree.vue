@@ -1,5 +1,10 @@
 <template>
   <ol class="wtree">
+    <div class="d-flex flex-row-reverse">
+      <v-icon @click="collapseOrExpandAll" dense>{{
+        collapseOrExpandIcon
+      }}</v-icon>
+    </div>
     <li v-for="category in content" :key="category._id">
       <CategoryContainer
         :expand="isExpanded(category._id)"
@@ -10,16 +15,26 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import CategoryContainer from "./category/CategoryContainer.vue";
 import EntryRow from "./entry/EntryRow.vue";
 export default {
-  computed: {
-    ...mapGetters(["content", "expandedOnes"]),
-  },
   methods: {
+    ...mapMutations(["setExpandedCategories"]),
     isExpanded(categoryId) {
       return this.expandedOnes.includes(categoryId);
+    },
+    collapseOrExpandAll() {
+      if (this.expandedOnes.length > 0) this.setExpandedCategories([]);
+      else this.setExpandedCategories(this.content.map((c) => c._id));
+    },
+  },
+  computed: {
+    ...mapGetters(["content", "expandedOnes"]),
+    collapseOrExpandIcon() {
+      return this.expandedOnes.length > 0
+        ? "mdi-arrow-expand"
+        : "mdi-arrow-collapse";
     },
   },
   components: {
@@ -31,7 +46,7 @@ export default {
 
 <style>
 .wtree {
-  margin-top: 1rem;
+  margin-top: 0px;
   position: relative;
   min-width: 30vw;
   width: 80%;

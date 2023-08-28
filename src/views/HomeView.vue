@@ -52,10 +52,6 @@ export default {
   methods: {
     ...mapActions(["fetchContent"]),
     ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched", "toggleCardView"]),
-    collapseOrExpandAll() {
-      if (this.expandedOnes.length > 0) this.setExpandedCategories([])
-      else this.setExpandedCategories(this.content.map(c => c._id))
-    },
     changeView() {
       this.toggleCardView()
     }
@@ -71,9 +67,6 @@ export default {
   },
   computed: {
     ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes", "contentAlreadyFetched", "isCardView", "isTreeView"]),
-    collapseOrExpandText() {
-      return this.expandedOnes.length > 0 ? "Collapse all" : "Expand all";
-    },
     toggleViewBtnText() {
       return this.isCardView ? 'Show tree view' : 'Show card view'
     }
