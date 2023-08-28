@@ -72,6 +72,7 @@ const actions = {
     try {
       const entries = (await axios.get("/entries/?" + queryString)).data;
       commit("setEntries", entries);
+      commit("setFilter", queryObj);
     } catch (e) {
       commit("setError", e.response.data.message);
     }

@@ -9,7 +9,7 @@
       clearable
       @input="searchForEntries"
       :append-outer-icon="showMore ? 'mdi-chevron-down' : 'mdi-chevron-up'"
-      @click:append-outer="showMore = !showMore"
+      @click:append-outer="setShowMore"
     ></v-text-field>
 
     <div v-if="showMore" class="show-more-filters">
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "search-field",
@@ -50,6 +50,11 @@ export default {
   },
   methods: {
     ...mapActions(["searchEntries"]),
+    ...mapMutations(["setShowMoreFilters"]),
+    setShowMore() {
+      this.showMore = !this.showMore;
+      this.setShowMoreFilters(this.showMore);
+    },
     async searchForEntries() {
       const query = {};
       if (this.category) query.category = this.category.id;
@@ -59,7 +64,21 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["categories"]),
+    ...mapGetters(["categories", "filter", "showMoreFilters"]),
+  },
+  mounted() {
+    this.search = this.filter.search;
+    this.status = this.filter.status;
+    this.showMore = this.showMoreFilters;
+    if (this.filter.category !== "") {
+      const categoryName = this.categories.find(
+        (c) => c.id === this.filter.category
+      ).name;
+      this.category = {
+        name: categoryName,
+        id: this.filter.category,
+      };
+    }
   },
 };
 </script>
