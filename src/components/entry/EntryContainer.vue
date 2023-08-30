@@ -1,8 +1,17 @@
 <template>
-  <div class="entry-container">
-    <div v-if="this.allEntries.length === 0">No Entries Yet</div>
-    <EntryCard v-for="entry in this.allEntries" :key="entry._id" :entry="entry">
-    </EntryCard>
+  <div>
+    <div class="mb-4">
+      {{ this.allEntries.length }}
+      {{ this.allEntries.length === 1 ? "entry" : "entries" }} found
+    </div>
+    <div class="entry-container">
+      <EntryCard
+        v-for="entry in this.allEntries"
+        :key="entry._id"
+        :entry="entry"
+      >
+      </EntryCard>
+    </div>
   </div>
 </template>
 
