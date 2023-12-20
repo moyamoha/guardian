@@ -49,14 +49,14 @@ export default {
       this.processing = false;
     },
     atMostSixDigits(v) {
-      if (!v) return true
-      const trimmed = v.trim()
-      const isAllDigits = parseInt(trimmed).toString() === trimmed
+      if (!v) return true;
+      const trimmed = v.trim();
+      const isAllDigits = /^\d*$/.test(trimmed);
       if (trimmed.length <= 6 && isAllDigits) {
-        return true
+        return true;
       }
-      if (!isAllDigits) return "Only digits are allowed"
-      if (trimmed.length > 6) return "Code must be 6 digits at most"
+      if (!isAllDigits) return "Only digits are allowed";
+      if (trimmed.length > 6) return "Code must be 6 digits at most";
     },
   },
   name: "verify-code",
