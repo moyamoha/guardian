@@ -41,17 +41,13 @@ import router from "@/router";
 import Loading from "@/components/_shared/Loading.vue";
 import EntryContainer from "@/components/entry/EntryContainer.vue";
 import SearchField from "@/components/SearchField.vue";
-// @ is an alias to /src
 
 export default {
   name: "HomeView",
   components: { CategoryDialog, Loading, EntryContainer, SearchField, EntryDialog },
   methods: {
     ...mapActions(["fetchContent"]),
-    ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched", "toggleCardView"]),
-    changeView() {
-      this.toggleCardView()
-    }
+    ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched"]),
   },
   mounted() {
     if (this.loggedInUser && !this.contentAlreadyFetched) {
@@ -63,11 +59,7 @@ export default {
     else router.replace("/");
   },
   computed: {
-    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes", "contentAlreadyFetched", "isCardView", "isTreeView"]),
-    toggleViewBtnText() {
-      return this.isCardView ? 'Show tree view' : 'Show card view'
-    }
-
+    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes", "contentAlreadyFetched"]),
   }
 };
 </script>

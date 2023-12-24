@@ -107,6 +107,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 0px;
+  flex-grow: 1;
 
   section {
     margin-bottom: 8px;
