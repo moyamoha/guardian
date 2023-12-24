@@ -15,8 +15,8 @@
     <h3 class="mt-3">Data</h3>
     <p>
       To download your data, simply click the button below. This will initiate
-      the download process and save your data to your computer. It's as simple
-      as that!
+      the download process and save your data to your computer as an excel file.
+      It's as simple as that!
     </p>
     <v-btn
       dense
@@ -56,28 +56,19 @@ export default {
     ...mapActions(["fetchContent", "getProfile"]),
     async downloadData() {
       this.downloading = true;
-      const content = (await axios.get("/categories/")).data;
-      const simplifiedContent = content.map((c) => {
-        return {
-          category_name: c.name,
-          entries: c.items.map((entry) => {
-            const { title, username, password, url, status } = entry;
-            return { title, username, password, url, status };
-          }),
-        };
+      const response = await axios.get("/users/download-data", {
+        responseType: "blob",
       });
-      const data = {
-        ...this.loggedInUser,
-        content: [...simplifiedContent],
-      };
-      const file = new Blob([JSON.stringify(data)], {
-        type: "application/json",
+      const blob = new Blob([response.data], {
+        type: "application/octet-stream",
       });
+      const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = URL.createObjectURL(file);
-      a.download = `${this.loggedInUser.email}-data.json`;
+      a.href = blobUrl;
+      a.download = `user_data.xlsx`;
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(a.href);
+      document.body.removeChild(a);
       this.downloading = false;
     },
   },
