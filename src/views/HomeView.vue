@@ -9,18 +9,17 @@
     <p v-else-if="this.content.length > 0">
       All your credentials
       <br />
-      <section :class="{'action-row': true, 'action-row--cardview': this.isCardView}">
+      <section class="action-row mb-4">
         <CategoryDialog
         :category="null"
         activatorText="Create category"
         ></CategoryDialog>
-        <EntryDialog :entry="null" :categoryId="null" v-if="this.isCardView">
+        <EntryDialog :entry="null" :categoryId="null">
           <v-btn outlined small dense>Create entry <v-icon right dark>mdi-plus</v-icon></v-btn>
         </EntryDialog>
         
       </section>
-      <v-btn class="view-toggle-btn" dense small outlined @click="changeView">{{ toggleViewBtnText }}</v-btn>
-      <SearchField v-if="this.isCardView"></SearchField>
+      <SearchField></SearchField>
     </p>
     <p v-else>
       You have not created anything yet.
@@ -29,15 +28,13 @@
         activatorText="Create category"
       ></CategoryDialog>
     </p>
-    <DataTree v-if="!this.isCardView"></DataTree>
-    <EntryContainer v-else></EntryContainer>
+    <EntryContainer></EntryContainer>
     <CategoryDialog></CategoryDialog>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import DataTree from "@/components/DataTree.vue";
 import EntryDialog from "@/components/entry/EntryDialog.vue";
 import CategoryDialog from "@/components/category/CategoryDialog.vue";
 import router from "@/router";
@@ -48,7 +45,7 @@ import SearchField from "@/components/SearchField.vue";
 
 export default {
   name: "HomeView",
-  components: { DataTree, CategoryDialog, Loading, EntryContainer, SearchField, EntryDialog },
+  components: { CategoryDialog, Loading, EntryContainer, SearchField, EntryDialog },
   methods: {
     ...mapActions(["fetchContent"]),
     ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched", "toggleCardView"]),
@@ -97,17 +94,9 @@ export default {
 
 .action-row {
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
 }
 
-.action-row--cardview {
-  width: 100%;
-}
-
-.view-toggle-btn {
-  margin: 1.2rem 0;
-  color: rgb(127, 17, 129) !important;
-}
 </style>
