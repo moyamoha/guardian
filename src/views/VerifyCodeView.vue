@@ -1,53 +1,31 @@
 <template>
   <v-col xs="7" sm="6" md="5" lg="4">
-    <v-form class="verify-form" ref="veriform" @submit="handleSubmit">
+    <v-form class="verify-form" ref="veriform">
       <p class="mb-3">
         Please enter the verification code that is currently displayed in your
         authenticator application
       </p>
       <ErrorAlert></ErrorAlert>
-      <v-text-field
-        class="otp-input"
-        label="Verification Code *"
-        v-model="code"
-        dense
-        outlined
-        autofocus
+      <v-otp-input
         :rules="[atMostSixDigits]"
-      ></v-text-field>
-      <v-btn
-        color="primary"
-        type="submit"
-        :disabled="processing"
+        v-model="code"
         :loading="processing"
-        >Verify</v-btn
-      >
+      ></v-otp-input>
     </v-form>
   </v-col>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
 
 export default {
+  name: "verify-code",
   data() {
     return { code: "", processing: false };
   },
   methods: {
     ...mapActions(["verifyCode"]),
-    async handleSubmit(e) {
-      e.preventDefault();
-      this.processing = true;
-      if (this.$refs.veriform.validate()) {
-        await this.verifyCode({
-          code: this.code,
-          email: localStorage.getItem("email"),
-        });
-        localStorage.removeItem("email");
-      }
-      this.processing = false;
-    },
     atMostSixDigits(v) {
       if (!v) return true;
       const trimmed = v.trim();
@@ -56,10 +34,34 @@ export default {
         return true;
       }
       if (!isAllDigits) return "Only digits are allowed";
-      if (trimmed.length > 6) return "Code must be 6 digits at most";
+    },
+
+    async submitCode(code) {
+      this.processing = true;
+      if (this.$refs.veriform.validate()) {
+        try {
+          const resp = await this.verifyCode({
+            code: code,
+            email: localStorage.getItem("email"),
+          });
+          if (resp) {
+            localStorage.removeItem("email");
+          }
+        } catch {
+        } finally {
+          this.code = "";
+        }
+      }
+      this.processing = false;
     },
   },
-  name: "verify-code",
+  watch: {
+    code: async function (newCode, _) {
+      if (newCode.length === 6) {
+        await this.submitCode(newCode);
+      }
+    },
+  },
   components: { ErrorAlert },
 };
 </script>

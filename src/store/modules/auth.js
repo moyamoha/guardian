@@ -51,15 +51,17 @@ const actions = {
         token: code,
         email: email,
       });
-      localStorage.setItem("accessToken", resp.data.accessToken);
-      const decoded = jwt_decode(resp.data.accessToken);
-      commit("setUser", {
-        email: decoded.email,
-        firstname: decoded.firstname,
-        lastname: decoded.lastname,
-        mfaEnabled: decoded.mfaEnabled,
-      });
-      router.push("/home");
+      if (resp && resp.data.accessToken) {
+        localStorage.setItem("accessToken", resp.data.accessToken);
+        const decoded = jwt_decode(resp.data.accessToken);
+        commit("setUser", {
+          email: decoded.email,
+          firstname: decoded.firstname,
+          lastname: decoded.lastname,
+          mfaEnabled: decoded.mfaEnabled,
+        });
+        router.push("/home");
+      }
     } catch (e) {
       commit("setError", e.response.data.message);
     }
