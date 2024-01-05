@@ -10,6 +10,7 @@
         :rules="[atMostSixDigits]"
         v-model="code"
         :loading="processing"
+        ref="codeInput"
       ></v-otp-input>
     </v-form>
   </v-col>
@@ -61,6 +62,9 @@ export default {
         await this.submitCode(newCode);
       }
     },
+  },
+  mounted() {
+    this.$refs.codeInput.focus();
   },
   components: { ErrorAlert },
 };
