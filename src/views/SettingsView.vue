@@ -56,7 +56,7 @@ export default {
     ...mapActions(["fetchContent", "getProfile"]),
     async downloadData() {
       this.downloading = true;
-      const response = await axios.get("/users/download-data", {
+      const response = await axios.get("/download/vartija", {
         responseType: "blob",
       });
       const blob = new Blob([response.data], {
