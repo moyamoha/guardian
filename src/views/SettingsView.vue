@@ -56,20 +56,25 @@ export default {
     ...mapActions(["fetchContent", "getProfile"]),
     async downloadData() {
       this.downloading = true;
-      const response = await axios.get("/download/vartija", {
-        responseType: "blob",
-      });
-      const blob = new Blob([response.data], {
-        type: "application/octet-stream",
-      });
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = `user_data.xlsx`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      this.downloading = false;
+      try {
+        this.downloading = true;
+        const response = await axios.get("/download/vartija", {
+          responseType: "blob",
+        });
+        const blob = new Blob([response.data], {
+          type: "application/octet-stream",
+        });
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = `user_data.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch (error) {
+      } finally {
+        this.downloading = false;
+      }
     },
   },
   async mounted() {
