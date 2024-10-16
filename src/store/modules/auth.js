@@ -1,5 +1,6 @@
 import socket from "@/plugins/socket";
 import router from "@/router";
+import { passwordHasBeenReset } from "@/router/utils";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
@@ -131,6 +132,10 @@ const actions = {
         currentPassword,
         newPassword,
       });
+      if (passwordHasBeenReset(router)) {
+        router.push("/home");
+        return;
+      }
       commit(
         "setNotification",
         "You will be logged out soon. Please log in again :)"
