@@ -27,10 +27,12 @@ axios.interceptors.response.use(
   },
   function (error) {
     const comesFromVerifyCodeView = router.currentRoute.name === "verify-code";
+    const isInLoginView = router.currentRoute.name === "login";
     if (
       error.name === "AxiosError" &&
       error.response.data.statusCode === 401 &&
-      !comesFromVerifyCodeView
+      !comesFromVerifyCodeView &&
+      !isInLoginView
     ) {
       store.commit("setError", "You are not logged in or session expired");
       store.commit("setUser", null);
