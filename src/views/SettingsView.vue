@@ -36,6 +36,7 @@ import MfaToggler from "@/components/settings/mfa/MfaToggler.vue";
 import AccountDeactivation from "@/components/settings/deactivate-account/AccountDeactivation.vue";
 import ChangeNameDialog from "@/components/settings/change-name/ChangeNameDialog.vue";
 import ChangePassDialog from "@/components/settings/change-password/ChangePassDialog.vue";
+import { useRouter } from "vue-router";
 import axios from "axios";
 export default {
   data() {
@@ -79,6 +80,7 @@ export default {
   },
   async mounted() {
     await this.getProfile();
+    const router = useRouter();
   },
 };
 </script>

@@ -27,7 +27,12 @@ const actions = {
           lastname: decoded.lastname,
           mfaEnabled: decoded.mfaEnabled,
         });
-        router.push("/home");
+        const routeQuery = router.currentRoute.query;
+        if (routeQuery.password_reset === "true") {
+          router.push("/settings?password_reset=true");
+        } else {
+          router.push("/home");
+        }
       } else {
         localStorage.setItem("email", email);
         router.push("/verify-code");
@@ -143,7 +148,7 @@ const actions = {
   async requestTempPassword({ commit, dispatch }, email) {
     try {
       await axios.patch("/auth/forgot-password", { email: email });
-      router.replace("/login");
+      router.replace("/login?password_reset=true");
     } catch (e) {
       commit("setError", e.response.data.message);
     }

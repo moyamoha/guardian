@@ -65,6 +65,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "@/components/_shared/ErrorAlert.vue";
 import PasswordField from "@/components/_shared/PasswordField.vue";
 import { generatePassword } from "@/utils/generate-password";
+import router from "@/router";
 
 export default {
   data() {
@@ -106,6 +107,14 @@ export default {
   },
   computed: {
     ...mapGetters(["error", "generateOptions"]),
+  },
+  mounted() {
+    if (
+      "password_reset" in router.currentRoute.query &&
+      router.currentRoute.query.password_reset === "true"
+    ) {
+      this.dialog = true;
+    }
   },
   components: {
     ErrorAlert,
