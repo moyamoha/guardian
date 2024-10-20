@@ -80,7 +80,6 @@ export default {
   },
   async mounted() {
     await this.getProfile();
-    const router = useRouter();
   },
 };
 </script>
