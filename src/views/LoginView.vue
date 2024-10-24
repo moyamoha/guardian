@@ -26,7 +26,7 @@
       >
       <span class="text--secondary ml-3"
         ><router-link to="/password-forgotten"
-          >I forgot my password</router-link
+          >I forgot my skdfjsd</router-link
         ></span
       >
     </v-form>
