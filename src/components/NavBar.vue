@@ -4,14 +4,13 @@
     <router-link v-if="loggedInUser" to="/home">Home</router-link>
     <router-link to="/generate-password">Generate</router-link>
     <v-spacer></v-spacer>
-    <router-link v-if="!loggedInUser" to="/login">Login</router-link>
-    <router-link v-if="!loggedInUser" to="/signup">Sign up</router-link>
-    <router-link v-if="loggedInUser" to="/settings">Settings</router-link>
+    <span v-if="loggedInUser" @click="goToSettingsPage">Settings</span>
     <span v-if="loggedInUser" @click="handleLogout">Log out</span>
   </nav>
 </template>
 
 <script>
+import { AUTH_UI_URL, SITE_URL } from "@/utils/constants";
 import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
@@ -22,6 +21,10 @@ export default {
       this.setContentAlreadyFetched(false);
       this.logout();
     },
+    goToSettingsPage() {
+      const token = window.localStorage.getItem("accessToken")
+      window.location.href = `${AUTH_UI_URL}/?redirect=${SITE_URL}/home&token=${token}`
+    }
   },
   computed: {
     ...mapGetters(["loggedInUser"]),

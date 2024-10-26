@@ -16,32 +16,7 @@ const routes = [
     name: "home",
     component: HomeView,
   },
-  {
-    path: "/login",
-    name: "login",
-    component: () => import("../views/LoginView.vue"),
-  },
 
-  {
-    path: "/verify-code",
-    name: "verify-code",
-    component: () => import("../views/VerifyCodeView.vue"),
-  },
-  {
-    path: "/signup",
-    name: "signup",
-    component: () => import("../views/SignupView.vue"),
-  },
-  {
-    path: "/settings",
-    name: "settings",
-    component: () => import("../views/SettingsView.vue"),
-  },
-  {
-    path: "/password-forgotten",
-    name: "password-forgotten",
-    component: () => import("../views/ForgotPasswordView.vue"),
-  },
   {
     path: "/generate-password",
     name: "generate",
