@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import router from "@/router";
-import { mapGetters } from "vuex";
+import { getTokenFromQuery } from "@/router/utils";
+import { AUTH_UI_URL, SITE_URL } from "@/utils/constants";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -33,13 +34,25 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["login"]),
     handleClick() {
-      router.push(this.loggedInUser ? "/home" : "/login");
+      if (this.loggedInUser) {
+        this.$router.push("/home")
+      } else {
+        const url = `${AUTH_UI_URL}/login?redirect=${SITE_URL}`
+        window.location.href = url
+      }
     },
   },
   computed: {
     ...mapGetters(["loggedInUser"]),
   },
+  mounted() {
+    const tokenFromQuery = getTokenFromQuery(this.$route)
+    if (tokenFromQuery) {
+      this.login(tokenFromQuery)
+    }
+  }
 };
 </script>
 
