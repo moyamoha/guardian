@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import socket from "@/plugins/socket";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["category", "done"],
@@ -70,7 +69,6 @@ export default {
       await this.removeCategory(this.category._id);
       this.deleting = false;
       this.dialog = false;
-      socket.emit("content-changed", this.loggedInUser.email);
     },
   },
   computed: {

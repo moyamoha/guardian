@@ -16,7 +16,6 @@
 import { mapActions, mapGetters } from "vuex";
 import NavBar from "./components/NavBar.vue";
 import NotifBar from "./components/NotifBar.vue";
-import socket from "./plugins/socket";
 export default {
   components: {
     NavBar,
@@ -25,34 +24,8 @@ export default {
   computed: {
     ...mapGetters(["loggedInUser"]),
   },
-  watch: {
-    loggedInUser: {
-      handler: function (val) {
-        if (val) {
-          socket.emit("joinRoom", val.email);
-        }
-      },
-      deep: true,
-    },
-  },
   methods: {
     ...mapActions(["logout", "getProfile", "fetchContent"]),
-  },
-  mounted() {
-    if (this.loggedInUser) {
-      socket.emit("joinRoom", this.loggedInUser.email);
-    }
-    socket.on("profile-updated", () => {
-      this.getProfile();
-    });
-
-    socket.on("user-deactivated", () => {
-      this.logout();
-    });
-
-    socket.on("content-changed", () => {
-      this.fetchContent();
-    });
   },
 };
 </script>

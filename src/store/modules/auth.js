@@ -1,5 +1,5 @@
-import socket from "@/plugins/socket";
 import router from "@/router";
+import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 const state = {
@@ -29,11 +29,25 @@ const actions = {
     }
   },
   logout: ({ commit, getters }) => {
-    socket.emit("leaveRoom", getters.loggedInUser.email);
     localStorage.clear();
     commit("setUser", null);
     commit("setError", "");
     router.push("/").catch((e) => {});
+  },
+  fetchProfile: async ({ commit }) => {
+    try {
+      const resp = await axios.get("/users/profile");
+      if (resp.data) {
+        commit("setUser", {
+          email: resp.data.email,
+          firstname: resp.data.firstname,
+          lastname: resp.data.lastname,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      commit("setError", error.response.data.message);
+    }
   },
 };
 

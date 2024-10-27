@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["login", "logout", "fetchProfile"]),
     handleClick() {
       if (this.loggedInUser) {
         this.$router.push("/home")
@@ -47,10 +47,11 @@ export default {
   computed: {
     ...mapGetters(["loggedInUser"]),
   },
-  mounted() {
+  async mounted() {
+    console.log('HERER')
     const tokenFromQuery = getTokenFromQuery(this.$route)
     if (tokenFromQuery) {
-      this.login(tokenFromQuery)
+      await this.login(tokenFromQuery)
     }
   }
 };

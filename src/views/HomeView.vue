@@ -46,12 +46,18 @@ export default {
   name: "HomeView",
   components: { CategoryDialog, Loading, EntryContainer, SearchField, EntryDialog },
   methods: {
-    ...mapActions(["fetchContent"]),
+    ...mapActions(["fetchContent", "fetchProfile", "logout"]),
     ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched"]),
   },
-  mounted() {
+  async mounted() {
+    if (this.$route.query["logout"] === 'true') {
+        this.logout()
+      } else if (this.$route.query["fetch_profile"] === 'true') {
+      await this.fetchProfile()
+        this.$router.push('/home')
+      }
     if (this.loggedInUser && !this.contentAlreadyFetched) {
-      this.fetchContent();
+      await this.fetchContent();
       this.setContentAlreadyFetched(true)
     } else if (this.loggedInUser && this.contentAlreadyFetched) {
       return

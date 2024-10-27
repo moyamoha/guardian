@@ -55,7 +55,6 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import CategoryDeletionDialog from "./CategoryDeletionDialog.vue";
-import socket from "@/plugins/socket";
 export default {
   props: ["category", "activatorText"],
   data() {
@@ -81,7 +80,6 @@ export default {
         } else {
           await this.addCategory(this.item);
         }
-        socket.emit("content-changed", this.loggedInUser.email);
         this.processing = false;
         if (this.error === "") this.dialog = false;
       }
