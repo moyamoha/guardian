@@ -6,27 +6,20 @@
       >!
     </p>
     <Loading v-if="this.isLoading"></Loading>
-    <p v-else-if="this.content.length > 0">
-      All your credentials
-      <br />
-      <section class="action-row mb-4">
-        <CategoryDialog
-        :category="null"
-        activatorText="Create category"
-        ></CategoryDialog>
+    <div v-else-if="this.content.length > 0">
+      <div class="d-flex mb-5 align-center">
+        <span class="mr-4">All your credentials</span>
         <EntryDialog :entry="null" :categoryId="null">
-          <v-btn outlined small dense>Create entry <v-icon right dark>mdi-plus</v-icon></v-btn>
+          <v-icon dense>mdi-plus-outline</v-icon>
         </EntryDialog>
-        
-      </section>
+      </div>
       <SearchField></SearchField>
-    </p>
+    </div>
     <p v-else>
       You have not created anything yet.
-      <CategoryDialog
-        :category="null"
-        activatorText="Create category"
-      ></CategoryDialog>
+      <CategoryDialog :category="null">
+        <v-btn dense small>Create category</v-btn>
+      </CategoryDialog>
     </p>
     <EntryContainer></EntryContainer>
     <CategoryDialog></CategoryDialog>
