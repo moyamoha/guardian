@@ -6,17 +6,9 @@
     persistent
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        color="error"
-        outlined
-        dense
-        small
-        v-bind="attrs"
-        v-on="on"
-        :disabled="deleting"
-        :loading="deleting"
-        >delete</v-btn
-      >
+      <div v-bind="attrs" v-on="on">
+        <slot></slot>
+      </div>
     </template>
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
@@ -66,7 +58,7 @@ export default {
     ...mapActions(["removeCategory"]),
     async handleDelete() {
       this.deleting = true;
-      await this.removeCategory(this.category._id);
+      await this.removeCategory(this.category.id);
       this.deleting = false;
       this.dialog = false;
     },

@@ -70,7 +70,7 @@ export default {
     this.search = this.filter.search;
     this.status = this.filter.status;
     this.showMore = this.showMoreFilters;
-    if (this.filter.category !== "") {
+    if (this.filter && this.filter.category) {
       const categoryName = this.categories.find(
         (c) => c.id === this.filter.category
       ).name;

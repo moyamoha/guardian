@@ -2,6 +2,7 @@
   <nav>
     <router-link to="/">Guardian</router-link>
     <router-link v-if="loggedInUser" to="/home">Home</router-link>
+    <router-link v-if="loggedInUser" to="/categories">Categories</router-link>
     <router-link to="/generate-password">Generate</router-link>
     <v-spacer></v-spacer>
     <span v-if="loggedInUser" @click="goToSettingsPage">Settings</span>
@@ -11,20 +12,18 @@
 
 <script>
 import { AUTH_UI_URL, SITE_URL } from "@/utils/constants";
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   methods: {
     ...mapActions(["logout"]),
-    ...mapMutations(["setContentAlreadyFetched"]),
     handleLogout() {
-      this.setContentAlreadyFetched(false);
       this.logout();
     },
     goToSettingsPage() {
-      const token = window.localStorage.getItem("accessToken")
-      window.location.href = `${AUTH_UI_URL}/?redirect=${SITE_URL}/home&token=${token}`
-    }
+      const token = window.localStorage.getItem("accessToken");
+      window.location.href = `${AUTH_UI_URL}/?redirect=${SITE_URL}/home&token=${token}`;
+    },
   },
   computed: {
     ...mapGetters(["loggedInUser"]),

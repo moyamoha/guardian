@@ -6,9 +6,9 @@
     persistent
   >
     <template v-slot:activator="{ on, attrs }">
-      <span class="action-link" v-bind="attrs" v-on="on">{{
-        activatorText
-      }}</span>
+      <div v-bind="attrs" v-on="on">
+        <slot></slot>
+      </div>
     </template>
     <v-card class="dialog-card">
       <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
@@ -41,10 +41,6 @@
             <v-btn @click="handleCancel" color="warn" outlined dense small
               >Cancel</v-btn
             >
-            <CategoryDeletionDialog
-              v-if="!createNew"
-              :category="category"
-            ></CategoryDeletionDialog>
           </div>
         </v-form>
       </v-card-text>
@@ -56,7 +52,7 @@
 import { mapActions, mapGetters } from "vuex";
 import CategoryDeletionDialog from "./CategoryDeletionDialog.vue";
 export default {
-  props: ["category", "activatorText"],
+  props: ["category"],
   data() {
     return {
       item: {
@@ -74,7 +70,7 @@ export default {
         this.processing = true;
         if (this.category) {
           await this.editCategory({
-            id: this.category._id,
+            id: this.category.id,
             name: this.item.name,
           });
         } else {
@@ -98,7 +94,7 @@ export default {
       return this.category === null || this.category === undefined;
     },
   },
-  components: { CategoryDeletionDialog },
+  components: { CategoryDeletionDialog }
 };
 </script>
 

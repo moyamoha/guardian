@@ -22,6 +22,12 @@ const routes = [
     name: "generate",
     component: () => import("../views/generate-password.vue"),
   },
+
+  {
+    path: "/categories",
+    name: "categories",
+    component: () => import("../views/CategoriesView.vue"),
+  },
 ];
 
 const router = new VueRouter({

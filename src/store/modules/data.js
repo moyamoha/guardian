@@ -3,7 +3,6 @@ import axios from "axios";
 const state = {
   content: [],
   entries: [],
-  openedCategories: [],
   loading: false,
   categories: [],
   filter: {
@@ -18,7 +17,6 @@ const getters = {
   allEntries: (state) => state.entries,
   isLoading: (state) => state.loading,
   categories: (state) => state.categories,
-  openedCategories: (state) => state.openedCategories,
   filter: (state) => state.filter,
 };
 
@@ -27,7 +25,7 @@ const mutations = {
   setContent: (state, data) => {
     state.content = data;
     state.categories = data.map((item) => {
-      return { name: item.name, id: item._id };
+      return { name: item.name, id: item._id, entryCount: item.items.length };
     });
     let e = [];
     data.forEach((citem) => {
@@ -78,10 +76,10 @@ const actions = {
     }
   },
 
-  removeCategory: async ({ commit }, id) => {
+  removeCategory: async ({ commit, dispatch }, id) => {
     try {
       await axios.delete("/categories/" + id);
-      commit("removeCateg", id);
+      dispatch("fetchContent");
     } catch (e) {
       commit("setError", e.response.data.message);
     }
@@ -96,11 +94,12 @@ const actions = {
     }
   },
 
-  editCategory: async ({ commit, dispatch, getters }, { id, name }) => {
+  editCategory: async ({ commit, dispatch }, { id, name }) => {
     try {
-      await axios.put("/categories/" + id, { name: name });
+      await axios.put("/categories/" + id, { newName: name });
       dispatch("fetchContent");
     } catch (e) {
+      console.log(e);
       commit("setError", e.response.data.message);
     }
   },

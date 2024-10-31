@@ -37,10 +37,10 @@ export default {
     ...mapActions(["login", "logout", "fetchProfile"]),
     handleClick() {
       if (this.loggedInUser) {
-        this.$router.push("/home")
+        this.$router.push("/home");
       } else {
-        const url = `${AUTH_UI_URL}/login?redirect=${SITE_URL}`
-        window.location.href = url
+        const url = `${AUTH_UI_URL}/login?redirect=${SITE_URL}`;
+        window.location.href = url;
       }
     },
   },
@@ -48,12 +48,11 @@ export default {
     ...mapGetters(["loggedInUser"]),
   },
   async mounted() {
-    console.log('HERER')
-    const tokenFromQuery = getTokenFromQuery(this.$route)
+    const tokenFromQuery = getTokenFromQuery(this.$route);
     if (tokenFromQuery) {
-      await this.login(tokenFromQuery)
+      await this.login(tokenFromQuery);
     }
-  }
+  },
 };
 </script>
 

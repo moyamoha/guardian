@@ -47,25 +47,23 @@ export default {
   components: { CategoryDialog, Loading, EntryContainer, SearchField, EntryDialog },
   methods: {
     ...mapActions(["fetchContent", "fetchProfile", "logout"]),
-    ...mapMutations(["setExpandedCategories", "setContentAlreadyFetched"]),
+    ...mapMutations(["setExpandedCategories"]),
   },
   async mounted() {
-    if (this.$route.query["logout"] === 'true') {
-        this.logout()
-      } else if (this.$route.query["fetch_profile"] === 'true') {
-      await this.fetchProfile()
+    const q = this.$route.query
+    if (q["logout"] === 'true') {
+      this.logout()
+    } else if (q["fetch_profile"] === 'true') {
+        await this.fetchProfile()
         this.$router.push('/home')
       }
-    if (this.loggedInUser && !this.contentAlreadyFetched) {
+    if (this.loggedInUser) {
       await this.fetchContent();
-      this.setContentAlreadyFetched(true)
-    } else if (this.loggedInUser && this.contentAlreadyFetched) {
-      return
     }
     else router.replace("/");
   },
   computed: {
-    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes", "contentAlreadyFetched"]),
+    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes"]),
   }
 };
 </script>
