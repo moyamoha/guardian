@@ -5,24 +5,23 @@
       <strong>{{ loggedInUser.firstname }} {{ loggedInUser.lastname }}</strong
       >!
     </p>
+    <div class="d-flex mb-5 align-center">
+      <span class="mr-4">All your credentials</span>
+      <EntryDialog :entry="null" :categoryId="null">
+        <v-icon dense>mdi-plus-outline</v-icon>
+      </EntryDialog>
+    </div>
     <Loading v-if="this.isLoading"></Loading>
-    <div v-else-if="this.content.length > 0">
-      <div class="d-flex mb-5 align-center">
-        <span class="mr-4">All your credentials</span>
-        <EntryDialog :entry="null" :categoryId="null">
-          <v-icon dense>mdi-plus-outline</v-icon>
-        </EntryDialog>
-      </div>
+    <div v-if="this.content.length > 0">
       <SearchField></SearchField>
     </div>
-    <p v-else>
+    <div v-if="this.content.length === 0 && !this.isLoading">
       You have not created anything yet.
       <CategoryDialog :category="null">
         <v-btn dense small>Create category</v-btn>
       </CategoryDialog>
-    </p>
+    </div>
     <EntryContainer></EntryContainer>
-    <CategoryDialog></CategoryDialog>
   </div>
 </template>
 
