@@ -1,32 +1,32 @@
 <template>
-    <div class="category-card">
-      <section class="category-card__title">
-        <span>{{ this.category.name }}</span>
-      </section>
-      <section class="category-card__entry-count">
-        <span class="entry-card__label">Entry count: </span>
-        <span>{{ this.category.entryCount }}</span>
-      </section>
-      <section class="category-card__actions">
-        <CategoryDeletionDialog :category="this.category">
-          <v-icon dense>mdi-delete-outline</v-icon>
-        </CategoryDeletionDialog>
-        <CategoryDialog :category="this.category">
-          <v-icon dense>mdi-square-edit-outline</v-icon>
-        </CategoryDialog>
-      </section>
-    </div>
+  <div class="category-card">
+    <section class="category-card__title">
+      <span>{{ this.category.name }}</span>
+    </section>
+    <section class="category-card__entry-count">
+      <span class="entry-card__label">Entry count: </span>
+      <span>{{ this.category.entryCount }}</span>
+    </section>
+    <section class="category-card__actions">
+      <CategoryDeletionDialog :category="this.category">
+        <v-icon dense>mdi-delete-outline</v-icon>
+      </CategoryDeletionDialog>
+      <CategoryDialog :category="this.category">
+        <v-icon dense>mdi-square-edit-outline</v-icon>
+      </CategoryDialog>
+    </section>
+  </div>
 </template>
 
 <script>
-import CategoryDeletionDialog from './CategoryDeletionDialog.vue';
-import CategoryDialog from './CategoryDialog.vue';
+import CategoryDeletionDialog from "./CategoryDeletionDialog.vue";
+import CategoryDialog from "./CategoryDialog.vue";
 
 export default {
-    name: 'category-card',
-    props: ["category"],
-    components: { CategoryDialog, CategoryDeletionDialog }
-}
+  name: "category-card",
+  props: ["category"],
+  components: { CategoryDialog, CategoryDeletionDialog },
+};
 </script>
 
 <style scoped lang="scss">
@@ -89,6 +89,4 @@ export default {
     width: 100%;
   }
 }
-
 </style>
-

@@ -36,27 +36,32 @@ import SearchField from "@/components/SearchField.vue";
 
 export default {
   name: "HomeView",
-  components: { CategoryDialog, Loading, EntryContainer, SearchField, EntryDialog },
+  components: {
+    CategoryDialog,
+    Loading,
+    EntryContainer,
+    SearchField,
+    EntryDialog,
+  },
   methods: {
     ...mapActions(["fetchContent", "fetchProfile", "logout"]),
     ...mapMutations(["setExpandedCategories"]),
   },
   async mounted() {
-    const q = this.$route.query
-    if (q["logout"] === 'true') {
-      this.logout()
-    } else if (q["fetch_profile"] === 'true') {
-        await this.fetchProfile()
-        this.$router.push('/home')
-      }
+    const q = this.$route.query;
+    if (q["logout"] === "true") {
+      this.logout();
+    } else if (q["fetch_profile"] === "true") {
+      await this.fetchProfile();
+      this.$router.push("/home");
+    }
     if (this.loggedInUser) {
       await this.fetchContent();
-    }
-    else router.replace("/");
+    } else router.replace("/");
   },
   computed: {
     ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes"]),
-  }
+  },
 };
 </script>
 
@@ -86,5 +91,4 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-
 </style>

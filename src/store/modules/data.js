@@ -143,6 +143,20 @@ const actions = {
       commit("setError", e.response.data.message);
     }
   },
+
+  requestEntryPasswordReveal: async ({ commit, dispatch }, payload) => {
+    const { id, masterPassword } = payload;
+
+    if (!id || !masterPassword) return;
+    try {
+      const resp = await axios.get(
+        `/entries/${id}/reveal-password?masterPassword=${masterPassword}`
+      );
+      return resp.data;
+    } catch (error) {
+      commit("setError", e.response.data.message);
+    }
+  },
 };
 
 export default {

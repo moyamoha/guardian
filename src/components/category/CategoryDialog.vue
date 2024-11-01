@@ -94,7 +94,7 @@ export default {
       return this.category === null || this.category === undefined;
     },
   },
-  components: { CategoryDeletionDialog }
+  components: { CategoryDeletionDialog },
 };
 </script>
 

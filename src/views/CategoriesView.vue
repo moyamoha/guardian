@@ -3,16 +3,16 @@
     <div class="d-flex my-5 align-center">
       <span class="mr-4">All your categories</span>
       <CategoryDialog :category="null">
-          <v-icon dense>mdi-plus-outline</v-icon>
+        <v-icon dense>mdi-plus-outline</v-icon>
       </CategoryDialog>
     </div>
     <Loading v-if="this.isLoading"></Loading>
     <div class="categories-list" v-if="this.categories.length > 0">
-        <CategoryCard 
-            v-for="category in this.categories"
-            :key="category.id"
-            :category="category"
-        ></CategoryCard>
+      <CategoryCard
+        v-for="category in this.categories"
+        :key="category.id"
+        :category="category"
+      ></CategoryCard>
     </div>
     <div v-else>No Categories</div>
   </div>
@@ -31,8 +31,8 @@ export default {
     ...mapGetters(["categories", "isLoading"]),
   },
   mounted() {
-    this.$store.dispatch("fetchContent")
-  }
+    this.$store.dispatch("fetchContent");
+  },
 };
 </script>
 

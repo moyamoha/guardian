@@ -9,11 +9,7 @@
     </section>
     <section class="entry-card__password">
       <span class="entry-card__label">Password: </span>
-      <span>{{
-        this.showPassword
-          ? this.entry.password
-          : Array(this.entry.password.length).fill("*").join("")
-      }}</span>
+      <span>*******</span>
     </section>
     <section class="entry-card__category">
       <span class="entry-card__label">Category: </span>
@@ -28,20 +24,9 @@
       <a :href="this.entry.url" target="_blank">{{ this.entry.url }}</a>
     </section>
     <section class="entry-card__actions">
-      <v-icon
-        class="entry-card__actions__icon"
-        @click="copyPassword"
-        dense
-        small
-        >mdi-content-copy</v-icon
-      >
-      <v-icon
-        class="entry-card__actions__icon"
-        @click="showPassword = !showPassword"
-        dense
-        small
-        >{{ eyeIcon }}</v-icon
-      >
+      <EntryPasswordRevealDialog :entry="entry">
+        <v-icon dense small>mdi-eye-off-outline</v-icon>
+      </EntryPasswordRevealDialog>
       <EntryDeletionDialog :entry="entry"></EntryDeletionDialog>
       <EntryDialog :entry="entry">
         <v-icon dense small>mdi-square-edit-outline</v-icon>
@@ -54,13 +39,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import EntryDeletionDialog from "./EntryDeletionDialog.vue";
 import EntryDialog from "./EntryDialog.vue";
+import EntryPasswordRevealDialog from "./EntryPasswordRevealDialog.vue";
 export default {
   name: "entry-card",
   props: ["entry"],
-  components: { EntryDeletionDialog, EntryDialog },
+  components: { EntryDeletionDialog, EntryDialog, EntryPasswordRevealDialog },
   data() {
     return {
       showPassword: false,
@@ -68,6 +54,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions([""]),
     copyPassword() {
       navigator.clipboard.writeText(this.entry.password);
       this.passwordCopied = true;
