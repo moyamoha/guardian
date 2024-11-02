@@ -5,23 +5,35 @@
       <strong>{{ loggedInUser.firstname }} {{ loggedInUser.lastname }}</strong
       >!
     </p>
-    <div class="d-flex mb-5 align-center">
-      <span class="mr-4">All your credentials</span>
-      <EntryDialog :entry="null" :categoryId="null">
-        <v-icon dense>mdi-plus-outline</v-icon>
-      </EntryDialog>
+    <v-alert
+      border="right"
+      colored-border
+      type="error"
+      elevation="2"
+      v-if="!this.userHasMasterPassword"
+    >
+      You have not set up master password. Creating entries will thus fail.
+      Please go the settings and set up a master password to proceed
+    </v-alert>
+    <div v-else>
+      <div class="d-flex mb-5 align-center">
+        <span class="mr-4">All your credentials</span>
+        <EntryDialog :entry="null" :categoryId="null">
+          <v-icon dense>mdi-plus-outline</v-icon>
+        </EntryDialog>
+      </div>
+      <Loading v-if="this.isLoading"></Loading>
+      <div v-if="this.content.length > 0">
+        <SearchField></SearchField>
+      </div>
+      <div v-if="this.content.length === 0 && !this.isLoading">
+        You have not created anything yet.
+        <CategoryDialog :category="null">
+          <v-btn dense small>Create category</v-btn>
+        </CategoryDialog>
+      </div>
+      <EntryContainer></EntryContainer>
     </div>
-    <Loading v-if="this.isLoading"></Loading>
-    <div v-if="this.content.length > 0">
-      <SearchField></SearchField>
-    </div>
-    <div v-if="this.content.length === 0 && !this.isLoading">
-      You have not created anything yet.
-      <CategoryDialog :category="null">
-        <v-btn dense small>Create category</v-btn>
-      </CategoryDialog>
-    </div>
-    <EntryContainer></EntryContainer>
   </div>
 </template>
 
@@ -60,7 +72,12 @@ export default {
     } else router.replace("/");
   },
   computed: {
-    ...mapGetters(["content", "isLoading", "loggedInUser", "expandedOnes"]),
+    ...mapGetters([
+      "content",
+      "isLoading",
+      "loggedInUser",
+      "userHasMasterPassword",
+    ]),
   },
 };
 </script>

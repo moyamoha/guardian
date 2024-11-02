@@ -4,10 +4,12 @@ import jwt_decode from "jwt-decode";
 
 const state = {
   user: null,
+  userHasMasterPassword: false,
 };
 
 const getters = {
   loggedInUser: (state) => state.user,
+  userHasMasterPassword: (state) => state.userHasMasterPassword,
 };
 
 const actions = {
@@ -16,6 +18,10 @@ const actions = {
       if (token) {
         localStorage.setItem("accessToken", token);
         const decoded = jwt_decode(token);
+
+        // Determine if user has vartija profile
+        const resp = await axios.get("/vartija-profiles/has-vartija-profile");
+        commit("setUserHasMasterPassword", resp.data.hasVartijaProfile);
         commit("setUser", {
           email: decoded.email,
           firstname: decoded.firstname,
@@ -28,6 +34,7 @@ const actions = {
       commit("setError", e.response.data.message);
     }
   },
+
   logout: ({ commit, getters }) => {
     localStorage.clear();
     commit("setUser", null);
@@ -45,7 +52,23 @@ const actions = {
         });
       }
     } catch (error) {
-      console.log(error);
+      commit("setError", error.response.data.message);
+    }
+  },
+
+  setupMasterPassword: async ({ commit }, payload) => {
+    try {
+      await axios.post("/vartija-profiles/", payload);
+      commit("setUserHasMasterPassword", true);
+    } catch (error) {
+      commit("setError", error.response.data.message);
+    }
+  },
+
+  changeMasterPassword: async ({ commit }, payload) => {
+    try {
+      await axios.patch("/vartija-profiles/change-master-password", payload);
+    } catch (error) {
       commit("setError", error.response.data.message);
     }
   },
@@ -58,6 +81,7 @@ const mutations = {
     state.user.lastname = nameObj.lastname;
   },
   setMfaStatus: (state, status) => (state.user.mfaEnabled = status),
+  setUserHasMasterPassword: (state, has) => (state.userHasMasterPassword = has),
 };
 
 export default {
