@@ -15,11 +15,12 @@
         Reveal password for entry {{ entry.title }}
         <v-icon @click="dialog = false" color="brown">mdi-close-circle</v-icon>
       </v-card-title>
-      <v-card-text>
+      <v-card-text class="pt-3">
+        <ErrorAlert></ErrorAlert>
         <p>
           For security reasons, we don't display entries' passwords in the user
           interface. You can request revelation by typing in your master
-          password and clicking submit
+          password and clicking Reveal
         </p>
         <p>
           The password for
@@ -39,7 +40,6 @@
             label="Master password *"
             dense
             outlined
-            :rules="[required]"
             v-model="masterPassword"
             autofocus
           ></v-text-field>
@@ -68,9 +68,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import ErrorAlert from "../_shared/ErrorAlert.vue";
 export default {
   props: ["entry"],
+  components: { ErrorAlert },
   data() {
     return {
       dialog: false,
@@ -82,6 +84,7 @@ export default {
   },
   methods: {
     ...mapActions(["requestEntryPasswordReveal"]),
+    ...mapMutations(["setError"]),
     async handleSubmit(e) {
       e.preventDefault();
       this.processing = true;
@@ -89,9 +92,13 @@ export default {
         id: this.entry._id,
         masterPassword: this.masterPassword,
       });
-      this.revealedPassword = revealPassObject.password;
-      this.processing = false;
-      this.masterPassword = "";
+      this.revealedPassword = revealPassObject?.password ?? "";
+      if (this.error === "") {
+        this.processing = false;
+        this.masterPassword = "";
+      } else {
+        this.processing = false;
+      }
     },
     handleCancel() {
       this.masterPassword = "";
@@ -99,17 +106,16 @@ export default {
       this.copied = false;
       this.processing = false;
       this.dialog = false;
-    },
-    required(v) {
-      return (v && v.length > 0) || "Category should have a name";
+      this.setError("");
     },
     async copyPassword() {
       await window.navigator.clipboard.writeText(this.revealedPassword);
       this.copied = true;
+      this.revealedPassword = "";
     },
   },
   computed: {
-    ...mapGetters(["loggedInUser"]),
+    ...mapGetters(["loggedInUser", "error"]),
   },
 };
 </script>

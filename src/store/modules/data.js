@@ -153,7 +153,7 @@ const actions = {
         `/entries/${id}/reveal-password?masterPassword=${masterPassword}`
       );
       return resp.data;
-    } catch (error) {
+    } catch (e) {
       commit("setError", e.response.data.message);
     }
   },
