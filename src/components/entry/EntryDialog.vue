@@ -107,6 +107,7 @@ export default {
         if (this.entry) {
           const categoryChanged = this.item.category.id !== this.entry.category;
           await this.editEntry({
+            id: this.entry._id,
             entry: {
               ...this.item,
               category: this.item.category.id,

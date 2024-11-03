@@ -113,8 +113,7 @@ const actions = {
     }
   },
 
-  editEntry: async ({ commit, dispatch }, { entry, reload }) => {
-    const id = entry._id;
+  editEntry: async ({ commit, dispatch }, { id, entry, reload }) => {
     try {
       await axios.put("/entries/" + id, entry);
       if (reload) dispatch("fetchContent");

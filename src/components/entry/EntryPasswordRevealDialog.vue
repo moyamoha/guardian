@@ -82,6 +82,15 @@ export default {
       copied: false,
     };
   },
+  watch: {
+    dialog(_new, _old) {
+      if (_new === true) {
+        this.revealedPassword = "";
+        this.masterPassword = "";
+        this.copied = false;
+      }
+    },
+  },
   methods: {
     ...mapActions(["requestEntryPasswordReveal"]),
     ...mapMutations(["setError"]),
