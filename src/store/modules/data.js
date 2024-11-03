@@ -157,6 +157,17 @@ const actions = {
       commit("setError", e.response.data.message);
     }
   },
+
+  editEntryPassword: async ({ commit }, payload) => {
+    const { id, newPassword } = payload;
+    try {
+      await axios.patch(`/entries/${id}/change-password`, {
+        password: newPassword,
+      });
+    } catch (e) {
+      commit("setError", e.response.data.message);
+    }
+  },
 };
 
 export default {

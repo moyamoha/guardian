@@ -13,6 +13,7 @@
     @input="updateValue"
     aria-autocomplete="none"
     :autofocus="autofocus"
+    autocomplete=""
   >
   </v-text-field>
 </template>

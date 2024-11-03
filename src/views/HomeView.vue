@@ -12,13 +12,20 @@
       elevation="2"
       v-if="!this.userHasMasterPassword"
     >
-      You have not set up master password. Creating entries will thus fail.
-      Please go the settings and set up a master password to proceed
+      <p>
+        You have not set up master password. Creating entries will thus fail.
+        Please set up a master password to proceed
+      </p>
+      <MasterPasswordDialog>
+        <v-btn small dense outlined color="cyan darken-3"
+          >Setup master password</v-btn
+        >
+      </MasterPasswordDialog>
     </v-alert>
     <div v-else>
       <div class="d-flex mb-5 align-center">
         <span class="mr-4">All your credentials</span>
-        <EntryDialog :entry="null" :categoryId="null">
+        <EntryDialog :entry="null">
           <v-icon dense>mdi-plus-outline</v-icon>
         </EntryDialog>
       </div>
@@ -45,6 +52,7 @@ import router from "@/router";
 import Loading from "@/components/_shared/Loading.vue";
 import EntryContainer from "@/components/entry/EntryContainer.vue";
 import SearchField from "@/components/SearchField.vue";
+import MasterPasswordDialog from "@/components/settings/MasterPasswordDialog.vue";
 
 export default {
   name: "HomeView",
@@ -54,6 +62,7 @@ export default {
     EntryContainer,
     SearchField,
     EntryDialog,
+    MasterPasswordDialog,
   },
   methods: {
     ...mapActions(["fetchContent", "fetchProfile", "logout"]),

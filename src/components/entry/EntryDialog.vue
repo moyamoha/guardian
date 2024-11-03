@@ -38,6 +38,7 @@
           <PasswordField
             v-model="item.password"
             able-to-generate
+            v-if="createNew"
           ></PasswordField>
           <UrlField v-model="item.url"></UrlField>
           <v-combobox
@@ -89,8 +90,8 @@ export default {
       item: {
         title: this.entry ? this.entry.title : "",
         username: this.entry ? this.entry.username : "",
-        password: this.entry ? this.entry.password : "",
         url: this.entry && this.entry.url ? this.entry.url : "",
+        password: "",
         status: this.entry && this.entry.status ? this.entry.status : "active",
       },
       dialog: false,
@@ -107,7 +108,6 @@ export default {
           const categoryChanged = this.item.category.id !== this.entry.category;
           await this.editEntry({
             entry: {
-              ...this.entry,
               ...this.item,
               category: this.item.category.id,
             },
@@ -159,6 +159,9 @@ export default {
     },
   },
   mounted() {
+    if (!this.entry) {
+      delete this.item.password;
+    }
     if (this.entry && this.entry.category) {
       const categs = this.categories;
       const found = categs.find((c) => c.id === this.entry.category);
@@ -168,11 +171,6 @@ export default {
           name: found.name,
           id: this.entry.category,
         };
-    } else if (this.categoryId && this.categoryId.length > 0) {
-      this.item.category = {
-        name: this.getCategoryNameById(this.categoryId),
-        id: this.categoryId,
-      };
     } else {
       this.item.category = null;
     }

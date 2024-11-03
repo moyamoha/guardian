@@ -10,6 +10,12 @@
     <section class="entry-card__password">
       <span class="entry-card__label">Password: </span>
       <span>*******</span>
+      <EditEntryPasswordDialog :entry="entry">
+        <v-icon small dense>mdi-square-edit-outline</v-icon>
+      </EditEntryPasswordDialog>
+      <EntryPasswordRevealDialog :entry="entry">
+        <v-icon dense small>mdi-eye-off-outline</v-icon>
+      </EntryPasswordRevealDialog>
     </section>
     <section class="entry-card__category">
       <span class="entry-card__label">Category: </span>
@@ -24,9 +30,6 @@
       <a :href="this.entry.url" target="_blank">{{ this.entry.url }}</a>
     </section>
     <section class="entry-card__actions">
-      <EntryPasswordRevealDialog :entry="entry">
-        <v-icon dense small>mdi-eye-off-outline</v-icon>
-      </EntryPasswordRevealDialog>
       <EntryDeletionDialog :entry="entry"></EntryDeletionDialog>
       <EntryDialog :entry="entry">
         <v-icon dense small>mdi-square-edit-outline</v-icon>
@@ -43,10 +46,16 @@ import { mapActions, mapGetters } from "vuex";
 import EntryDeletionDialog from "./EntryDeletionDialog.vue";
 import EntryDialog from "./EntryDialog.vue";
 import EntryPasswordRevealDialog from "./EntryPasswordRevealDialog.vue";
+import EditEntryPasswordDialog from "./EditEntryPasswordDialog.vue";
 export default {
   name: "entry-card",
   props: ["entry"],
-  components: { EntryDeletionDialog, EntryDialog, EntryPasswordRevealDialog },
+  components: {
+    EntryDeletionDialog,
+    EntryDialog,
+    EntryPasswordRevealDialog,
+    EditEntryPasswordDialog,
+  },
   data() {
     return {
       showPassword: false,
@@ -108,6 +117,11 @@ export default {
   &__password,
   &__url {
     font-size: 0.8rem;
+  }
+
+  &__password {
+    display: flex;
+    gap: 10px;
   }
 
   &__label {
