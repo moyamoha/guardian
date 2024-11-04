@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   props: ["entry"],
   data() {
@@ -54,14 +54,22 @@ export default {
   },
   methods: {
     ...mapActions(["removeEntry"]),
+    ...mapMutations(["setError"]),
     async handleDelete() {
       this.processing = true;
       await this.removeEntry(this.entry._id);
       this.processing = false;
     },
   },
+  watch: {
+    dialog(_new, _old) {
+      if (_new === false) {
+        this.setError("");
+      }
+    },
+  },
   computed: {
-    ...mapGetters(["loggedInUser"]),
+    ...mapGetters(["loggedInUser", "error"]),
   },
 };
 </script>

@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import ErrorAlert from "../_shared/ErrorAlert.vue";
 import PasswordField from "../_shared/PasswordField.vue";
 import UrlField from "../_shared/UrlField.vue";
@@ -100,6 +100,7 @@ export default {
   },
   methods: {
     ...mapActions(["addEntry", "editEntry", "changeCategoryForEntry"]),
+    ...mapMutations(["setError"]),
     async handleSubmit(e) {
       e.preventDefault();
       if (this.$refs.enform.validate()) {
@@ -159,10 +160,14 @@ export default {
       return this.entry === null || this.entry === undefined;
     },
   },
+  watch: {
+    dialog(_new, _old) {
+      if (_new === false) {
+        this.setError("");
+      }
+    },
+  },
   mounted() {
-    if (!this.entry) {
-      delete this.item.password;
-    }
     if (this.entry && this.entry.category) {
       const categs = this.categories;
       const found = categs.find((c) => c.id === this.entry.category);
