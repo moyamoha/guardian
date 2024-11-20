@@ -8,8 +8,5 @@ const prodUlr = "https://yahya-8csr.onrender.com";
 export const BACKEND_BASE_URL =
   isDevMode && !useProdUrlAnyway ? devUrl : prodUlr;
 
-export const AUTH_UI_URL =
-  1 === 2 ? "http://localhost:8081" : "https://account.yahyasalimi.com";
-export const SITE_URL = isDevMode
-  ? "http://localhost:8080"
-  : "https://vartija.yahyasalimi.com";
+export const AUTH_UI_URL = "https://account.yahyasalimi.com";
+export const SITE_URL = window.location.origin;

@@ -39,7 +39,6 @@
 import { AUTH_UI_URL, SITE_URL } from "@/utils/constants";
 import { mapGetters, mapActions } from "vuex";
 import MasterPasswordDialog from "./settings/MasterPasswordDialog.vue";
-import axios from "axios";
 
 export default {
   components: { MasterPasswordDialog },
