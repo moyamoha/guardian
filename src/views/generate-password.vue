@@ -102,4 +102,15 @@ export default {
   width: 100%;
   word-break: break-all;
 }
+
+@media (max-width: 900px) {
+  .generate-password-page {
+    width: 60%;
+  }
+}
+@media (max-width: 700px) {
+  .generate-password-page {
+    width: 90%;
+  }
+}
 </style>
