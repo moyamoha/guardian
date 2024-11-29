@@ -42,7 +42,7 @@ main {
   min-height: 90vh;
   display: flex;
   justify-content: center;
-  padding-top: 3rem;
+  margin-top: 65px;
 }
 
 @media (max-width: 900px) {

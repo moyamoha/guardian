@@ -71,6 +71,12 @@ nav {
   gap: 10px;
   border-bottom: 5px solid rgb(255, 177, 32);
 
+  position: fixed;
+  top: 0;
+  width: 100%; /* Ensures it spans the entire width */
+  z-index: 1000;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
   a,
   span {
     font-weight: 500;
