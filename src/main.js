@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import vuetify from "./plugins/vuetify";
 import store from "./store";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { BACKEND_BASE_URL } from "./utils/constants";
 
 Vue.config.productionTip = false;
@@ -26,15 +26,7 @@ axios.interceptors.response.use(
     return resp;
   },
   function (error) {
-    const comesFromVerifyCodeView = router.currentRoute.name === "verify-code";
-    const isInLoginView = router.currentRoute.name === "login";
-    console.log("Here", comesFromVerifyCodeView, isInLoginView);
-    if (
-      error.name === "AxiosError" &&
-      error.response.data.statusCode === 401 &&
-      !comesFromVerifyCodeView &&
-      !isInLoginView
-    ) {
+    if (error instanceof AxiosError && error.response.data.statusCode === 401) {
       store.commit("setError", "You are not logged in or session expired");
       store.commit("setUser", null);
       router.push("/");
