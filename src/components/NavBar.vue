@@ -38,14 +38,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
 import useAuthStore from "../store/auth.store";
 import { AUTH_UI_URL, SITE_URL } from "../utils/constants";
 import MasterPasswordDialog from "./settings/MasterPasswordDialog.vue";
 
 const auth = useAuthStore();
-
-const downloading = ref<boolean>(false);
 
 function goToAccountSettingsPage() {
   const token = window.localStorage.getItem("accessToken");
