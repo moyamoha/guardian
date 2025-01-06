@@ -3,7 +3,7 @@
     <span class="text-caption mr-2"
       >Found ({{ dataStore.entriesCount }}) entries |</span
     >
-    <span class="per-page__text">Per page:</span>
+    <span class="text-caption mr-3">Per page:</span>
     <select class="per-page__select" v-model="dataStore.pagination.perPage">
       <option
         v-for="v in possiblePerPageValues"
