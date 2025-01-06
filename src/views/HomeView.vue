@@ -7,18 +7,20 @@
     </p>
     <v-alert
       colored-border
-      type="error"
+      type="warning"
+      variant="outlined"
+      border="start"
       elevation="2"
+      class="mt-4"
+      icon="mdi-alert-outline"
       v-if="!auth.userHasMasterPassword"
     >
-      <p>
+      <p class="mb-3">
         You have not set up master password. Creating entries will thus fail.
         Please set up a master password to proceed
       </p>
       <MasterPasswordDialog>
-        <v-btn small dense outlined color="cyan darken-3"
-          >Setup master password</v-btn
-        >
+        <v-btn variant="tonal">Setup master password</v-btn>
       </MasterPasswordDialog>
     </v-alert>
     <div v-else>
