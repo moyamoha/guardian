@@ -3,7 +3,12 @@
     <div class="d-flex mt-5 mb-3 align-center justify-space-between">
       <span class="mr-4">All your categories</span>
       <CategoryDialog>
-        <v-icon dense>mdi-plus-outline</v-icon>
+        <v-btn
+          icon="mdi-plus-outline"
+          density="compact"
+          elevation="0"
+          size="small"
+        ></v-btn>
       </CategoryDialog>
     </div>
     <Loading v-if="dataStore.isLoading"></Loading>
@@ -49,5 +54,9 @@ onMounted(async () => {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  grid-auto-flow: dense;
 }
 </style>

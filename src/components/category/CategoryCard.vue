@@ -1,7 +1,7 @@
 <template>
   <div class="category-card">
     <section class="category-card__title">
-      <span>{{ category.name }}</span>
+      <span @click="handleTitleClick">{{ category.name }}</span>
     </section>
     <section class="category-card__entry-count">
       <span class="entry-card__label">Entry count: </span>
@@ -28,13 +28,23 @@ import type { PropType } from "vue";
 import CategoryDeletionDialog from "./CategoryDeletionDialog.vue";
 import CategoryDialog from "./CategoryDialog.vue";
 import type { Category } from "../../utils/_types";
+import useDataStore from "../../store/data.store";
+import { useRouter } from "vue-router";
 
-defineProps({
+const props = defineProps({
   category: {
     type: Object as PropType<Category>,
     required: true,
   },
 });
+
+const dataStore = useDataStore();
+const router = useRouter();
+
+function handleTitleClick() {
+  dataStore.filter = { ...dataStore.filter, category: props.category._id };
+  router.push("/home");
+}
 </script>
 
 <style scoped lang="scss">
@@ -49,6 +59,7 @@ defineProps({
   justify-content: space-between;
   padding-bottom: 0px;
   flex-grow: 1;
+  font-size: 0.9rem;
 
   section {
     margin-bottom: 8px;
@@ -56,6 +67,11 @@ defineProps({
 
   &__title {
     font-weight: 520;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: default;
+    }
   }
 
   &__entry-count {
