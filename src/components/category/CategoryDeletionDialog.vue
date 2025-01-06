@@ -16,9 +16,11 @@
       </div>
     </template>
     <v-card class="dialog-card">
-      <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
+      <v-card-title
+        class="text-h6 grey lighten-2 d-flex justify-space-between dialog-card-title"
+      >
         Delete category {{ category.name }} ?
-        <v-icon @click="dialog = false" color="brown">mdi-close-circle</v-icon>
+        <v-icon @click="dialog = false" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text class="py-2">
         Deleting a category will delete all the entries in it. Are you sure?

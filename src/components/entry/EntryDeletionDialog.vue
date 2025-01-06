@@ -16,9 +16,11 @@
       </div>
     </template>
     <v-card class="dialog-card">
-      <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
+      <v-card-title
+        class="text-h6 d-flex justify-space-between dialog-card-title"
+      >
         Delete entry
-        <v-icon @click="dialog = false" color="brown">mdi-close-circle</v-icon>
+        <v-icon @click="dialog = false" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text class="py-2">
         Are your sure you want to delete {{ entry.title }}?

@@ -11,11 +11,13 @@
       </div>
     </template>
     <v-card class="dialog-card">
-      <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
+      <v-card-title
+        class="text-h6 d-flex justify-space-between dialog-card-title"
+      >
         <div>
           {{ entry ? `Edit '${entry.title}'?` : `Create new entry` }}
         </div>
-        <v-icon @click="handleClose" color="brown">mdi-close-circle</v-icon>
+        <v-icon @click="handleClose" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text class="py-2">
         <ErrorAlert v-if="ui.errorHappened" :timeout="4000"></ErrorAlert>
@@ -177,8 +179,13 @@ function handleClose() {
 </script>
 
 <style>
-.dialog-card {
+/* .dialog-card {
   position: relative;
+} */
+
+.dialog-card-title {
+  background-color: rgb(40, 83, 83);
+  color: white;
 }
 
 .close-icon {

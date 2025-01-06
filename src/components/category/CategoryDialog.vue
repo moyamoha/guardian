@@ -11,12 +11,15 @@
       </div>
     </template>
     <v-card class="dialog-card">
-      <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
+      <v-card-title
+        class="text-h6 d-flex justify-space-between dialog-card-title"
+      >
         <div>
           {{ createNew ? "New category" : `Editing ${category?.name}` }}
         </div>
-        <v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
+        <v-icon @click="handleCancel" color="white">mdi-close-circle</v-icon>
       </v-card-title>
+
       <v-card-text>
         <ErrorAlert v-if="ui.errorHappened" :timeout="3500"></ErrorAlert>
         <v-form class="my-3" @submit.prevent="handleSubmit" ref="catform">

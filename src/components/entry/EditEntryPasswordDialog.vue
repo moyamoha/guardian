@@ -16,11 +16,13 @@
       </div>
     </template>
     <v-card class="dialog-card">
-      <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
+      <v-card-title
+        class="text-h6 d-flex justify-space-between dialog-card-title"
+      >
         <div>
           Edit password for <strong>{{ entry.title }}</strong>
         </div>
-        <v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
+        <v-icon @click="handleCancel" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text>
         <v-form class="my-3" @submit.prevent="handleSubmit" ref="entryPassForm">

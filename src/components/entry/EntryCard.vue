@@ -1,5 +1,17 @@
 <template>
   <div class="entry-card">
+    <div
+      size="small"
+      :color="entry.status === 'active' ? 'success' : 'error'"
+      :class="{
+        'entry-card__status': true,
+        'entry-card__status--expired': entry.status === 'expired',
+        'entry-card__status--active': entry.status === 'active',
+      }"
+    >
+      {{ entry.status }}
+    </div>
+
     <section class="entry-card__title">
       <span>{{ entry.title }}</span>
     </section>
@@ -16,10 +28,6 @@
     <section class="entry-card__category">
       <span class="entry-card__label">Category: </span>
       <span>{{ entry.category.name }}</span>
-    </section>
-    <section class="entry-card__status">
-      <span class="entry-card__label">Status: </span>
-      <span>{{ entry.status }}</span>
     </section>
     <section class="entry-card__actions">
       <a v-if="entry.url" :href="entry.url" target="_blank">
@@ -69,8 +77,7 @@ const passwordCopied = ref(false);
 
 <style lang="scss">
 .entry-card {
-  // width: 220px;
-  // height: 220px;
+  position: relative;
   border-radius: 2px;
   border: 1px solid #222;
   padding: 8px 10px;
@@ -95,6 +102,26 @@ const passwordCopied = ref(false);
   &__category,
   &__status {
     font-size: 0.75rem;
+  }
+
+  &__status {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 40px;
+    padding: 12px;
+
+    background-color: #e8f5e9;
+    color: rgb(76, 175, 80);
+
+    &--expired {
+      background-color: #f5dfe3;
+      color: rgb(176, 0, 32);
+    }
   }
 
   &__password {
