@@ -71,16 +71,11 @@
             class="mr-2"
             color="primary"
             variant="outlined"
-            density="compact"
             :disabled="processing || !formIsValid"
             :loading="processing"
             >Save</v-btn
           >
-          <v-btn
-            @click="dialog = !dialog"
-            color="error"
-            variant="outlined"
-            density="compact"
+          <v-btn @click="dialog = !dialog" color="error" variant="outlined"
             >Cancel</v-btn
           >
         </v-form>

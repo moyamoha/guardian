@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-3 d-flex align-center justify-space-between w-100">
+    <div class="mb-3 d-sm-flex align-center justify-space-between w-100">
       <EntryDialog>
         <template v-slot:default>
           <v-btn
@@ -11,7 +11,7 @@
           ></v-btn>
         </template>
       </EntryDialog>
-      <div class="d-flex align-center">
+      <div class="d-md-flex align-center">
         <PerPage></PerPage>
         <v-pagination
           v-model="dataStore.pagination.page"
@@ -51,8 +51,7 @@ const maxPage = computed(() =>
 .entry-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  grid-auto-flow: dense;
   gap: 15px;
-  /* counter-reset: num; */
+  grid-auto-flow: dense;
 }
 </style>

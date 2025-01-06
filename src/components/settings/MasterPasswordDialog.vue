@@ -11,16 +11,18 @@
       </div>
     </template>
     <v-card class="dialog-card">
-      <v-card-title class="text-h6 grey lighten-2 d-flex justify-space-between">
+      <v-card-title
+        class="text-h6 d-flex justify-space-between dialog-card-title"
+      >
         <div>
           {{
             createNew ? "Set up Master password" : `Change your master password`
           }}
         </div>
-        <v-icon @click="handleCancel" color="brown">mdi-close-circle</v-icon>
+        <v-icon @click="handleCancel" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text>
-        <p class="mb-7">
+        <p class="mb-7 text-justify">
           Your master password is the key to all your sensitive data, so it's
           crucial to make it strong and secure. This password is the only one
           you’ll need to remember, as it will be used to reveal entry's
@@ -54,17 +56,12 @@
             <v-btn
               type="submit"
               color="primary"
-              varinat="outlined"
-              density="compact"
+              variant="outlined"
               :disabled="processing"
               :loading="processing"
               >Save</v-btn
             >
-            <v-btn
-              @click="handleCancel"
-              variant="outlined"
-              density="compact"
-              color="secondary"
+            <v-btn @click="handleCancel" variant="outlined" color="secondary"
               >Cancel</v-btn
             >
           </div>

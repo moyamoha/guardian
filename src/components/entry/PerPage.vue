@@ -1,5 +1,8 @@
 <template>
   <div class="per-page">
+    <span class="text-caption mr-2"
+      >Found ({{ dataStore.entriesCount }}) entries /</span
+    >
     <span class="per-page__text">Per page:</span>
     <select class="per-page__select" v-model="dataStore.pagination.perPage">
       <option

@@ -1,7 +1,12 @@
 <template>
   <div class="categories-view">
     <div class="d-flex mt-5 mb-3 align-center justify-space-between">
-      <span class="mr-4">All your categories</span>
+      <span
+        >All your categories
+        <span class="text-caption"
+          >( {{ dataStore.categories.length }} )</span
+        ></span
+      >
       <CategoryDialog>
         <v-btn
           icon="mdi-plus-outline"
@@ -51,11 +56,8 @@ onMounted(async () => {
 }
 
 .categories-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
   grid-auto-flow: dense;
 }

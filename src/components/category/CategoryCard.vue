@@ -49,14 +49,10 @@ function handleTitleClick() {
 
 <style scoped lang="scss">
 .category-card {
-  width: 200px;
-  // height: 280px;
   border-radius: 2px;
+  position: relative;
   border: 1px solid #222;
   padding: 8px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding-bottom: 0px;
   flex-grow: 1;
   font-size: 0.9rem;
@@ -93,24 +89,6 @@ function handleTitleClick() {
     &__icon {
       cursor: pointer;
     }
-  }
-}
-
-@media (max-width: 1150px) {
-  .category-card {
-    width: 40%;
-  }
-}
-
-@media (max-width: 750px) {
-  .category-card {
-    width: 48%;
-  }
-}
-
-@media (max-width: 450px) {
-  .category-card {
-    width: 100%;
   }
 }
 </style>

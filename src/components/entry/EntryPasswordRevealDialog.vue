@@ -24,7 +24,7 @@
       </v-card-title>
       <v-card-text class="pt-3">
         <ErrorAlert v-if="ui.errorHappened"></ErrorAlert>
-        <p>
+        <p class="text-justify mb-2">
           For security reasons, we don't display entries' passwords in the user
           interface. You can request revelation by typing in your master
           password and clicking Reveal
@@ -48,6 +48,7 @@
             density="compact"
             variant="outlined"
             v-model="masterPassword"
+            hide-details
             autofocus
           ></v-text-field>
           <div class="btn-cont">
@@ -56,7 +57,7 @@
               color="primary"
               density="compact"
               variant="outlined"
-              :disabled="processing"
+              :disabled="processing || masterPassword === ''"
               :loading="processing"
               >Reveal</v-btn
             >

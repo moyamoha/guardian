@@ -23,28 +23,29 @@
         <v-icon @click="dialog = false" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text class="py-2">
-        Are your sure you want to delete {{ entry.title }}?
+        <p>Are your sure you want to delete {{ entry.title }}?</p>
+        <v-sheet class="d-flex my-2">
+          <v-btn
+            elevation="2"
+            variant="outlined"
+            density="compact"
+            @click="handleDelete"
+            color="success"
+            :disabled="processing"
+            :loading="processing"
+            >Yes</v-btn
+          >
+          <v-btn
+            elevation="2"
+            density="compact"
+            variant="outlined"
+            color="red"
+            class="ml-3"
+            @click="dialog = false"
+            >No</v-btn
+          >
+        </v-sheet>
       </v-card-text>
-      <v-card-actions>
-        <v-btn
-          elevation="2"
-          density="compact"
-          variant="outlined"
-          @click="handleDelete"
-          color="success"
-          :disabled="processing"
-          :loading="processing"
-          >Yes</v-btn
-        >
-        <v-btn
-          elevation="2"
-          density="compact"
-          variant="outlined"
-          color="red"
-          @click="dialog = false"
-          >No</v-btn
-        >
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
