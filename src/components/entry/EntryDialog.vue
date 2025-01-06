@@ -179,8 +179,9 @@ function handleClose() {
 } */
 
 .dialog-card-title {
-  background-color: rgb(40, 83, 83);
+  background-color: #2c3e50;
   color: white;
+  border-bottom: 5px solid rgb(255, 177, 32);
 }
 
 .close-icon {
