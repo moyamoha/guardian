@@ -22,6 +22,9 @@ router.beforeEach(
       to.name?.toString() !== ""
         ? "Guardian - " + to.name?.toString()
         : "Guardian";
+    if (to.name?.toString() === "landing") {
+      document.title = "Guardian";
+    }
     next();
 
     if (routes.findIndex((r) => r.name === to.name?.toString()) === -1) {
