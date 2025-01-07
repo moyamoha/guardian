@@ -79,11 +79,11 @@
 </template>
 
 <script setup lang="ts">
-import ErrorAlert from "../_shared/ErrorAlert.vue";
+import ErrorAlert from "../../_shared/ErrorAlert.vue";
 import { ref, watch, type PropType } from "vue";
-import type { Entry } from "../../utils/_types";
-import useDataStore from "../../store/data.store";
-import useUiStore from "../../store/ui.store";
+import type { Entry } from "../../../utils/_types";
+import useDataStore from "../../../store/data.store";
+import useUiStore from "../../../store/ui.store";
 
 const props = defineProps({
   entry: {

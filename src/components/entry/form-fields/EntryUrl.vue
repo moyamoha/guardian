@@ -5,7 +5,9 @@
     variant="outlined"
     v-model="localValue"
     @click:append="openUrl"
-    :rules="[rules.isUrl]"
+    :rules="[rules.isUrlOrEmpty]"
+    clearable
+    @click:clear="localValue = ''"
   >
     <template v-slot:append>
       <v-icon @click="openUrl" :disabled="openUrlIconDisabled" dense
@@ -17,7 +19,7 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch } from "vue";
-import { rules } from "../../utils/validation";
+import { rules } from "../../../utils/validation";
 
 const props = defineProps({
   modelValue: { type: String, required: true },
@@ -33,7 +35,7 @@ function openUrl() {
 }
 
 const openUrlIconDisabled = computed(
-  () => typeof rules.isUrl(localValue.value) === "string"
+  () => typeof rules.isUrlOrEmpty(localValue.value) === "string"
 );
 
 watch(localValue, (_new: string) => {

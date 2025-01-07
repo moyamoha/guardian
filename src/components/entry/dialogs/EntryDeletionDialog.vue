@@ -52,8 +52,8 @@
 
 <script setup lang="ts">
 import { ref, type PropType } from "vue";
-import type { Entry } from "../../utils/_types";
-import useDataStore from "../../store/data.store";
+import type { Entry } from "../../../utils/_types";
+import useDataStore from "../../../store/data.store";
 
 const dataStore = useDataStore();
 

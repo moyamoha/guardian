@@ -37,7 +37,7 @@
 import { computed } from "vue";
 import useDataStore from "../../store/data.store";
 import EntryCard from "./EntryCard.vue";
-import EntryDialog from "./EntryDialog.vue";
+import EntryDialog from "./dialogs/EntryDialog.vue";
 import PerPage from "./PerPage.vue";
 
 const dataStore = useDataStore();

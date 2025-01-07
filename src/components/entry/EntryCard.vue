@@ -60,10 +60,10 @@
 <script setup lang="ts">
 import { ref, type PropType } from "vue";
 import type { Entry } from "../../utils/_types";
-import EntryPasswordRevealDialog from "./EntryPasswordRevealDialog.vue";
-import EditEntryPasswordDialog from "./EditEntryPasswordDialog.vue";
-import EntryDeletionDialog from "./EntryDeletionDialog.vue";
-import EntryDialog from "./EntryDialog.vue";
+import EntryPasswordRevealDialog from "./dialogs/EntryPasswordRevealDialog.vue";
+import EditEntryPasswordDialog from "./dialogs/EditEntryPasswordDialog.vue";
+import EntryDeletionDialog from "./dialogs/EntryDeletionDialog.vue";
+import EntryDialog from "./dialogs/EntryDialog.vue";
 
 const props = defineProps({
   entry: {

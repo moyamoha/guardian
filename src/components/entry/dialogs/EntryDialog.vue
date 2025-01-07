@@ -26,46 +26,12 @@
           @submit.prevent="handleSubmit"
           v-model="formIsValid"
         >
-          <v-text-field
-            label="Title *"
-            density="compact"
-            variant="outlined"
-            v-model="item.title"
-            :rules="[rules.required]"
-            autofocus
-          ></v-text-field>
-          <v-text-field
-            label="Username *"
-            density="compact"
-            variant="outlined"
-            v-model="item.username"
-            :rules="[rules.required]"
-          ></v-text-field>
-          <PasswordField
-            v-model="item.password"
-            able-to-generate
-            v-if="createNew"
-          ></PasswordField>
-          <UrlField v-model="item.url"></UrlField>
-          <v-combobox
-            v-model="item.status"
-            :items="['active', 'expired']"
-            label="Status"
-            density="compact"
-            variant="outlined"
-            v-if="!createNew"
-          ></v-combobox>
-          <v-combobox
-            v-model="category"
-            :items="dataStore.categories"
-            item-title="name"
-            item-value="_id"
-            :return-object="false"
-            label="Category *"
-            density="compact"
-            variant="outlined"
-            :rules="[rules.required]"
-          ></v-combobox>
+          <EntryTitle v-model="item.title" />
+          <EntryUsername v-model="item.username"></EntryUsername>
+          <EntryPassword v-model="item.password" v-if="createNew" />
+          <EntryUrl v-model="item.url"></EntryUrl>
+          <EntryStatus v-model="item.status" v-if="!createNew" />
+          <EntryCategory v-model="category" />
           <v-btn
             type="submit"
             class="mr-2"
@@ -86,13 +52,16 @@
 
 <script lang="ts" setup>
 import { computed, ref, type PropType } from "vue";
-import ErrorAlert from "../_shared/ErrorAlert.vue";
-import PasswordField from "../_shared/PasswordField.vue";
-import UrlField from "../_shared/UrlField.vue";
-import useDataStore from "../../store/data.store";
-import type { Entry } from "../../utils/_types";
-import { rules } from "../../utils/validation";
-import useUiStore from "../../store/ui.store";
+import useDataStore from "../../../store/data.store";
+import type { Entry } from "../../../utils/_types";
+import useUiStore from "../../../store/ui.store";
+import ErrorAlert from "../../_shared/ErrorAlert.vue";
+import EntryTitle from "../form-fields/EntryTitle.vue";
+import EntryUsername from "../form-fields/EntryUsername.vue";
+import EntryPassword from "../form-fields/EntryPassword.vue";
+import EntryStatus from "../form-fields/EntryStatus.vue";
+import EntryUrl from "../form-fields/EntryUrl.vue";
+import EntryCategory from "../form-fields/EntryCategory.vue";
 
 const dataStore = useDataStore();
 const ui = useUiStore();
