@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <NavBar></NavBar>
-    <!-- <NotifBar></NotifBar> -->
     <main>
       <v-container>
         <v-row class="d-flex justify-center">
