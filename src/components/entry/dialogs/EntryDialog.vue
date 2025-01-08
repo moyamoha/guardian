@@ -39,9 +39,14 @@
             variant="outlined"
             :disabled="processing || !formIsValid"
             :loading="processing"
+            prepend-icon="mdi-content-save-check-outline"
             >Save</v-btn
           >
-          <v-btn @click="dialog = !dialog" color="error" variant="outlined"
+          <v-btn
+            @click="dialog = !dialog"
+            color="error"
+            variant="outlined"
+            prepend-icon="mdi-close"
             >Cancel</v-btn
           >
         </v-form>

@@ -13,6 +13,7 @@
           density="compact"
           elevation="0"
           size="small"
+          v-tooltip:bottom="'Create new category'"
         ></v-btn>
       </CategoryDialog>
     </div>

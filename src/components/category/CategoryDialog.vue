@@ -35,17 +35,17 @@
             <v-btn
               type="submit"
               color="primary"
-              density="compact"
               variant="outlined"
               :disabled="processing"
               :loading="processing"
+              prepend-icon="mdi-content-save-check-outline"
               >Save</v-btn
             >
             <v-btn
               @click="handleCancel"
-              color="warn"
-              density="compact"
+              color="error"
               variant="outlined"
+              prepend-icon="mdi-close"
               >Cancel</v-btn
             >
           </div>

@@ -8,6 +8,7 @@
             density="compact"
             size="small"
             elevation="0"
+            v-tooltip:end="'Create new entry'"
           ></v-btn>
         </template>
       </EntryDialog>

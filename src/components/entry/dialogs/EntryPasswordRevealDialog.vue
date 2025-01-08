@@ -55,7 +55,7 @@
             <v-btn
               type="submit"
               color="primary"
-              density="compact"
+              prepend-icon="mdi-eye-outline"
               variant="outlined"
               :disabled="processing || masterPassword === ''"
               :loading="processing"
@@ -63,8 +63,8 @@
             >
             <v-btn
               @click="handleCancel"
-              color="warn"
-              density="compact"
+              color="error"
+              prepend-icon="mdi-close"
               variant="outlined"
               >Close</v-btn
             >

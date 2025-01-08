@@ -25,26 +25,24 @@
       <v-card-text class="py-2">
         Deleting a category will delete all the entries in it. Are you sure?
       </v-card-text>
-      <v-card-actions>
-        <v-btn
-          elevation="2"
-          density="compact"
-          variant="outlined"
-          @click="handleDelete"
-          color="success"
-          :disabled="deleting"
-          :loading="deleting"
-          >Yes</v-btn
-        >
-        <v-btn
-          elevation="2"
-          density="compact"
-          variant="outlined"
-          color="red"
-          @click="dialog = false"
-          >No</v-btn
-        >
-      </v-card-actions>
+      <v-btn
+        elevation="2"
+        density="compact"
+        variant="outlined"
+        @click="handleDelete"
+        color="success"
+        :disabled="deleting"
+        :loading="deleting"
+        >Yes</v-btn
+      >
+      <v-btn
+        elevation="2"
+        density="compact"
+        variant="outlined"
+        color="red"
+        @click="dialog = false"
+        >No</v-btn
+      >
     </v-card>
   </v-dialog>
 </template>

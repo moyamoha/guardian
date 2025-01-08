@@ -24,22 +24,22 @@
       </v-card-title>
       <v-card-text class="py-2">
         <p>Are your sure you want to delete {{ entry.title }}?</p>
-        <v-sheet class="d-flex my-2">
+        <v-sheet class="d-flex my-4">
           <v-btn
             elevation="2"
             variant="outlined"
-            density="compact"
+            prepend-icon="mdi-delete-outline"
             @click="handleDelete"
-            color="success"
+            color="primary"
             :disabled="processing"
             :loading="processing"
             >Yes</v-btn
           >
           <v-btn
             elevation="2"
-            density="compact"
+            prepend-icon="mdi-close"
             variant="outlined"
-            color="red"
+            color="secondary"
             class="ml-3"
             @click="dialog = false"
             >No</v-btn
