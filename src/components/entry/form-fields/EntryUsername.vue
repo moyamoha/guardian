@@ -5,6 +5,7 @@
     variant="outlined"
     v-model="localValue"
     :rules="[rules.required]"
+    aria-autocomplete="none"
   ></v-text-field>
 </template>
 

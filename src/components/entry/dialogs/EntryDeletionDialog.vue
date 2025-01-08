@@ -30,7 +30,7 @@
             variant="outlined"
             prepend-icon="mdi-delete-outline"
             @click="handleDelete"
-            color="primary"
+            color="error"
             :disabled="processing"
             :loading="processing"
             >Yes</v-btn

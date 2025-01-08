@@ -23,26 +23,30 @@
         <v-icon @click="dialog = false" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text class="py-2">
-        Deleting a category will delete all the entries in it. Are you sure?
+        <p>
+          Deleting a category will delete all the entries in it. Are you sure?
+        </p>
+
+        <div class="d-flex my-3">
+          <v-btn
+            color="error"
+            variant="outlined"
+            prepend-icon="mdi-delete-outline"
+            @click="handleDelete"
+            class="mr-3"
+          >
+            Yes
+          </v-btn>
+          <v-btn
+            color="secondary"
+            variant="outlined"
+            prepend-icon="mdi-close"
+            @click="dialog = false"
+          >
+            No
+          </v-btn>
+        </div>
       </v-card-text>
-      <v-btn
-        elevation="2"
-        density="compact"
-        variant="outlined"
-        @click="handleDelete"
-        color="success"
-        :disabled="deleting"
-        :loading="deleting"
-        >Yes</v-btn
-      >
-      <v-btn
-        elevation="2"
-        density="compact"
-        variant="outlined"
-        color="red"
-        @click="dialog = false"
-        >No</v-btn
-      >
     </v-card>
   </v-dialog>
 </template>
