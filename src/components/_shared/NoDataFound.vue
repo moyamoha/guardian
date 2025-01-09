@@ -15,7 +15,7 @@ const text = computed(() => {
   if (route.name === "home") {
     return "No entries found. Try changing search terms";
   } else if (route.name === "categories") {
-    return "No categories found. Please create one";
+    return "You have not created any categories yet";
   }
 });
 </script>
