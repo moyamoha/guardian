@@ -28,8 +28,10 @@
         v-for="entry in dataStore.entries"
         :key="entry._id"
         :entry="entry"
+        v-if="dataStore.entries.length > 0"
       >
       </EntryCard>
+      <NoDataFound v-else></NoDataFound>
     </div>
   </div>
 </template>
@@ -40,6 +42,7 @@ import useDataStore from "../../store/data.store";
 import EntryCard from "./EntryCard.vue";
 import EntryDialog from "./dialogs/EntryDialog.vue";
 import PerPage from "./PerPage.vue";
+import NoDataFound from "../_shared/NoDataFound.vue";
 
 const dataStore = useDataStore();
 
