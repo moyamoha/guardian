@@ -13,11 +13,15 @@
     </div>
 
     <section class="entry-card__title">
-      <span>{{ entry.title }}</span>
+      <span :class="`highlightable-title__${entry._id}`">{{
+        entry.title
+      }}</span>
     </section>
     <section class="entry-card__username">
       <span class="entry-card__label">Username: </span>
-      <span>{{ entry.username }}</span>
+      <span :class="`highlightable-username__${entry._id}`">{{
+        entry.username
+      }}</span>
     </section>
     <section class="entry-card__password">
       <span class="entry-card__label">Password: </span>
@@ -58,12 +62,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type PropType } from "vue";
+import { onMounted, ref, type PropType } from "vue";
 import type { Entry } from "../../utils/_types";
 import EntryPasswordRevealDialog from "./dialogs/EntryPasswordRevealDialog.vue";
 import EditEntryPasswordDialog from "./dialogs/EditEntryPasswordDialog.vue";
 import EntryDeletionDialog from "./dialogs/EntryDeletionDialog.vue";
 import EntryDialog from "./dialogs/EntryDialog.vue";
+import useDataStore from "../../store/data.store";
+import Mark from "mark.js";
 
 const props = defineProps({
   entry: {
@@ -72,7 +78,29 @@ const props = defineProps({
   },
 });
 
+const dataStore = useDataStore();
 const passwordCopied = ref(false);
+
+onMounted(() => {
+  const markingOptions = {
+    separateWordSearch: true,
+    caseSensitive: false,
+    className: "highlight",
+  };
+  const set1 = document.querySelector(
+    `.highlightable-title__${props.entry._id}`
+  ) as any;
+  const set2 = document.querySelector(
+    `.highlightable-username__${props.entry._id}`
+  ) as any;
+  const marker1 = new Mark(set1);
+  const marker2 = new Mark(set2);
+  if (!dataStore.filter.search) {
+    return;
+  }
+  marker1.mark(dataStore.filter.search, markingOptions);
+  marker2.mark(dataStore.filter.search, markingOptions);
+});
 </script>
 
 <style lang="scss">

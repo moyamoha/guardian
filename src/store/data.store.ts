@@ -13,6 +13,7 @@ import type {
   CreateEntryPayload,
   EditEntryPayload,
 } from "../utils/payload-types";
+import Mark from "mark.js";
 
 export const DEFAULT_ENTRIES_PER_PAGE = 9;
 
@@ -40,6 +41,20 @@ function dataStoreSetup() {
     pagination,
     async (_new: Pagination) => {
       await searchEntries();
+      const highlightDestinations = document.querySelector(
+        ".highlightable"
+      ) as any;
+      console.log(highlightDestinations);
+      const marker = new Mark(highlightDestinations);
+      if (!filter.value.search) {
+        return;
+      }
+      console.log("here", filter.value.search);
+      marker.mark(filter.value.search, {
+        separateWordSearch: true,
+        caseSensitive: false,
+        className: "highlight",
+      });
     },
     { deep: true }
   );

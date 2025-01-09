@@ -55,4 +55,9 @@ const maxPage = computed(() =>
   gap: 15px;
   grid-auto-flow: dense;
 }
+
+.highlight {
+  color: black;
+  background-color: yellow;
+}
 </style>
