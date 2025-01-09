@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-text-field
-      placeholder="Search by title, username, status and category"
+      placeholder="Search by title and/or username"
       v-model="dataStore.filter.search"
       density="compact"
       variant="outlined"
