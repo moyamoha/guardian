@@ -18,16 +18,14 @@
       </CategoryDialog>
     </div>
     <Loading v-if="dataStore.isLoading"></Loading>
-    <div
-      class="categories-list"
-      v-if="dataStore.categories.length > 0 && !dataStore.isLoading"
-    >
+    <div class="categories-list" v-else-if="dataStore.categories.length > 0">
       <CategoryCard
         v-for="category in dataStore.categories"
         :key="category._id"
         :category="category"
       ></CategoryCard>
     </div>
+    <NoDataFound v-else />
   </div>
 </template>
 
@@ -37,6 +35,7 @@ import CategoryCard from "../components/category/CategoryCard.vue";
 import Loading from "../components/_shared/Loading.vue";
 import CategoryDialog from "../components/category/CategoryDialog.vue";
 import { onMounted } from "vue";
+import NoDataFound from "../components/_shared/NoDataFound.vue";
 
 const dataStore = useDataStore();
 
