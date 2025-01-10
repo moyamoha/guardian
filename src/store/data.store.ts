@@ -13,6 +13,7 @@ import type {
   CreateEntryPayload,
   EditEntryPayload,
 } from "../utils/payload-types";
+import { defaultFilterObject } from "../utils/constants";
 
 export const DEFAULT_ENTRIES_PER_PAGE = 9;
 
@@ -30,11 +31,7 @@ function dataStoreSetup() {
     perPage: DEFAULT_ENTRIES_PER_PAGE,
   });
 
-  const filter = ref<SearchFilter>({
-    search: "",
-    status: "active",
-    category: "",
-  });
+  const filter = ref<SearchFilter>(defaultFilterObject);
 
   watch(
     pagination,

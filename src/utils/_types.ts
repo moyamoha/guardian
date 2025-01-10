@@ -2,8 +2,6 @@ export type User = {
   email: string;
   firstname: string;
   lastname: string;
-  //   dateJoined: string;
-  //   gender: "male" | "female";
 };
 
 export type Pagination = {
@@ -14,7 +12,7 @@ export type Pagination = {
 export type SearchFilter = {
   search: string;
   category: string;
-  status: PossibleEntryStatus;
+  status: PossibleEntryStatus | "";
 };
 
 // Entities
