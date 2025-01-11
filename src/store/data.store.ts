@@ -117,6 +117,7 @@ function dataStoreSetup() {
     try {
       await axios.post("/entries/?categoryId=" + categId, entry);
       await searchEntries();
+      await loadCategories();
     } catch (e) {
       ui.setError(e);
     }
