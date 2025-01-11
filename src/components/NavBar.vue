@@ -5,7 +5,7 @@
     <router-link v-if="auth.userIsLoggedIn" to="/categories"
       >Categories</router-link
     >
-    <CreateEntityMenu></CreateEntityMenu>
+    <CreateEntityMenu v-if="auth.userIsLoggedIn"></CreateEntityMenu>
     <router-link to="/generate-password">Generate</router-link>
     <v-spacer></v-spacer>
     <SettingsMenu v-if="auth.userIsLoggedIn"></SettingsMenu>
