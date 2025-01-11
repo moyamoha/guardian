@@ -74,10 +74,12 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
-  border-left: 5px solid rgb(76, 175, 80);
+  border: 1px solid rgb(76, 175, 80);
+  border-left-width: 5px;
 
   &--expired {
-    border-left: 5px solid rgb(176, 0, 32);
+    border: 1px solid rgb(176, 0, 32);
+    border-left-width: 5px;
   }
 
   &-data {
