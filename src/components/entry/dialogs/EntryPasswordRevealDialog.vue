@@ -7,12 +7,7 @@
   >
     <template v-slot:activator="{ props }">
       <div v-bind="props">
-        <v-btn
-          icon="mdi-eye-outline"
-          density="compact"
-          size="small"
-          elevation="0"
-        ></v-btn>
+        <slot></slot>
       </div>
     </template>
     <v-card class="dialog-card">

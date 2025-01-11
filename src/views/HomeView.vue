@@ -25,7 +25,18 @@
     </v-alert>
     <div v-else>
       <div class="d-flex mb-5 align-center">
-        <span class="mr-4">All your credentials</span>
+        <span class="mr-2">All your credentials</span>
+        <!-- <EntryDialog>
+          <template v-slot:default>
+            <v-btn
+              icon="mdi-plus-outline"
+              density="compact"
+              size="small"
+              elevation="0"
+              v-tooltip:end="'Create new entry'"
+            ></v-btn>
+          </template>
+        </EntryDialog> -->
       </div>
       <Filters></Filters>
       <Loading v-if="dataStore.isLoading" />

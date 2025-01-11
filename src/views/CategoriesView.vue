@@ -7,15 +7,6 @@
           >( {{ dataStore.categories.length }} )</span
         ></span
       >
-      <CategoryDialog>
-        <v-btn
-          icon="mdi-plus-outline"
-          density="compact"
-          elevation="0"
-          size="small"
-          v-tooltip:bottom="'Create new category'"
-        ></v-btn>
-      </CategoryDialog>
     </div>
     <Loading v-if="dataStore.isLoading"></Loading>
     <div class="categories-list" v-else-if="dataStore.categories.length > 0">
@@ -33,7 +24,6 @@
 import useDataStore from "../store/data.store";
 import CategoryCard from "../components/category/CategoryCard.vue";
 import Loading from "../components/_shared/Loading.vue";
-import CategoryDialog from "../components/category/CategoryDialog.vue";
 import { onMounted } from "vue";
 import NoDataFound from "../components/_shared/NoDataFound.vue";
 

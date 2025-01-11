@@ -5,49 +5,19 @@
     <router-link v-if="auth.userIsLoggedIn" to="/categories"
       >Categories</router-link
     >
+    <CreateEntityMenu></CreateEntityMenu>
     <router-link to="/generate-password">Generate</router-link>
     <v-spacer></v-spacer>
-    <v-menu
-      offset-y
-      offset-x
-      class="settings"
-      close-on-content-click
-      v-if="auth.userIsLoggedIn"
-    >
-      <template v-slot:activator="{ props }">
-        <span v-bind="props" class="mr-2">Settings</span>
-      </template>
-      <v-list width="200" class="settings-dropdown">
-        <div class="settings-item" @click="goToAccountSettingsPage">
-          <span>Account</span>
-          <v-icon small dense>mdi-account-circle-outline</v-icon>
-        </div>
-        <MasterPasswordDialog>
-          <div class="settings-item">
-            <span>Master password</span>
-            <v-icon small dense>mdi-lock-outline</v-icon>
-          </div>
-        </MasterPasswordDialog>
-        <div class="settings-item" @click="auth.logout()">
-          <span>Logout</span>
-          <v-icon small dense>mdi-logout</v-icon>
-        </div>
-      </v-list>
-    </v-menu>
+    <SettingsMenu v-if="auth.userIsLoggedIn"></SettingsMenu>
   </nav>
 </template>
 
 <script lang="ts" setup>
 import useAuthStore from "../store/auth.store";
-import { AUTH_UI_URL, SITE_URL } from "../utils/constants";
-import MasterPasswordDialog from "./settings/MasterPasswordDialog.vue";
+import SettingsMenu from "./settings/SettingsMenu.vue";
+import CreateEntityMenu from "./CreateEntityMenu.vue";
 
 const auth = useAuthStore();
-
-function goToAccountSettingsPage() {
-  const token = window.localStorage.getItem("accessToken");
-  window.location.href = `${AUTH_UI_URL}/?redirect=${SITE_URL}/home&token=${token}`;
-}
 </script>
 
 <style scoped lang="scss">
@@ -85,26 +55,6 @@ nav {
   span {
     cursor: pointer;
     margin-left: auto;
-  }
-}
-
-.settings-dropdown {
-  padding: 6px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  .settings-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #cdcdcd;
-    }
   }
 }
 </style>

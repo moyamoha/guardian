@@ -26,8 +26,26 @@
     <section class="entry-card__password">
       <span class="entry-card__label">Password: </span>
       <span>*******</span>
-      <EditEntryPasswordDialog :entry="entry" />
-      <EntryPasswordRevealDialog :entry="entry" />
+      <EditEntryPasswordDialog :entry="entry">
+        <template v-slot:default>
+          <v-btn
+            icon="mdi-square-edit-outline"
+            density="compact"
+            size="small"
+            elevation="0"
+          ></v-btn>
+        </template>
+      </EditEntryPasswordDialog>
+      <EntryPasswordRevealDialog :entry="entry">
+        <template v-slot:default>
+          <v-btn
+            icon="mdi-eye-outline"
+            density="compact"
+            size="small"
+            elevation="0"
+          ></v-btn>
+        </template>
+      </EntryPasswordRevealDialog>
     </section>
     <section class="entry-card__category">
       <span class="entry-card__label">Category: </span>
@@ -42,11 +60,19 @@
           density="compact"
         ></v-btn>
       </a>
-      <EntryDeletionDialog :entry="entry" />
+      <EntryDeletionDialog :entry="entry">
+        <template v-slot:default>
+          <v-btn
+            icon="mdi-delete-outline"
+            size="small"
+            density="compact"
+            elevation="0"
+          ></v-btn
+        ></template>
+      </EntryDeletionDialog>
       <EntryDialog :entry="entry">
         <template v-slot:default>
           <v-btn
-            v-bind="props"
             icon="mdi-square-edit-outline"
             size="small"
             density="compact"
@@ -55,14 +81,11 @@
         ></template>
       </EntryDialog>
     </section>
-    <v-snackbar v-model="passwordCopied" timeout="1500"
-      >Password was copied to the clipboard</v-snackbar
-    >
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, type PropType } from "vue";
+import { onMounted, type PropType } from "vue";
 import type { Entry } from "../../utils/_types";
 import EntryPasswordRevealDialog from "./dialogs/EntryPasswordRevealDialog.vue";
 import EditEntryPasswordDialog from "./dialogs/EditEntryPasswordDialog.vue";
@@ -79,7 +102,6 @@ const props = defineProps({
 });
 
 const dataStore = useDataStore();
-const passwordCopied = ref(false);
 
 onMounted(() => {
   const markingOptions = {

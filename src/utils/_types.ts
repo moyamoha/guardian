@@ -42,3 +42,6 @@ export type Category = IdentifierWithOwner & {
   name: string;
   entryCount: number;
 };
+
+// UI
+export type EntryDisplayMode = "grid" | "table";
