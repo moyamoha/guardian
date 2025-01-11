@@ -44,7 +44,6 @@ import NoDataFound from "../_shared/NoDataFound.vue";
 import EntryRow from "./EntryRow.vue";
 import useUiStore from "../../store/ui.store";
 import ViewTypeSelector from "./ViewTypeSelector.vue";
-import EntryDialog from "./dialogs/EntryDialog.vue";
 
 const dataStore = useDataStore();
 const ui = useUiStore();
