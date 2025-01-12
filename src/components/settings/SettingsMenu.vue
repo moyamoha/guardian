@@ -25,6 +25,7 @@
 <script lang="ts" setup>
 import useAuthStore from "../../store/auth.store";
 import { AUTH_UI_URL, SITE_URL } from "../../utils/constants";
+import MasterPasswordDialog from "./MasterPasswordDialog.vue";
 
 const auth = useAuthStore();
 

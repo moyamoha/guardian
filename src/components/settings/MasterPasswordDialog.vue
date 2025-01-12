@@ -81,7 +81,7 @@ import useAuthStore from "../../store/auth.store";
 const ui = useUiStore();
 const auth = useAuthStore();
 
-const isValid = ref(true);
+const isValid = ref(false);
 const dialog = ref(false);
 const processing = ref(false);
 const item = ref({
