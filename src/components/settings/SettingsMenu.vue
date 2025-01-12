@@ -49,6 +49,7 @@ function goToAccountSettingsPage() {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    font-size: 0.8rem;
 
     &__item {
       display: flex;
