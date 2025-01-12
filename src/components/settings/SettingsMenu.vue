@@ -1,5 +1,5 @@
 <template>
-  <v-menu offset-y offset-x class="settings" close-on-content-click>
+  <v-menu offset-y offset-x class="settings" open-on-hover>
     <template v-slot:activator="{ props }">
       <span v-bind="props" class="mr-2 settings__text">Settings</span>
     </template>

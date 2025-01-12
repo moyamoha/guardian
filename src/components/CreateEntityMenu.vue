@@ -1,5 +1,5 @@
 <template>
-  <v-menu offset-y offset-x class="create-entity">
+  <v-menu offset-y offset-x class="create-entity" open-on-hover>
     <template v-slot:activator="{ props }">
       <span v-bind="props" class="mr-2 create-entity__text">Create</span>
     </template>
