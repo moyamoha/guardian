@@ -36,7 +36,7 @@
               type="submit"
               color="primary"
               variant="outlined"
-              :disabled="processing"
+              :disabled="processing || !changed"
               :loading="processing"
               prepend-icon="mdi-content-save-check-outline"
               >Save</v-btn
@@ -77,6 +77,7 @@ const item = ref({
 });
 const dialog = ref(false);
 const processing = ref(false);
+const changed = computed(() => item.value.name !== props.category?.name);
 
 async function handleSubmit() {
   processing.value = true;

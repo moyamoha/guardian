@@ -37,7 +37,7 @@
             class="mr-2"
             color="primary"
             variant="outlined"
-            :disabled="processing || !formIsValid"
+            :disabled="processing || !formIsValid || !entryIsEdited"
             :loading="processing"
             prepend-icon="mdi-content-save-check-outline"
             >Save</v-btn
@@ -94,6 +94,15 @@ const dialog = ref(false);
 const processing = ref(false);
 
 const createNew = computed(() => !Boolean(props.entry));
+const entryIsEdited = computed(
+  () =>
+    props.entry?.title !== item.value.title ||
+    props.entry?.username !== item.value.username ||
+    props.entry?.url !== item.value.url ||
+    props.entry?.status !== item.value.status ||
+    props.entry?.category._id !== category.value
+);
+
 const categoryChanged = computed(() =>
   Boolean(category.value !== props.entry?.category._id)
 );
