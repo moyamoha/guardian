@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-2 d-sm-flex align-center justify-space-between w-100">
-      <ViewTypeSelector></ViewTypeSelector>
+      <ViewTypeSelector v-if="showViewTypeSelector"></ViewTypeSelector>
       <div class="d-flex align-center">
         <PerPage></PerPage>
         <v-pagination
@@ -44,9 +44,15 @@ import NoDataFound from "../_shared/NoDataFound.vue";
 import EntryRow from "./EntryRow.vue";
 import useUiStore from "../../store/ui.store";
 import ViewTypeSelector from "./ViewTypeSelector.vue";
+import { useDisplay } from "vuetify";
 
 const dataStore = useDataStore();
 const ui = useUiStore();
+const display = useDisplay();
+
+const showViewTypeSelector = computed(() => {
+  return display.width.value > 450;
+});
 
 const maxPage = computed(() =>
   Math.ceil(dataStore.entriesCount / dataStore.pagination.perPage)

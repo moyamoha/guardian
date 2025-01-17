@@ -12,7 +12,20 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from "vue";
 import NavBar from "./components/NavBar.vue";
+import { useDisplay } from "vuetify";
+import useUiStore from "./store/ui.store";
+const display = useDisplay();
+const ui = useUiStore();
+watch(
+  () => display.width.value,
+  (_new: number) => {
+    if (_new <= 450) {
+      ui.entryDisplayMode = "grid";
+    }
+  }
+);
 </script>
 
 <style scoped>
