@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { BACKEND_BASE_URL } from "../utils/constants";
 import useUiStore from "../store/ui.store";
-import { useRouter } from "vue-router";
+import useAuthStore from "../store/auth.store";
 
 axios.defaults.baseURL = BACKEND_BASE_URL;
 axios.interceptors.request.use((config) => {
@@ -19,13 +19,11 @@ axios.interceptors.response.use(
     return resp;
   },
   function (error) {
-    const ui = useUiStore();
     if (
       error instanceof AxiosError &&
       error.response?.data.statusCode === 401
     ) {
-      ui.error = "You are not logged in or session expired";
-      useRouter().push("/");
+      useAuthStore().logout("You are not logged in or session expired");
     } else {
       return Promise.reject(error);
     }

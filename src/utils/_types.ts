@@ -10,8 +10,8 @@ export type Pagination = {
 };
 
 export type SearchFilter = {
-  search: string;
-  category: string;
+  search: string | null;
+  category: string | null;
   status: PossibleEntryStatus | "";
 };
 

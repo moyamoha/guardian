@@ -44,10 +44,10 @@ function authStoreSetup() {
     }
   }
 
-  function logout() {
+  function logout(error?: string) {
     localStorage.clear();
     setUser(null);
-    ui.setError("");
+    ui.setError(error ? error : "");
     router.push("/").catch((_) => {});
   }
   async function fetchProfile() {

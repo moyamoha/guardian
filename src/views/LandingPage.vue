@@ -1,5 +1,6 @@
 <template>
   <v-col xs="11" sm="8" md="6">
+    <ErrorAlert :timeout="1600" v-if="ui.errorHappened"></ErrorAlert>
     <p class="text-justify">
       Welcome to Guardian :) We are commited to make people feel safe about
       their credintials. We know it is hard. The applications out their are
@@ -30,9 +31,12 @@ import { onMounted, ref } from "vue";
 import useAuthStore from "../store/auth.store";
 import { useRoute, useRouter } from "vue-router";
 import { getTokenFromQuery } from "../router/utils";
+import ErrorAlert from "../components/_shared/ErrorAlert.vue";
+import useUiStore from "../store/ui.store";
 
 const toggle = ref(false);
 const auth = useAuthStore();
+const ui = useUiStore();
 const router = useRouter();
 const route = useRoute();
 
