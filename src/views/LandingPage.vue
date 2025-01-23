@@ -3,7 +3,7 @@
     <ErrorAlert :timeout="1600" v-if="ui.errorHappened"></ErrorAlert>
     <p class="text-justify">
       Welcome to Guardian :) We are commited to make people feel safe about
-      their credintials. We know it is hard. The applications out their are
+      their credentials. We know it is hard. The applications out their are
       complicated and often expensive to use. That is why we came up with this
       password management application. Why choose Guardian? The answer is
     </p>
