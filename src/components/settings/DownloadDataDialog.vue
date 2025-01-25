@@ -74,7 +74,7 @@ async function handleSubmit() {
   const blobUrl = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = blobUrl;
-  a.download = `entries.xlsx`;
+  a.download = "entries.xlsx";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
