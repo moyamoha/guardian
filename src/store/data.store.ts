@@ -176,6 +176,17 @@ function dataStoreSetup() {
     }
   }
 
+  async function downloadData(masterPassword: string) {
+    try {
+      return await axios.get(
+        `/download/vartija?masterPassword=${masterPassword}`,
+        { responseType: "blob" }
+      );
+    } catch (e) {
+      ui.setError(e);
+    }
+  }
+
   return {
     pagination,
     entries,
@@ -193,6 +204,7 @@ function dataStoreSetup() {
     removeCategory,
     requestEntryPasswordReveal,
     editEntryPassword,
+    downloadData,
   };
 }
 const useDataStore = defineStore("data", dataStoreSetup, { persist: true });

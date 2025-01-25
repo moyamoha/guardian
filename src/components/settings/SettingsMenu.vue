@@ -14,6 +14,12 @@
           <v-icon small dense>mdi-lock-outline</v-icon>
         </div>
       </MasterPasswordDialog>
+      <DownloadDataDialog>
+        <div class="settings__dropdown__item">
+          <span>Download your data</span>
+          <v-icon small dense>mdi-download-outline</v-icon>
+        </div>
+      </DownloadDataDialog>
       <div class="settings__dropdown__item" @click="auth.logout()">
         <span>Logout</span>
         <v-icon small dense>mdi-logout</v-icon>
@@ -26,6 +32,7 @@
 import useAuthStore from "../../store/auth.store";
 import { AUTH_UI_URL, SITE_URL } from "../../utils/constants";
 import MasterPasswordDialog from "./MasterPasswordDialog.vue";
+import DownloadDataDialog from "./DownloadDataDialog.vue";
 
 const auth = useAuthStore();
 
