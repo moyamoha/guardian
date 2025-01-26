@@ -14,7 +14,7 @@
       <v-card-title
         class="text-h6 d-flex justify-space-between dialog-card-title"
       >
-        <div>Download all your entries with their respective categories</div>
+        <div>Download your data</div>
         <v-icon @click="handleCancel" color="white">mdi-close-circle</v-icon>
       </v-card-title>
       <v-card-text>
@@ -23,12 +23,14 @@
         </p>
         <ErrorAlert v-if="ui.errorHappened" :timeout="3500"></ErrorAlert>
         <v-form class="mt-4" @submit.prevent="handleSubmit" v-model="isValid">
-          <PasswordField
-            v-model="masterPassword"
+          <v-text-field
             label="Master password *"
-            auto-focus
-            v-if="auth.userHasMasterPassword"
-          ></PasswordField>
+            density="compact"
+            variant="outlined"
+            v-model="masterPassword"
+            hide-details
+            autofocus
+          ></v-text-field>
           <div class="btn-cont">
             <v-btn
               type="submit"
@@ -49,15 +51,12 @@
 </template>
 
 <script lang="ts" setup>
-import PasswordField from "../_shared/PasswordField.vue";
 import ErrorAlert from "../_shared/ErrorAlert.vue";
 import { ref } from "vue";
 import useUiStore from "../../store/ui.store";
-import useAuthStore from "../../store/auth.store";
 import useDataStore from "../../store/data.store";
 
 const ui = useUiStore();
-const auth = useAuthStore();
 const dataStore = useDataStore();
 
 const isValid = ref(false);
