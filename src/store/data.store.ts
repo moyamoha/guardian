@@ -178,10 +178,20 @@ function dataStoreSetup() {
 
   async function downloadData(masterPassword: string) {
     try {
-      return await axios.get(
+      const response = await axios.get(
         `/download/vartija?masterPassword=${masterPassword}`,
         { responseType: "blob" }
       );
+      const blob = new Blob([response.data], {
+        type: "application/octet-stream",
+      });
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = "entries.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     } catch (e) {
       ui.setError(e);
     }

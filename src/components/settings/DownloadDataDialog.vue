@@ -69,15 +69,7 @@ async function handleSubmit() {
   if (!isValid) return;
   processing.value = true;
 
-  const response = await dataStore.downloadData(masterPassword.value);
-  const blob = new Blob([response?.data], { type: "application/octet-stream" });
-  const blobUrl = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = blobUrl;
-  a.download = "entries.xlsx";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  await dataStore.downloadData(masterPassword.value);
   processing.value = false;
   if (!ui.errorHappened) dialog.value = false;
 }
