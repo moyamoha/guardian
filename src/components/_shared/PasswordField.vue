@@ -12,7 +12,7 @@
     :rules="[rules.required]"
     aria-autocomplete="none"
     :autofocus="autoFocus"
-    autocomplete=""
+    autocomplete="new-password"
   >
   </v-text-field>
 </template>
